@@ -3,7 +3,7 @@
 #include "J3D/J3DDrawBuffer.hxx"
 #include "JGeometry.hxx"
 #include "JDRPlacement.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 namespace JDrama {
 

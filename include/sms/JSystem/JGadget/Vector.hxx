@@ -2,7 +2,7 @@
 
 #include "Allocator.hxx"
 #include "Node.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 namespace JGadget {
 

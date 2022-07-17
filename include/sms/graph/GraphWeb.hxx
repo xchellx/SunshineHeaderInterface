@@ -3,7 +3,7 @@
 #include "RailNode.hxx"
 #include "GraphNode.hxx"
 #include "SplineRail.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 class TGraphWeb {
 public:

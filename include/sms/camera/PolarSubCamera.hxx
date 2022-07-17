@@ -5,7 +5,7 @@
 #include "sms/camera/CameraInbetween.hxx"
 #include "sms/camera/CameraMapTool.hxx"
 #include "sms/npc/BaseNPC.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 class CPolarSubCamera : public JDrama::TLookAtCamera {
 public:

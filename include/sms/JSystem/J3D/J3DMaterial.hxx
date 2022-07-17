@@ -5,8 +5,8 @@
 #include "J3DShape.hxx"
 #include "J3DTexture.hxx"
 #include "JSU/JSUInputStream.hxx"
-#include "MTX.h"
-#include "types.h"
+#include <dolphin/MTX.h>
+#include <dolphin/types.h>
 
 class J3DPEBlock {
 public:

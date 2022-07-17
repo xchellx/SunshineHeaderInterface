@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "sms/JSystem/JGeometry.hxx"
 #include "sms/actor/SpineEnemy.hxx"
 #include "sms/actor/HitActor.hxx"

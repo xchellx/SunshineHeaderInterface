@@ -1,7 +1,7 @@
 #ifndef OS_H
 #define OS_H
 
-#include "types.h"
+#include <dolphin/types.h>
 
 // clang-format off
 #ifdef __cplusplus

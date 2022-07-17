@@ -1,8 +1,8 @@
 #pragma once
 
-#include "types.h"
-#include "DVD.h"
-#include "OS.h"
+#include <dolphin/types.h>
+#include <dolphin/DVD.h>
+#include <dolphin/OS.h>
 #include "JKRFile.hxx"
 #include "JSU/JSUList.hxx"
 

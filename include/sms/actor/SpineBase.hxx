@@ -2,7 +2,7 @@
 
 #include "LiveActor.hxx"
 
-#include "types.h"
+#include <dolphin/types.h>
 
 template <typename T> class TSpineBase;
 

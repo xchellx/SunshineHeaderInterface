@@ -2,7 +2,7 @@
 
 #include "JKR/JKRArchivePri.hxx"
 #include "J2DScreen.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 class J2DSetScreen : public J2DScreen {
 public:

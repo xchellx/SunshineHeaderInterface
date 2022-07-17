@@ -1,7 +1,7 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include "types.h"
+#include <dolphin/types.h>
 
 #ifdef __cplusplus
 extern "C"

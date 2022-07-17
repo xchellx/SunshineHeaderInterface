@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "JKRArchivePri.hxx"
 
 class JKRCompArchive : public JKRArchive

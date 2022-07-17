@@ -2,7 +2,7 @@
 
 #include "JKRFileFinder.hxx"
 #include "JKRFileLoader.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 
 enum EMountMode {};

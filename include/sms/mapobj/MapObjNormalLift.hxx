@@ -2,7 +2,7 @@
 
 #include "JSU/JSUMemoryStream.hxx"
 #include "MapObjRail.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 class TNormalLift : public TRailMapObj {
 public:

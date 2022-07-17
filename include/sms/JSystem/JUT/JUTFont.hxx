@@ -1,7 +1,7 @@
 #pragma once
 
 #include "JUTColor.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 
 class JUTFont {

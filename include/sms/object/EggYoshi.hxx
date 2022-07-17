@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "JSU/JSUMemoryStream.hxx"
 #include "sms/M3DUtil/MActor.hxx"
 #include "sms/actor/HitActor.hxx"

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "types.h"
-#include "GX.h"
+#include <dolphin/types.h>
+#include <dolphin/GX.h>
 
 #include "JUTPalette.hxx"
 

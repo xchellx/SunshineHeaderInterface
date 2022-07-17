@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 
 #include "sms/actor/LiveActor.hxx"
 #include "sms/collision/MapCollisionBase.hxx"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "sms/mapobj/MapObjGeneral.hxx"
 #include "sms/actor/Item.hxx"
 

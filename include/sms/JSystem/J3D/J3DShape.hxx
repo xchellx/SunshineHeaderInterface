@@ -1,7 +1,7 @@
 #pragma once
 
-#include "types.h"
-#include "MTX.h"
+#include <dolphin/types.h>
+#include <dolphin/MTX.h>
 
 class J3DShape
 {

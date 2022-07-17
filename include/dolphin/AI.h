@@ -1,7 +1,7 @@
 #ifndef AI_H
 #define AI_H
 
-#include "types.h"
+#include <dolphin/types.h>
 
 #ifdef __cplusplus
 extern "C"

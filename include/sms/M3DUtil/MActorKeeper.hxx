@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 
 #include "MActor.hxx"
 #include "sms/manager/LiveManager.hxx"

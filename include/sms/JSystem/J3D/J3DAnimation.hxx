@@ -2,7 +2,7 @@
 
 #include "JUT/JUTNameTab.hxx"
 #include "J3DTransform.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 
 class J3DTexNoAnm {

@@ -2,7 +2,7 @@
 
 #include "JSU/JSUMemoryStream.hxx"
 #include "MapObjNormalLift.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 union U32SplitU16 {
   struct {

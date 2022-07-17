@@ -2,7 +2,7 @@
 
 #include "JGeometry.hxx"
 #include "sms/actor/Item.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 #include "JPA/JPABaseEmitter.hxx"
 
 

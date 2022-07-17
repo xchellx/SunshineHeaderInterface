@@ -1,18 +1,17 @@
 #ifndef STDIO_H
 #define STDIO_H
 
-#include "types.h"
-#include "stdarg.h"
+#include <dolphin/stdarg.h>
+#include <dolphin/types.h>
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-    int snprintf(char *, size_t, const char *, ...);
-    int sprintf(char *, const char *, ...);
-    int vsnprintf(char *, size_t, const char *, va_list);
-    int vprintf(char *, const char *, va_list);
+int snprintf(char *, size_t, const char *, ...);
+int sprintf(char *, const char *, ...);
+int vsnprintf(char *, size_t, const char *, va_list);
+int vprintf(char *, const char *, va_list);
 
 #ifdef __cplusplus
 }

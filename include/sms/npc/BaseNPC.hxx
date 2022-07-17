@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "sms/actor/SpineEnemy.hxx"
 
 class TBaseNPC : public TSpineEnemy

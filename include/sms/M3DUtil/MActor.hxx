@@ -6,7 +6,7 @@
 #include "JDrama/JDRGraphics.hxx"
 #include "JGeometry.hxx"
 #include "sms/collision/BGCheck.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 class MActorAnmBase {
 public:

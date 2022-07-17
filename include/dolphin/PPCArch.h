@@ -1,7 +1,7 @@
 #ifndef PPCARCH_H
 #define PPCARCH_H
 
-#include "types.h"
+#include <dolphin/types.h>
 
 #ifndef __ppc__
 #define __ppc__

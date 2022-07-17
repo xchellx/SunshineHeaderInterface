@@ -1,7 +1,7 @@
 #pragma once
 
 #include "JGeometry.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 class TRailNode {
 

@@ -1,6 +1,6 @@
 #include "MapObjBaseManager.hxx"
 #include "sms/actor/Item.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 
 class TItemManager : public TMapObjBaseManager {

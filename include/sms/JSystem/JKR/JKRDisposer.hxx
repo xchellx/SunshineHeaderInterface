@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "JSU/JSUList.hxx"
 
 class JKRDisposer

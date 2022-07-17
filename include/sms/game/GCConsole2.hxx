@@ -4,7 +4,7 @@
 #include "J2D/J2DWindow.hxx"
 #include "JUT/JUTColor.hxx"
 #include "sms/GC2D/ConsoleStr.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 class TGCConsole2 {
 

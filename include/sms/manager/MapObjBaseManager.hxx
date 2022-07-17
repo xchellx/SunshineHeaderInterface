@@ -1,6 +1,6 @@
 #include "sms/mapobj/MapObjBase.hxx"
 #include "LiveManager.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 class TMapObjBaseManager : public TLiveManager {
 public:

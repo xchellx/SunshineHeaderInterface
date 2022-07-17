@@ -1,8 +1,8 @@
 #pragma once
 
-#include "JKR/JKRHeap.hxx"
-#include "JPABaseEmitter.hxx"
-#include "JPATextureResource.hxx"
+#include <JKR/JKRHeap.hxx>
+#include <JPA/JPABaseEmitter.hxx>
+#include <JPA/JPATextureResource.hxx>
 
 struct JPAEmitterData {
   size_t mResourceNum;

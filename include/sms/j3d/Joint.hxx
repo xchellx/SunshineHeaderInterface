@@ -5,7 +5,7 @@
 #include "JDrama/JDRGraphics.hxx"
 #include "JDrama/JDRViewObj.hxx"
 #include "sms/M3DUtil/MActor.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 
 class TJointObj {

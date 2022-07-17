@@ -1,8 +1,9 @@
 #pragma once
 
-#include "JDrama/JDRGraphics.hxx"
-#include "JDrama/JDRRect.hxx"
-#include "JUT/JUTColor.hxx"
+#include <JDrama/JDRNameRef.hxx>
+#include <JDrama/JDRGraphics.hxx>
+#include <JDrama/JDRRect.hxx>
+#include <JUT/JUTColor.hxx>
 
 class TSMSFader : public JDrama::TNameRef {
 public:

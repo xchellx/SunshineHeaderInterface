@@ -1,7 +1,7 @@
 #ifndef GD_H
 #define GD_H
 
-#include "types.h"
+#include <dolphin/types.h>
 
 typedef struct _GDLObj
 {

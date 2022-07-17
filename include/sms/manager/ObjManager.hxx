@@ -5,7 +5,7 @@
 #include "JSU/JSUMemoryStream.hxx"
 #include "sms/actor/HitActor.hxx"
 #include "sms/object/ObjChara.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 
 struct TModelDataLoadEntry {

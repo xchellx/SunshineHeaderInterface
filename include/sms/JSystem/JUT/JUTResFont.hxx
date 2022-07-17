@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GX.h"
-#include "types.h"
+#include <dolphin/GX.h>
+#include <dolphin/types.h>
 
 
 #include "JKR/JKRArchivePri.hxx"

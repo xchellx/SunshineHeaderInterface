@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "J2D/J2DSetScreen.hxx"
 #include "sms/option/OptionRumbleUnit.hxx"
 #include "sms/option/OptionSoundUnit.hxx"

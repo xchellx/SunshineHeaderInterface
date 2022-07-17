@@ -8,7 +8,7 @@
 #include "sms/object/EffectObjBase.hxx"
 #include "JGadget/List.hxx"
 #include "JGadget/Allocator.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 
 /* Size -- 0x34 */

@@ -3,7 +3,7 @@
 #include "JSU/JSUMemoryStream.hxx"
 #include "JDRNameRefPtrListT.hxx"
 #include "JDRNameRef.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 namespace JDrama {
 

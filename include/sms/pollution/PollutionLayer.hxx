@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "sms/pollution/PollutionPos.hxx"
 
 #include "sms/j3d/Joint.hxx"

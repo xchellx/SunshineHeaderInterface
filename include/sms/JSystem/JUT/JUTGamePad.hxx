@@ -1,8 +1,8 @@
 #pragma once
 
-#include "types.h"
-#include "OS.h"
-#include "PAD.h"
+#include <dolphin/types.h>
+#include <dolphin/OS.h>
+#include <dolphin/PAD.h>
 #include "JKR/JKRDisposer.hxx"
 
 enum EPadPort

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "J2DPane.hxx"
 #include "JSU/JSUInputStream.hxx"
 #include "JUT/JUTColor.hxx"

@@ -1,7 +1,7 @@
 #ifndef ARQ_H
 #define ARQ_H
 
-#include "types.h"
+#include <dolphin/types.h>
 
 #ifdef __cplusplus
 extern "C"

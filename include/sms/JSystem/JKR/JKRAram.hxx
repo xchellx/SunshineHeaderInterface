@@ -5,8 +5,8 @@
 #include "JKRAramHeap.hxx"
 #include "JKRDvdRipper.hxx"
 #include "JKRThread.hxx"
-#include "OS.h"
-#include "types.h"
+#include <dolphin/OS.h>
+#include <dolphin/types.h>
 
 
 class JKRAram : public JKRThread {

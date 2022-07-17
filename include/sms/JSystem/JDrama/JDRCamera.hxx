@@ -4,7 +4,7 @@
 #include "JSU/JSUMemoryStream.hxx"
 #include "JStage/JSGCamera.hxx"
 #include "JDRPlacement.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 namespace JDrama {
 

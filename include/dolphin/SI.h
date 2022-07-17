@@ -1,7 +1,7 @@
 #ifndef SI_H
 #define SI_H
 
-#include "types.h"
+#include <dolphin/types.h>
 
 #ifdef __cplusplus
 extern "C"

@@ -4,9 +4,9 @@
 #include "JSU/JSUList.hxx"
 #include "JUT/JUTColor.hxx"
 #include "JUT/JUTRect.hxx"
-#include "GX.h"
-#include "MTX.h"
-#include "types.h"
+#include <dolphin/GX.h>
+#include <dolphin/MTX.h>
+#include <dolphin/types.h>
 
 
 enum J2DBasePosition { UNK_BASEPOS_4 = 4, UNK_BASEPOS_5 = 5 };

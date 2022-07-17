@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "J3D/J3DJoint.hxx"
 
 // JointObj represents joints of a model that can be slept or awoke

@@ -9,7 +9,7 @@
 #include "sms/manager/LiveManager.hxx"
 #include "sms/params/BaseParam.hxx"
 #include "sms/params/Params.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 
 class TConductor : public JDrama::TNameRef {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "JDRGraphics.hxx"
 #include "JDRViewObj.hxx"
 #include "JSU/JSUMemoryStream.hxx"

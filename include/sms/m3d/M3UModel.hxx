@@ -2,7 +2,7 @@
 
 #include "J3D/J3DModel.hxx"
 #include "JDrama/JDRGraphics.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 
 class M3UMtxCalcSetInfo {};

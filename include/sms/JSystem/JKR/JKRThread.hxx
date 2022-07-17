@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "JKRDisposer.hxx"
 #include "JKRHeap.hxx"
 #include "JSU/JSUList.hxx"

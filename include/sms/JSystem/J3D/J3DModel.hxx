@@ -7,8 +7,8 @@
 #include "J3DVertex.hxx"
 #include "JGeometry.hxx"
 #include "JUT/JUTNameTab.hxx"
-#include "MTX.h"
-#include "types.h"
+#include <dolphin/MTX.h>
+#include <dolphin/types.h>
 
 
 class J3DModelHierarchy;

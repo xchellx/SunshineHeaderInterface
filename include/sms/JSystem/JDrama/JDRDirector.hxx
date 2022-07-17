@@ -4,7 +4,7 @@
 #include "JUT/JUTGamePad.hxx"
 #include "JDRNameRef.hxx"
 #include "sms/game/PerformList.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 namespace JDrama {
 

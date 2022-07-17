@@ -4,8 +4,8 @@
 #include "JDrama/JDRGraphics.hxx"
 #include "JGeometry.hxx"
 #include "JUT/JUTGamePad.hxx"
-#include "MTX.h"
-#include "types.h"
+#include <dolphin/MTX.h>
+#include <dolphin/types.h>
 
 #include "sms/actor/TakeActor.hxx"
 #include "sms/actor/Yoshi.hxx"
@@ -848,7 +848,8 @@ public:
     STATE_DEATH = 0x00020467,
     STATE_DOOR_F_O = 0x00001321, // Door open fail
     STATE_WALL_S_L = 0x04000471,
-    STATE_F_KNCK_H = 0x000208B0, // hard knockback from front (bumping wall from dive)
+    STATE_F_KNCK_H =
+        0x000208B0, // hard knockback from front (bumping wall from dive)
     STATE_KNCK_LND = 0x00020462, // Landing from front knockback
     STATE_KNCK_GND = 0x00020466, // Front knockback while grounded
     STATE_FIRE_HIT = 0x000208B7,
@@ -948,14 +949,14 @@ public:
   u16 mSubState;      // 0x0084
   u16 mSubStateTimer; // 0x0086
   u32 mJumpSlipState;
-  f32 mBaseAcceleration;        // 0x008C
-  u16 mAccelerationDirection;   // 0x0090
-  u16 _92;                      // padding?
-  TVec3s mAngle; // 0x0094
+  f32 mBaseAcceleration;      // 0x008C
+  u16 mAccelerationDirection; // 0x0090
+  u16 _92;                    // padding?
+  TVec3s mAngle;              // 0x0094
   JGeometry::TVec3<u16> _9A;
   u16 _A0;
   TVec3f mSpeed;     // 0x00A4
-  f32 mForwardSpeed;                // 0x00B0
+  f32 mForwardSpeed; // 0x00B0
   TVec3f mPrevSpeed; //?
   f32 _C0;
   u16 _C4;
@@ -1075,7 +1076,7 @@ public:
   Mtx _250;
   TVec3f mLastPosition; //?       0x0280
   TVec3f mLastRotation; //?       0x028C
-  u32 mInitialWater;                   // 0x0298
+  u32 mInitialWater;    // 0x0298
   TVec3f mLastPos;
   TVec3f mLastGroundedPos; // 0x02A8
   u32 _2B4;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MTX.h"
-#include "types.h"
+#include <dolphin/MTX.h>
+#include <dolphin/types.h>
 
 class RumbleMgr {
 public:

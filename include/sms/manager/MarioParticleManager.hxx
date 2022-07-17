@@ -8,7 +8,7 @@
 #include "sms/actor/HitActor.hxx"
 #include "sms/object/EffectObjBase.hxx"
 #include "sms/object/ObjChara.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 /* Size -- 0x34 */
 class TMarioParticleManager : public JDrama::TViewObj {

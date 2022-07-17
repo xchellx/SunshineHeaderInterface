@@ -2,7 +2,7 @@
 
 #include "JSU/JSUInputStream.hxx"
 #include "J2DPane.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 
 class J2DScreen : public J2DPane {

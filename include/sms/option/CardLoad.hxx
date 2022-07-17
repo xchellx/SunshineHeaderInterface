@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "JDrama/JDRGraphics.hxx"
 #include "JDrama/JDRNameRef.hxx"
 #include "JUT/JUTRect.hxx"

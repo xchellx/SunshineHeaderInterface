@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 
 #include "J3DMaterial.hxx"
 #include "J3DModel.hxx"

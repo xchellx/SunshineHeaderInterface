@@ -3,7 +3,7 @@
 #include "JDrama/JDRActor.hxx"
 #include "JGeometry.hxx"
 #include "sms/actor/SpineEnemy.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 class TBGPolDrop : JDrama::TActor {
 public:

@@ -1,16 +1,15 @@
 #ifndef __GX_H__
 #define __GX_H__
 
-#include "MTX.h"
-#include "types.h"
-#include "GX_types.h"
+#include <dolphin/GX_types.h>
+#include <dolphin/MTX.h>
+#include <dolphin/types.h>
 
 /*!
  * \file gx.h
  * \brief GX subsystem
  *
  */
-
 
 #ifdef __cplusplus
 extern "C" {

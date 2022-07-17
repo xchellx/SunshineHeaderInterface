@@ -2,7 +2,7 @@
 
 #include "JSU/JSUList.hxx"
 #include "JKRHeap.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 enum JKRExpandSwitch { NOP = 0, EXPAND = 1 };
 

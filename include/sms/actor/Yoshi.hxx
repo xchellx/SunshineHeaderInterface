@@ -4,7 +4,7 @@
 #include "JGeometry.hxx"
 #include "sms/M3DUtil/MActor.hxx"
 #include "sms/object/EggYoshi.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 
 class TMario;

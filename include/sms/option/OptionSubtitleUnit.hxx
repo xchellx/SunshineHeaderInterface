@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "J2D/J2DScreen.hxx"
 
 class TOptionSubtitleUnit

@@ -2,7 +2,7 @@
 
 #include "JSU/JSUList.hxx"
 #include "JKRDisposer.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 
 class JKRArchive;

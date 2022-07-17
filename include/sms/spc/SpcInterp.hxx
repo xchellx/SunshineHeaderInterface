@@ -3,7 +3,7 @@
 #include "sms/spc/SpcBinary.hxx"
 #include "sms/spc/SpcSlice.hxx"
 #include "sms/spc/SpcStack.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 
 class TSpcInterp {

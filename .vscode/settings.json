@@ -41,7 +41,8 @@
         "iterator": "cpp",
         "gx.h": "c",
         "gx_types.h": "c",
-        "*.rh": "cpp"
+        "*.rh": "cpp",
+        "mtx.h": "c"
     },
     "cmake.configureOnOpen": false
 }

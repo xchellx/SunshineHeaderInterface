@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "JSU/JSUMemoryStream.hxx"
 #include "JGeometry.hxx"
 

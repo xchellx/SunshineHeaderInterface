@@ -1,7 +1,7 @@
 #ifndef AR_H
 #define AR_H
 
-#include "types.h"
+#include <dolphin/types.h>
 
 #ifdef __cplusplus
 extern "C"

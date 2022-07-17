@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MTX.h"
-#include "math.h"
+#include <dolphin/MTX.h>
+#include <dolphin/math.h>
 #include "equivtype.hxx"
 
 namespace JGeometry {

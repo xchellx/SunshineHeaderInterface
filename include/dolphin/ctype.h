@@ -1,7 +1,7 @@
 #ifndef CTYPE_H
 #define CTYPE_H
 
-#include "types.h"
+#include <dolphin/types.h>
 
 #ifdef __cplusplus
 extern "C"

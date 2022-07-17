@@ -1,5 +1,6 @@
 #pragma once
 
+#include <JSU/JSUInputStream.hxx>
 #include "SmplFader.hxx"
 
 class TShineFader : public TSmplFader {

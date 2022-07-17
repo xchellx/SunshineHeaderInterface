@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GX.h"
+#include <dolphin/GX.h>
 
 struct ResTLUT {
   u8 mTlutFmt;

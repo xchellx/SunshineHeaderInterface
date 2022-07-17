@@ -4,7 +4,7 @@
 #include "sms/nozzle/NozzleBase.hxx"
 #include "sms/nozzle/NozzleTrigger.hxx"
 #include "sms/params/Params.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 
 class TMario;

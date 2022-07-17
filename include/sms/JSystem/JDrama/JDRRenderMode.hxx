@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GX_Types.h"
-#include "types.h"
+#include <dolphin/GX_Types.h>
+#include <dolphin/types.h>
 
 namespace JDrama {
 

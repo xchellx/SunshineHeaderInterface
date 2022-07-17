@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "JSUInputStream.hxx"
 #include "JKR/JKRFile.hxx"
 #include "JKR/JKRDvdFile.hxx"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "sms/JSystem/JGeometry.hxx"
 #ifdef NTSCU
 #define __fill_mem ((int(*)(...))0x80003130)

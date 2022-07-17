@@ -2,7 +2,7 @@
 
 #include "JGeometry.hxx"
 #include "sms/sound/JAISound.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 class JAIActor {};
 

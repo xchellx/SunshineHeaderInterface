@@ -3,7 +3,7 @@
 #include "sms/actor/LiveActor.hxx"
 #include "sms/graph/GraphTracer.hxx"
 #include "sms/params/Params.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 struct TSpineEnemyParams : TParams {
 #define CONSTRUCT_PARAM(name, val)                                             \

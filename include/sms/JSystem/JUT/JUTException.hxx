@@ -1,7 +1,7 @@
 #pragma once
 
-#include "types.h"
-#include "OS.h"
+#include <dolphin/types.h>
+#include <dolphin/OS.h>
 #include "JUTDirectPrint.hxx"
 #include "JKR/JKRThread.hxx"
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 #include "J2DTextBox.hxx"
 #include "JUT/JUTColor.hxx"
 #include "JUT/JUTFont.hxx"

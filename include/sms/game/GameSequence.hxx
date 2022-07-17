@@ -1,6 +1,6 @@
 #pragma once
 
-#include "types.h"
+#include <dolphin/types.h>
 
 struct AreaEpisodeArray {
   u32 _00[0x10 / 4]; // 0x0000

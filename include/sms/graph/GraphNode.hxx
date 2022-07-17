@@ -1,8 +1,8 @@
 #pragma once
 
 #include "RailNode.hxx"
-#include "types.h"
-#include "MTX.h"
+#include <dolphin/types.h>
+#include <dolphin/MTX.h>
 
 #include "JGeometry.hxx"
 

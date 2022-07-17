@@ -1,8 +1,8 @@
 #pragma once
 
-#include "types.h"
-#include "CARD.h"
-#include "OS.h"
+#include <dolphin/types.h>
+#include <dolphin/CARD.h>
+#include <dolphin/OS.h>
 #include "JSU/JSUMemoryStream.hxx"
 
 class TCardBookmarkInfo

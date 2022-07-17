@@ -1,7 +1,7 @@
 #pragma once
 
 #include "JSGObject.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 namespace JStage {
 

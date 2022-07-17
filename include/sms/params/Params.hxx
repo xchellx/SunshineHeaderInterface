@@ -1,7 +1,7 @@
 #pragma once
 
 #include "macros.h"
-#include "types.h"
+#include <dolphin/types.h>
 
 #include "BaseParam.hxx"
 #include "JKR/JKRMemArchive.hxx"

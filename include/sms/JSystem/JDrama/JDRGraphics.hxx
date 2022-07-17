@@ -1,7 +1,7 @@
 #pragma once
 
 #include "JDRRect.hxx"
-#include "types.h"
+#include <dolphin/types.h>
 
 namespace JDrama {
 
