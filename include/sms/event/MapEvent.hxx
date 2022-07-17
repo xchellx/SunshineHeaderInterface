@@ -2,9 +2,8 @@
 
 #include <SMS/event/EventWatcher.hxx>
 
-class TMapEvent : public TEventWatcher
-{
-    public:
+class TMapEvent : public TEventWatcher {
+public:
     TMapEvent(const char *);
     virtual ~TMapEvent();
 
@@ -13,8 +12,8 @@ class TMapEvent : public TEventWatcher
     virtual bool isFinishedAll() const;
     virtual void startControl();
     virtual void finishControl();
-    virtual u32* getBuilding(int) const;
+    virtual u32 *getBuilding(int) const;
 
-    u32 mEventState; // _18
-    u32* _1C;
+    u32 mEventState;  // _18
+    u32 *_1C;
 };

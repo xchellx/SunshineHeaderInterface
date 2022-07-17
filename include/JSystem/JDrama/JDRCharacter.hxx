@@ -6,9 +6,9 @@
 
 namespace JDrama {
 
-class TCharacter : public TNameRef {
-public:
-  virtual ~TCharacter();
-};
+    class TCharacter : public TNameRef {
+    public:
+        virtual ~TCharacter();
+    };
 
-}
+}  // namespace JDrama

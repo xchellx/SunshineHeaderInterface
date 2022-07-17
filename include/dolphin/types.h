@@ -26,7 +26,7 @@ typedef unsigned long size_t;
 #ifdef __cplusplus
 #define NULL nullptr
 #else
-#define NULL ((void*)0)
+#define NULL ((void *)0)
 #define bool int
 #define true 1
 #define false 0

@@ -615,8 +615,7 @@ void GXSetViewport(f32 xOrig, f32 yOrig, f32 wd, f32 ht, f32 nearZ, f32 farZ);
  *
  * \return none
  */
-void GXSetViewportJitter(f32 xOrig, f32 yOrig, f32 wd, f32 ht, f32 nearZ,
-                         f32 farZ, u32 field);
+void GXSetViewportJitter(f32 xOrig, f32 yOrig, f32 wd, f32 ht, f32 nearZ, f32 farZ, u32 field);
 
 /*!
  * \fn void GXSetChanCtrl(s32 channel,u8 enable,u8 ambsrc,u8 matsrc,u8
@@ -667,8 +666,8 @@ void GXSetViewportJitter(f32 xOrig, f32 yOrig, f32 wd, f32 ht, f32 nearZ,
  *
  * \return none
  */
-void GXSetChanCtrl(s32 channel, u8 enable, u8 ambsrc, u8 matsrc, u8 litmask,
-                   u8 diff_fn, u8 attn_fn);
+void GXSetChanCtrl(s32 channel, u8 enable, u8 ambsrc, u8 matsrc, u8 litmask, u8 diff_fn,
+                   u8 attn_fn);
 
 /*!
  * \fn void GXSetChanAmbColor(s32 channel,GXColor color)
@@ -773,8 +772,7 @@ void GXSetArray(u32 attr, void *ptr, u8 stride);
  *
  * \return none
  */
-void GXSetVtxAttrFmt(u8 vtxfmt, u32 vtxattr, u32 comptype, u32 compsize,
-                     u32 frac);
+void GXSetVtxAttrFmt(u8 vtxfmt, u32 vtxattr, u32 comptype, u32 compsize, u32 frac);
 
 /*!
  * \fn void GXSetVtxAttrFmtv(u8 vtxfmt,GXVtxAttrFmt *attr_list)
@@ -979,58 +977,58 @@ void GXCallDispList(void *list, u32 nbytes);
 static inline void GXEnd(void) {}
 
 static inline void GXPosition3f32(f32 x, f32 y, f32 z) {
-  wgPipe->F32 = x;
-  wgPipe->F32 = y;
-  wgPipe->F32 = z;
+    wgPipe->F32 = x;
+    wgPipe->F32 = y;
+    wgPipe->F32 = z;
 }
 
 static inline void GXPosition3u16(u16 x, u16 y, u16 z) {
-  wgPipe->U16 = x;
-  wgPipe->U16 = y;
-  wgPipe->U16 = z;
+    wgPipe->U16 = x;
+    wgPipe->U16 = y;
+    wgPipe->U16 = z;
 }
 
 static inline void GXPosition3s16(s16 x, s16 y, s16 z) {
-  wgPipe->S16 = x;
-  wgPipe->S16 = y;
-  wgPipe->S16 = z;
+    wgPipe->S16 = x;
+    wgPipe->S16 = y;
+    wgPipe->S16 = z;
 }
 
 static inline void GXPosition3u8(u8 x, u8 y, u8 z) {
-  wgPipe->U8 = x;
-  wgPipe->U8 = y;
-  wgPipe->U8 = z;
+    wgPipe->U8 = x;
+    wgPipe->U8 = y;
+    wgPipe->U8 = z;
 }
 
 static inline void GXPosition3s8(s8 x, s8 y, s8 z) {
-  wgPipe->S8 = x;
-  wgPipe->S8 = y;
-  wgPipe->S8 = z;
+    wgPipe->S8 = x;
+    wgPipe->S8 = y;
+    wgPipe->S8 = z;
 }
 
 static inline void GXPosition2f32(f32 x, f32 y) {
-  wgPipe->F32 = x;
-  wgPipe->F32 = y;
+    wgPipe->F32 = x;
+    wgPipe->F32 = y;
 }
 
 static inline void GXPosition2u16(u16 x, u16 y) {
-  wgPipe->U16 = x;
-  wgPipe->U16 = y;
+    wgPipe->U16 = x;
+    wgPipe->U16 = y;
 }
 
 static inline void GXPosition2s16(s16 x, s16 y) {
-  wgPipe->S16 = x;
-  wgPipe->S16 = y;
+    wgPipe->S16 = x;
+    wgPipe->S16 = y;
 }
 
 static inline void GXPosition2u8(u8 x, u8 y) {
-  wgPipe->U8 = x;
-  wgPipe->U8 = y;
+    wgPipe->U8 = x;
+    wgPipe->U8 = y;
 }
 
 static inline void GXPosition2s8(s8 x, s8 y) {
-  wgPipe->S8 = x;
-  wgPipe->S8 = y;
+    wgPipe->S8 = x;
+    wgPipe->S8 = y;
 }
 
 static inline void GXPosition1x8(u8 index) { wgPipe->U8 = index; }
@@ -1038,21 +1036,21 @@ static inline void GXPosition1x8(u8 index) { wgPipe->U8 = index; }
 static inline void GXPosition1x16(u16 index) { wgPipe->U16 = index; }
 
 static inline void GXNormal3f32(f32 nx, f32 ny, f32 nz) {
-  wgPipe->F32 = nx;
-  wgPipe->F32 = ny;
-  wgPipe->F32 = nz;
+    wgPipe->F32 = nx;
+    wgPipe->F32 = ny;
+    wgPipe->F32 = nz;
 }
 
 static inline void GXNormal3s16(s16 nx, s16 ny, s16 nz) {
-  wgPipe->S16 = nx;
-  wgPipe->S16 = ny;
-  wgPipe->S16 = nz;
+    wgPipe->S16 = nx;
+    wgPipe->S16 = ny;
+    wgPipe->S16 = nz;
 }
 
 static inline void GXNormal3s8(s8 nx, s8 ny, s8 nz) {
-  wgPipe->S8 = nx;
-  wgPipe->S8 = ny;
-  wgPipe->S8 = nz;
+    wgPipe->S8 = nx;
+    wgPipe->S8 = ny;
+    wgPipe->S8 = nz;
 }
 
 static inline void GXNormal1x8(u8 index) { wgPipe->U8 = index; }
@@ -1060,22 +1058,22 @@ static inline void GXNormal1x8(u8 index) { wgPipe->U8 = index; }
 static inline void GXNormal1x16(u16 index) { wgPipe->U16 = index; }
 
 static inline void GXColor4u8(u8 r, u8 g, u8 b, u8 a) {
-  wgPipe->U8 = r;
-  wgPipe->U8 = g;
-  wgPipe->U8 = b;
-  wgPipe->U8 = a;
+    wgPipe->U8 = r;
+    wgPipe->U8 = g;
+    wgPipe->U8 = b;
+    wgPipe->U8 = a;
 }
 
 static inline void GXColor3u8(u8 r, u8 g, u8 b) {
-  wgPipe->U8 = r;
-  wgPipe->U8 = g;
-  wgPipe->U8 = b;
+    wgPipe->U8 = r;
+    wgPipe->U8 = g;
+    wgPipe->U8 = b;
 }
 
 static inline void GXColor3f32(f32 r, f32 g, f32 b) {
-  wgPipe->U8 = (u8)(r * 255.0);
-  wgPipe->U8 = (u8)(g * 255.0);
-  wgPipe->U8 = (u8)(b * 255.0);
+    wgPipe->U8 = (u8)(r * 255.0);
+    wgPipe->U8 = (u8)(g * 255.0);
+    wgPipe->U8 = (u8)(b * 255.0);
 }
 
 static inline void GXColor1u32(u32 clr) { wgPipe->U32 = clr; }
@@ -1087,28 +1085,28 @@ static inline void GXColor1x8(u8 index) { wgPipe->U8 = index; }
 static inline void GXColor1x16(u16 index) { wgPipe->U16 = index; }
 
 static inline void GXTexCoord2f32(f32 s, f32 t) {
-  wgPipe->F32 = s;
-  wgPipe->F32 = t;
+    wgPipe->F32 = s;
+    wgPipe->F32 = t;
 }
 
 static inline void GXTexCoord2u16(u16 s, u16 t) {
-  wgPipe->U16 = s;
-  wgPipe->U16 = t;
+    wgPipe->U16 = s;
+    wgPipe->U16 = t;
 }
 
 static inline void GXTexCoord2s16(s16 s, s16 t) {
-  wgPipe->S16 = s;
-  wgPipe->S16 = t;
+    wgPipe->S16 = s;
+    wgPipe->S16 = t;
 }
 
 static inline void GXTexCoord2u8(u8 s, u8 t) {
-  wgPipe->U8 = s;
-  wgPipe->U8 = t;
+    wgPipe->U8 = s;
+    wgPipe->U8 = t;
 }
 
 static inline void GXTexCoord2s8(s8 s, s8 t) {
-  wgPipe->S8 = s;
-  wgPipe->S8 = t;
+    wgPipe->S8 = s;
+    wgPipe->S8 = t;
 }
 
 static inline void GXTexCoord1f32(f32 s) { wgPipe->F32 = s; }
@@ -1150,8 +1148,7 @@ static inline void GXMatrixIndex1x8(u8 index) { wgPipe->U8 = index; }
  *
  * \returns none
  */
-void GXAdjustForOverscan(GXRenderModeObj *rmin, GXRenderModeObj *rmout, u16 hor,
-                         u16 ver);
+void GXAdjustForOverscan(GXRenderModeObj *rmin, GXRenderModeObj *rmout, u16 hor, u16 ver);
 
 /*!
  * \fn void GXLoadPosMtxImm(Mtx mt,u32 pnidx)
@@ -1519,8 +1516,7 @@ void GXSetTevAlphaIn(u8 tevstage, u8 a, u8 b, u8 c, u8 d);
  *
  * \return none
  */
-void GXSetTevColorOp(u8 tevstage, u8 tevop, u8 tevbias, u8 tevscale, u8 clamp,
-                     u8 tevregid);
+void GXSetTevColorOp(u8 tevstage, u8 tevop, u8 tevbias, u8 tevscale, u8 clamp, u8 tevregid);
 
 /*!
  * \fn void GXSetTevAlphaOp(u8 tevstage,u8 tevop,u8 tevbias,u8 tevscale,u8
@@ -1546,8 +1542,7 @@ void GXSetTevColorOp(u8 tevstage, u8 tevop, u8 tevbias, u8 tevscale, u8 clamp,
  *
  * \return none
  */
-void GXSetTevAlphaOp(u8 tevstage, u8 tevop, u8 tevbias, u8 tevscale, u8 clamp,
-                     u8 tevregid);
+void GXSetTevAlphaOp(u8 tevstage, u8 tevop, u8 tevbias, u8 tevscale, u8 clamp, u8 tevregid);
 
 /*!
  * \fn void GXSetNumTexGens(u32 nr)
@@ -1653,8 +1648,8 @@ void GXSetTexCoordGen(u16 texcoord, u32 tgen_typ, u32 tgen_src, u32 mtxsrc);
  *
  * \return none
  */
-void GXSetTexCoordGen2(u16 texcoord, u32 tgen_typ, u32 tgen_src, u32 mtxsrc,
-                       u32 normalize, u32 postmtx);
+void GXSetTexCoordGen2(u16 texcoord, u32 tgen_typ, u32 tgen_src, u32 mtxsrc, u32 normalize,
+                       u32 postmtx);
 
 /*!
  * \fn void GXSetZTexture(u8 op,u8 fmt,u32 bias)
@@ -2229,8 +2224,8 @@ void GXSetTevSwapModeTable(u8 swapid, u8 r, u8 g, u8 b, u8 a);
  *
  * \return none
  */
-void GXSetTevIndirect(u8 tevstage, u8 indtexid, u8 format, u8 bias, u8 mtxid,
-                      u8 wrap_s, u8 wrap_t, u8 addprev, u8 utclod, u8 a);
+void GXSetTevIndirect(u8 tevstage, u8 indtexid, u8 format, u8 bias, u8 mtxid, u8 wrap_s, u8 wrap_t,
+                      u8 addprev, u8 utclod, u8 a);
 
 /*!
  * \fn void GXSetTevDirect(u8 tevstage)
@@ -2479,9 +2474,8 @@ void GXSetTevIndBumpXYZ(u8 tevstage, u8 indstage, u8 mtx_sel);
  *
  * \return none
  */
-void GXSetTevIndTile(u8 tevstage, u8 indtexid, u16 tilesize_x, u16 tilesize_y,
-                     u16 tilespacing_x, u16 tilespacing_y, u8 indtexfmt,
-                     u8 indtexmtx, u8 bias_sel, u8 alpha_sel);
+void GXSetTevIndTile(u8 tevstage, u8 indtexid, u16 tilesize_x, u16 tilesize_y, u16 tilespacing_x,
+                     u16 tilespacing_y, u8 indtexfmt, u8 indtexmtx, u8 bias_sel, u8 alpha_sel);
 
 /*!
  * \fn void GXSetTevIndRepeat(u8 tevstage)
@@ -3307,8 +3301,8 @@ u16 GXGetTexObjWidth(GXTexObj *obj);
  *
  * \return none
  */
-void GXGetTexObjAll(GXTexObj *obj, void **image_ptr, u16 *width, u16 *height,
-                    u8 *format, u8 *wrap_s, u8 *wrap_t, u8 *mipmap);
+void GXGetTexObjAll(GXTexObj *obj, void **image_ptr, u16 *width, u16 *height, u8 *format,
+                    u8 *wrap_s, u8 *wrap_t, u8 *mipmap);
 
 /*!
  * \fn u32 GXGetTexBufferSize(u16 wd,u16 ht,u32 fmt,u8 mipmap,u8 maxlod)
@@ -3404,8 +3398,8 @@ void GXInvalidateTexRegion(GXTexRegion *region);
  *
  * \return none
  */
-void GXInitTexCacheRegion(GXTexRegion *region, u8 is32bmipmap, u32 tmem_even,
-                          u8 size_even, u32 tmem_odd, u8 size_odd);
+void GXInitTexCacheRegion(GXTexRegion *region, u8 is32bmipmap, u32 tmem_even, u8 size_even,
+                          u32 tmem_odd, u8 size_odd);
 
 /*!
  * \fn void GXInitTexPreloadRegion(GXTexRegion *region,u32 tmem_even,u32
@@ -3439,8 +3433,8 @@ void GXInitTexCacheRegion(GXTexRegion *region, u8 is32bmipmap, u32 tmem_even,
  *
  * \return none
  */
-void GXInitTexPreloadRegion(GXTexRegion *region, u32 tmem_even, u32 size_even,
-                            u32 tmem_odd, u32 size_odd);
+void GXInitTexPreloadRegion(GXTexRegion *region, u32 tmem_even, u32 size_even, u32 tmem_odd,
+                            u32 size_odd);
 
 /*!
  * \fn void GXInitTexObj(GXTexObj *obj,void *img_ptr,u16 wd,u16 ht,u8 fmt,u8
@@ -3476,8 +3470,8 @@ void GXInitTexPreloadRegion(GXTexRegion *region, u32 tmem_even, u32 size_even,
  *
  * \return none
  */
-void GXInitTexObj(GXTexObj *obj, void *img_ptr, u16 wd, u16 ht, u8 fmt,
-                  u8 wrap_s, u8 wrap_t, u8 mipmap);
+void GXInitTexObj(GXTexObj *obj, void *img_ptr, u16 wd, u16 ht, u8 fmt, u8 wrap_s, u8 wrap_t,
+                  u8 mipmap);
 
 /*!
  * \fn void GXInitTexObjCI(GXTexObj *obj,void *img_ptr,u16 wd,u16 ht,u8 fmt,u8
@@ -3523,8 +3517,8 @@ void GXInitTexObj(GXTexObj *obj, void *img_ptr, u16 wd, u16 ht, u8 fmt,
  *
  * \return none
  */
-void GXInitTexObjCI(GXTexObj *obj, void *img_ptr, u16 wd, u16 ht, u8 fmt,
-                    u8 wrap_s, u8 wrap_t, u8 mipmap, u32 tlut_name);
+void GXInitTexObjCI(GXTexObj *obj, void *img_ptr, u16 wd, u16 ht, u8 fmt, u8 wrap_s, u8 wrap_t,
+                    u8 mipmap, u32 tlut_name);
 
 /*!
  * \fn void GXInitTexObjTlut(GXTexObj *obj,u32 tlut_name)
@@ -3865,9 +3859,8 @@ void GXInitTlutRegion(GXTlutRegion *region, u32 tmem_addr, u8 tlut_sz);
  *
  * \return none
  */
-void GXInitTexObjLOD(GXTexObj *obj, u8 minfilt, u8 magfilt, f32 minlod,
-                     f32 maxlod, f32 lodbias, u8 biasclamp, u8 edgelod,
-                     u8 maxaniso);
+void GXInitTexObjLOD(GXTexObj *obj, u8 minfilt, u8 magfilt, f32 minlod, f32 maxlod, f32 lodbias,
+                     u8 biasclamp, u8 edgelod, u8 maxaniso);
 
 /*!
  * \fn void GXSetTexCoordScaleManually(u8 texcoord,u8 enable,u16 ss,u16 ts)
@@ -4119,8 +4112,7 @@ void GXLoadLightObjIdx(u32 litobjidx, u8 litid);
  *
  * \return none
  */
-void GXInitLightDistAttn(GXLightObj *lit_obj, f32 ref_dist, f32 ref_brite,
-                         u8 dist_fn);
+void GXInitLightDistAttn(GXLightObj *lit_obj, f32 ref_dist, f32 ref_brite, u8 dist_fn);
 
 /*!
  * \fn void GXInitLightAttn(GXLightObj *lit_obj,f32 a0,f32 a1,f32 a2,f32 k0,f32
@@ -4170,8 +4162,7 @@ void GXInitLightDistAttn(GXLightObj *lit_obj, f32 ref_dist, f32 ref_brite,
  *
  * \return none
  */
-void GXInitLightAttn(GXLightObj *lit_obj, f32 a0, f32 a1, f32 a2, f32 k0,
-                     f32 k1, f32 k2);
+void GXInitLightAttn(GXLightObj *lit_obj, f32 a0, f32 a1, f32 a2, f32 k0, f32 k1, f32 k2);
 
 /*!
  * \fn void GXInitLightAttnA(GXLightObj *lit_obj,f32 a0,f32 a1,f32 a2)
@@ -4280,8 +4271,7 @@ void GXInitLightAttnK(GXLightObj *lit_obj, f32 k0, f32 k1, f32 k2);
  *
  * \return none
  */
-void GXInitSpecularDirHA(GXLightObj *lit_obj, f32 nx, f32 ny, f32 nz, f32 hx,
-                         f32 hy, f32 hz);
+void GXInitSpecularDirHA(GXLightObj *lit_obj, f32 nx, f32 ny, f32 nz, f32 hx, f32 hy, f32 hz);
 
 /*!
  * \fn void GXInitSpecularDir(GXLightObj *lit_obj,f32 nx,f32 ny,f32 nz)
@@ -4566,8 +4556,7 @@ void GXSetVCacheMetric(u32 attr);
  *
  * \return none
  */
-void GXGetGPStatus(u8 *overhi, u8 *underlow, u8 *readIdle, u8 *cmdIdle,
-                   u8 *brkpt);
+void GXGetGPStatus(u8 *overhi, u8 *underlow, u8 *readIdle, u8 *cmdIdle, u8 *brkpt);
 
 /*!
  * \fn void GXReadGPMetric(u32 *cnt0,u32 *cnt1)
@@ -4674,9 +4663,8 @@ volatile void *GXRedirectWriteGatherPipe(void *ptr);
  *
  * \return none
  */
-#define GX_InitLightPosv(lo, vec)                                              \
-  (GX_InitLightPos((lo), *(f32 *)(vec), *((f32 *)(vec) + 1),                   \
-                   *((f32 *)(vec) + 2)))
+#define GX_InitLightPosv(lo, vec)                                                                  \
+    (GX_InitLightPos((lo), *(f32 *)(vec), *((f32 *)(vec) + 1), *((f32 *)(vec) + 2)))
 
 /*!
  * \def GXInitLightDirv(lo,vec)
@@ -4701,9 +4689,8 @@ volatile void *GXRedirectWriteGatherPipe(void *ptr);
  *
  * \return none
  */
-#define GX_InitLightDirv(lo, vec)                                              \
-  (GX_InitLightDir((lo), *(f32 *)(vec), *((f32 *)(vec) + 1),                   \
-                   *((f32 *)(vec) + 2)))
+#define GX_InitLightDirv(lo, vec)                                                                  \
+    (GX_InitLightDir((lo), *(f32 *)(vec), *((f32 *)(vec) + 1), *((f32 *)(vec) + 2)))
 
 /*!
  * \def GXInitSpecularDirv(lo,vec)
@@ -4737,9 +4724,8 @@ volatile void *GXRedirectWriteGatherPipe(void *ptr);
  *
  * \return none
  */
-#define GX_InitSpecularDirv(lo, vec)                                           \
-  (GX_InitSpecularDir((lo), *(f32 *)(vec), *((f32 *)(vec) + 1),                \
-                      *((f32 *)(vec) + 2)))
+#define GX_InitSpecularDirv(lo, vec)                                                               \
+    (GX_InitSpecularDir((lo), *(f32 *)(vec), *((f32 *)(vec) + 1), *((f32 *)(vec) + 2)))
 
 /*!
  * \def GXInitSpecularDirHAv(lo,vec0,vec1)
@@ -4766,10 +4752,9 @@ volatile void *GXRedirectWriteGatherPipe(void *ptr);
  *
  * \return none
  */
-#define GX_InitSpecularDirHAv(lo, vec0, vec1)                                  \
-  (GX_InitSpecularDirHA((lo), *(f32 *)(vec0), *((f32 *)(vec0) + 1),            \
-                        *((f32 *)(vec0) + 2), *(f32 *)(vec1),                  \
-                        *((f32 *)(vec1) + 1), *((f32 *)(vec1) + 2)))
+#define GX_InitSpecularDirHAv(lo, vec0, vec1)                                                      \
+    (GX_InitSpecularDirHA((lo), *(f32 *)(vec0), *((f32 *)(vec0) + 1), *((f32 *)(vec0) + 2),        \
+                          *(f32 *)(vec1), *((f32 *)(vec1) + 1), *((f32 *)(vec1) + 2)))
 
 /*!
  * \def GXInitLightShininess(lobj, shininess)
@@ -4790,9 +4775,8 @@ volatile void *GXRedirectWriteGatherPipe(void *ptr);
  *
  * \return none
  */
-#define GX_InitLightShininess(lobj, shininess)                                 \
-  (GX_InitLightAttn(lobj, 0.0F, 0.0F, 1.0F, (shininess) / 2.0F, 0.0F,          \
-                    1.0F - (shininess) / 2.0F))
+#define GX_InitLightShininess(lobj, shininess)                                                     \
+    (GX_InitLightAttn(lobj, 0.0F, 0.0F, 1.0F, (shininess) / 2.0F, 0.0F, 1.0F - (shininess) / 2.0F))
 
 #ifdef __cplusplus
 }

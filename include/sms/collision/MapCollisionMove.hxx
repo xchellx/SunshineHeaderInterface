@@ -1,36 +1,35 @@
 #pragma once
 
-#include <JSystem/JGeometry.hxx>
 #include <Dolphin/MTX.h>
 #include <Dolphin/types.h>
-
+#include <JSystem/JGeometry.hxx>
 
 #include <SMS/actor/LiveActor.hxx>
 #include <SMS/collision/MapCollisionBase.hxx>
 
 class TMapCollisionMove : TMapCollisionBase {
 public:
-  TMapCollisionMove();
+    TMapCollisionMove();
 
-  void init(const s8, u16, const TLiveActor *);
-  void init(u32, u16, s16, const TLiveActor *);
-  void move();
-  void moveMtx(float (*)[4]);
-  void moveSRT(const TVec3f &, const TVec3f &, const TVec3f &);
-  void moveTrans(const TVec3f &);
-  void setList();
+    void init(const s8, u16, const TLiveActor *);
+    void init(u32, u16, s16, const TLiveActor *);
+    void move();
+    void moveMtx(float (*)[4]);
+    void moveSRT(const TVec3f &, const TVec3f &, const TVec3f &);
+    void moveTrans(const TVec3f &);
+    void setList();
 
-  u32 _00;
-  u32 _04;
-  u32 _08;
-  u32 _0C;
-  u32 _10;
-  u32 _14;
-  u32 _18;
-  u32 _1C;
-  Mtx _20;
-  f32 _50;
-  f32 _54;
-  f32 _58;
-  u16 _5C;
+    u32 _00;
+    u32 _04;
+    u32 _08;
+    u32 _0C;
+    u32 _10;
+    u32 _14;
+    u32 _18;
+    u32 _1C;
+    Mtx _20;
+    f32 _50;
+    f32 _54;
+    f32 _58;
+    u16 _5C;
 };

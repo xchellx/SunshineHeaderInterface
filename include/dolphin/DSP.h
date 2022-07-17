@@ -4,18 +4,17 @@
 #include <Dolphin/types.h>
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-    u32 DSPCheckMailToDSP();
-    u32 DSPCheckMailFromDSP();
+u32 DSPCheckMailToDSP();
+u32 DSPCheckMailFromDSP();
 
-    u32 DSPReadMailFromDSP();
-    void DSPSendMailToDSP(u32 mail);
+u32 DSPReadMailFromDSP();
+void DSPSendMailToDSP(u32 mail);
 
-    void DSPAssertInt();
-    void DSPInit();
+void DSPAssertInt();
+void DSPInit();
 
 #ifdef __cplusplus
 }

@@ -6,8 +6,8 @@ enum JSUStreamSeekFrom { BEGIN, CURRENT, END };
 
 class JSUIosBase {
 public:
-  JSUIosBase();
-  virtual ~JSUIosBase();
+    JSUIosBase();
+    virtual ~JSUIosBase();
 
-  u8 _4; // maybe state?
+    u8 _4;  // maybe state?
 };

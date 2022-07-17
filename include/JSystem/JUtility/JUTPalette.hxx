@@ -3,16 +3,13 @@
 #include <Dolphin/GX.h>
 
 struct ResTLUT {
-  u8 mTlutFmt;
-  u8 mTransparency;
-  u16 mLutSize;
-  void *mLut __attribute__((aligned(32)));
+    u8 mTlutFmt;
+    u8 mTransparency;
+    u16 mLutSize;
+    void *mLut __attribute__((aligned(32)));
 };
 
-enum JUTTransparency {
-    OPAQUE,
-    TRANSPARENT
-};
+enum JUTTransparency { OPAQUE, TRANSPARENT };
 
 class JUTPalette {
 public:

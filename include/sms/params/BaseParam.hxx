@@ -5,8 +5,7 @@
 
 class TParams;
 
-class TBaseParam
-{
+class TBaseParam {
 public:
     TBaseParam(TParams *parent, u16 keycode, const char *name);
 

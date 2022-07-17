@@ -5,8 +5,7 @@
 #include <SMS/actor/LiveActor.hxx>
 #include <SMS/collision/MapCollisionBase.hxx>
 
-class TMapCollisionStatic : public TMapCollisionBase
-{
+class TMapCollisionStatic : public TMapCollisionBase {
 public:
     TMapCollisionStatic();
 
@@ -14,5 +13,5 @@ public:
     void remove();
     void setUp();
 
-    TLiveActor *mActor; // _60
+    TLiveActor *mActor;  // _60
 };

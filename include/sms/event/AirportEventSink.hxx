@@ -2,9 +2,8 @@
 
 #include <SMS/event/MapEventSinkInPollutionReset.hxx>
 
-class TAirportEventSink : public TMapEventSinkInPollutionReset
-{
-    public:
+class TAirportEventSink : public TMapEventSinkInPollutionReset {
+public:
     TAirportEventSink(const char *);
     virtual ~TAirportEventSink();
 

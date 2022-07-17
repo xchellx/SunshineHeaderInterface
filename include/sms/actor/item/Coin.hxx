@@ -5,19 +5,18 @@
 #include <SMS/actor/HitActor.hxx>
 #include <SMS/actor/Item.hxx>
 
-class TCoin : public TItem
-{
+class TCoin : public TItem {
 public:
-	TCoin(const char *);
-	virtual ~TCoin();
+    TCoin(const char *);
+    virtual ~TCoin();
 
-	virtual void loadAfter() override;
-	virtual void perform(u32, JDrama::TGraphics *) override;
-	virtual void appear() override;
-	virtual void makeObjAppeared() override;
-	virtual void makeObjDead() override;
-	virtual void initMapObj() override;
-	virtual void taken(THitActor *) override;
+    virtual void loadAfter() override;
+    virtual void perform(u32, JDrama::TGraphics *) override;
+    virtual void appear() override;
+    virtual void makeObjAppeared() override;
+    virtual void makeObjDead() override;
+    virtual void initMapObj() override;
+    virtual void taken(THitActor *) override;
 
-	u32 _154;
+    u32 _154;
 };

@@ -3,18 +3,14 @@
 #include <SMS/actor/Mario.hxx>
 #include <SMS/m3d/M3UModel.hxx>
 
-class M3UModelCommonMario : public M3UModelCommon
-{
+class M3UModelCommonMario : public M3UModelCommon {
 public:
     virtual M3UMtxCalcSetInfo *getMtxCalc(const M3UMtxCalcSetInfo &) const;
 };
 
-class TEnemyMario : public TMario
-{
+class TEnemyMario : public TMario {
 public:
-
-    enum CONTEXTS
-    {
+    enum CONTEXTS {
         UNK0,
         CAUTIONWAIT,
         REPEATJUMP,
@@ -29,9 +25,9 @@ public:
         FALLING,
         LAYWAITING,
         RUNAWAY,
-        MOVETONEWGRAPH, //?
-        LAUGHATTARGET = 16,
-        LEAVEMAP = 17,
+        MOVETONEWGRAPH,  //?
+        LAUGHATTARGET  = 16,
+        LEAVEMAP       = 17,
         LAUGHATTARGET2 = 18,
     };
 
@@ -42,5 +38,5 @@ public:
     u32 _08[0x38 / 4];
     f32 mWarpSpeed;
     u32 _44[0x38 / 4];
-    void *mEnemyManager; //?
+    void *mEnemyManager;  //?
 };

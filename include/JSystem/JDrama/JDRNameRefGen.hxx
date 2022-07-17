@@ -1,22 +1,22 @@
 #pragma once
 
-#include <JSystem/JSupport/JSUMemoryStream.hxx>
-#include <JSystem/JDrama/JDRNameRefPtrListT.hxx>
-#include <JSystem/JDrama/JDRNameRef.hxx>
 #include <Dolphin/types.h>
+#include <JSystem/JDrama/JDRNameRef.hxx>
+#include <JSystem/JDrama/JDRNameRefPtrListT.hxx>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
 
 namespace JDrama {
 
-class TNameRefGen {
-public:
-  virtual void load(JSUMemoryInputStream &stream);
-  virtual TNameRef *getNameRef(const char *) const;
+    class TNameRefGen {
+    public:
+        virtual void load(JSUMemoryInputStream &stream);
+        virtual TNameRef *getNameRef(const char *) const;
 
-  TNameRef *getRootNameRef();
-  static TNameRefGen *getInstance();
+        TNameRef *getRootNameRef();
+        static TNameRefGen *getInstance();
 
-private:
-  TNameRef *mRootName;
-};
+    private:
+        TNameRef *mRootName;
+    };
 
-} // namespace JDrama
+}  // namespace JDrama

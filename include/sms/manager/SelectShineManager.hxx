@@ -1,5 +1,3 @@
 #pragma once
 
-class TSelectShineManager {
-
-};
+class TSelectShineManager {};

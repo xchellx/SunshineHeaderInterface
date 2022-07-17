@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Dolphin/types.h>
 #include <Dolphin/GX.h>
+#include <Dolphin/types.h>
 
 class JPADefaultTexture {
 public:

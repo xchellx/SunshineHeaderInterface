@@ -2,6 +2,4 @@
 
 #include <Dolphin/types.h>
 
-class TPollutionPos
-{
-};
+class TPollutionPos {};

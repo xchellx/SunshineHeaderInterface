@@ -7,8 +7,7 @@ class TCoord2D {
 public:
     void setValue(s32 speed, f32 startx, f32 starty, f32 endx, f32 endy);
 
-    template <typename T>
-    T roundf(f32) const;
+    template <typename T> T roundf(f32) const;
 
     void update();
 

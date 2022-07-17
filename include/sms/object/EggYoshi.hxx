@@ -8,8 +8,7 @@
 
 class TMario;
 
-class TEggYoshi : public TMapObjGeneral
-{
+class TEggYoshi : public TMapObjGeneral {
 public:
     TEggYoshi(const char *);
     virtual ~TEggYoshi();
@@ -25,7 +24,7 @@ public:
     void startFruit();
     void touchFruit();
 
-    MActor *mActor;    //0x0148
-    u32 mWantedFruit;  //0x014C
-    TMario *mMario;    //0x0150
+    MActor *mActor;    // 0x0148
+    u32 mWantedFruit;  // 0x014C
+    TMario *mMario;    // 0x0150
 };

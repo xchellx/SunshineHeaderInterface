@@ -5,8 +5,8 @@
 
 class JPADataBlock {
 public:
-  JPADataBlock(u8 *data, JKRHeap *heap);
-  virtual ~JPADataBlock();
+    JPADataBlock(u8 *data, JKRHeap *heap);
+    virtual ~JPADataBlock();
 
-  void *mData;
+    void *mData;
 };

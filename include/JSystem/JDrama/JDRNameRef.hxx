@@ -1,30 +1,30 @@
 #pragma once
 
-#include <JSystem/JSupport/JSUMemoryStream.hxx>
 #include <Dolphin/types.h>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
 
 namespace JDrama {
 
-class TNameRef {
-public:
-  TNameRef(const char *);
-  virtual ~TNameRef();
+    class TNameRef {
+    public:
+        TNameRef(const char *);
+        virtual ~TNameRef();
 
-  virtual u32 getType() const;
-  virtual void load(JSUMemoryInputStream &stream);
-  virtual void save(JSUMemoryOutputStream &stream);
-  virtual void loadAfter();
-  virtual TNameRef *searchF(u16, const char *);
+        virtual u32 getType() const;
+        virtual void load(JSUMemoryInputStream &stream);
+        virtual void save(JSUMemoryOutputStream &stream);
+        virtual void loadAfter();
+        virtual TNameRef *searchF(u16, const char *);
 
-  void genObject(JSUMemoryInputStream &stream, JSUMemoryInputStream &);
-  u32 getType(JSUMemoryInputStream &stream, JSUMemoryInputStream &);
-  void search(const char *);
+        void genObject(JSUMemoryInputStream &stream, JSUMemoryInputStream &);
+        u32 getType(JSUMemoryInputStream &stream, JSUMemoryInputStream &);
+        void search(const char *);
 
-  static s16 calcKeyCode(const char *);
+        static s16 calcKeyCode(const char *);
 
-  char *mTypeName;
-  u16 mKeyCode;
-  u16 _0A;
-};
+        char *mTypeName;
+        u16 mKeyCode;
+        u16 _0A;
+    };
 
-} // namespace JDrama
+}  // namespace JDrama

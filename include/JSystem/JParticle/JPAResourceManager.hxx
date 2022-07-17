@@ -5,19 +5,19 @@
 #include <JPA/JPATextureResource.hxx>
 
 struct JPAEmitterData {
-  size_t mResourceNum;
-  size_t mResourceMax;
-  JPABaseEmitter **mEmitters;
+    size_t mResourceNum;
+    size_t mResourceMax;
+    JPABaseEmitter **mEmitters;
 };
 
 class JPAResourceManager {
 public:
-  JPAResourceManager(size_t capacity, u32, JKRHeap *heap);
+    JPAResourceManager(size_t capacity, u32, JKRHeap *heap);
 
-  void load(const char *filepath, u16);
-  void load(const void *data, u16);
+    void load(const char *filepath, u16);
+    void load(const void *data, u16);
 
-  JKRHeap *mHeap;
-  JPAEmitterData *mResource;
-  JPATextureResource *mTextureResource;
+    JKRHeap *mHeap;
+    JPAEmitterData *mResource;
+    JPATextureResource *mTextureResource;
 };

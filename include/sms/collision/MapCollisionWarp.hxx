@@ -6,8 +6,7 @@
 #include <SMS/actor/LiveActor.hxx>
 #include <SMS/collision/MapCollisionBase.hxx>
 
-class TMapCollisionWarp : TMapCollisionBase
-{
+class TMapCollisionWarp : TMapCollisionBase {
 public:
     TMapCollisionWarp();
 
@@ -17,5 +16,5 @@ public:
     void setUpTrans(const TVec3f &);
 
     u16 _60;
-    TLiveActor *mActor; //0x0064
+    TLiveActor *mActor;  // 0x0064
 };

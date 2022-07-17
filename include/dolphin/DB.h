@@ -2,12 +2,11 @@
 #define DB_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
-    void DBInit();
-    void DBPrintf(char *str, ...);
+void DBInit();
+void DBPrintf(char *str, ...);
 
 #ifdef __cplusplus
 }

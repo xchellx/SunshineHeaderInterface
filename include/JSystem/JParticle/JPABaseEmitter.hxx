@@ -1,7 +1,7 @@
 #pragma once
 
-#include <JSystem/JSupport/JSUList.hxx>
 #include <JSystem/JParticle/JPABaseParticle.hxx>
+#include <JSystem/JSupport/JSUList.hxx>
 
 class JPABaseEmitter : public JSUPtrLink {
 public:

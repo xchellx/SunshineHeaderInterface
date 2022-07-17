@@ -2,6 +2,4 @@
 
 #include <Dolphin/types.h>
 
-class J3DTransformInfo
-{
-};
+class J3DTransformInfo {};

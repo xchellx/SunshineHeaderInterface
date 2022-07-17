@@ -4,16 +4,15 @@
 #include <JSystem/J2D/J2DPane.hxx>
 #include <JSystem/JUtility/JUTRect.hxx>
 
-class J2DOrthoGraph : public J2DGrafContext
-{
+class J2DOrthoGraph : public J2DGrafContext {
 public:
     J2DOrthoGraph(u32, u32, u32, u32);
-	J2DOrthoGraph(const JUTRect &);
-	~J2DOrthoGraph();
+    J2DOrthoGraph(const JUTRect &);
+    ~J2DOrthoGraph();
 
-	void setPort();
-	void setLookat();
-	void scissorBounds(JUTRect *, JUTRect *);
+    void setPort();
+    void setLookat();
+    void scissorBounds(JUTRect *, JUTRect *);
 
     JUTRect _D8;
     u32 _DC;

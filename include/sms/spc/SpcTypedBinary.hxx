@@ -6,9 +6,9 @@
 
 template <typename T> class TSpcTypedBinary : public TSpcBinary {
 public:
-  virtual ~TSpcTypedBinary();
+    virtual ~TSpcTypedBinary();
 
-  virtual void initUserBuiltin() override;
+    virtual void initUserBuiltin() override;
 };
 
 void linPushNerve(TSpcTypedInterp<TLiveActor> *, u32);

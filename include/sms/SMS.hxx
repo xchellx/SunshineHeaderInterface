@@ -3,10 +3,10 @@
 #include <Dolphin/types.h>
 
 #include <JSystem/JGeometry.hxx>
+#include <JSystem/JParticle/JPAResourceManager.hxx>
 #include <JSystem/JUtility/JUTColor.hxx>
 #include <JSystem/JUtility/JUTConsole.hxx>
 #include <JSystem/JUtility/JUTResFont.hxx>
-#include <JSystem/JParticle/JPAResourceManager.hxx>
 
 #include <SMS/actor/Mario.hxx>
 #include <SMS/camera/CameraMarioData.hxx>
@@ -14,20 +14,19 @@
 #include <SMS/camera/PolarSubCamera.hxx>
 #include <SMS/collision/MapCollisionData.hxx>
 #include <SMS/game/Application.hxx>
+#include <SMS/game/Conductor.hxx>
 #include <SMS/game/GCConsole2.hxx>
 #include <SMS/game/MarDirector.hxx>
 #include <SMS/game/Strategy.hxx>
-#include <SMS/game/Conductor.hxx>
 #include <SMS/manager/EffectObjManager.hxx>
 #include <SMS/manager/FlagManager.hxx>
-#include <SMS/manager/PollutionManager.hxx>
-#include <SMS/manager/RumbleManager.hxx>
 #include <SMS/manager/MarioParticleManager.hxx>
 #include <SMS/manager/ModelWaterManager.hxx>
+#include <SMS/manager/PollutionManager.hxx>
+#include <SMS/manager/RumbleManager.hxx>
 #include <SMS/map/Map.hxx>
 #include <SMS/option/CardLoad.hxx>
 #include <SMS/sound/MSound.hxx>
-
 
 extern JUtility::TColor gYoshiBodyColor[4];
 extern TVec3f gShineShadowPos;

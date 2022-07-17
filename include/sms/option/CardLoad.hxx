@@ -7,8 +7,7 @@
 #include <SMS/option/CardManager.hxx>
 #include <SMS/option/OptionControl.hxx>
 
-enum TEProgress
-{
+enum TEProgress {
     PROGRESS_UNK_0,
     PROGRESS_UNK_1,
     PROGRESS_UNK_2,
@@ -18,8 +17,7 @@ enum TEProgress
     PROGRESS_UNK_6
 };
 
-class TCardLoad : public JDrama::TNameRef
-{
+class TCardLoad : public JDrama::TNameRef {
 public:
     TCardLoad(const char *);
     virtual ~TCardLoad();
@@ -43,13 +41,13 @@ public:
 
     u16 _0C;
     TEProgress mProgress;
-    u32 mState;                     //0x0014
-    u32 _18[0x98 / 4];              //0x0018
-    u8 mSelected;                   //0x00B0
+    u32 mState;         // 0x0014
+    u32 _18[0x98 / 4];  // 0x0018
+    u8 mSelected;       // 0x00B0
     u8 _B1[0xF];
-    s32 mFramesOpen;                //0x00C0
-    u32 _C4[0x60 / 4];              //0x00C4
-    JUTRect mRects[11];             //0x0124
+    s32 mFramesOpen;     // 0x00C0
+    u32 _C4[0x60 / 4];   // 0x00C4
+    JUTRect mRects[11];  // 0x0124
     u32 _1D4[0x5A0 / 4];
-    TOptionControl *mOptionControl; //0x0774
+    TOptionControl *mOptionControl;  // 0x0774
 };

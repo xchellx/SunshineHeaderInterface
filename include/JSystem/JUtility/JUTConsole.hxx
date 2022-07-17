@@ -3,12 +3,9 @@
 #include <Dolphin/types.h>
 #include <JSystem/JKernel/JKRDisposer.hxx>
 
-class JUTConsole : public JKRDisposer
-{
+class JUTConsole : public JKRDisposer {
 public:
-    enum EConsoleType
-    {
-    };
+    enum EConsoleType {};
 
     JUTConsole(unsigned int, unsigned int, bool);
     ~JUTConsole();

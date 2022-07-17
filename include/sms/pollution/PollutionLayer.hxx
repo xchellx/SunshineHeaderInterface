@@ -5,9 +5,8 @@
 
 #include <SMS/j3d/Joint.hxx>
 
-class TPollutionLayer : public TJointModel
-{
+class TPollutionLayer : public TJointModel {
 
 public:
-    u16 mPollutionEffect; //0x0030
+    u16 mPollutionEffect;  // 0x0030
 };

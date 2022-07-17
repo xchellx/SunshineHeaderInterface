@@ -2,9 +2,8 @@
 
 #include <SMS/event/MapEventSink.hxx>
 
-class TMapEventSinkInPollution : public TMapEventSink
-{
-    public:
+class TMapEventSinkInPollution : public TMapEventSink {
+public:
     virtual ~TMapEventSinkInPollution();
 
     virtual void loadAfter();

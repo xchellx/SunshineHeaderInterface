@@ -2,22 +2,22 @@
 
 namespace JGadget {
 
-class TSingleLinkListNode {
-public:
-  TSingleLinkListNode *mPrev;
-  TSingleLinkListNode *mNext;
-};
+    class TSingleLinkListNode {
+    public:
+        TSingleLinkListNode *mPrev;
+        TSingleLinkListNode *mNext;
+    };
 
-class TLinkListNode {
-  friend class TNodeLinkList;
+    class TLinkListNode {
+        friend class TNodeLinkList;
 
-public:
-  TLinkListNode *getNext();
-  TLinkListNode *getPrev();
+    public:
+        TLinkListNode *getNext();
+        TLinkListNode *getPrev();
 
-protected:
-  TLinkListNode *mNext;
-  TLinkListNode *mPrev;
-};
+    protected:
+        TLinkListNode *mNext;
+        TLinkListNode *mPrev;
+    };
 
-} // namespace JGadget
+}  // namespace JGadget

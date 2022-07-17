@@ -2,6 +2,4 @@
 
 #include <SMS/mapobj/MapObjBase.hxx>
 
-class TDemoCannon : public TMapObjBase
-{
-};
+class TDemoCannon : public TMapObjBase {};

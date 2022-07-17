@@ -7,6 +7,6 @@
 
 class J3DModelLoaderDataBase {
 public:
-  static J3DModelData *load(const void *, u32);
-  static J3DMaterialTable *loadMaterialTable(const void *);
+    static J3DModelData *load(const void *, u32);
+    static J3DMaterialTable *loadMaterialTable(const void *);
 };

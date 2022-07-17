@@ -3,21 +3,20 @@
 #include <Dolphin/types.h>
 #include <JSystem/J2D/J2DScreen.hxx>
 
-class TOptionRumbleUnit
-{
+class TOptionRumbleUnit {
 public:
-    J2DScreen *mScreen; // _0
-    u32 *_4;            // TExPane*
+    J2DScreen *mScreen;  // _0
+    u32 *_4;             // TExPane*
     u8 _8;
     u8 _9;
-    u8 _A; // padding?
-    u8 _B; // ^^
+    u8 _A;  // padding?
+    u8 _B;  // ^^
     u32 _C;
-    u32 *_10;   // TPatternAnmControl*
-    u32 *_14;   // TPatternAnmControl*
-    u32 *_18;   // some class
-    u32 mState; // _1C
-    u32 *_20;   // copy of _18
+    u32 *_10;    // TPatternAnmControl*
+    u32 *_14;    // TPatternAnmControl*
+    u32 *_18;    // some class
+    u32 mState;  // _1C
+    u32 *_20;    // copy of _18
     f32 _24;
 
     /*

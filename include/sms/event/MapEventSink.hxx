@@ -2,9 +2,8 @@
 
 #include <SMS/event/MapEvent.hxx>
 
-class TMapEventSink : public TMapEvent
-{
-    public:
+class TMapEventSink : public TMapEvent {
+public:
     TMapEventSink(const char *);
     virtual ~TMapEventSink();
 
@@ -14,18 +13,18 @@ class TMapEventSink : public TMapEvent
     virtual void startContorl();
     virtual s32 control();
     virtual void finishControl();
-    virtual u32* getBuilding(int) const;
+    virtual u32 *getBuilding(int) const;
     virtual void initBuilding(int, JSUMemoryInputStream &);
     virtual void initWithBuildingNum(JSUMemoryInputStream &);
     virtual void rising();
     virtual f32 getSinkOffsetY() const;
     virtual void makeBuildingRecovered(int);
 
-    u32 _20; // defined in map binary
+    u32 _20;  // defined in map binary
     u32 _24;
     s32 _28;
     u32 _2C;
-    u32* _30;
+    u32 *_30;
     f32 _34;
     f32 _38;
     f32 _3C;
@@ -33,9 +32,9 @@ class TMapEventSink : public TMapEvent
     u32 _44;
     u32 _48;
     u32 _4C;
-    TVec3f* _50; // array of something, count is this + 0x20
-    void* _54;
-    void* _58;
-    void* _5C;
-    void* _60;
+    TVec3f *_50;  // array of something, count is this + 0x20
+    void *_54;
+    void *_58;
+    void *_5C;
+    void *_60;
 };

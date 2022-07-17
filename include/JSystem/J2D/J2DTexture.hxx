@@ -4,5 +4,4 @@
 
 class J2DTexture : public J2DPane {
 public:
-    
 };

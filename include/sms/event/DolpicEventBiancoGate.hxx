@@ -2,9 +2,8 @@
 
 #include <SMS/event/MapEventSink.hxx>
 
-class TDolpicEventBiancoGate : public TMapEventSink
-{
-    public:
+class TDolpicEventBiancoGate : public TMapEventSink {
+public:
     TDolpicEventBiancoGate(const char *);
     virtual ~TDolpicEventBiancoGate();
 
@@ -13,6 +12,6 @@ class TDolpicEventBiancoGate : public TMapEventSink
     virtual s32 watch();
     virtual s32 control();
 
-    u32* _20;
+    u32 *_20;
     f32 _24;
 };

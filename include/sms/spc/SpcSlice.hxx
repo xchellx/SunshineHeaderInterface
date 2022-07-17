@@ -4,14 +4,14 @@
 
 class TSpcSlice {
 public:
-  TSpcSlice();
+    TSpcSlice();
 
-  u32 getDataInt() const;
-  f32 getDataFloat() const;
+    u32 getDataInt() const;
+    f32 getDataFloat() const;
 
-  bool operator!=(const TSpcSlice &) const;
-  bool operator==(const TSpcSlice &) const;
+    bool operator!=(const TSpcSlice &) const;
+    bool operator==(const TSpcSlice &) const;
 
-  u32 mType;
-  u32 mValue;
+    u32 mType;
+    u32 mValue;
 };

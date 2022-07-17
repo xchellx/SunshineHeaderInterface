@@ -4,5 +4,5 @@
 
 class TSmplFader : public TSMSFader {
 public:
-  virtual ~TSmplFader();
+    virtual ~TSmplFader();
 };

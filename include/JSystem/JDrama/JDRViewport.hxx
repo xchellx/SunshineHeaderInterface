@@ -7,16 +7,16 @@
 
 namespace JDrama {
 
-class TViewport : public TViewObj {
-public:
-  TViewport(const TRect &, const char *);
-  virtual ~TViewport();
+    class TViewport : public TViewObj {
+    public:
+        TViewport(const TRect &, const char *);
+        virtual ~TViewport();
 
-  virtual void load(JSUMemoryInputStream &stream);
-  virtual void perform(u32, TGraphics *);
+        virtual void load(JSUMemoryInputStream &stream);
+        virtual void perform(u32, TGraphics *);
 
-  TRect mViewportRect; // 10
-  u16 _20;
-};
+        TRect mViewportRect;  // 10
+        u16 _20;
+    };
 
-}
+}  // namespace JDrama

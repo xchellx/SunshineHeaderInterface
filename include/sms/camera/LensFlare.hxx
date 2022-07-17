@@ -5,9 +5,9 @@
 
 class TLensFlare : public JDrama::TViewObj {
 public:
-  TLensFlare(const char *name);
-  virtual ~TLensFlare();
+    TLensFlare(const char *name);
+    virtual ~TLensFlare();
 
-  virtual void perform(u32, JDrama::TGraphics *) override;
-  u32 _10[0x3C / 4];
+    virtual void perform(u32, JDrama::TGraphics *) override;
+    u32 _10[0x3C / 4];
 };

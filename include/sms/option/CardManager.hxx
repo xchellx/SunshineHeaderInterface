@@ -1,26 +1,22 @@
 #pragma once
 
-#include <Dolphin/types.h>
 #include <Dolphin/CARD.h>
 #include <Dolphin/OS.h>
+#include <Dolphin/types.h>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 
-class TCardBookmarkInfo
-{
+class TCardBookmarkInfo {
 public:
-    struct
-    {
-        u32 _00[0x1C / 4]; //0x0000
-        u16 mShineCount;   //0x001C
-        u16 _01;           //0x001E
+    struct {
+        u32 _00[0x1C / 4];  // 0x0000
+        u16 mShineCount;    // 0x001C
+        u16 _01;            // 0x001E
     } FileData[3];
 };
 
-class TCardManager
-{
+class TCardManager {
 public:
-    enum Commands
-    {
+    enum Commands {
         NOP,
         FORMAT,
         CREATE,
@@ -33,18 +29,11 @@ public:
         EXIT
     };
 
-    enum Blocks
-    {
-        A,
-        B,
-        C
-    };
+    enum Blocks { A, B, C };
 
-    class TCriteria
-    {
+    class TCriteria {
     public:
-        enum TEBlockStat
-        {
+        enum TEBlockStat {
             SETTING = 1,
             COPYING = 3,
         };
@@ -54,7 +43,7 @@ public:
         void set(TEBlockStat, size_t, const void *);
 
         TEBlockStat mBlockStat;
-        u32 _04; //?
+        u32 _04;  //?
         u8 mBuffer[32];
     };
 
@@ -93,18 +82,18 @@ public:
     u32 _08;
     TCriteria mCriteriaArray[7];
     u8 _124;
-    bool mMounted;              //0x0125
-    bool mRefuseOverwriteMount; //0x0126
-    s32 mLastStatus;               //0x0128
-    void *mCardWorkArea;           //0x012C
-    void *mCARDBlock;              //0x0130
+    bool mMounted;               // 0x0125
+    bool mRefuseOverwriteMount;  // 0x0126
+    s32 mLastStatus;             // 0x0128
+    void *mCardWorkArea;         // 0x012C
+    void *mCARDBlock;            // 0x0130
     u32 _134;
     OSThread mThread;
-    Commands mCommand;             //0x0448
+    Commands mCommand;  // 0x0448
     OSMutex mMutex;
     OSCond mCond;
-    TCardBookmarkInfo *mBookMarks; //0x046C
-    Blocks mSaveBlock;             //0x0474
+    TCardBookmarkInfo *mBookMarks;  // 0x046C
+    Blocks mSaveBlock;              // 0x0474
 };
 
 void cardmain(void *);

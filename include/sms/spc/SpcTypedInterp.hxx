@@ -1,12 +1,11 @@
 #pragma once
 
-#include <SMS/spc/SpcInterp.hxx>
 #include <Dolphin/types.h>
-
+#include <SMS/spc/SpcInterp.hxx>
 
 template <typename T> class TSpcTypedInterp : public TSpcInterp {
 public:
-  ~TSpcTypedInterp();
+    ~TSpcTypedInterp();
 
-  void dispatchBuiltin(u32, u32);
+    void dispatchBuiltin(u32, u32);
 };

@@ -2,23 +2,23 @@
 
 #include <Dolphin/types.h>
 
-#include <JSystem/JGeometry.hxx>
-#include <JSystem/JKernel/JKRArchivePri.hxx>
 #include <JSystem/JDrama/JDRCharacter.hxx>
 #include <JSystem/JDrama/JDRNameRef.hxx>
+#include <JSystem/JGeometry.hxx>
+#include <JSystem/JKernel/JKRArchivePri.hxx>
 
 namespace JDrama {
 
-class TSmplChara : public TCharacter {
-public:
-  virtual ~TSmplChara();
+    class TSmplChara : public TCharacter {
+    public:
+        virtual ~TSmplChara();
 
-  virtual void load(JSUMemoryInputStream &stream);
-  virtual u32 *getRes(const char *resName);
+        virtual void load(JSUMemoryInputStream &stream);
+        virtual u32 *getRes(const char *resName);
 
-  void mountArc(const char *resName);
+        void mountArc(const char *resName);
 
-  JKRArchive *mArchive; // C
-};
+        JKRArchive *mArchive;  // C
+    };
 
-} // namespace JDrama
+}  // namespace JDrama
