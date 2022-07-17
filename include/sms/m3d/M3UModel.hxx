@@ -1,8 +1,8 @@
 #pragma once
 
-#include "J3D/J3DModel.hxx"
-#include "JDrama/JDRGraphics.hxx"
-#include <dolphin/types.h>
+#include <JSystem/J3D/J3DModel.hxx>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <Dolphin/types.h>
 
 
 class M3UMtxCalcSetInfo {};

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "JGeometry.hxx"
-#include "sms/nozzle/NozzleBase.hxx"
-#include "sms/nozzle/NozzleTrigger.hxx"
-#include "sms/params/Params.hxx"
-#include <dolphin/types.h>
+#include <JSystem/JGeometry.hxx>
+#include <SMS/nozzle/NozzleBase.hxx>
+#include <SMS/nozzle/NozzleTrigger.hxx>
+#include <SMS/params/Params.hxx>
+#include <Dolphin/types.h>
 
 
 class TMario;

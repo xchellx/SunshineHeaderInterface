@@ -1,11 +1,11 @@
 #pragma once
 
-#include "sms/G2D/BoundPane.hxx"
-#include "sms/G2D/ExPane.hxx"
-#include "J2D/J2DTextBox.hxx"
-#include "J2D/J2DSetScreen.hxx"
-#include "JDrama/JDRGraphics.hxx"
-#include "JDrama/JDRViewObj.hxx"
+#include <SMS/G2D/BoundPane.hxx>
+#include <SMS/G2D/ExPane.hxx>
+#include <JSystem/J2D/J2DTextBox.hxx>
+#include <JSystem/J2D/J2DSetScreen.hxx>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
 
 class TConsoleStr : public JDrama::TViewObj {
 public:

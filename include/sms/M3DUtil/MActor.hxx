@@ -1,12 +1,12 @@
 #pragma once
 
-#include "J3D/J3DAnimation.hxx"
-#include "J3D/J3DModel.hxx"
-#include "J3D/J3DModelLoader.hxx"
-#include "JDrama/JDRGraphics.hxx"
-#include "JGeometry.hxx"
-#include "sms/collision/BGCheck.hxx"
-#include <dolphin/types.h>
+#include <JSystem/J3D/J3DAnimation.hxx>
+#include <JSystem/J3D/J3DModel.hxx>
+#include <JSystem/J3D/J3DModelLoader.hxx>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JGeometry.hxx>
+#include <SMS/collision/BGCheck.hxx>
+#include <Dolphin/types.h>
 
 class MActorAnmBase {
 public:

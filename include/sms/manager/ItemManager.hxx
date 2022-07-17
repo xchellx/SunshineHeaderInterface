@@ -1,7 +1,6 @@
-#include "MapObjBaseManager.hxx"
-#include "sms/actor/Item.hxx"
-#include <dolphin/types.h>
-
+#include <Dolphin/types.h>
+#include <SMS/actor/Item.hxx>
+#include <SMS/manager/MapObjBaseManager.hxx>
 
 class TItemManager : public TMapObjBaseManager {
 public:
@@ -20,7 +19,7 @@ public:
 
   static TItem *newAndRegisterCoin(u32);
   static TItem *newAndRegisterCoinReal();
-  
+
   f32 _40;
   f32 _44;
   f32 _48;

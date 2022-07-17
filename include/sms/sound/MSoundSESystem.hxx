@@ -1,8 +1,8 @@
 #pragma once
 
-#include "JGeometry.hxx"
-#include "sms/sound/JAISound.hxx"
-#include <dolphin/types.h>
+#include <JSystem/JGeometry.hxx>
+#include <SMS/sound/JAISound.hxx>
+#include <Dolphin/types.h>
 
 class JAIActor {};
 

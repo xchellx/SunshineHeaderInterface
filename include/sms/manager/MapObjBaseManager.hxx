@@ -1,6 +1,6 @@
-#include "sms/mapobj/MapObjBase.hxx"
-#include "LiveManager.hxx"
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
+#include <SMS/manager/LiveManager.hxx>
+#include <SMS/mapobj/MapObjBase.hxx>
 
 class TMapObjBaseManager : public TLiveManager {
 public:
@@ -15,11 +15,10 @@ public:
   void makeObjAppear(f32, f32, f32, u32, bool);
   void makeObjAppear(u32);
   void makeObjAppeared(u32);
-  
+
   static u32 getActorTypeByEventID(u32);
   static TMapObjBase *newAndRegisterObj(const char *, const TVec3f &,
-                                 const TVec3f &,
-                                 const TVec3f &);
+                                        const TVec3f &, const TVec3f &);
   static TMapObjBase *newAndRegisterObjByEventID(u32, const char *);
 
   f32 _38;

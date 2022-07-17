@@ -1,14 +1,14 @@
 #pragma once
 
-#include <dolphin/GX.h>
-#include <dolphin/types.h>
+#include <Dolphin/GX.h>
+#include <Dolphin/types.h>
 
+#include <JSystem/J3D/J3DModel.hxx>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
+#include <SMS/actor/HitActor.hxx>
+#include <SMS/actor/LiveActor.hxx>
+#include <SMS/mapobj/MapObjInit.hxx>
 
-#include "J3D/J3DModel.hxx"
-#include "JSU/JSUMemoryStream.hxx"
-#include "MapObjInit.hxx"
-#include "sms/actor/HitActor.hxx"
-#include "sms/actor/LiveActor.hxx"
 
 class TMapObjBase : public TLiveActor {
 public:
@@ -31,9 +31,7 @@ public:
   virtual void appear();
   virtual void makeObjAppeared();
   virtual void makeObjDead();
-  virtual void changeObjSRT(const TVec3f &,
-                            const TVec3f &,
-                            const TVec3f &);
+  virtual void changeObjSRT(const TVec3f &, const TVec3f &, const TVec3f &);
   virtual void changeObjMtx(Mtx44);
   virtual void updateObjMtx();
   virtual void setUpCurrentMapCollision();
@@ -60,19 +58,15 @@ public:
   bool animIsFinished() const;
   void awake();
   void calcMap();
-  void calcReflectingVelocity(const TBGCheckData *, f32,
-                              TVec3f *) const;
+  void calcReflectingVelocity(const TBGCheckData *, f32, TVec3f *) const;
   void checkOnManhole();
   void concatOnlyRotFromLeft(Mtx44, Mtx44, Mtx44);
   void concatOnlyRotFromRight(Mtx44, Mtx44, Mtx44);
-  void emitAndBindScale(s32, u8, const TVec3f *,
-                        const TVec3f &) const;
+  void emitAndBindScale(s32, u8, const TVec3f *, const TVec3f &) const;
   void emitAndRotateScale(s32, u8, const TVec3f *) const;
   void emitAndScale(s32, u8, const TVec3f *) const;
-  void emitAndScale(s32, u8, const TVec3f *,
-                    const TVec3f &) const;
-  void emitAndSRT(s32, u8, const TVec3f *,
-                  const TVec3f &, const TVec3f &);
+  void emitAndScale(s32, u8, const TVec3f *, const TVec3f &) const;
+  void emitAndSRT(s32, u8, const TVec3f *, const TVec3f &, const TVec3f &);
   void emitColumnWater();
   void *getBuildingJoint(int);
   void *getBuildingJointObj(int);
@@ -83,8 +77,7 @@ public:
   f32 getObjCollisionHeightOffset() const;
   f32 getRotYFromAxisX(const TVec3f &) const;
   f32 getRotYFromAxisZ(const TVec3f &) const;
-  TVec3f *getVerticalVecToTargetXZ(f32, f32,
-                                                  TVec3f *);
+  TVec3f *getVerticalVecToTargetXZ(f32, f32, TVec3f *);
   bool hasAnim(u16) const;
   bool hasModelOrAnimData(u16) const;
   void initActorData();
@@ -114,8 +107,7 @@ public:
   void startControlAnim(u16);
   void startSound(u16);
   void throwObjToFront(TMapObjBase *, f32, f32) const;
-  void throwObjToFrontFromPoint(TMapObjBase *, const TVec3f &,
-                                f32, f32) const;
+  void throwObjToFrontFromPoint(TMapObjBase *, const TVec3f &, f32, f32) const;
   void updateRootMtxTrans();
 
   static f32 getJointScaleY(J3DJoint *);
@@ -145,18 +137,17 @@ public:
   static void setJointTransY(J3DJoint *, f32);
   static void setJointTransZ(J3DJoint *, f32);
   static void startAllAnim(MActor *, const char *);
-  static void throwObjFromPointWithRot(TMapObjBase *,
-                                       const TVec3f &,
+  static void throwObjFromPointWithRot(TMapObjBase *, const TVec3f &,
                                        const TVec3f &, f32, f32);
   static bool waterHitPlane(THitActor *);
 
-  char *mRegisterName;                    // 0x00F4
-  u32 _00;                                // 0x00F8
-  u16 mState;                             // 0x00FC
-  u16 _01;                                // 0x00FE
-  u16 mSoundIDIndex;                      // 0x0100
-  s32 mStateTimer;                        // 0x0104
-  u32 _03;                                // 0x0108
+  char *mRegisterName;     // 0x00F4
+  u32 _00;                 // 0x00F8
+  u16 mState;              // 0x00FC
+  u16 _01;                 // 0x00FE
+  u16 mSoundIDIndex;       // 0x0100
+  s32 mStateTimer;         // 0x0104
+  u32 _03;                 // 0x0108
   TVec3f mInitialPosition; // 0x010C
   TVec3f mInitialRotation; // 0x0118
   u32 _124[3];

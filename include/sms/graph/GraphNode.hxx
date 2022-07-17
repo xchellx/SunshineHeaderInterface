@@ -1,10 +1,10 @@
 #pragma once
 
-#include "RailNode.hxx"
-#include <dolphin/types.h>
-#include <dolphin/MTX.h>
+#include <Dolphin/MTX.h>
+#include <Dolphin/types.h>
+#include <SMS/graph/RailNode.hxx>
 
-#include "JGeometry.hxx"
+#include <JSystem/JGeometry.hxx>
 
 class TGraphNode {
 

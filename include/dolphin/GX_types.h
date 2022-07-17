@@ -1,6 +1,6 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
 #define GX_FALSE 0
 #define GX_TRUE 1

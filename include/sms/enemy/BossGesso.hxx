@@ -1,9 +1,9 @@
 #pragma once
 
-#include "JDrama/JDRActor.hxx"
-#include "JGeometry.hxx"
-#include "sms/actor/SpineEnemy.hxx"
-#include <dolphin/types.h>
+#include <JSystem/JDrama/JDRActor.hxx>
+#include <JSystem/JGeometry.hxx>
+#include <SMS/actor/SpineEnemy.hxx>
+#include <Dolphin/types.h>
 
 class TBGPolDrop : JDrama::TActor {
 public:

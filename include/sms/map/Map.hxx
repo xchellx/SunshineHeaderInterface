@@ -1,11 +1,11 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
-#include "JDrama/JDRGraphics.hxx"
-#include "JDrama/JDRViewObj.hxx"
-#include "sms/collision/BGCheck.hxx"
-#include "sms/collision/MapCollisionData.hxx"
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
+#include <SMS/collision/BGCheck.hxx>
+#include <SMS/collision/MapCollisionData.hxx>
 
 class TMapWarp {
 public:

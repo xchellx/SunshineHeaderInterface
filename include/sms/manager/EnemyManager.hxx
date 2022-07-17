@@ -1,10 +1,12 @@
 #pragma once
 
-#include "JDrama/JDRGraphics.hxx"
-#include "sms/manager/ObjManager.hxx"
-#include "sms/spc/SpcBinary.hxx"
-#include "sms/params/Params.hxx"
-#include "LiveManager.hxx"
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <SMS/M3DUtil/MActor.hxx>
+#include <SMS/actor/SpineEnemy.hxx>
+#include <SMS/manager/LiveManager.hxx>
+#include <SMS/manager/ObjManager.hxx>
+#include <SMS/params/Params.hxx>
+#include <SMS/spc/SpcBinary.hxx>
 
 class TLiveActor;
 
@@ -41,12 +43,12 @@ public:
   void performShared(u32, JDrama::TGraphics *);
   void setSharedFlags();
   void updateAnmSoundShared();
-  
+
   TSpineEnemyParams *mEnemyParams; // 0
-  f32 _3C; // 1.0f
-  u32 _40; // 0
-  u32 _44; // 0
-  u32 _48; // 0
-  u32 _4c; // -1
-  u32 _50; // 0
+  f32 _3C;                         // 1.0f
+  u32 _40;                         // 0
+  u32 _44;                         // 0
+  u32 _48;                         // 0
+  u32 _4c;                         // -1
+  u32 _50;                         // 0
 };

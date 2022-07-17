@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SMSFader.hxx"
+#include <SMS/screen/SMSFader.hxx>
 
 class TSmplFader : public TSMSFader {
 public:

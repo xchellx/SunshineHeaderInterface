@@ -1,11 +1,11 @@
 #pragma once
 
-#include "JDrama/JDRCamera.hxx"
-#include "JDrama/JDRGraphics.hxx"
-#include "sms/camera/CameraInbetween.hxx"
-#include "sms/camera/CameraMapTool.hxx"
-#include "sms/npc/BaseNPC.hxx"
-#include <dolphin/types.h>
+#include <JSystem/JDrama/JDRCamera.hxx>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <SMS/camera/CameraInbetween.hxx>
+#include <SMS/camera/CameraMapTool.hxx>
+#include <SMS/npc/BaseNPC.hxx>
+#include <Dolphin/types.h>
 
 class CPolarSubCamera : public JDrama::TLookAtCamera {
 public:

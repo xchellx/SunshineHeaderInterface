@@ -1,8 +1,8 @@
 #pragma once
 
-#include "JDrama/JDRGraphics.hxx"
-#include "JDrama/JDRViewObj.hxx"
-#include "JUT/JUTColor.hxx"
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
+#include <JSystem/JUtility/JUTColor.hxx>
 
 class TSelectGrad : public JDrama::TViewObj {
 public:

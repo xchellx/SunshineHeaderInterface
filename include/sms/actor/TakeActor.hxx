@@ -1,6 +1,6 @@
 #pragma once
 
-#include "sms/actor/HitActor.hxx"
+#include <SMS/actor/HitActor.hxx>
 
 class TTakeActor : public THitActor {
 public:

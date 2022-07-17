@@ -1,7 +1,7 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "JAISound.hxx"
+#include <Dolphin/types.h>
+#include <JSystem/JAISound.hxx>
 
 enum MSStageInfo
 {

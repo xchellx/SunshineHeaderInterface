@@ -1,9 +1,9 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "JUT/JUTPoint.hxx"
-#include "J2D/J2DPane.hxx"
-#include "JUT/JUTRect.hxx"
+#include <Dolphin/types.h>
+#include <JSystem/JUtility/JUTPoint.hxx>
+#include <JSystem/J2D/J2DPane.hxx>
+#include <JSystem/JUtility/JUTRect.hxx>
 
 class TBoundPane {
 public:

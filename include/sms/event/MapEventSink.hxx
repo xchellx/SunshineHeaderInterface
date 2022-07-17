@@ -1,6 +1,6 @@
 #pragma once
 
-#include "sms/event/MapEvent.hxx"
+#include <SMS/event/MapEvent.hxx>
 
 class TMapEventSink : public TMapEvent
 {

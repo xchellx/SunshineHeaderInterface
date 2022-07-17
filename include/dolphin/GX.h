@@ -1,9 +1,9 @@
 #ifndef __GX_H__
 #define __GX_H__
 
-#include <dolphin/GX_types.h>
-#include <dolphin/MTX.h>
-#include <dolphin/types.h>
+#include <Dolphin/GX_types.h>
+#include <Dolphin/MTX.h>
+#include <Dolphin/types.h>
 
 /*!
  * \file gx.h

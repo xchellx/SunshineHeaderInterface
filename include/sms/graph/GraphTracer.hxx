@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GraphWeb.hxx"
-#include <dolphin/types.h>
+#include <SMS/graph/GraphWeb.hxx>
+#include <Dolphin/types.h>
 
 
 class TGraphTracer {

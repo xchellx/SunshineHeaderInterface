@@ -1,9 +1,9 @@
 #pragma once
 
-#include "JDrama/JDRGraphics.hxx"
-#include "JDrama/JDRViewObj.hxx"
-#include "sms/map/JointModel.hxx"
-#include "sms/M3DUtil/MActor.hxx"
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
+#include <SMS/map/JointModel.hxx>
+#include <SMS/M3DUtil/MActor.hxx>
 
 class TJointModelManager : public JDrama::TViewObj {
 public:

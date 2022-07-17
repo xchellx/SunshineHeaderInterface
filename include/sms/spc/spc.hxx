@@ -1,7 +1,7 @@
 #pragma once
 
-#include "sms/event/EventWatcher.hxx"
-#include "sms/spc/SpcTypedInterp.hxx"
+#include <SMS/event/EventWatcher.hxx>
+#include <SMS/spc/SpcTypedInterp.hxx>
 
 void SpcTrace(const char *, ...);
 

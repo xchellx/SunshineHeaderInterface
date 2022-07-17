@@ -1,7 +1,7 @@
 #pragma once
 
-#include "sms/sound/MSound.hxx"
-#include "sms/sound/JAIAnimeSound.hxx"
+#include <SMS/sound/MSound.hxx>
+#include <SMS/sound/JAIAnimeSound.hxx>
 
 class MAnmSound : public JAIAnimeSound
 {

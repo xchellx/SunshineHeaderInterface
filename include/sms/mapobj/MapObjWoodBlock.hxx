@@ -1,8 +1,9 @@
 #pragma once
 
-#include "JSU/JSUMemoryStream.hxx"
-#include "MapObjNormalLift.hxx"
-#include <dolphin/types.h>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
+#include <Dolphin/types.h>
+#include <SMS/mapobj/MapObjNormalLift.hxx>
+
 
 union U32SplitU16 {
   struct {

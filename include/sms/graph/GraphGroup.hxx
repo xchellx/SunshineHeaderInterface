@@ -1,20 +1,20 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "GraphWeb.hxx"
+#include <Dolphin/types.h>
+#include <SMS/graph/GraphWeb.hxx>
 
-#include "JDrama/JDRGraphics.hxx"
+#include <JSystem/JDrama/JDRGraphics.hxx>
 
 class TGraphGroup {
 public:
-    TGraphGroup(void *nameOfsArray);
+  TGraphGroup(void *nameOfsArray);
 
-    TGraphWeb *getGraphByName(const char *);
-    void initGraphGroup();
-    void perform(u32, JDrama::TGraphics *);
+  TGraphWeb *getGraphByName(const char *);
+  void initGraphGroup();
+  void perform(u32, JDrama::TGraphics *);
 
-    s32 *mNameOffsets;
-    size_t mRailNum;
-    TGraphWeb **mRails;
-    TGraphWeb *mNullRail;
+  s32 *mNameOffsets;
+  size_t mRailNum;
+  TGraphWeb **mRails;
+  TGraphWeb *mNullRail;
 };

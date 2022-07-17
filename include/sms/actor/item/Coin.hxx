@@ -1,9 +1,9 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "JDrama/JDRGraphics.hxx"
-#include "sms/actor/HitActor.hxx"
-#include "sms/actor/Item.hxx"
+#include <Dolphin/types.h>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <SMS/actor/HitActor.hxx>
+#include <SMS/actor/Item.hxx>
 
 class TCoin : public TItem
 {

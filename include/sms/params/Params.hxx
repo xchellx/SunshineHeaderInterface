@@ -1,11 +1,11 @@
 #pragma once
 
-#include "macros.h"
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
+#include <SMS/macros.h>
 
-#include "BaseParam.hxx"
-#include "JKR/JKRMemArchive.hxx"
-#include "JSU/JSUMemoryStream.hxx"
+#include <JSystem/JKernel/JKRMemArchive.hxx>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
+#include <SMS/params/BaseParam.hxx>
 
 class TParams {
 public:
@@ -14,7 +14,7 @@ public:
   ~TParams() {}
 
   static void finalize();
-  
+
   void init();
   void load(const char *);
   void load(JSUMemoryInputStream &);

@@ -1,9 +1,9 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include <dolphin/MTX.h>
+#include <Dolphin/types.h>
+#include <Dolphin/MTX.h>
 
-#include "JGeometry.hxx"
+#include <JSystem/JGeometry.hxx>
 
 class TGraphWeb;
 

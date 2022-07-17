@@ -1,7 +1,7 @@
 #pragma once
 
-#include "J3D/J3DAnimation.hxx"
-#include "JDrama/JDRGraphics.hxx"
+#include <JSystem/J3D/J3DAnimation.hxx>
+#include <JSystem/JDrama/JDRGraphics.hxx>
 
 template <class _T, class _A> class TViewObjPtrListT : public JDrama::TViewObj {
 public:

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "JSU/JSUMemoryStream.hxx"
-#include "MapObjRail.hxx"
-#include <dolphin/types.h>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
+#include <Dolphin/types.h>
+#include <SMS/mapobj/MapObjRail.hxx>
 
 class TNormalLift : public TRailMapObj {
 public:

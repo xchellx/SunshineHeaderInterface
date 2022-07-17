@@ -1,9 +1,9 @@
 #pragma once
 
-#include "sms/actor/LiveActor.hxx"
-#include "sms/graph/GraphTracer.hxx"
-#include "sms/params/Params.hxx"
-#include <dolphin/types.h>
+#include <SMS/actor/LiveActor.hxx>
+#include <SMS/graph/GraphTracer.hxx>
+#include <SMS/params/Params.hxx>
+#include <Dolphin/types.h>
 
 struct TSpineEnemyParams : TParams {
 #define CONSTRUCT_PARAM(name, val)                                             \

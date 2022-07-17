@@ -1,10 +1,10 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "J2D/J2DSetScreen.hxx"
-#include "sms/option/OptionRumbleUnit.hxx"
-#include "sms/option/OptionSoundUnit.hxx"
-#include "sms/option/OptionSubtitleUnit.hxx"
+#include <Dolphin/types.h>
+#include <JSystem/J2D/J2DSetScreen.hxx>
+#include <SMS/option/OptionRumbleUnit.hxx>
+#include <SMS/option/OptionSoundUnit.hxx>
+#include <SMS/option/OptionSubtitleUnit.hxx>
 
 enum SelectType
 {

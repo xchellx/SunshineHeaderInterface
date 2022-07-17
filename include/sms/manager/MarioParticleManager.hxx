@@ -1,14 +1,14 @@
 #pragma once
 
-#include "JDrama/JDRGraphics.hxx"
-#include "JDrama/JDRViewObj.hxx"
-#include "JGadget/Allocator.hxx"
-#include "JGadget/List.hxx"
-#include "JSU/JSUMemoryStream.hxx"
-#include "sms/actor/HitActor.hxx"
-#include "sms/object/EffectObjBase.hxx"
-#include "sms/object/ObjChara.hxx"
-#include <dolphin/types.h>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
+#include <JSystem/JGadget/Allocator.hxx>
+#include <JSystem/JGadget/List.hxx>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
+#include <SMS/actor/HitActor.hxx>
+#include <SMS/object/EffectObjBase.hxx>
+#include <SMS/object/ObjChara.hxx>
+#include <Dolphin/types.h>
 
 /* Size -- 0x34 */
 class TMarioParticleManager : public JDrama::TViewObj {

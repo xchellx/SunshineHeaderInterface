@@ -1,32 +1,32 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
-#include "JGeometry.hxx"
-#include "JUT/JUTColor.hxx"
-#include "JUT/JUTConsole.hxx"
-#include "JUT/JUTResFont.hxx"
-#include "JPA/JPAResourceManager.hxx"
+#include <JSystem/JGeometry.hxx>
+#include <JSystem/JUtility/JUTColor.hxx>
+#include <JSystem/JUtility/JUTConsole.hxx>
+#include <JSystem/JUtility/JUTResFont.hxx>
+#include <JSystem/JParticle/JPAResourceManager.hxx>
 
-#include "sms/actor/Mario.hxx"
-#include "sms/camera/CameraMarioData.hxx"
-#include "sms/camera/CameraShake.hxx"
-#include "sms/camera/PolarSubCamera.hxx"
-#include "sms/collision/MapCollisionData.hxx"
-#include "sms/game/Application.hxx"
-#include "sms/game/GCConsole2.hxx"
-#include "sms/game/MarDirector.hxx"
-#include "sms/game/Strategy.hxx"
-#include "sms/game/Conductor.hxx"
-#include "sms/manager/EffectObjManager.hxx"
-#include "sms/manager/FlagManager.hxx"
-#include "sms/manager/PollutionManager.hxx"
-#include "sms/manager/RumbleManager.hxx"
-#include "sms/manager/MarioParticleManager.hxx"
-#include "sms/manager/ModelWaterManager.hxx"
-#include "sms/map/Map.hxx"
-#include "sms/option/CardLoad.hxx"
-#include "sms/sound/MSound.hxx"
+#include <SMS/actor/Mario.hxx>
+#include <SMS/camera/CameraMarioData.hxx>
+#include <SMS/camera/CameraShake.hxx>
+#include <SMS/camera/PolarSubCamera.hxx>
+#include <SMS/collision/MapCollisionData.hxx>
+#include <SMS/game/Application.hxx>
+#include <SMS/game/GCConsole2.hxx>
+#include <SMS/game/MarDirector.hxx>
+#include <SMS/game/Strategy.hxx>
+#include <SMS/game/Conductor.hxx>
+#include <SMS/manager/EffectObjManager.hxx>
+#include <SMS/manager/FlagManager.hxx>
+#include <SMS/manager/PollutionManager.hxx>
+#include <SMS/manager/RumbleManager.hxx>
+#include <SMS/manager/MarioParticleManager.hxx>
+#include <SMS/manager/ModelWaterManager.hxx>
+#include <SMS/map/Map.hxx>
+#include <SMS/option/CardLoad.hxx>
+#include <SMS/sound/MSound.hxx>
 
 
 extern JUtility::TColor gYoshiBodyColor[4];

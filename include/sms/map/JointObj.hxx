@@ -1,7 +1,7 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "J3D/J3DJoint.hxx"
+#include <Dolphin/types.h>
+#include <JSystem/J3D/J3DJoint.hxx>
 
 // JointObj represents joints of a model that can be slept or awoke
 

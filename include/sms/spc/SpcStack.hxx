@@ -1,6 +1,6 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
 // I've only seen this used as u32 and TSpcSlice
 template <typename T> class TSpcStack {

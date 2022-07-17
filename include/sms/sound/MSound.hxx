@@ -1,9 +1,9 @@
 #pragma once
 
-#include "JKR/JKRHeap.hxx"
-#include "sms/sound/JAIBasic.hxx"
-#include <dolphin/MTX.h>
-#include <dolphin/types.h>
+#include <JSystem/JKernel/JKRHeap.hxx>
+#include <SMS/sound/JAIBasic.hxx>
+#include <Dolphin/MTX.h>
+#include <Dolphin/types.h>
 
 
 enum MS_SCENE_WAVE {};

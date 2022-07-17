@@ -1,7 +1,7 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "sms/sound/JAISound.hxx"
+#include <Dolphin/types.h>
+#include <SMS/sound/JAISound.hxx>
 
 class JAIBasic
 {

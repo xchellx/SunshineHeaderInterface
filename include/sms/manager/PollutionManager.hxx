@@ -1,7 +1,7 @@
 #pragma once
 
-#include "sms/manager/JointModelManager.hxx"
-#include <dolphin/types.h>
+#include <SMS/manager/JointModelManager.hxx>
+#include <Dolphin/types.h>
 
 
 class TPollutionManager : public TJointModelManager {

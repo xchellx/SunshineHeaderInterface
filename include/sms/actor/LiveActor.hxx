@@ -1,19 +1,19 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
-#include "JDrama/JDRGraphics.hxx"
-#include "JGeometry.hxx"
-#include "JSU/JSUMemoryStream.hxx"
-#include "sms/M3DUtil/MActor.hxx"
-#include "sms/M3DUtil/MActorKeeper.hxx"
-#include "sms/actor/RidingInfo.hxx"
-#include "sms/actor/SpineBase.hxx"
-#include "sms/actor/TakeActor.hxx"
-#include "sms/collision/BGCheck.hxx"
-#include "sms/m3d/LodAnm.hxx"
-#include "sms/manager/LiveManager.hxx"
-#include "sms/sound/MAnmSound.hxx"
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JGeometry.hxx>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
+#include <SMS/M3DUtil/MActor.hxx>
+#include <SMS/M3DUtil/MActorKeeper.hxx>
+#include <SMS/actor/RidingInfo.hxx>
+#include <SMS/actor/SpineBase.hxx>
+#include <SMS/actor/TakeActor.hxx>
+#include <SMS/collision/BGCheck.hxx>
+#include <SMS/m3d/LodAnm.hxx>
+#include <SMS/manager/LiveManager.hxx>
+#include <SMS/sound/MAnmSound.hxx>
 
 class TMapCollisionManager;
 

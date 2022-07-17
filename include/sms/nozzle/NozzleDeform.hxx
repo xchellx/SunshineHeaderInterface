@@ -1,7 +1,7 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "sms/nozzle/NozzleBase.hxx"
+#include <Dolphin/types.h>
+#include <SMS/nozzle/NozzleBase.hxx>
 
 class TNozzleDeform : public TNozzleBase
 {

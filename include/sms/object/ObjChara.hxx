@@ -1,10 +1,10 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
-#include "JDrama/JDRCharacter.hxx"
-#include "JKR/JKRArchivePri.hxx"
-#include "JSU/JSUMemoryStream.hxx"
+#include <JSystem/JDrama/JDRCharacter.hxx>
+#include <JSystem/JKernel/JKRArchivePri.hxx>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
 
 class TObjChara : public JDrama::TCharacter {
 public:

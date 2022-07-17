@@ -1,7 +1,7 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "JGeometry.hxx"
+#include <Dolphin/types.h>
+#include <JSystem/JGeometry.hxx>
 
 class TCameraInbetween
 {

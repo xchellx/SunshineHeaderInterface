@@ -1,10 +1,9 @@
 #pragma once
 
-#include "JGeometry.hxx"
-#include "sms/actor/Item.hxx"
-#include <dolphin/types.h>
-#include "JPA/JPABaseEmitter.hxx"
-
+#include <JSystem/JGeometry.hxx>
+#include <JSystem/JParticle/JPABaseEmitter.hxx>
+#include <Dolphin/types.h>
+#include <SMS/actor/Item.hxx>
 
 class TShine : public TItem {
 public:
@@ -28,17 +27,17 @@ public:
   void appearWithTimeCallback(u32, u32);
   void movingCircle();
 
-  u32 mType;                       // 0x0154
-  u32 _158[0x38 / 4];               // 0x0158
-  bool mIsNormalCamera;            // 0x0190
+  u32 mType;                    // 0x0154
+  u32 _158[0x38 / 4];           // 0x0158
+  bool mIsNormalCamera;         // 0x0190
   JPABaseEmitter *mPromiEffect; // 0x0194 | Light Flare
   JPABaseEmitter *mSenkoEffect; // 0x0198 | Light rays
-  JPABaseEmitter *mKiraEffect; // 0x019C | Sparkles
-  JPABaseEmitter *mBowEffect; // 0x01A0 | Light bow
+  JPABaseEmitter *mKiraEffect;  // 0x019C | Sparkles
+  JPABaseEmitter *mBowEffect;   // 0x01A0 | Light bow
   u32 _1A4;
-  TVec3f mGlowSize; // 0x01A8
-  bool mIsAlreadyObtained;           // 0x01B4
-  u32 _1B8[0x40 / 4];               // 0x01B8
+  TVec3f mGlowSize;        // 0x01A8
+  bool mIsAlreadyObtained; // 0x01B4
+  u32 _1B8[0x40 / 4];      // 0x01B8
 
   static f32 mBowRate;
   static f32 mCircleRate;

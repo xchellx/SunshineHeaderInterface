@@ -1,10 +1,10 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
-#include "JDrama/JDRGraphics.hxx"
-#include "JDrama/JDRViewObj.hxx"
-#include "sms/spc/SpcTypedBinary.hxx"
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
+#include <SMS/spc/SpcTypedBinary.hxx>
 
 class TEventWatcher : public JDrama::TViewObj {
 public:

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "J3D/J3DJoint.hxx"
-#include "J3D/J3DModel.hxx"
-#include "JDrama/JDRGraphics.hxx"
-#include "JDrama/JDRViewObj.hxx"
-#include "sms/M3DUtil/MActor.hxx"
-#include <dolphin/types.h>
+#include <JSystem/J3D/J3DJoint.hxx>
+#include <JSystem/J3D/J3DModel.hxx>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
+#include <SMS/M3DUtil/MActor.hxx>
+#include <Dolphin/types.h>
 
 
 class TJointObj {

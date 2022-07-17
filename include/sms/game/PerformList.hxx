@@ -1,9 +1,9 @@
 #pragma once
 
-#include "JDrama/JDRGraphics.hxx"
-#include "JDrama/JDRViewObj.hxx"
-#include "JGadget/List.hxx"
-#include "JSU/JSUMemoryStream.hxx"
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
+#include <JSystem/JGadget/List.hxx>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
 
 #define PERFORM_ON_MOVEMENT 0x00000001
 #define PERFORM_ON_GX 0x00000008

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include <dolphin/GX_types.h>
+#include <Dolphin/types.h>
+#include <Dolphin/GX_types.h>
 
 /*!
  * \addtogroup vi_defines List of defines used for the VIDEO subsystem

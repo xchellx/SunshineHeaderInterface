@@ -1,8 +1,8 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "JGeometry.hxx"
-#include "sms/actor/HitActor.hxx"
+#include <Dolphin/types.h>
+#include <JSystem/JGeometry.hxx>
+#include <SMS/actor/HitActor.hxx>
 
 struct TRidingInfo
 {

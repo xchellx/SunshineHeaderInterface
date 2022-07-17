@@ -1,12 +1,12 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "JSU/JSUMemoryStream.hxx"
-#include "JGeometry.hxx"
+#include <Dolphin/types.h>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
+#include <JSystem/JGeometry.hxx>
 
-#include "sms/actor/LiveActor.hxx"
-#include "sms/collision/BGCheck.hxx"
-#include "sms/collision/MapCollisionBase.hxx"
+#include <SMS/actor/LiveActor.hxx>
+#include <SMS/collision/BGCheck.hxx>
+#include <SMS/collision/MapCollisionBase.hxx>
 
 class TMapCollisionData
 {

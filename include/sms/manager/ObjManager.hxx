@@ -1,11 +1,11 @@
 #pragma once
 
-#include "JDrama/JDRGraphics.hxx"
-#include "JDrama/JDRViewObj.hxx"
-#include "JSU/JSUMemoryStream.hxx"
-#include "sms/actor/HitActor.hxx"
-#include "sms/object/ObjChara.hxx"
-#include <dolphin/types.h>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
+#include <SMS/actor/HitActor.hxx>
+#include <SMS/object/ObjChara.hxx>
+#include <Dolphin/types.h>
 
 
 struct TModelDataLoadEntry {

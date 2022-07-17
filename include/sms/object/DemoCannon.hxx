@@ -1,6 +1,6 @@
 #pragma once
 
-#include "sms/mapobj/MapObjBase.hxx"
+#include <SMS/mapobj/MapObjBase.hxx>
 
 class TDemoCannon : public TMapObjBase
 {

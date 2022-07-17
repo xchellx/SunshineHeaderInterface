@@ -1,14 +1,14 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "sms/JSystem/JGeometry.hxx"
-#include "sms/actor/SpineEnemy.hxx"
-#include "sms/actor/HitActor.hxx"
-#include "JDrama/JDRGraphics.hxx"
-#include "JDrama/JDRActor.hxx"
-#include "sms/actor/SpineBase.hxx"
-#include "sms/manager/EnemyManager.hxx"
-#include "JGeometry.hxx"
+#include <Dolphin/types.h>
+#include <SMS/JSystem/JGeometry.hxx>
+#include <SMS/actor/SpineEnemy.hxx>
+#include <SMS/actor/HitActor.hxx>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JDrama/JDRActor.hxx>
+#include <SMS/actor/SpineBase.hxx>
+#include <SMS/manager/EnemyManager.hxx>
+#include <JSystem/JGeometry.hxx>
 
 class TBPTornado;
 class TBPPolDrop;

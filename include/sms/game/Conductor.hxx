@@ -1,15 +1,15 @@
 #pragma once
 
-#include "JDrama/JDRGraphics.hxx"
-#include "JDrama/JDRNameRef.hxx"
-#include "JDrama/JDRViewObj.hxx"
-#include "JGeometry.hxx"
-#include "sms/actor/LiveActor.hxx"
-#include "sms/graph/GraphWeb.hxx"
-#include "sms/manager/LiveManager.hxx"
-#include "sms/params/BaseParam.hxx"
-#include "sms/params/Params.hxx"
-#include <dolphin/types.h>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JDrama/JDRNameRef.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
+#include <JSystem/JGeometry.hxx>
+#include <SMS/actor/LiveActor.hxx>
+#include <SMS/graph/GraphWeb.hxx>
+#include <SMS/manager/LiveManager.hxx>
+#include <SMS/params/BaseParam.hxx>
+#include <SMS/params/Params.hxx>
+#include <Dolphin/types.h>
 
 
 class TConductor : public JDrama::TNameRef {

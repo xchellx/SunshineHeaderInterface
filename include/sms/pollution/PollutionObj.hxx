@@ -1,9 +1,9 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "sms/pollution/PollutionPos.hxx"
+#include <Dolphin/types.h>
+#include <SMS/pollution/PollutionPos.hxx>
 
-#include "sms/j3d/Joint.hxx"
+#include <SMS/j3d/Joint.hxx>
 
 class TPollutionObj : public TJointObj
 {

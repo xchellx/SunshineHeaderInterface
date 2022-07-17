@@ -1,16 +1,16 @@
 #pragma once
 
-#include "SelectDir.hxx"
-#include "SelectGrad.hxx"
-#include "sms/G2D/BoundPane.hxx"
-#include "sms/G2D/ExPane.hxx"
-#include "J2D/J2DPicture.hxx"
-#include "J2D/J2DSetScreen.hxx"
-#include "J2D/J2DTextBox.hxx"
-#include "J2D/J2DTexture.hxx"
-#include "JDrama/JDRGraphics.hxx"
-#include "JDrama/JDRViewObj.hxx"
-#include "sms/manager/SelectShineManager.hxx"
+#include <SMS/GC2D/SelectDir.hxx>
+#include <SMS/GC2D/SelectGrad.hxx>
+#include <SMS/G2D/BoundPane.hxx>
+#include <SMS/G2D/ExPane.hxx>
+#include <JSystem/J2D/J2DPicture.hxx>
+#include <JSystem/J2D/J2DSetScreen.hxx>
+#include <JSystem/J2D/J2DTextBox.hxx>
+#include <JSystem/J2D/J2DTexture.hxx>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
+#include <SMS/manager/SelectShineManager.hxx>
 
 class TSelectMenu : public JDrama::TViewObj {
 public:

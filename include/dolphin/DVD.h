@@ -1,7 +1,7 @@
 #ifndef DVD_H
 #define DVD_H
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
 #define DEVICE_TYPE_GAMECUBE_DVD (('G' << 24) | ('D' << 16) | ('V' << 8) | 'D')
 #define DVD_ERROR_CANCELED -3

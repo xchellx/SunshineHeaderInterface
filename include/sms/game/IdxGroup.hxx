@@ -1,10 +1,10 @@
 #pragma once
 
-#include "J3D/J3DAnimation.hxx"
-#include "JDrama/JDRViewObj.hxx"
-#include "JGadget/List.hxx"
-#include "ViewObjPtrList.hxx"
-#include "sms/actor/HitActor.hxx"
+#include <JSystem/J3D/J3DAnimation.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
+#include <JSystem/JGadget/List.hxx>
+#include <SMS/game/ViewObjPtrList.hxx>
+#include <SMS/actor/HitActor.hxx>
 
 
 class IdxGroup : public TViewObjPtrListT<THitActor, JDrama::TViewObj> {

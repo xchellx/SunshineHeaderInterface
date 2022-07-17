@@ -1,7 +1,7 @@
-#include "J3D/J3DAnimation.hxx"
-#include "J3D/J3DModel.hxx"
-#include "JDrama/JDRNameRef.hxx"
-#include "JPA/JPABaseEmitter.hxx"
+#include <JSystem/J3D/J3DAnimation.hxx>
+#include <JSystem/J3D/J3DModel.hxx>
+#include <JSystem/JDrama/JDRNameRef.hxx>
+#include <JSystem/JParticle/JPABaseEmitter.hxx>
 
 
 class TSelectShine {

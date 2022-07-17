@@ -1,11 +1,11 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "JDrama/JDRGraphics.hxx"
-#include "JDrama/JDRNameRef.hxx"
-#include "JUT/JUTRect.hxx"
-#include "sms/option/CardManager.hxx"
-#include "sms/option/OptionControl.hxx"
+#include <Dolphin/types.h>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JDrama/JDRNameRef.hxx>
+#include <JSystem/JUtility/JUTRect.hxx>
+#include <SMS/option/CardManager.hxx>
+#include <SMS/option/OptionControl.hxx>
 
 enum TEProgress
 {

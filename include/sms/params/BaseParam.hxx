@@ -1,7 +1,7 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "JSU/JSUMemoryStream.hxx"
+#include <Dolphin/types.h>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
 
 class TParams;
 

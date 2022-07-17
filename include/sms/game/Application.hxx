@@ -1,12 +1,12 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
-#include "JDrama/JDRDisplay.hxx"
-#include "sms/actor/Mario.hxx"
-#include "sms/game/GameSequence.hxx"
-#include "sms/game/MarDirector.hxx"
-#include "sms/screen/SMSFader.hxx"
+#include <JSystem/JDrama/JDRDisplay.hxx>
+#include <SMS/actor/Mario.hxx>
+#include <SMS/game/GameSequence.hxx>
+#include <SMS/game/MarDirector.hxx>
+#include <SMS/screen/SMSFader.hxx>
 
 
 class TApplication {

@@ -1,24 +1,25 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
-#include "JDrama/JDRActor.hxx"
-#include "JDrama/JDRDirector.hxx"
-#include "JGeometry.hxx"
+#include <JSystem/JStage/JSGObject.hxx>
+#include <JSystem/JDrama/JDRActor.hxx>
+#include <JSystem/JDrama/JDRDirector.hxx>
+#include <JSystem/JGeometry.hxx>
 
-#include "sms/GC2D/Guide.hxx"
+#include <SMS/GC2D/Guide.hxx>
 
-#include "sms/actor/Yoshi.hxx"
-#include "sms/actor/item/Coin.hxx"
-#include "sms/actor/item/Shine.hxx"
+#include <SMS/actor/Yoshi.hxx>
+#include <SMS/actor/item/Coin.hxx>
+#include <SMS/actor/item/Shine.hxx>
 
-#include "sms/game/GCConsole2.hxx"
-#include "sms/npc/BaseNPC.hxx"
-#include "sms/object/DemoCannon.hxx"
-#include "sms/screen/ShineFader.hxx"
+#include <SMS/game/GCConsole2.hxx>
+#include <SMS/npc/BaseNPC.hxx>
+#include <SMS/object/DemoCannon.hxx>
+#include <SMS/screen/ShineFader.hxx>
 
-#include "GCConsole2.hxx"
-#include "PerformList.hxx"
+#include <SMS/game/GCConsole2.hxx>
+#include <SMS/game/PerformList.hxx>
 
 class TMarDirector : public JDrama::TDirector {
 public:

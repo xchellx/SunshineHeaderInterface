@@ -1,12 +1,12 @@
 #pragma once
 
-#include "JGeometry.hxx"
-#include <dolphin/MTX.h>
-#include <dolphin/types.h>
+#include <JSystem/JGeometry.hxx>
+#include <Dolphin/MTX.h>
+#include <Dolphin/types.h>
 
 
-#include "sms/actor/LiveActor.hxx"
-#include "sms/collision/MapCollisionBase.hxx"
+#include <SMS/actor/LiveActor.hxx>
+#include <SMS/collision/MapCollisionBase.hxx>
 
 class TMapCollisionMove : TMapCollisionBase {
 public:

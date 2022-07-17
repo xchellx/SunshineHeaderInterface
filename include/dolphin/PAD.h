@@ -1,7 +1,7 @@
 #ifndef PAD_H
 #define PAD_H
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
 #ifdef __cplusplus
 extern "C"

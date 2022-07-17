@@ -1,10 +1,10 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "JGeometry.hxx"
+#include <Dolphin/types.h>
+#include <JSystem/JGeometry.hxx>
 
-#include "sms/actor/LiveActor.hxx"
-#include "sms/collision/MapCollisionBase.hxx"
+#include <SMS/actor/LiveActor.hxx>
+#include <SMS/collision/MapCollisionBase.hxx>
 
 class TMapCollisionWarp : TMapCollisionBase
 {

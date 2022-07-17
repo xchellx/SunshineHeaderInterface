@@ -1,7 +1,7 @@
 #ifndef MATH_H
 #define MATH_H
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
 #define M_PI 3.14159265358979323846
 #define Max(a, b) (((a) > (b)) ? (a) : (b))

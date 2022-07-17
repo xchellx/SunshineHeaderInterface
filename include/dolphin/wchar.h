@@ -1,7 +1,7 @@
 #ifndef WCHAR_H
 #define WCHAR_H
 
-#include <dolphin/stdarg.h>
+#include <Dolphin/stdarg.h>
 
 #ifdef __cplusplus
 extern "C" {

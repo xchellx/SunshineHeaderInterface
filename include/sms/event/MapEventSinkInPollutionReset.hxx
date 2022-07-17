@@ -1,6 +1,6 @@
 #pragma once
 
-#include "sms/event/MapEventSinkInPollution.hxx"
+#include <SMS/event/MapEventSinkInPollution.hxx>
 
 class TMapEventSinkInPollutionReset : public TMapEventSinkInPollution
 {

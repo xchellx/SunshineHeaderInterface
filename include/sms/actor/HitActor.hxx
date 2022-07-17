@@ -1,10 +1,10 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
-#include "JDrama/JDRActor.hxx"
-#include "JDrama/JDRGraphics.hxx"
-#include "JGeometry.hxx"
+#include <JSystem/JDrama/JDRActor.hxx>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JGeometry.hxx>
 
 class THitActor : public JDrama::TActor {
 public:

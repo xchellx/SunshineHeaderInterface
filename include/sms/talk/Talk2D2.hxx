@@ -1,7 +1,8 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "JSU/JSUMemoryStream.hxx"
+#include <Dolphin/types.h>
+#include <JSystem/J2D/J2DTextBox.hxx>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
 
 enum BoxState {
     BOX_IDLE = 0,

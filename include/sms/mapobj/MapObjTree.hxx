@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MapObjGeneral.hxx"
+#include <SMS/mapobj/MapObjGeneral.hxx>
 
 class TMapObjTree : public TMapObjGeneral {
 public:

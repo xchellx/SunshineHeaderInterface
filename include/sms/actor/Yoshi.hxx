@@ -1,10 +1,10 @@
 #pragma once
 
-#include "JDrama/JDRGraphics.hxx"
-#include "JGeometry.hxx"
-#include "sms/M3DUtil/MActor.hxx"
-#include "sms/object/EggYoshi.hxx"
-#include <dolphin/types.h>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JGeometry.hxx>
+#include <SMS/M3DUtil/MActor.hxx>
+#include <SMS/object/EggYoshi.hxx>
+#include <Dolphin/types.h>
 
 
 class TMario;

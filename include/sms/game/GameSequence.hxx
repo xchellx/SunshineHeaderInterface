@@ -1,6 +1,7 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
+#include <JSystem/JDrama/JDRFlagT.hxx>
 
 struct AreaEpisodeArray {
   u32 _00[0x10 / 4]; // 0x0000

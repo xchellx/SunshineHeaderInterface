@@ -1,6 +1,6 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
 class TWaterGun;
 

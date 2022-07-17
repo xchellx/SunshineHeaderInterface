@@ -3,8 +3,6 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/include/dolphin",
-                "${workspaceFolder}/include/sms/JSystem",
                 "${workspaceFolder}/include"
             ],
             "defines": [

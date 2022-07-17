@@ -1,11 +1,11 @@
 #pragma once
 
-#include "JDrama/JDRViewObj.hxx"
-#include "JDrama/JDRGraphics.hxx"
-#include "J3D/J3DModel.hxx"
-#include "sms/M3DUtil/MActor.hxx"
+#include <JSystem/JDrama/JDRViewObj.hxx>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/J3D/J3DModel.hxx>
+#include <SMS/M3DUtil/MActor.hxx>
 
-#include "JointObj.hxx"
+#include <JSystem/JointObj.hxx>
 
 class TJointModelManager;
 

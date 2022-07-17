@@ -1,9 +1,9 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "sms/GC2D/Coord2D.hxx"
-#include "J2D/J2DPane.hxx"
-#include "JUT/JUTRect.hxx"
+#include <Dolphin/types.h>
+#include <SMS/GC2D/Coord2D.hxx>
+#include <JSystem/J2D/J2DPane.hxx>
+#include <JSystem/JUtility/JUTRect.hxx>
 
 class TExPane {
 public:

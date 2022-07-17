@@ -1,7 +1,7 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "BGCheck.hxx"
+#include <Dolphin/types.h>
+#include <SMS/collision/BGCheck.hxx>
 
 class TBGWallCheckRecord {
 public:

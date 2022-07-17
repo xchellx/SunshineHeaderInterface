@@ -1,7 +1,7 @@
 #pragma once
 
-#include "JGeometry.hxx"
-#include "JSU/JSUMemoryStream.hxx"
+#include <JSystem/JGeometry.hxx>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
 
 class TCameraMapTool {
 public:

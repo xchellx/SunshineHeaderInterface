@@ -1,8 +1,8 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "JKR/JKRHeap.hxx"
-#include "JSU/JSUMemoryStream.hxx"
+#include <Dolphin/types.h>
+#include <JSystem/JKernel/JKRHeap.hxx>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
 
 class TFlagManager {
 

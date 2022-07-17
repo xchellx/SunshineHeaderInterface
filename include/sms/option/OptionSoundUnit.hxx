@@ -1,7 +1,7 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "J2D/J2DScreen.hxx"
+#include <Dolphin/types.h>
+#include <JSystem/J2D/J2DScreen.hxx>
 
 class TOptionSoundUnit
 {

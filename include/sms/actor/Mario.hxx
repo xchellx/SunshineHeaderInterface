@@ -1,19 +1,19 @@
 #pragma once
 
-#include "J3D/J3DDrawBuffer.hxx"
-#include "JDrama/JDRGraphics.hxx"
-#include "JGeometry.hxx"
-#include "JUT/JUTGamePad.hxx"
-#include <dolphin/MTX.h>
-#include <dolphin/types.h>
+#include <JSystem/J3D/J3DDrawBuffer.hxx>
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JGeometry.hxx>
+#include <JSystem/JUtility/JUTGamePad.hxx>
+#include <Dolphin/MTX.h>
+#include <Dolphin/types.h>
 
-#include "sms/actor/TakeActor.hxx"
-#include "sms/actor/Yoshi.hxx"
-#include "sms/collision/BGCheck.hxx"
-#include "sms/m3d/M3UModel.hxx"
-#include "sms/nozzle/Watergun.hxx"
-#include "sms/params/BaseParam.hxx"
-#include "sms/params/Params.hxx"
+#include <SMS/actor/TakeActor.hxx>
+#include <SMS/actor/Yoshi.hxx>
+#include <SMS/collision/BGCheck.hxx>
+#include <SMS/m3d/M3UModel.hxx>
+#include <SMS/nozzle/Watergun.hxx>
+#include <SMS/params/BaseParam.hxx>
+#include <SMS/params/Params.hxx>
 
 #define MESSAGE_MARIO_TOSS 7
 #define MESSAGE_MARIO_BURN 10

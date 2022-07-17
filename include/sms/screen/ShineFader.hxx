@@ -1,7 +1,7 @@
 #pragma once
 
-#include <JSU/JSUInputStream.hxx>
-#include "SmplFader.hxx"
+#include <JSystem/JSupport/JSUInputStream.hxx>
+#include <SMS/screen/SmplFader.hxx>
 
 class TShineFader : public TSmplFader {
 public:

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "LiveActor.hxx"
+#include <SMS/actor/LiveActor.hxx>
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
 template <typename T> class TSpineBase;
 

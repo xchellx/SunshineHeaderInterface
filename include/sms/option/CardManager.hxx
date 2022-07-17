@@ -1,9 +1,9 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include <dolphin/CARD.h>
-#include <dolphin/OS.h>
-#include "JSU/JSUMemoryStream.hxx"
+#include <Dolphin/types.h>
+#include <Dolphin/CARD.h>
+#include <Dolphin/OS.h>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
 
 class TCardBookmarkInfo
 {

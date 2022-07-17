@@ -1,10 +1,10 @@
 #pragma once
 
-#include "J2D/J2DPicture.hxx"
-#include "J2D/J2DWindow.hxx"
-#include "JUT/JUTColor.hxx"
-#include "sms/GC2D/ConsoleStr.hxx"
-#include <dolphin/types.h>
+#include <JSystem/J2D/J2DPicture.hxx>
+#include <JSystem/J2D/J2DWindow.hxx>
+#include <JSystem/JUtility/JUTColor.hxx>
+#include <SMS/GC2D/ConsoleStr.hxx>
+#include <Dolphin/types.h>
 
 class TGCConsole2 {
 

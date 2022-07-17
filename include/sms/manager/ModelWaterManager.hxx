@@ -1,13 +1,13 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
-#include "JDrama/JDRGraphics.hxx"
-#include "JDrama/JDRViewObj.hxx"
-#include "JGeometry.hxx"
-#include "JSU/JSUMemoryStream.hxx"
-#include "JUT/JUTColor.hxx"
-#include "sms/nozzle/Watergun.hxx"
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
+#include <JSystem/JGeometry.hxx>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
+#include <JSystem/JUtility/JUTColor.hxx>
+#include <SMS/nozzle/Watergun.hxx>
 
 class TModelWaterManager : public JDrama::TViewObj {
 public:

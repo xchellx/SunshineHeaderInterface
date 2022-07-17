@@ -1,13 +1,13 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
-#include "JDrama/JDRGraphics.hxx"
-#include "JGeometry.hxx"
-#include "sms/actor/HitActor.hxx"
-#include "sms/actor/TakeActor.hxx"
-#include "sms/collision/MapCheck.hxx"
-#include "sms/mapobj/MapObjBase.hxx"
+#include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JGeometry.hxx>
+#include <SMS/actor/HitActor.hxx>
+#include <SMS/actor/TakeActor.hxx>
+#include <SMS/collision/MapCheck.hxx>
+#include <SMS/mapobj/MapObjBase.hxx>
 
 class TMapObjGeneral : public TMapObjBase {
 public:

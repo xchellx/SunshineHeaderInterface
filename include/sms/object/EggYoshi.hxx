@@ -1,10 +1,10 @@
 #pragma once
 
-#include <dolphin/types.h>
-#include "JSU/JSUMemoryStream.hxx"
-#include "sms/M3DUtil/MActor.hxx"
-#include "sms/actor/HitActor.hxx"
-#include "sms/mapobj/MapObjGeneral.hxx"
+#include <Dolphin/types.h>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
+#include <SMS/M3DUtil/MActor.hxx>
+#include <SMS/actor/HitActor.hxx>
+#include <SMS/mapobj/MapObjGeneral.hxx>
 
 class TMario;
 

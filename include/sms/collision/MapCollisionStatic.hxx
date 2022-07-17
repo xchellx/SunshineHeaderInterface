@@ -1,9 +1,9 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
-#include "sms/actor/LiveActor.hxx"
-#include "sms/collision/MapCollisionBase.hxx"
+#include <SMS/actor/LiveActor.hxx>
+#include <SMS/collision/MapCollisionBase.hxx>
 
 class TMapCollisionStatic : public TMapCollisionBase
 {

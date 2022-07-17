@@ -1,9 +1,9 @@
 #pragma once
 
-#include <dolphin/types.h>
+#include <Dolphin/types.h>
 
-#include "MActor.hxx"
-#include "sms/manager/LiveManager.hxx"
+#include <SMS/M3DUtil/MActor.hxx>
+#include <SMS/manager/LiveManager.hxx>
 
 class TMActorKeeper {
 public:

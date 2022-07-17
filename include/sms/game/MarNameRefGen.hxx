@@ -1,7 +1,7 @@
 #pragma once
 
-#include "JDrama/JDRNameRef.hxx"
-#include "JDrama/JDRNameRefGen.hxx"
+#include <JSystem/JDrama/JDRNameRef.hxx>
+#include <JSystem/JDrama/JDRNameRefGen.hxx>
 
 class TMarNameRefGen : public JDrama::TNameRefGen {
 public:
