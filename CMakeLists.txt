@@ -8,3 +8,9 @@ target_include_directories(Dolphin INTERFACE include/Dolphin)
 
 add_library(SMS INTERFACE)
 target_include_directories(SMS INTERFACE include/SMS)
+
+add_library(Kamek INTERFACE)
+target_include_directories(SMS INTERFACE include/Kamek)
+
+add_library(Kuribo INTERFACE)
+target_include_directories(SMS INTERFACE include/Kuribo)
