@@ -5,7 +5,7 @@
 #include <JSystem/JDrama/JDRViewObj.hxx>
 #include <SMS/M3DUtil/MActor.hxx>
 
-#include <JSystem/JointObj.hxx>
+#include <SMS/map/JointObj.hxx>
 
 class TJointModelManager;
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SMS/sound/JAIAnimeSound.hxx>
+#include <JSystem/JAudio/JAIAnimeSound.hxx>
 #include <SMS/sound/MSound.hxx>
 
 class MAnmSound : public JAIAnimeSound {

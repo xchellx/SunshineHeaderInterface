@@ -20,7 +20,7 @@ namespace JDrama {
         u32 getType(JSUMemoryInputStream &stream, JSUMemoryInputStream &);
         void search(const char *);
 
-        static s16 calcKeyCode(const char *);
+        static u16 calcKeyCode(const char *);
 
         char *mTypeName;
         u16 mKeyCode;
@@ -28,3 +28,10 @@ namespace JDrama {
     };
 
 }  // namespace JDrama
+
+constexpr u16 cexp_calcKeyCode(const char *str) {
+    u32 i = 0;
+    for (; *str != '\0'; i = (*str++) + i * 3)
+        ;
+    return i;
+}

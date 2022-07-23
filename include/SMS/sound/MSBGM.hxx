@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <JSystem/JAISound.hxx>
+#include <JSystem/JAudio/JAISound.hxx>
 
 enum MSStageInfo {
     BGM_DOLPIC          = 0x80010001,

@@ -3,7 +3,7 @@
 #include <Dolphin/MTX.h>
 #include <Dolphin/types.h>
 #include <JSystem/JKernel/JKRHeap.hxx>
-#include <SMS/sound/JAIBasic.hxx>
+#include <JSystem/JAudio/JAIBasic.hxx>
 
 enum MS_SCENE_WAVE {};
 

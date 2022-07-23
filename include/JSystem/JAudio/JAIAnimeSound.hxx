@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <SMS/sound/JAISound.hxx>
+#include <JSystem/JAudio/JAISound.hxx>
 
 class JAIAnimeSound {
 public:
