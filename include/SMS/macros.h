@@ -3,7 +3,6 @@
 #include <Dolphin/OS.h>
 #include <Dolphin/PPCArch.h>
 #include <Dolphin/printf.h>
-#include <SMS/equivtype.hxx>
 
 #define SMS_STRINGIZE_(x) #x
 #define SMS_STRINGIZE(x)  SMS_STRINGIZE_(x)
@@ -71,7 +70,5 @@
 #else
 #define SMS_FUNC_SIG "UNDEFINED"
 #endif
-
-#define SMS_ASSERT_SAME_TYPE(T1, T2, emsg) static_assert(is_equal_type<T1, T2>(), emsg)
 
 #define SMS_CALL_NAIVE(addr, ...) ((void (*)(...))addr)(__VA_ARGS__)

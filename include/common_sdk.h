@@ -1,5 +1,11 @@
 #pragma once
 
+#include <Dolphin/types.h>
+
+#ifndef KURIBO_NO_TYPES
+#define KURIBO_NO_TYPES
+#endif
+
 #if !defined(SMS_BUILD_KURIBO) && !defined(SMS_BUILD_KAMEK) && !defined(SMS_BUILD_KAMEK_INLINE)
 #define SMS_BUILD_KURIBO
 #endif

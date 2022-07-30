@@ -10,7 +10,7 @@ add_library(SMS INTERFACE)
 target_include_directories(SMS INTERFACE include/SMS)
 
 add_library(Kamek INTERFACE)
-target_include_directories(SMS INTERFACE include/Kamek)
+target_include_directories(Kamek INTERFACE include/Kamek)
 
 add_library(Kuribo INTERFACE)
-target_include_directories(SMS INTERFACE include/Kuribo)
+target_include_directories(Kuribo INTERFACE include/Kuribo)

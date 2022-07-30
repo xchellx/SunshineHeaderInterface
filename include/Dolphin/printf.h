@@ -10,8 +10,8 @@ extern "C" {
 
 int snprintf(char *, size_t, const char *, ...);
 int sprintf(char *, const char *, ...);
-int vsnprintf(char *, size_t, const char *, va_list);
-int vprintf(char *, const char *, va_list);
+int vsnprintf(char *, size_t, const char *, ...);
+int vprintf(const char *, ...);
 
 #ifdef __cplusplus
 }

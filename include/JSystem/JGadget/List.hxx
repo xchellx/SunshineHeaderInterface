@@ -59,8 +59,7 @@ namespace JGadget {
                 return nullptr;
             node->mPrev = prev;
             node->mNext = next;
-            if (item)
-                node->mItem = item;
+            node->mItem = item;
             return node;
         }
 
@@ -70,8 +69,7 @@ namespace JGadget {
             iterator(TNode_ *node) : mCurrent(node) {}
             iterator(const iterator &iter) : mCurrent(iter.mCurrent) {}
 
-            bool operator==(iterator &rhs) const { return mCurrent == rhs.mCurrent; }
-            bool operator!=(iterator &rhs) const { return mCurrent != rhs.mCurrent; }
+            bool operator==(const iterator &rhs) const { return mCurrent == rhs.mCurrent; }
             TNode_ *operator->() const { return mCurrent; }
             iterator operator++() { return iterator(mCurrent->mNext); }
             iterator operator--() { return iterator(mCurrent->mPrev); }
