@@ -1,5 +1,6 @@
 #pragma once
 
+
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned long u32;
@@ -21,7 +22,14 @@ typedef volatile u64 vu64;
 typedef volatile f32 vf32;
 typedef volatile f64 vf64;
 
-typedef unsigned long size_t;
+#if !defined(_SIZE_T)
+#define _SIZE_T
+#ifdef __SIZE_TYPE__
+typedef __SIZE_TYPE__ size_t;
+#else
+typedef unsigned int size_t;
+#endif
+#endif
 
 #ifdef __cplusplus
 #define NULL nullptr

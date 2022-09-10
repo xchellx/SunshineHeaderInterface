@@ -29,36 +29,53 @@
 #error "No region provided!"
 #endif
 
-#define SMS_FROM_GPR(reg, var) asm volatile("mr %0, " #reg : "=r"(var))
-#define SMS_TO_GPR(reg, var)   asm volatile("mr " #reg ", %0" : : "r"(var))
-#define SMS_FROM_FPR(reg, var) asm volatile("fmr %0, " #reg : "=r"(var))
-#define SMS_TO_FPR(reg, var)   asm volatile("fmr " #reg ", %0" : : "r"(var))
+#ifdef __MWERKS__
+#define SMS_REGISTER register
+#define SMS_ASM_FUNC asm
+#define SMS_ASM_BLOCK
+#else
+#define SMS_REGISTER
+#ifdef _MSC_VER
+#define SMS_ASM_FUNC  __declspec(naked)
+#define SMS_ASM_BLOCK __asm volatile
+#else
+#define SMS_ASM_FUNC  __attribute__((naked))
+#define SMS_ASM_BLOCK asm volatile
+#endif
+#endif
+
+#define SMS_FROM_GPR(reg, var) SMS_ASM_BLOCK("mr %0, " #reg : "=r"(var))
+#define SMS_TO_GPR(reg, var)   SMS_ASM_BLOCK("mr " #reg ", %0" : : "r"(var))
+#define SMS_FROM_FPR(reg, var) SMS_ASM_BLOCK("fmr %0, " #reg : "=r"(var))
+#define SMS_TO_FPR(reg, var)   SMS_ASM_BLOCK("fmr " #reg ", %0" : : "r"(var))
+
 
 #ifdef __cplusplus
 #if __cplusplus >= 201103L
+#ifndef offsetof
 #define offsetof(t, d) ((size_t) & (((t *)0)->d))
+#endif
 //#define offsetof(t, d) __builtin_offsetof(t, d)
 #else
+#ifndef offsetof
 #define offsetof(t, d) ((size_t) & (((t *)0)->d))
+#endif
 #endif
 #define SMS_EXTERN_C extern "C"
 #else
 #define SMS_EXTERN_C extern
 #endif
 
+#ifdef _MSC_VER
+#define SMS_NO_INLINE __declspec(noinline)
+#else
 #define SMS_NO_INLINE __attribute__((noinline))
+#endif
 
 #define SMS_ATOMIC_CODE(code)                                                                      \
     u32 __atomic_interrupt_state = OSDisableInterrupts();                                          \
     code OSRestoreInterrupts(__atomic_interrupt_state);
 
-#ifdef __MWERKS__
-#define SMS_REGISTER register
-#define SMS_PURE_ASM asm
-#else
-#define SMS_REGISTER
-#define SMS_PURE_ASM __attribute__((naked))
-#endif
 
 #if defined(__GNUC__) || (defined(__MWERKS__) && (__MWERKS__ >= 0x3000)) ||                        \
     (defined(__ICC) && (__ICC >= 600))

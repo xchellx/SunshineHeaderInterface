@@ -23,7 +23,7 @@ public:
     u16 mKeyCode;
     u32 _0C;
     u32 _10;
-    JGadget::TList<TEffectObjBase *, JGadget::TAllocator> mEffectObjList;
+    JGadget::TList<TEffectObjBase *> mEffectObjList;
     TEffectObjBase **mEffectObjs;
 
     static constexpr size_t DefaultEffectNum = 5;

@@ -46,11 +46,11 @@ namespace JGadget {
         iterator mStart;
     };
 
-    template <class _T, template <class> class _A> class TList {
+    template <class _Ty, class _Alloc = TAllocator<_Ty>> class TList {
         struct TNode_ {
             TNode_ *mPrev;
             TNode_ *mNext;
-            _T mItem;
+            _Ty mItem;
         };
 
         TNode_ *CreateNode_(TNode_ *prev, TNode_ *next, const _T &item) {
@@ -79,7 +79,7 @@ namespace JGadget {
         };
 
         TList() : _00(0), mSize(0), mStart(nullptr) {}
-        TList(_A<_T> *allocator) { _00 = allocator->_00; }
+        TList(_Alloc<_Ty> *allocator) { _00 = allocator->_00; }
 
         iterator begin() { return iterator(mStart.mCurrent); }
         iterator end() { return mStart; }
@@ -104,7 +104,7 @@ namespace JGadget {
             return iterator(iter);
         }
 
-        iterator insert(iterator iter, const _T &node) {
+        iterator insert(iterator iter, const _Ty &node) {
             TNode_ *current = iter.mCurrent;
             TNode_ *next    = current->mNext;
 

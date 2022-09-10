@@ -14,7 +14,11 @@
 #define __ppc__
 #endif
 
-#define SMS_DEBUG _DEBUG
+#ifdef NDEBUG
+#define SMS_DEBUG 1
+#else
+#define SMS_DEBUG 0
+#endif
 
 #if defined(SMS_BUILD_KAMEK) || defined(SMS_BUILD_KAMEK_INLINE)
 #include <Kamek/sdk/kamek_sdk.h>

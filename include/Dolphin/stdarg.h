@@ -40,7 +40,7 @@ typedef __builtin_va_list __gnuc_va_list;
 #if defined __GNUC__ && __GNUC__ >= 3
 typedef __builtin_va_list va_list;
 #else
-typedef char *va_list;
+typedef void *va_list;
 #endif
 #endif
 
