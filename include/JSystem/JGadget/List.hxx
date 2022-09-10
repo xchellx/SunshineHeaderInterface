@@ -51,6 +51,7 @@ namespace JGadget {
             TNode_ *mPrev;
             TNode_ *mNext;
             _T mItem;
+            ~TNode_() {};
         };
 
         TNode_ *CreateNode_(TNode_ *prev, TNode_ *next, const _T &item) {
