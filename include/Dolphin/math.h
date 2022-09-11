@@ -20,6 +20,7 @@ f32 atan2f(f32, f32);
 f64 cos(f64 rad);
 f32 cosf(f32 rad);
 f32 expf(f32 x);
+f64 log(f64 x);
 f64 fabs(f64 x);
 f32 fabsf(f32 x);
 f64 frexp(f64, int *);

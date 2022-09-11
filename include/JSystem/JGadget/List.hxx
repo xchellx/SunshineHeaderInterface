@@ -46,20 +46,21 @@ namespace JGadget {
         iterator mStart;
     };
 
-    template <class _T, template <class> class _A> class TList {
+    template <class _T, class _A = TAllocator<_T>> class TList {
         struct TNode_ {
-            TNode_ *mPrev;
             TNode_ *mNext;
+            TNode_ *mPrev;
             _T mItem;
-            ~TNode_() {};
+
+            ~TNode_(){};
         };
 
-        TNode_ *CreateNode_(TNode_ *prev, TNode_ *next, const _T &item) {
+        TNode_ *CreateNode_(TNode_ *next, TNode_ *prev, const _T &item) {
             TNode_ *node = new TNode_();
             if (!node)
                 return nullptr;
-            node->mPrev = prev;
             node->mNext = next;
+            node->mPrev = prev;
             node->mItem = item;
             return node;
         }
@@ -74,16 +75,20 @@ namespace JGadget {
             TNode_ *operator->() const { return mCurrent; }
             iterator operator++() { return iterator(mCurrent->mNext); }
             iterator operator--() { return iterator(mCurrent->mPrev); }
-            iterator operator*() { return iterator(mCurrent); }
+            TNode_ *operator*() { return mCurrent; }
 
             TNode_ *mCurrent;
+            TNode_ *_04;
         };
 
-        TList() : _00(0), mSize(0), mStart(nullptr) {}
-        TList(_A<_T> *allocator) { _00 = allocator->_00; }
+        TList() : mAllocator(), mSize(0), mBegin(nullptr), mEnd(nullptr) {
+            mBegin = reinterpret_cast<TNode_ *>(&mEnd);
+            mEnd   = reinterpret_cast<TNode_ *>(&mEnd);
+        }
+        explicit TList(_A *allocator) { mAllocator = *allocator; }
 
-        iterator begin() { return iterator(mStart.mCurrent); }
-        iterator end() { return mStart; }
+        iterator begin() { return iterator(mBegin); }
+        iterator end() { return iterator(mEnd->mNext); }
 
         iterator erase(iterator iter) {
             TNode_ *prev = iter->mPrev;
@@ -107,22 +112,23 @@ namespace JGadget {
 
         iterator insert(iterator iter, const _T &node) {
             TNode_ *current = iter.mCurrent;
-            TNode_ *next    = current->mNext;
+            TNode_ *prev    = current->mPrev;
 
             TNode_ *newNode = CreateNode_(iter.mCurrent, iter.mCurrent, node);
             if (!newNode)
-                return mStart;
+                return end();
 
-            current->mNext = newNode;
-            next->mPrev    = newNode;
+            current->mPrev = newNode;
+            prev->mNext    = newNode;
             mSize += 1;
 
-            return iterator(newNode);
+            return iterator(current);
         }
 
-        u8 _00;
+        _A mAllocator;
         size_t mSize;
-        iterator mStart;
+        TNode_ *mEnd;
+        TNode_ *mBegin;
     };
 
     template <typename _T, size_t _S> class TLinkList {
