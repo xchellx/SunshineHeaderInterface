@@ -2,6 +2,7 @@
 
 #include <Dolphin/OS.h>
 #include <Dolphin/types.h>
+#include <JKernel/JKRHeap.hxx>
 #include <JSystem/JGadget/Allocator.hxx>
 #include <JSystem/JGadget/Node.hxx>
 
@@ -58,7 +59,7 @@ namespace JGadget {
         };
 
         TNode_ *CreateNode_(TNode_ *next, TNode_ *prev, const _T &item) {
-            return new TNode_(next, prev, item);
+            return new (JKRHeap::sSystemHeap, 4) TNode_(next, prev, item);
         }
 
     public:
@@ -90,6 +91,7 @@ namespace JGadget {
             mLast  = reinterpret_cast<TNode_ *>(&mFirst);
         }
         explicit TList(_A *allocator) { mAllocator = *allocator; }
+        ~TList() { erase(begin(), end()); }
 
         iterator begin() { return {mFirst}; }
         iterator end() { return {reinterpret_cast<TNode_ *>(&mFirst)}; }
