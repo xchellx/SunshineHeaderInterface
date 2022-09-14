@@ -40,7 +40,7 @@ public:
     AreaEpisodeArray *mStringPaths;  // 0x0030
     TSMSFader *mFader;               // 0x0034
     u32 _04[0x8 / 4];                // 0x0038
-    u32 *mJKRExpHeapHi;              // 0x0040
+    JKRHeap *mCurrentHeap;           // 0x0040
 };
 
 void SetupThreadFuncLogo(void *);
