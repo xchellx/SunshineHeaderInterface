@@ -44,9 +44,7 @@ public:
     static JKRHeap *findFromRoot(void *);
     static void free(void *, JKRHeap *);
 
-    u32 _0C[3];
     OSMutex mMutex;
-    u32 _2C;
     void *mStart;
     void *mEnd;
     size_t mSize;

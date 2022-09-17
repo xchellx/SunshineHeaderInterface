@@ -32,3 +32,5 @@ public:
     char *mParamStreamPath;  // _74
     u32 _78;
 };
+
+static JAIBasic *MSGBasic;

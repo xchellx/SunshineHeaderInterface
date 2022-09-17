@@ -85,8 +85,7 @@ public:
         f32 mStickX;
         f32 mStickY;
         f32 mLengthFromNeutral;
-        u16 mAngle;
-        u16 _E;  // i assume unused
+        s16 mAngle;
     };
 
     class CRumble {
@@ -120,8 +119,5 @@ public:
     u32 _94;
     u32 _98;
     u8 mResetFlag;      // _9C
-    u8 _9D;             // padding?
-    u8 _9E;             // ^^
-    u8 _9F;             // ^^
     OSTick mResetTime;  // _A0
 };

@@ -101,3 +101,6 @@ public:
     JSUPtrList mChildrenList;
     JSUPtrLink mPtrLink;
 };
+
+void J2DFillBox(int x, int y, int w, int h, JUtility::TColor color);
+void J2DFillBox(JUTRect rect, JUtility::TColor color);

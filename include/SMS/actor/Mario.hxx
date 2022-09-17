@@ -123,7 +123,7 @@ public:
     f32 _C8;
     f32 _CC;
     u32 mMeaning;
-    u32 _D4;
+    u32 mFrameMeaning;
     u32 _D8;
     u16 _DC;
     u16 _DE;
@@ -769,6 +769,8 @@ public:
         STATE_HVY_LAND        = 0x04000473,
         STATE_D_LAND          = 0x04000472,
         STATE_T_LAND          = 0x0800023A,
+        STATE_LAND_RECOVER    = 0x0C000230,
+        STATE_D_LAND_RECOVER  = 0x0C000231,
         STATE_JUMPSIDE        = 0x00000880,
         STATE_BOUNCE          = 0x00000884,
         STATE_SIDE_STEP       = 0x0C008220,
@@ -1066,7 +1068,7 @@ public:
     f32 _378;
     u16 _37C;  // padding?
     u16 _37E;
-    u32 _380;
+    u32 mFluddUsageState;
     TTakeActor *mGrabTarget;  // 0x0384
     u8 _388;
     u8 mSurfGessoID;        // 0x0389

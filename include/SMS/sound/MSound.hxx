@@ -2,8 +2,9 @@
 
 #include <Dolphin/MTX.h>
 #include <Dolphin/types.h>
-#include <JSystem/JKernel/JKRHeap.hxx>
 #include <JSystem/JAudio/JAIBasic.hxx>
+#include <JSystem/JKernel/JKRHeap.hxx>
+
 
 enum MS_SCENE_WAVE {};
 
@@ -62,8 +63,7 @@ public:
 
         SE_YOSHI_FIRST_RIDE = 0x4849,
 
-        SE_NINTENDO_CHAO = 0x7914,
-        SE_NINTENDO_COIN = 0x7915
+        SE_NINTENDO_SOUND = 0x7914
     };
 
     MSound(JKRHeap *, JKRHeap *, u32, u8 *, u8 *, u32);
