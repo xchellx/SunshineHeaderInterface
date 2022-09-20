@@ -948,7 +948,7 @@ public:
         bool mIsWater             : 1;
         bool mIsShallowWater      : 1;
         bool mHasFludd            : 1;
-        u32 _02                   : 1;
+        bool mIsFluddEmitting     : 1;
         bool mGainHelmet          : 1;
         bool mGainHelmetFlwCamera : 1;
         bool mIsGroundPoundSitUp  : 1;
@@ -969,7 +969,7 @@ public:
         bool mIsWater             : 1;
         bool mIsShallowWater      : 1;
         bool mHasFludd            : 1;
-        u32 _02                   : 1;
+        bool mIsFluddEmitting     : 1;
         bool mGainHelmet          : 1;
         bool mGainHelmetFlwCamera : 1;
         bool mIsGroundPoundSitUp  : 1;
