@@ -40,11 +40,11 @@ public:
     char *mStrPtr;
     u32 _104;
     u32 _108;
-    JUtility::TColor mColor;
-    JUtility::TColor mGradient;
-    u32 _114;
-    u32 _118;
-    u32 _11C;
-    u32 _120;
+    size_t mCharSpacing;
+    size_t mNewlineSize;
+    size_t mCharSizeX;
+    size_t mCharSizeY;
+    JUtility::TColor mColorMask;
+    JUtility::TColor mAdvanceColor;
     bool mInitialized;
 };

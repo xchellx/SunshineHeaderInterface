@@ -157,13 +157,53 @@ namespace JGadget {
     public:
         class iterator {
         public:
-            iterator(TSingleLinkListNode **nodelist);
-            TSingleLinkListNode **mNodeList;
+            iterator(TSingleLinkListNode *node) : mNode(node) {}
+            iterator(const iterator &iter) : mNode(iter.mNode) {}
+
+            bool operator==(const iterator &rhs) const { return mNode == rhs.mNode; }
+            bool operator!=(const iterator &rhs) const { return mNode != rhs.mNode; }
+
+            iterator &operator++() {
+                mNode = mNode->mNext;
+                return *this;
+            }
+
+            TSingleLinkListNode *operator->() const { return mNode; }
+            TSingleLinkListNode &operator*() { return *mNode; }
+
+            TSingleLinkListNode *mNode;
         };
 
-        void Initialize();
+        void Initialize_();
+
         iterator Insert(iterator iter, TSingleLinkListNode *node);
+
+        iterator Erase(iterator iter) {
+            auto searchIter = begin();
+            while (searchIter != end()) {
+                TSingleLinkListNode *next = searchIter->mNext;
+                if (next == iter.mNode) {
+                    searchIter->mNext = iter->mNext;
+                    delete iter.mNode;
+
+                    mSize -= 1;
+                    return iterator(searchIter->mNext);
+                }
+                ++searchIter;
+            }
+            return end();
+        }
+
+        iterator Erase(iterator start, iterator end) {
+            iterator iter = start;
+            while (iter != end) {
+                iter = Erase(iter);
+            }
+            return iterator(iter);
+        }
+
         iterator end();
+        iterator begin() { return {mStart}; }
 
         size_t mSize;
         TSingleLinkListNode *mStart;

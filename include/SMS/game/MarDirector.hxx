@@ -23,7 +23,15 @@
 
 class TMarDirector : public JDrama::TDirector {
 public:
-    enum Status { INTRO_INIT = 0, INTRO_PLAYING = 1, NORMAL = 4, PAUSE_MENU = 5, SAVE_CARD = 11 };
+    enum Status {
+        INTRO_INIT    = 0,
+        INTRO_PLAYING = 1,
+        GAME_STARTING = 2,
+        NORMAL        = 4,
+        PAUSE_MENU    = 5,
+        STATE_FREEZE  = 10,
+        SAVE_CARD     = 11
+    };
 
     enum State { WARP_OUT = 2 };
 
