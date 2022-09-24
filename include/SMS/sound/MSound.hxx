@@ -5,7 +5,6 @@
 #include <JSystem/JAudio/JAIBasic.hxx>
 #include <JSystem/JKernel/JKRHeap.hxx>
 
-
 enum MS_SCENE_WAVE {};
 
 class MSound : public JAIBasic {
@@ -111,3 +110,8 @@ public:
 
     u8 _00[0xD2];
 };
+
+extern MSound *gpMSound;
+extern f32 gAudioVolume;
+extern f32 gAudioPitch;
+extern f32 gAudioSpeed;

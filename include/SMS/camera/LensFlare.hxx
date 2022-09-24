@@ -2,6 +2,7 @@
 
 #include <JSystem/J3D/J3DAnimation.hxx>
 #include <JSystem/JDrama/JDRGraphics.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
 
 class TLensFlare : public JDrama::TViewObj {
 public:

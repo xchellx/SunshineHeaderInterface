@@ -78,3 +78,5 @@ public:
     u32 _F8;
     u32 _FC;
 };
+
+extern TConductor *gpConductor;

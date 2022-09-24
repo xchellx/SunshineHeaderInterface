@@ -158,3 +158,5 @@ struct TCamParamData {
     f32 mCamXOffset;
     f32 _60[0x9C / 4];
 };
+
+extern CPolarSubCamera *gpCamera;

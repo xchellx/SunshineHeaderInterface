@@ -31,3 +31,5 @@ public:
     u32 _4C;
     u16 mHitObjFlags;
 };
+
+extern TStrategy *gpStrategy;

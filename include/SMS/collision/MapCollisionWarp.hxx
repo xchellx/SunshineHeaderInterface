@@ -10,10 +10,10 @@ class TMapCollisionWarp : TMapCollisionBase {
 public:
     TMapCollisionWarp();
 
-    void init(const s8, u16, const TLiveActor *);
-    void remove();
-    void setUp();
-    void setUpTrans(const TVec3f &);
+    virtual void init(const char *, u16, const TLiveActor *) override;
+    virtual void remove() override;
+    virtual void setUp() override;
+    virtual void setUpTrans(const TVec3f &) override;
 
     u16 _60;
     TLiveActor *mActor;  // 0x0064

@@ -25,5 +25,5 @@ public:
     u32 *_08;
     MActorAnmData *mAnmData;
     u16 *_10;
-    u32 _14;
+    u32 mModelFlags;
 };

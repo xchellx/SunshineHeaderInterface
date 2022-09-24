@@ -8,29 +8,6 @@
 
 class TMario;
 
-struct TWaterEmitInfo : public TParams {
-    TWaterEmitInfo(const char *prm);
-
-    TParamT<s32> mNum;
-    TParamT<s16> mAlive;
-    TParamT<s16> mAttack;
-    TParamT<TVec3f> mDir;
-    TParamT<TVec3f> mPos;
-    TParamT<TVec3f> mV;
-    TParamT<f32> mDirTremble;
-    TParamT<f32> mPow;
-    TParamT<f32> mPowTremble;
-    TParamT<f32> mSize;
-    TParamT<f32> mSizeTremble;
-    TParamT<f32> mHitRadius;
-    TParamT<f32> mHitHeight;
-    TParamT<s32> mFlag;
-    TParamT<s16> mType;
-
-private:
-    TParamT<s16> __padding;
-};
-
 class TWaterGun {
 
 public:

@@ -3,7 +3,8 @@
 #include <Dolphin/types.h>
 
 #include <JSystem/JDrama/JDRDisplay.hxx>
-#include <SMS/actor/Mario.hxx>
+#include <JSystem/JUtility/JUTConsole.hxx>
+#include <SMS/Player/Mario.hxx>
 #include <SMS/game/GameSequence.hxx>
 #include <SMS/game/MarDirector.hxx>
 #include <SMS/screen/SMSFader.hxx>
@@ -45,3 +46,18 @@ public:
 
 void SetupThreadFuncLogo(void *);
 void SetupThreadFuncBoot(void *);
+
+extern TApplication gpApplication;
+
+extern JUTConsole *sReportConsole;
+extern JUTConsole *sWarningConsole;
+extern JUTResFont *gpSystemFont;
+extern JUTResFont *gpRomFont;
+
+extern void *arcBufNLogo;
+extern void *arcBufMario;
+extern void *arcBufCmn;
+extern void *bufStageArcBin;
+extern void *spGameHeapBlock;
+extern void *gArbkConsole;
+extern void *gArbkGuide;

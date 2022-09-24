@@ -5,12 +5,15 @@
 #include <JSystem/J3D/J3DDrawBuffer.hxx>
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JGeometry.hxx>
-#include <JSystem/JUtility/JUTGamePad.hxx>
-
+#include <SMS/Player/MarioBlend.hxx>
+#include <SMS/Player/MarioCap.hxx>
+#include <SMS/Player/MarioDraw.hxx>
+#include <SMS/Player/MarioEffect.hxx>
+#include <SMS/Player/MarioGamePad.hxx>
+#include <SMS/Player/MarioSound.hxx>
 #include <SMS/actor/TakeActor.hxx>
 #include <SMS/actor/Yoshi.hxx>
 #include <SMS/collision/BGCheck.hxx>
-#include <SMS/m3d/M3UModel.hxx>
 #include <SMS/nozzle/Watergun.hxx>
 #include <SMS/params/BaseParam.hxx>
 #include <SMS/params/Params.hxx>
@@ -20,133 +23,16 @@
 
 #define OBJECT_ID_MARIO 0x80000001
 
-class TMario;
-
-class TDrawSyncCallback {
-public:
-    virtual void drawSyncCallback(u16) = 0;
-};
-
-struct TMarioAnimeData {
-    enum FLUDD { FLUDD_ENABLED = 68, FLUDD_DISABLED = 200 };
-
-    enum HAND { HAND_A, HAND_B, HAND_C };
-
-    bool isPumpOK() const;
-
-    u16 mAnimID;
-    u16 mFluddEnabled;  // Note: ENUM? 68 = enabled, 200 = disabled
-    u8 mAnmTexPattern;  // Note: 23 is the max value allowed
-    u8 mMarioHand;      // Note: 1, 2, and 3 seem to be valid values, this determines
-                        // the hand model used(?)
-    u8 unk_1;           // Note: If bit 30 is set, it seems to activate a bit flag to
-                        // multiple pointers, likely mtx related
-    u8 unk_2;           // Note: Value seems to be set but is never used?
-};
-
-class TMarioCap {
-public:
-    TMarioCap(TMario *);
-
-    virtual void perform(u32, JDrama::TGraphics *);
-
-    void createMirrorModel();
-    void mtxEffectHide();
-    void mtxEffectShow();
-};
-
-class M3UModelMario : public M3UModel {
-public:
-    virtual void updateIn() override;
-    virtual void updateOut() override;
-
-    void changeMtxCalcSIAnmBQAnmTransform(int, int, u8);
-    void updateInMotion();
-};
-
-class TMarioSoundValues {
-public:
-    TMarioSoundValues();
-
-    u32 _0;
-    u32 _4;
-    u32 _8;
-    u32 _C;
-    u32 _10;
-    u32 _14;
-    u8 _18;
-    u32 _1C;
-    u8 _20;
-    u16 _22;
-    u8 _24;
-    u16 _26;
-    u16 _28;
-    u8 _2A;
-    u8 _2B;
-    u8 _2C;
-};
-
-struct TMarioControllerWork {
-    enum Buttons { R = 0x20, A = 0x100, B = 0x200 };
-
-    s16 mStickHS16;
-    s16 mStickVS16;
-    Buttons mInput;
-    Buttons mFrameInput;
-    u8 mAnalogRU8;
-    u8 mAnalogLU8;
-    f32 mStickH;
-    f32 mStickV;
-    f32 mStickDist;
-    f32 mAnalogL;
-    f32 mAnalogR;
-};
-
-class TMarioGamePad : public JUTGamePad {
-public:
-    virtual ~TMarioGamePad();
-
-    void onNeutralMarioKey();
-    void read();
-    void reset();
-    void updateMeaning();
-
-    u32 _A4;
-    f32 _A8;
-    f32 _AC;
-    f32 _B0;
-    f32 _B4;
-    f32 _B8;
-    f32 _BC;
-    f32 mStickX;  // _C0
-    f32 mStickY;  // _C4
-    f32 _C8;
-    f32 _CC;
-    u32 mMeaning;
-    u32 mFrameMeaning;
-    u32 _D8;
-    u16 _DC;
-    u16 _DE;
-    u16 _E0;
-
-    struct {
-        u16 _00         : 8;
-        bool mDisable   : 1;
-        u8 _01          : 5;
-        bool mReadInput : 1;
-        u8 _02          : 1;
-    } State;  // 0x00E2
-
-    u16 _E4;
-    u16 _E6;  // padding?
-    u32 _E8;
-    u32 _EC;  // padding?
-};
-
 class TMario : public TTakeActor, public TDrawSyncCallback {
 public:
 #define CONSTRUCT_PARAM(name, val)                                                                 \
     name(this, val, JDrama::TNameRef::calcKeyCode(SMS_STRINGIZE(name)), SMS_STRINGIZE(name))
+
+    enum E_SIDEWALK_TYPE { NONE, LEFT, RIGHT };
+
+    struct JumpSlipRecord {};
+
+    struct TEParams : TParams {};
 
     struct TDeParams : public TParams {
         TDeParams();
@@ -895,7 +781,296 @@ public:
     virtual u8 getVoiceStatus();
     virtual void drawSyncCallback(u16) override;
 
-    // add funcs
+    bool actnMain();
+    void addCallBack(JDrama::TGraphics *);
+    void addDamageFog(JDrama::TGraphics *);
+    void addDirty();
+    void addUpper();
+    void addVelocity(f32);
+    void animSound();
+    bool askJumpIntoWaterEffectExist() const;
+    bool barClimb();
+    bool barProcess();
+    bool barWait();
+    void blurEffect();
+    bool boardJumping();
+    void boxDrawPrepare(Mtx);
+    void bubbleFromBody();
+    void bubbleFromMouth(int);
+    void calcAnim(u32, JDrama::TGraphics *);
+    void calcBaseMtx(Mtx);
+    void calcDamagePos(const TVec3f &);
+    void calcGroundMtx(const TVec3f &);
+    void calcView(JDrama::TGraphics *);
+    bool canBendBody();
+    bool canPut();
+    bool canSleep();
+    bool canSlipJump();
+    bool canSquat() const;
+    bool canTake(THitActor *actor);
+    bool catching();
+    bool catchStop();
+    void changeHand(int hand);
+    void changeMontemanWaitingAnim();
+    bool changePlayerDropping(u32 state, u32 jumpSlipState);
+    bool changePlayerJumping(u32 state, u32 jumpSlipState);
+    bool changePlayerStatus(u32 state, u32 jumpSlipState, bool ifGrounded);
+    bool changePlayerTriJump();
+    void changeWireHanging();
+    bool checkAllMotions();
+    bool checkBackTrig();
+    void checkCurrentPlane();
+    void checkDescent();
+    void checkEnforceJump();
+    void checkGraffito();
+    void checkGraffitoElec();
+    void checkGraffitoFire();
+    void checkGraffitoSlip();
+    bool checkGroundAtJumping(const Vec &, int);
+    bool checkGroundAtWalking(Vec *);
+    bool checkGroundPlane(f32 x, f32 y, f32 z, f32 *out, const TBGCheckData **);
+    void checkPlayerAction(JDrama::TGraphics *);
+    void checkPlayerAround(int, f32);
+    bool checkPumpEnable();
+    void checkPumping();
+    void checkRideMovement();
+    void checkRideReCalc();
+    f32 checkRoofPlane(const Vec &, f32, const TBGCheckData **);
+    void checkSink();
+    bool checkStatusType(s32) const;
+    bool checkStickRotate(int *out);
+    bool checkSwimJump();
+    void checkThrowObject();
+    void checkWallPlane(const Vec &pos, f32 width, f32 height);
+    void checkWet();
+    bool considerJumpRotate();
+    bool considerRotateJumpStart();
+    bool considerRotateStart();
+    void considerTake();
+    void considerWaist();
+    void decHP(int);
+    bool demoMain();
+    void dirtyLimitCheck();
+    bool diving();
+    void doJumping();
+    void doPushingAnimation(const Vec &);
+    u8 doRoofMovingProcess();
+    void doRunning();
+    void doRunningAnimation();
+    void doSliding();
+    void doSurfing();
+    void doSwimming();
+    f32 downingCommon(int, f32, int);
+    void drawLogic();
+    void dropObject();
+    void elecEffect();
+    void elecEndEffect();
+    bool electricDamage();
+    void emitBlurHipDrop();
+    void emitBlurHipDropSuper();
+    void emitBlurSpinJump();
+    void emitDirtyFootPrint();
+    void emitFootPrintWithEffect(int, int);
+    void emitGetCoinEffect(TVec3f *);
+    void emitGetEffect();
+    void emitGetWaterEffect();
+    bool emitParticle(int id);
+    bool emitParticle(int id, const TVec3f *);
+    bool emitParticle(int id, s16);
+    void emitRotateShootEffect();
+    void emitSandEffect();
+    void emitSmoke(s16);
+    void emitSweat(s16);
+    void emitSweatSometimes();
+    void entryModels(JDrama::TGraphics *);
+    void fallProcess();
+    bool fenceMove();
+    bool fencePunch();
+    void finalDrawInitialize();
+    bool fireDashing();
+    bool fireDowning();
+    void floorDamageExec(int damage, int type, int emitcount, int tremble);
+    void floorDamageExec(const TEParams &);
+    void flowMove(const TVec3f &);
+    bool footDowning();
+    void frontSlipEffect();
+    s16 getAttackAngle(const THitActor *);
+    Mtx *getCenterAnmMtx();
+    f32 getChangeAngleSpeed();
+    f32 getCurrentFrame(int);
+    TPullParams *getCurrentPullParams(f32 *, f32 *);
+    void *getDmgMapCode(int) const;
+    void *getGesso(THitActor *);
+    f32 getJumpAccelControl() const;
+    f32 getJumpSlideControl() const;
+    J3DFrameCtrl *getMotionFrameCtrl();
+    void getOffYoshi(bool knockedOff);
+    s16 getOnWirePosAngle(TVec3f *);
+    f32 getPumpFrame() const;
+    void getRidingMtx(Mtx out);
+    Mtx *getRootAnmMtx();
+    void getSideWalkValues(E_SIDEWALK_TYPE *out, f32 *, f32 *);
+    f32 getSlideStickMult();
+    f32 getSlideStopCatch();
+    f32 getSlideStopNormal();
+    f32 getSlopeNormalAccele(f32 *, f32 *);
+    f32 getSlopeSlideAccele(f32 *, f32 *);
+    TSurfingParams *getSurfingParamsWater();
+    Mtx *getTakenMtx();
+    u8 getTrampleCt();
+    s16 getWallAngle() const;
+    void gunExec();
+    bool hanging();
+    u8 hangingCheckRoof(TVec3f *);
+    bool hangonCheck(const TBGCheckData *, const Vec &, const Vec &);
+    void hangPole(THitActor *);
+    bool hipAttacking();
+    void hitNormal(THitActor *);
+    void incHP(int);
+    void initMirrorModel();
+    void initParticle();
+    void inOutWaterEffect(f32);
+    bool isAnimeLoopOrStop();
+    bool isForceSlip();
+    bool isFrontSlip(int);
+    bool isInvincible() const;
+    bool isLast1AnimeFrame();
+    bool isMario();
+    bool isRunningInWater();
+    bool isSlipStart();
+    bool isTakeSituation(THitActor *);
+    bool isUnderWater() const;
+    bool isUnUsualStageStart();
+    bool isUpperPumpingStyle() const;
+    bool isWallInFront() const;
+    bool isWearingCap();
+    bool isWearingHelm();
+    bool jumpCatch();
+    u8 jumpDownCommon(int, int, f32);
+    bool jumpEndCommon(int, int);
+    bool jumpEndEvents(u32);
+    u8 jumpingBasic(int, int, int);
+    bool jumpingDemoCommon(u32, int, f32);
+    bool jumpMain();
+    u8 jumpProcess(int);
+    u8 jumpSlipCommon(s16, u32);
+    bool jumpSlipEvents(JumpSlipRecord *);
+    void keepDistance(const THitActor &, f32);
+    void keepDistance(const TVec3f &, f32, f32);
+    void kickFruitEffect();
+    void kickRoofEffect();
+    u8 landing();
+    void loadAnmTexPattern(J3DAnmTexPattern **, char *, J3DModelData *);
+    void loadBas(void **, const char *);
+    bool loserDown();
+    bool loserExec();
+    void makeHistory();
+    void meltInWaterEffect();
+    bool moveMain();
+    void moveParticle();
+    bool moveRoof();
+    void normalizeNozzle();
+    bool oilRun();
+    bool oilSlip();
+    bool onYoshi() const;
+    void playerRefrection(int);
+    bool pulling();
+    bool readBillboard();
+    void resetHistory();
+    void resetNozzle();
+    bool returnStart(const TVec3f *, f32, bool, int);
+    void rippleEffect();
+    bool rocketCheck();
+    void rocketEffectStart();
+    bool rocketing();
+    bool rollingStart(const TVec3f *, f32);
+    bool roofCommonEvents();
+    bool rotating();
+    void rumbleStart(int, int);
+    bool running();
+    bool runningRippleEffect();
+    f32 setAnimation(int id, f32 speed);
+    void setDivHelm();
+    void setGamePad(TMarioGamePad *);
+    void setNormalAttackArea();
+    void setPlayerVelocity(f32 velocity);
+    void setPositions();
+    f32 setReverseAnimation(int id, f32 speed);
+    u32 setStatusToJumping(u32 status, u32);
+    void setUpperDamageRun();
+    void sinkInSandEffect();
+    bool sleepily();
+    bool sleeping();
+    void sleepingEffect();
+    void sleepingEffectKill();
+    void slideProcess(f32, f32);
+    bool slipBackCommon(int, int, int);
+    bool slipFalling();
+    bool slipForeCommon(int, int, int);
+    void slippingBasic(int, int, int);
+    void slopeProcess();
+    void smallTouchDownEffect();
+    void soundMovement();
+    void soundTorocco();
+    bool specMain();
+    bool squating();
+    bool squatStandup();
+    bool startHangLanding(u32);
+    bool startJumpWall();
+    JAISound *startSoundActor(u32 id);
+    bool startTalking();
+    bool startVoice(u32 id);
+    bool startVoiceIfNoVoice(u32 id);
+    void stateMachine();
+    void stateMachineUpper();
+    bool stayWall();
+    bool stopCommon(int, int);
+    void stopProcess();
+    void stopVoice();
+    void strongTouchDownEffect();
+    bool surfing();
+    void surfingEffect();
+    bool swimMain();
+    void swimmingBubbleEffect();
+    bool swimPaddle();
+    void takeOffGlass();
+    bool taking();
+    void thinkDirty();
+    void thinkHeight();
+    void thinkParams();
+    void thinkSand();
+    void thinkSituation();
+    void thinkWaterSurface();
+    void thinkYoshiHeadCollision();
+    void throwMario(const TVec3f &rotation, f32 strength);
+    bool thrownDowning();
+    void toroccoEffect();
+    bool toroccoStart();
+    bool trampleExec(THitActor *);
+    void treeSlipEffect();
+    bool turnEnd();
+    bool turnning();
+    bool waiting();
+    bool waitingCommonEvents();
+    bool waitingStart(const TVec3f *, f32);
+    bool waitMain();
+    u8 waitProcess();
+    u8 walkEnd();
+    u8 walkProcess();
+    bool warpIn();
+    void warpInEffect();
+    void warpInLight();
+    bool warpOut();
+    void warpOutEffect();
+    bool warpRequest(const TVec3f &, f32);
+    void wearGlass();
+    bool winDemo();
+    void windMove(const TVec3f &);
+    bool wireHanging();
+    void wireMove(f32);
+    bool wireRolling();
+    bool wireSWait();
+    bool wireWait();
 
     u32 mActionState;    // 0x0074
     u32 mJumpingState;   // 0x0078
@@ -1242,3 +1417,17 @@ public:
     TSoundParams mSoundParams;                       // 0x4230
     TOptionParams mOptionParams;                     // 0x424C
 };
+
+extern TMario *gpMarioOriginal;
+extern TMario *gpMarioAddress;
+extern TVec3f *gpMarioPos;
+extern f32 *gpMarioAngleX;
+extern f32 *gpMarioAngleY;
+extern f32 *gpMarioAngleZ;
+extern f32 *gpMarioSpeedX;
+extern f32 *gpMarioSpeedY;
+extern f32 *gpMarioSpeedZ;
+extern s32 *gpMarioLightID;
+extern u32 *gpMarioFlag;
+extern f32 *gpMarioThrowPower;
+extern TBGCheckData *gpMarioGroundPlane;

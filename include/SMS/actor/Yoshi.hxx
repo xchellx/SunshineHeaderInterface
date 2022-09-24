@@ -3,6 +3,7 @@
 #include <Dolphin/types.h>
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JGeometry.hxx>
+#include <JSystem/JUtility/JUTColor.hxx>
 #include <SMS/M3DUtil/MActor.hxx>
 #include <SMS/object/EggYoshi.hxx>
 
@@ -45,3 +46,5 @@ public:
     u32 _11[0x1C / 4];         // 0x00D4
     TEggYoshi *mEgg;           // 0x00F0
 };
+
+extern JUtility::TColor bodyColor[4];

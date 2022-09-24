@@ -1,34 +1,101 @@
 #pragma once
 
 #include <Dolphin/types.h>
+#include <SMS/params/Params.hxx>
+
+struct TWaterEmitInfo : public TParams {
+    TWaterEmitInfo(const char *prm);
+
+    TParamT<s32> mNum;
+    TParamT<s16> mAlive;
+    TParamT<s16> mAttack;
+    TParamT<TVec3f> mDir;
+    TParamT<TVec3f> mPos;
+    TParamT<TVec3f> mV;
+    TParamT<f32> mDirTremble;
+    TParamT<f32> mPow;
+    TParamT<f32> mPowTremble;
+    TParamT<f32> mSize;
+    TParamT<f32> mSizeTremble;
+    TParamT<f32> mHitRadius;
+    TParamT<f32> mHitHeight;
+    TParamT<s32> mFlag;
+    TParamT<s16> mType;
+
+private:
+    TParamT<s16> __padding;
+};
 
 class TWaterGun;
+class TMarioControllerWork;
 
 class TNozzleBase {
-
 public:
-    u32 _00[0x2C / 4];        // 0x0000
-    f32 mEmitPerFrame;        // 0x002C
-    u32 _30[0x24 / 4];        // 0x0030
-    f32 mEmitRandom;          // 0x0054
-    u32 _58[0x10 / 4];        // 0x0058
-    f32 mDistance;            // 0x0068
-    u32 _6C[0x38 / 4];        // 0x006C
-    f32 mMasterScale;         // 0x00A4
-    u32 _A8[0x10 / 4];        // 0x00A8
-    f32 mDistortionStrength;  // 0x00B8
-    u32 _BC[0x10 / 4];        // 0x00BC
-    s32 mMaxWater;            // 0x00CC
-    u32 _D0[0x10 / 4];        // 0x00D0
-    f32 mForwardSpeedFactor;  // 0x00E0
-    u32 _E4[0x24 / 4];
-    s16 mWaterStep;              // 0x0108
-    u32 _10C[0x24 / 4];          // 0x010C
-    s32 mDamageLoss;             // 0x0130
-    u32 _134[0x1B4 / 4];         // 0X0134
-    s16 mMaxSprayQuarterFrames;  // 0x02E8
-    u16 _2EA;
-    u32 _2EC[0x7C / 4];  // 0x02EC
-    TWaterGun *mFludd;   // 0x0368
-    u32 _36C[0x18 / 4];  // 0x036C
-};
+    struct TEmitParams : public TParams {
+        TParamT<u8> mRocketType;
+        TParamT<f32> mNum;
+        TParamT<u16> mAttack;
+        TParamT<f32> mDirTremble;
+        TParamT<f32> mEmitPow;
+        TParamT<f32> mEmitCtrl;
+        TParamT<f32> mPowTremble;
+        TParamT<f32> mSize;
+        TParamT<f32> mSizeTremble;
+        TParamT<s32> mAmountMax;
+        TParamT<f32> mReactionPow;
+        TParamT<f32> mReactionY;
+        TParamT<s16> mDecRate;
+        TParamT<s16> mTriggerRate;
+        TParamT<s32> mDamageLoss;
+        TParamT<f32> mSuckRate;
+        TParamT<f32> mHitRadius;
+        TParamT<f32> mHitHeight;
+        TParamT<s16> mLAngleBase;
+        TParamT<s16> mLAngleNormal;
+        TParamT<s16> mLAngleSquat;
+        TParamT<s16> mLAngleMin;
+        TParamT<s16> mLAngleMax;
+        TParamT<s16> mLAngleChase;
+        TParamT<f32> mSizeMinPressure;
+        TParamT<f32> mSizeMaxPressure;
+        TParamT<f32> mNumMin;
+        TParamT<s16> mAttackMin;
+        TParamT<f32> mDirTrembleMin;
+        TParamT<f32> mEmitPowMin;
+        TParamT<f32> mSizeMin;
+        TParamT<f32> mMotorPowMin;
+        TParamT<f32> mMotorPowMax;
+        TParamT<f32> mReactionPowMin;
+        TParamT<f32> mInsidePressureDec;
+        TParamT<f32> mInsidePressureMax;
+        TParamT<s16> mTriggerTime;
+        TParamT<s16> mType;
+        TParamT<s16> mSideAngleMaxSide;
+        TParamT<s16> mSideAngleMaxFront;
+        TParamT<s16> mSideAngleMaxBack;
+        TParamT<f32> mRButtonMult;
+        TParamT<f32> mEmitPowScale;
+    } mEmitParams;  // 0x0000
+
+    TNozzleBase(const char *name, const char *prm, TWaterGun *fludd);
+
+    virtual void init();
+    virtual u8 getNozzleKind();
+    virtual s16 getGunAngle() const;
+    virtual s16 getWaistAngle();
+    virtual void movement();
+    virtual void emitCommon(int, TWaterEmitInfo *);
+    virtual void emit(int);
+    virtual void animation(int);
+
+    void calcGunAngle(const TMarioControllerWork &);
+
+    TWaterGun *mFludd;  // 0x0368
+    u16 mAnimState;
+    s16 mGunAngle;
+    s16 mWaistAngle;
+    f32 _374;
+    f32 _378;
+    f32 _37C;
+    f32 _380;
+};  // 0x384

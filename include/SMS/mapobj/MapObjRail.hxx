@@ -26,13 +26,13 @@ public:
 
     bool checkMarioRiding();
     void initGraphTracer(TGraphWeb *);
-    void moveToNextNode(f32);
+    bool moveToNextNode(f32);
     void resetStep(f32);
 
     TGraphTracer *mGraphTracer;
-    s32 mDistanceToNext;  // ??
-    u32 _140;             // flags
-    f32 _144;
+    s32 mDistanceToNext;
+    u32 _140;  // flags
+    f32 mTravelSpeed;
     u8 mRailStatus;
     s16 mContextTimer;   // default = 180
     u8 mLastRailStatus;  // ?

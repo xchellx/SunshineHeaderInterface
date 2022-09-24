@@ -49,7 +49,6 @@
 #define SMS_FROM_FPR(reg, var) SMS_ASM_BLOCK("fmr %0, " #reg : "=r"(var))
 #define SMS_TO_FPR(reg, var)   SMS_ASM_BLOCK("fmr " #reg ", %0" : : "r"(var))
 
-
 #ifdef __cplusplus
 #if __cplusplus >= 201103L
 #ifndef offsetof
@@ -75,7 +74,6 @@
 #define SMS_ATOMIC_CODE(code)                                                                      \
     u32 __atomic_interrupt_state = OSDisableInterrupts();                                          \
     code OSRestoreInterrupts(__atomic_interrupt_state);
-
 
 #if defined(__GNUC__) || (defined(__MWERKS__) && (__MWERKS__ >= 0x3000)) ||                        \
     (defined(__ICC) && (__ICC >= 600))

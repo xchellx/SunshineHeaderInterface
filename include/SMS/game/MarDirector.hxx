@@ -108,3 +108,7 @@ public:
     u32 _15;                   // 0x0258
     TShine *mCollectedShine;   // 0x025C
 };
+
+extern TMarDirector *gpMarDirector;
+extern f32 gEffectCoronaScale;
+extern float *gpNPCPtrSaveNormal;

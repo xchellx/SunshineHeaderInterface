@@ -5,6 +5,7 @@
 #include <JSystem/JDrama/JDRViewObj.hxx>
 #include <JSystem/JGadget/Allocator.hxx>
 #include <JSystem/JGadget/List.hxx>
+#include <JSystem/JParticle/JPABaseEmitter.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 #include <SMS/actor/HitActor.hxx>
 #include <SMS/object/EffectObjBase.hxx>
@@ -35,3 +36,5 @@ public:
                                    const void *);
     s32 getAvailableIdx(s32 effect, u8, const void *);
 };
+
+extern TMarioParticleManager *gpMarioParticleManager;

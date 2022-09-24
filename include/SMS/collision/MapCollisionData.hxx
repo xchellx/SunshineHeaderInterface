@@ -6,6 +6,7 @@
 
 #include <SMS/actor/LiveActor.hxx>
 #include <SMS/collision/BGCheck.hxx>
+#include <SMS/collision/MapCheck.hxx>
 #include <SMS/collision/MapCollisionBase.hxx>
 
 class TMapCollisionData {
@@ -52,3 +53,5 @@ public:
 
     static TBGCheckData mIllegalCheckData;
 };
+
+extern TMapCollisionData *gpMapCollisionData;

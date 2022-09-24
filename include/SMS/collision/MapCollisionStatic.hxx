@@ -9,9 +9,9 @@ class TMapCollisionStatic : public TMapCollisionBase {
 public:
     TMapCollisionStatic();
 
-    void init(const s8, u16, const TLiveActor *);
-    void remove();
-    void setUp();
+    virtual void init(const char *, u16, const TLiveActor *) override;
+    virtual void remove() override;
+    virtual void setUp() override;
 
     TLiveActor *mActor;  // _60
 };

@@ -21,3 +21,5 @@ public:
     u32 _18;
     f32 _1C;
 };
+
+extern TCameraMarioData *gpCameraMario;

@@ -97,3 +97,5 @@ public:
 };
 
 void cardmain(void *);
+
+extern TCardManager *gpCardManager;

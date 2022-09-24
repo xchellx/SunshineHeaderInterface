@@ -138,8 +138,8 @@ public:
     static void throwObjFromPointWithRot(TMapObjBase *, const TVec3f &, const TVec3f &, f32, f32);
     static bool waterHitPlane(THitActor *);
 
-    char *mRegisterName;      // 0x00F4
-    u32 _00;                  // 0x00F8
+    const char *mRegisterName;      // 0x00F4
+    u32 mModelLoadFlags;      // 0x00F8
     u16 mState;               // 0x00FC
     u16 _01;                  // 0x00FE
     u16 mSoundIDIndex;        // 0x0100

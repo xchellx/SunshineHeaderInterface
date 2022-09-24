@@ -13,7 +13,7 @@ public:
     virtual void readData(void *, s32) = 0;
 
     void read(void *, s32);
-    void readString(void *, u16);
+    void readString(char *, u16);
     char *readString();
 };
 

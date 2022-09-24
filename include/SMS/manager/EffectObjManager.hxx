@@ -28,3 +28,5 @@ public:
 
     static constexpr size_t DefaultEffectNum = 5;
 };
+
+extern TEffectObjManager *gpEffectObjManager;

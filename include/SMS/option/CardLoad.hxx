@@ -51,3 +51,5 @@ public:
     u32 _1D4[0x5A0 / 4];
     TOptionControl *mOptionControl;  // 0x0774
 };
+
+extern TCardLoad *gpCardLoad;
