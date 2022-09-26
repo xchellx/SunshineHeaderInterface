@@ -1,17 +1,44 @@
 #pragma once
 
 #include <Dolphin/types.h>
+#include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JGeometry.hxx>
 #include <SMS/nozzle/NozzleBase.hxx>
 #include <SMS/nozzle/NozzleTrigger.hxx>
 #include <SMS/params/Params.hxx>
 
 class TMario;
+class TMarioControllerWork;
 
 class TWaterGun {
-
 public:
-    enum NozzleType { Spray, Rocket, Underwater, Yoshi, Hover, Turbo, Sniper };
+    enum TNozzleType : u8 { Spray, Rocket, Underwater, Yoshi, Hover, Turbo, Sniper };
+
+    TWaterGun(TMario *);
+
+    virtual void perform(u32, JDrama::TGraphics *);
+
+    void calcAnimation(JDrama::TGraphics *);
+    void changeBackup();
+    void changeNozzle(TNozzleType, bool);
+    bool damage();
+    void emit();
+    TNozzleType getCurrentNozzle() const;
+    Mtx *getEmitMtx(int);
+    void getEmitPosDirSpeed(int, TVec3f *pos, TVec3f *dir, TVec3f *speed);
+    Mtx *getNozzleMtx();
+    f32 getPressure();
+    f32 getPressureMax();
+    void init();
+    void initInLoadAfter();
+    bool isEmitting();
+    bool isPressureOn();
+    void movement();
+    void rotateProp(f32);
+    void setAmountToRate(f32);
+    void setBaseTRMtx(Mtx);
+    void suck();
+    void triggerPressureMovement(const TMarioControllerWork &);
 
     u32 _00[0x8 / 4];                       // 0x0000
     TMario *mMario;                         // 0x0008

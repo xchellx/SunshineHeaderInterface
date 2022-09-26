@@ -1095,13 +1095,13 @@ public:
     f32 _D0;
     u8 _D4;
     u8 _D5;
-    TBGCheckData *mWallTriangle;        // 0x00D8
-    TBGCheckData *mRoofTriangle;        // 0x00DC
-    TBGCheckData *mFloorTriangle;       // 0x00E0
-    TBGCheckData *mFloorTriangleWater;  // 0x00E4
-    f32 mCeilingAbove;                  // 0x00E8
-    f32 mFloorBelow;                    // 0x00EC
-    f32 mWaterHeight;                   // 0x00F0
+    const TBGCheckData *mWallTriangle;        // 0x00D8
+    const TBGCheckData *mRoofTriangle;        // 0x00DC
+    const TBGCheckData *mFloorTriangle;       // 0x00E0
+    const TBGCheckData *mFloorTriangleWater;  // 0x00E4
+    f32 mCeilingAbove;                        // 0x00E8
+    f32 mFloorBelow;                          // 0x00EC
+    f32 mWaterHeight;                         // 0x00F0
     u16 _F4;
     u16 mLightID;
     u16 _F8;

@@ -10,23 +10,45 @@
 class TMario;
 
 class TYoshi {
-
 public:
     enum Color { GREEN, ORANGE, PURPLE, PINK };
-
     enum State { EGG = 0, DROWNING = 3, DYING = 4, UNMOUNTED = 6, MOUNTED = 8 };
 
+    bool appearFromEgg(const TVec3f &);
+    void calcAnim();
+    void changeAnimation(int id);
+    bool disappear();
+    void doEat(u32 fruitID);
+    void doSearch();
+    void entry();
+    void getEmitPosDir(TVec3f *, TVec3f *) const;
+    J3DFrameCtrl *getFrameCtrl() const;
+    Mtx *getMtxPtrFootL() const;
+    Mtx *getMtxPtrFootR() const;
+    void getOff(bool knockedOff);
+    void init(TMario *);
+    void initInLoadAfter();
+    void kill();
+    void movement();
+    bool onYoshi();
+    void ride();
+    void setEggYoshiPtr(TEggYoshi *);
+    void thinkAnimation();
+    void thinkBtp(int);
+    void thinkHoldOut();
+    void thinkUpper();
+    void viewCalc();
+
     s8 mState;                 // 0x0000
-    u8 _00;                    // 0x0001
     u16 mSubState;             // 0x0002 ??
     u32 _01;                   // 0x0004
     s32 mMaxJuice;             // 0x0008
     s32 mCurJuice;             // 0x000C
     TMario *mMario;            // 0x0010
     u32 _02[0xC / 4];          // 0x0014
-    TVec3f mCoordinates;       // 0x0020
+    TVec3f mPosition;          // 0x0020
     u32 _03[0x8 / 4];          // 0x002C
-    MActor *mAnimationTable;   // 0x0034
+    MActor *mActor;            // 0x0034
     u32 _04[0x4C / 4];         // 0x0038
     f32 mRedComponent;         // 0x0084
     f32 mGreenComponent;       // 0x0088
@@ -45,6 +67,7 @@ public:
     u16 _10;                   // 0x00D2
     u32 _11[0x1C / 4];         // 0x00D4
     TEggYoshi *mEgg;           // 0x00F0
+    u32 _F4[0x30 / 4];
 };
 
 extern JUtility::TColor bodyColor[4];
