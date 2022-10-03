@@ -4,14 +4,16 @@
 #include <Dolphin/types.h>
 
 #define DEVICE_TYPE_GAMECUBE_DVD (('G' << 24) | ('D' << 16) | ('V' << 8) | 'D')
+#define DVD_CHECK_CONFIRMED      1
+#define DVD_CHECK_DENIED         0
 #define DVD_ERROR_CANCELED       -3
 #define DVD_ERROR_COVER_CLOSED   -4
 #define DVD_ERROR_FATAL          -1
 #define DVD_ERROR_IGNORED        -2
 #define DVD_ERROR_OK             0
-#define DVD_RESETHARD            0
-#define DVD_RESETNONE            2
-#define DVD_RESETSOFT            1
+#define DVD_RESET_HARD           0
+#define DVD_RESET_NONE           2
+#define DVD_RESET_SOFT           1
 #define DVD_SPINMOTOR_ACCEPT     0x00004000
 #define DVD_SPINMOTOR_CHECKDISK  0x00008000
 #define DVD_SPINMOTOR_DOWN       0x00000000
@@ -37,8 +39,8 @@ typedef struct DVDFileInfo DVDFileInfo;
 typedef struct DVDCommandBlock DVDCommandBlock;
 
 // our callbacks
-typedef void (*DVDCallback)(s32 result, DVDFileInfo *info);
-typedef void (*DVDCBCallback)(s32 result, DVDCommandBlock *cmdBlock);
+typedef void (*DVDCallback)(u32 result, DVDFileInfo *info);
+typedef void (*DVDCBCallback)(u32 result, DVDCommandBlock *cmdBlock);
 
 typedef struct DVDDiskID {
     char mName[0x04];      // _0
@@ -96,8 +98,10 @@ bool DVDReadAsyncPrio(DVDFileInfo *info, void *address, s32 length, s32 offset, 
                       s32 priority);
 s32 DVDReadPrio(DVDFileInfo *info, void *address, s32 length, s32 offset, s32 priority);
 
+bool DVDPrepareStreamAbsAsync(DVDFileInfo *info, u32 length, u32 offset, DVDCallback cb);
 bool DVDPrepareStreamAsync(DVDFileInfo *info, u32 length, u32 offset, DVDCallback cb);
 bool DVDCancelStreamAsync(DVDCommandBlock *cmdBlock, DVDCBCallback cb);
+u32 DVDCancelStream(DVDCommandBlock *cmdBlock);
 bool DVDStopStreamAtEndAsync(DVDCommandBlock *cmdBlock, DVDCBCallback cb);
 u32 DVDStopStreamAtEnd(DVDCommandBlock *cmdblock);
 bool DVDGetStreamErrorStatusAsync(DVDCommandBlock *cmdblock, DVDCBCallback cb);

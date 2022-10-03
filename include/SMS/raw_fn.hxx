@@ -13,7 +13,6 @@
 #define __init_data                                                  ((int (*)(...))0x80005380)
 #define __init_hardware                                              ((int (*)(...))0x80005440)
 #define __flush_cache                                                ((int (*)(...))0x80005460)
-#define main                                                         ((int (*)(...))0x80005600)
 #define __sinit_main_cpp                                             ((int (*)(...))0x80005644)
 #define __dt__11TBoidLeaderFv                                        ((int (*)(...))0x8000566C)
 #define calcForces__11TBoidLeaderCFPC5TBoid                          ((int (*)(...))0x800056E0)
