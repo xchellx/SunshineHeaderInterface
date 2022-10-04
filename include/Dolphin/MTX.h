@@ -33,7 +33,7 @@ void PSMTXConcat(const Mtx sourceA, const Mtx sourceB, Mtx dest);
 void PSMTXConcatArray(const Mtx sourceA, const Mtx *sourcesB, Mtx *destsB, int count);
 u32 PSMTXInverse(const Mtx source, Mtx dest);
 u32 PSMTXInvXpose(const Mtx source, Mtx dest);
-void PSMTXRotRad(Mtx matrix, u8 axis, f32 radians);
+void PSMTXRotRad(Mtx matrix, f32 radians);
 void PSMTXRotTrig(Mtx matrix, u8 axis, f32 sin, f32 cos);
 void PSMTXRotAxisRad(Mtx matrix, Vec *axis, f32 radians);
 void PSMTXTrans(Mtx matrix, f32 x, f32 y, f32 z);

@@ -25,9 +25,6 @@
 
 class TMario : public TTakeActor, public TDrawSyncCallback {
 public:
-#define CONSTRUCT_PARAM(name, val)                                                                 \
-    name(this, val, JDrama::TNameRef::calcKeyCode(SMS_STRINGIZE(name)), SMS_STRINGIZE(name))
-
     enum E_SIDEWALK_TYPE { NONE, LEFT, RIGHT };
 
     struct JumpSlipRecord {};
@@ -94,9 +91,9 @@ public:
 
     struct TBodyAngleParams : public TParams {
         TBodyAngleParams(const char *prm)
-            : CONSTRUCT_PARAM(mHeadRot, 0.0f), CONSTRUCT_PARAM(mWaistRoll, 0.0f),
-              CONSTRUCT_PARAM(mWaistPitch, 80.0f), CONSTRUCT_PARAM(mWaistRollMax, 0),
-              CONSTRUCT_PARAM(mWaistPitchMax, 1000), CONSTRUCT_PARAM(mWaistAngleChangeRate, 0.07f) {
+            : SMS_TPARAM_INIT(mHeadRot, 0.0f), SMS_TPARAM_INIT(mWaistRoll, 0.0f),
+              SMS_TPARAM_INIT(mWaistPitch, 80.0f), SMS_TPARAM_INIT(mWaistRollMax, 0),
+              SMS_TPARAM_INIT(mWaistPitchMax, 1000), SMS_TPARAM_INIT(mWaistAngleChangeRate, 0.07f) {
             load(prm);
         }
 
@@ -110,7 +107,7 @@ public:
 
     struct TAttackParams : public TParams {
         TAttackParams(const char *prm)
-            : CONSTRUCT_PARAM(mRadius, 100.0f), CONSTRUCT_PARAM(mHeight, 50.0f) {
+            : SMS_TPARAM_INIT(mRadius, 100.0f), SMS_TPARAM_INIT(mHeight, 50.0f) {
             load(prm);
         }
 
@@ -231,9 +228,9 @@ public:
 
     struct THangFenceParams : public TParams {
         THangFenceParams()
-            : CONSTRUCT_PARAM(mMoveSp, 0.1f), CONSTRUCT_PARAM(mAnmRate, 0.5f),
-              CONSTRUCT_PARAM(mRapidTime, 2000), CONSTRUCT_PARAM(mLimitTime, 2400),
-              CONSTRUCT_PARAM(mAnmRapid, 8.0f), CONSTRUCT_PARAM(mDescentSp, 10.0f) {
+            : SMS_TPARAM_INIT(mMoveSp, 0.1f), SMS_TPARAM_INIT(mAnmRate, 0.5f),
+              SMS_TPARAM_INIT(mRapidTime, 2000), SMS_TPARAM_INIT(mLimitTime, 2400),
+              SMS_TPARAM_INIT(mAnmRapid, 8.0f), SMS_TPARAM_INIT(mDescentSp, 10.0f) {
             load("/Mario/Hanging.prm");
         }
 
@@ -246,7 +243,7 @@ public:
     };
 
     struct THangRoofParams : public TParams {
-        THangRoofParams() : CONSTRUCT_PARAM(mAnmMult, 0.3f) { load("/Mario/HangRoof.prm"); }
+        THangRoofParams() : SMS_TPARAM_INIT(mAnmMult, 0.3f) { load("/Mario/HangRoof.prm"); }
 
         TParamT<f32> mAnmMult;
     };
@@ -274,8 +271,8 @@ public:
 
     struct TPullParams : public TParams {
         TPullParams(const char *prm)
-            : CONSTRUCT_PARAM(mPullRateV, 0.3f), CONSTRUCT_PARAM(mPullRateH, 0.05f),
-              CONSTRUCT_PARAM(mOilPullRateV, 0.1f), CONSTRUCT_PARAM(mOilPullRateH, 0.01f) {
+            : SMS_TPARAM_INIT(mPullRateV, 0.3f), SMS_TPARAM_INIT(mPullRateH, 0.05f),
+              SMS_TPARAM_INIT(mOilPullRateV, 0.1f), SMS_TPARAM_INIT(mOilPullRateH, 0.01f) {
             load(prm);
         }
 
@@ -287,9 +284,9 @@ public:
 
     struct TClimbParams : public TParams {
         TClimbParams()
-            : CONSTRUCT_PARAM(mClimbSp, 0.035f), CONSTRUCT_PARAM(mRotateSp, 3.0f),
-              CONSTRUCT_PARAM(mClimbAnmRate, 1.0f / 256.0f), CONSTRUCT_PARAM(mCatchRadius, 100.0f),
-              CONSTRUCT_PARAM(mCatchAngle, 0.8f) {
+            : SMS_TPARAM_INIT(mClimbSp, 0.035f), SMS_TPARAM_INIT(mRotateSp, 3.0f),
+              SMS_TPARAM_INIT(mClimbAnmRate, 1.0f / 256.0f), SMS_TPARAM_INIT(mCatchRadius, 100.0f),
+              SMS_TPARAM_INIT(mCatchAngle, 0.8f) {
             load("/Mario/Bar.prm");
         }
 
@@ -330,8 +327,8 @@ public:
 
     struct THoverParams : public TParams {
         THoverParams()
-            : CONSTRUCT_PARAM(mRotSp, 128), CONSTRUCT_PARAM(mAccelRate, 0.03f),
-              CONSTRUCT_PARAM(mBrake, 0.95f) {
+            : SMS_TPARAM_INIT(mRotSp, 128), SMS_TPARAM_INIT(mAccelRate, 0.03f),
+              SMS_TPARAM_INIT(mBrake, 0.95f) {
             load("/Mario/HHover.prm");
         }
 
@@ -342,9 +339,9 @@ public:
 
     struct TDivingParams : public TParams {
         TDivingParams()
-            : CONSTRUCT_PARAM(mRotSp, 128), CONSTRUCT_PARAM(mGravity, 0.5f),
-              CONSTRUCT_PARAM(mAccelControl, 0.02f), CONSTRUCT_PARAM(mSeaBrake, 0.999f),
-              CONSTRUCT_PARAM(mSeaBrakeY, 0.98f) {
+            : SMS_TPARAM_INIT(mRotSp, 128), SMS_TPARAM_INIT(mGravity, 0.5f),
+              SMS_TPARAM_INIT(mAccelControl, 0.02f), SMS_TPARAM_INIT(mSeaBrake, 0.999f),
+              SMS_TPARAM_INIT(mSeaBrakeY, 0.98f) {
             load("/Mario/Diving.prm");
         }
 
@@ -357,11 +354,11 @@ public:
 
     struct TYoshiParams : public TParams {
         TYoshiParams()
-            : CONSTRUCT_PARAM(mRunYoshiMult, 1.2f), CONSTRUCT_PARAM(mJumpYoshiMult, 1.0f),
-              CONSTRUCT_PARAM(mRotYoshiMult, 1.5f), CONSTRUCT_PARAM(mHeadFront, 80.0f),
-              CONSTRUCT_PARAM(mHeadRadius, 50.0f), CONSTRUCT_PARAM(mHoldOutAccCtrlF, 0.01f),
-              CONSTRUCT_PARAM(mHoldOutAccCtrlB, 0.023f), CONSTRUCT_PARAM(mHoldOutSldCtrl, 0.3f),
-              CONSTRUCT_PARAM(mDecBrake, 1.0f) {
+            : SMS_TPARAM_INIT(mRunYoshiMult, 1.2f), SMS_TPARAM_INIT(mJumpYoshiMult, 1.0f),
+              SMS_TPARAM_INIT(mRotYoshiMult, 1.5f), SMS_TPARAM_INIT(mHeadFront, 80.0f),
+              SMS_TPARAM_INIT(mHeadRadius, 50.0f), SMS_TPARAM_INIT(mHoldOutAccCtrlF, 0.01f),
+              SMS_TPARAM_INIT(mHoldOutAccCtrlB, 0.023f), SMS_TPARAM_INIT(mHoldOutSldCtrl, 0.3f),
+              SMS_TPARAM_INIT(mDecBrake, 1.0f) {
             load("/Mario/Yoshi.prm");
         }
 
@@ -378,11 +375,11 @@ public:
 
     struct TWaterEffectParams : public TParams {
         TWaterEffectParams()
-            : CONSTRUCT_PARAM(mJumpIntoMdlEffectSpY, 10.0f), CONSTRUCT_PARAM(mJumpIntoMinY, 20.0f),
-              CONSTRUCT_PARAM(mJumpIntoMaxY, 50.0f), CONSTRUCT_PARAM(mJumpIntoScaleMin, 0.75f),
-              CONSTRUCT_PARAM(mJumpIntoScaleWidth, 1.0f),
-              CONSTRUCT_PARAM(mRunningRippleSpeed, 30.0f),
-              CONSTRUCT_PARAM(mRunningRippleDepth, 30.0f) {
+            : SMS_TPARAM_INIT(mJumpIntoMdlEffectSpY, 10.0f), SMS_TPARAM_INIT(mJumpIntoMinY, 20.0f),
+              SMS_TPARAM_INIT(mJumpIntoMaxY, 50.0f), SMS_TPARAM_INIT(mJumpIntoScaleMin, 0.75f),
+              SMS_TPARAM_INIT(mJumpIntoScaleWidth, 1.0f),
+              SMS_TPARAM_INIT(mRunningRippleSpeed, 30.0f),
+              SMS_TPARAM_INIT(mRunningRippleDepth, 30.0f) {
             load("/Mario/WaterEffect.prm");
         }
 
@@ -397,11 +394,11 @@ public:
 
     struct TControllerParams : public TParams {
         TControllerParams()
-            : CONSTRUCT_PARAM(mAnalogLRToZeroVal, 30), CONSTRUCT_PARAM(mAnalogLRToMiddleVal, 90),
-              CONSTRUCT_PARAM(mAnalogLRToMaxVal, 150), CONSTRUCT_PARAM(mAnalogLRMiddleVal, 0.1f),
-              CONSTRUCT_PARAM(mStartToWalkLevel, 15.0f), CONSTRUCT_PARAM(mStickRotateTime, 24),
-              CONSTRUCT_PARAM(mLengthMultTimes, 10), CONSTRUCT_PARAM(mLengthMult, 0.935f),
-              CONSTRUCT_PARAM(mSquatRotMidAnalog, 0.7f), CONSTRUCT_PARAM(mSquatRotMidValue, 0.05f) {
+            : SMS_TPARAM_INIT(mAnalogLRToZeroVal, 30), SMS_TPARAM_INIT(mAnalogLRToMiddleVal, 90),
+              SMS_TPARAM_INIT(mAnalogLRToMaxVal, 150), SMS_TPARAM_INIT(mAnalogLRMiddleVal, 0.1f),
+              SMS_TPARAM_INIT(mStartToWalkLevel, 15.0f), SMS_TPARAM_INIT(mStickRotateTime, 24),
+              SMS_TPARAM_INIT(mLengthMultTimes, 10), SMS_TPARAM_INIT(mLengthMult, 0.935f),
+              SMS_TPARAM_INIT(mSquatRotMidAnalog, 0.7f), SMS_TPARAM_INIT(mSquatRotMidValue, 0.05f) {
             load("/Mario/Controller.prm");
         }
 
@@ -445,18 +442,18 @@ public:
 
     struct TDirtyParams : public TParams {
         TDirtyParams()
-            : CONSTRUCT_PARAM(mIncRunning, 0.1f), CONSTRUCT_PARAM(mIncCatching, 0.3f),
-              CONSTRUCT_PARAM(mIncSlipping, 0.2f), CONSTRUCT_PARAM(mDecSwimming, 0.5f),
-              CONSTRUCT_PARAM(mDecWaterHit, 0.2f), CONSTRUCT_PARAM(mDecRotJump, 0.1f),
-              CONSTRUCT_PARAM(mBrakeStartValSlip, 0.99f), CONSTRUCT_PARAM(mBrakeStartValRun, 0.98f),
-              CONSTRUCT_PARAM(mDirtyTimeSlip, 600), CONSTRUCT_PARAM(mDirtyTimeRun, 600),
-              CONSTRUCT_PARAM(mPolSizeSlip, 200.0f), CONSTRUCT_PARAM(mPolSizeRun, 80.0f),
-              CONSTRUCT_PARAM(mPolSizeFootPrint, 200.0f), CONSTRUCT_PARAM(mPolSizeJump, 200.0f),
-              CONSTRUCT_PARAM(mSlopeAngle, 0.99f), CONSTRUCT_PARAM(mDirtyMax, 200.0f),
-              CONSTRUCT_PARAM(mSlipAnmSpeed, 3.0f), CONSTRUCT_PARAM(mSlipRunSp, 0.01f),
-              CONSTRUCT_PARAM(mSlipCatchSp, 0.01f), CONSTRUCT_PARAM(mSlipRotate, 100),
-              CONSTRUCT_PARAM(mSlipCatchRotate, 100), CONSTRUCT_PARAM(mBrakeSlipNoPollute, 0.98f),
-              CONSTRUCT_PARAM(mFogTimeYellow, 240), CONSTRUCT_PARAM(mFogTimeRed, 600) {
+            : SMS_TPARAM_INIT(mIncRunning, 0.1f), SMS_TPARAM_INIT(mIncCatching, 0.3f),
+              SMS_TPARAM_INIT(mIncSlipping, 0.2f), SMS_TPARAM_INIT(mDecSwimming, 0.5f),
+              SMS_TPARAM_INIT(mDecWaterHit, 0.2f), SMS_TPARAM_INIT(mDecRotJump, 0.1f),
+              SMS_TPARAM_INIT(mBrakeStartValSlip, 0.99f), SMS_TPARAM_INIT(mBrakeStartValRun, 0.98f),
+              SMS_TPARAM_INIT(mDirtyTimeSlip, 600), SMS_TPARAM_INIT(mDirtyTimeRun, 600),
+              SMS_TPARAM_INIT(mPolSizeSlip, 200.0f), SMS_TPARAM_INIT(mPolSizeRun, 80.0f),
+              SMS_TPARAM_INIT(mPolSizeFootPrint, 200.0f), SMS_TPARAM_INIT(mPolSizeJump, 200.0f),
+              SMS_TPARAM_INIT(mSlopeAngle, 0.99f), SMS_TPARAM_INIT(mDirtyMax, 200.0f),
+              SMS_TPARAM_INIT(mSlipAnmSpeed, 3.0f), SMS_TPARAM_INIT(mSlipRunSp, 0.01f),
+              SMS_TPARAM_INIT(mSlipCatchSp, 0.01f), SMS_TPARAM_INIT(mSlipRotate, 100),
+              SMS_TPARAM_INIT(mSlipCatchRotate, 100), SMS_TPARAM_INIT(mBrakeSlipNoPollute, 0.98f),
+              SMS_TPARAM_INIT(mFogTimeYellow, 240), SMS_TPARAM_INIT(mFogTimeRed, 600) {
             load("/Mario/Dirty.prm");
         }
 
@@ -488,8 +485,8 @@ public:
 
     struct TMotorParams : public TParams {
         TMotorParams()
-            : CONSTRUCT_PARAM(mMotorReturn, 25), CONSTRUCT_PARAM(mMotorTrample, 8),
-              CONSTRUCT_PARAM(mMotorHipDrop, 15), CONSTRUCT_PARAM(mMotorWall, 6) {
+            : SMS_TPARAM_INIT(mMotorReturn, 25), SMS_TPARAM_INIT(mMotorTrample, 8),
+              SMS_TPARAM_INIT(mMotorHipDrop, 15), SMS_TPARAM_INIT(mMotorWall, 6) {
             load("/Mario/MarioMotor.prm");
         }
 
@@ -501,12 +498,12 @@ public:
 
     struct TParticleParams : public TParams {
         TParticleParams()
-            : CONSTRUCT_PARAM(mMeltInWaterMax, 0.5f), CONSTRUCT_PARAM(mWaveEmitSpeed, 5.0f),
-              CONSTRUCT_PARAM(mWaveAlphaDec, 5), CONSTRUCT_PARAM(mBubbleDepth, 10.0f),
-              CONSTRUCT_PARAM(mBodyBubbleSpMin, 0.0f), CONSTRUCT_PARAM(mBodyBubbleSpMax, 40.0f),
-              CONSTRUCT_PARAM(mBodyBubbleEmitMin, 0.0f), CONSTRUCT_PARAM(mBodyBubbleEmitMax, 0.5f),
-              CONSTRUCT_PARAM(mBubbleToRipple, 0.3f), CONSTRUCT_PARAM(mToroccoWind, 0.001f),
-              CONSTRUCT_PARAM(mToroccoSpark, 0.001f) {
+            : SMS_TPARAM_INIT(mMeltInWaterMax, 0.5f), SMS_TPARAM_INIT(mWaveEmitSpeed, 5.0f),
+              SMS_TPARAM_INIT(mWaveAlphaDec, 5), SMS_TPARAM_INIT(mBubbleDepth, 10.0f),
+              SMS_TPARAM_INIT(mBodyBubbleSpMin, 0.0f), SMS_TPARAM_INIT(mBodyBubbleSpMax, 40.0f),
+              SMS_TPARAM_INIT(mBodyBubbleEmitMin, 0.0f), SMS_TPARAM_INIT(mBodyBubbleEmitMax, 0.5f),
+              SMS_TPARAM_INIT(mBubbleToRipple, 0.3f), SMS_TPARAM_INIT(mToroccoWind, 0.001f),
+              SMS_TPARAM_INIT(mToroccoSpark, 0.001f) {
             load("/Mario/MarioParticle.prm");
         }
 
@@ -525,9 +522,9 @@ public:
 
     struct TEffectParams : public TParams {
         TEffectParams()
-            : CONSTRUCT_PARAM(mDashInc, 1.0f / 3.0f), CONSTRUCT_PARAM(mDashDec, 1.0f / 6.0f),
-              CONSTRUCT_PARAM(mDashMaxBlendInBlur, 180), CONSTRUCT_PARAM(mDashMaxBlendInIris, 180),
-              CONSTRUCT_PARAM(mDashBlendScale, 0.2f) {
+            : SMS_TPARAM_INIT(mDashInc, 1.0f / 3.0f), SMS_TPARAM_INIT(mDashDec, 1.0f / 6.0f),
+              SMS_TPARAM_INIT(mDashMaxBlendInBlur, 180), SMS_TPARAM_INIT(mDashMaxBlendInIris, 180),
+              SMS_TPARAM_INIT(mDashBlendScale, 0.2f) {
             load("/Mario/MarioEffect.prm");
         }
 
@@ -540,12 +537,12 @@ public:
 
     struct TSlipParams : public TParams {
         TSlipParams(const char *prm)
-            : CONSTRUCT_PARAM(mSlipFriction, 0.9f), CONSTRUCT_PARAM(mSlopeAcceleUp, 0.0f),
-              CONSTRUCT_PARAM(mSlopeAcceleDown, 0.0f), CONSTRUCT_PARAM(mSlideAcceleUp, 0.0f),
-              CONSTRUCT_PARAM(mSlideAcceleDown, 0.0f), CONSTRUCT_PARAM(mSlideStopNormal, 15.0f),
-              CONSTRUCT_PARAM(mSlideStopCatch, 15.0f), CONSTRUCT_PARAM(mJumpEnable, 1),
-              CONSTRUCT_PARAM(mMissJump, 1), CONSTRUCT_PARAM(mSlideAngleYSp, 512),
-              CONSTRUCT_PARAM(mStickSlideMult, 0.05) {
+            : SMS_TPARAM_INIT(mSlipFriction, 0.9f), SMS_TPARAM_INIT(mSlopeAcceleUp, 0.0f),
+              SMS_TPARAM_INIT(mSlopeAcceleDown, 0.0f), SMS_TPARAM_INIT(mSlideAcceleUp, 0.0f),
+              SMS_TPARAM_INIT(mSlideAcceleDown, 0.0f), SMS_TPARAM_INIT(mSlideStopNormal, 15.0f),
+              SMS_TPARAM_INIT(mSlideStopCatch, 15.0f), SMS_TPARAM_INIT(mJumpEnable, 1),
+              SMS_TPARAM_INIT(mMissJump, 1), SMS_TPARAM_INIT(mSlideAngleYSp, 512),
+              SMS_TPARAM_INIT(mStickSlideMult, 0.05) {
             load(prm);
         }
 
@@ -564,9 +561,9 @@ public:
 
     struct TUpperBodyParams : public TParams {
         TUpperBodyParams()
-            : CONSTRUCT_PARAM(mPumpWaitTime, 10), CONSTRUCT_PARAM(mPumpAnmSpeed, 0.01f),
-              CONSTRUCT_PARAM(mHoverHeadAngle, -8192), CONSTRUCT_PARAM(mFeelDeepHeadAngle, 8192),
-              CONSTRUCT_PARAM(mFrontWallHeadAngle, -8192) {
+            : SMS_TPARAM_INIT(mPumpWaitTime, 10), SMS_TPARAM_INIT(mPumpAnmSpeed, 0.01f),
+              SMS_TPARAM_INIT(mHoverHeadAngle, -8192), SMS_TPARAM_INIT(mFeelDeepHeadAngle, 8192),
+              SMS_TPARAM_INIT(mFrontWallHeadAngle, -8192) {
             load("/Mario/UpperBody.prm");
         }
 
@@ -579,10 +576,10 @@ public:
 
     struct TDmgEnemyParams : public TParams {
         TDmgEnemyParams(const char *prm)
-            : CONSTRUCT_PARAM(mDamage, 1), CONSTRUCT_PARAM(mDownType, 1),
-              CONSTRUCT_PARAM(mWaterEmit, 0), CONSTRUCT_PARAM(mMotor, 25),
-              CONSTRUCT_PARAM(mMinSpeed, 16.0f), CONSTRUCT_PARAM(mDirty, 0.0f),
-              CONSTRUCT_PARAM(mInvincibleTime, 300) {
+            : SMS_TPARAM_INIT(mDamage, 1), SMS_TPARAM_INIT(mDownType, 1),
+              SMS_TPARAM_INIT(mWaterEmit, 0), SMS_TPARAM_INIT(mMotor, 25),
+              SMS_TPARAM_INIT(mMinSpeed, 16.0f), SMS_TPARAM_INIT(mDirty, 0.0f),
+              SMS_TPARAM_INIT(mInvincibleTime, 300) {
             load(prm);
         }
 
@@ -597,10 +594,10 @@ public:
 
     struct TDemoParams : public TParams {
         TDemoParams()
-            : CONSTRUCT_PARAM(mWarpInBallsDispTime, 6), CONSTRUCT_PARAM(mWarpInBallsTime, 70),
-              CONSTRUCT_PARAM(mWarpInCapturedTime, 120), CONSTRUCT_PARAM(mWarpInTremble, 15.0f),
-              CONSTRUCT_PARAM(mWarpInVecBase, 0.3f), CONSTRUCT_PARAM(mWarpTransTremble, 50.0f),
-              CONSTRUCT_PARAM(mReadRotSp, 1024) {
+            : SMS_TPARAM_INIT(mWarpInBallsDispTime, 6), SMS_TPARAM_INIT(mWarpInBallsTime, 70),
+              SMS_TPARAM_INIT(mWarpInCapturedTime, 120), SMS_TPARAM_INIT(mWarpInTremble, 15.0f),
+              SMS_TPARAM_INIT(mWarpInVecBase, 0.3f), SMS_TPARAM_INIT(mWarpTransTremble, 50.0f),
+              SMS_TPARAM_INIT(mReadRotSp, 1024) {
             load("/Mario/AutoDemo.prm");
         }
 
@@ -614,15 +611,15 @@ public:
     };
 
     struct TSoundParams : public TParams {
-        TSoundParams() : CONSTRUCT_PARAM(mStartFallVoiceSpeed, 60.0f) { load("/Mario/Sound.prm"); }
+        TSoundParams() : SMS_TPARAM_INIT(mStartFallVoiceSpeed, 60.0f) { load("/Mario/Sound.prm"); }
 
         TParamT<f32> mStartFallVoiceSpeed;
     };
 
     struct TOptionParams : public TParams {
         TOptionParams()
-            : CONSTRUCT_PARAM(mZ, -1000.0f), CONSTRUCT_PARAM(mXMin, 846.0f),
-              CONSTRUCT_PARAM(mXMax, 2000.0f) {
+            : SMS_TPARAM_INIT(mZ, -1000.0f), SMS_TPARAM_INIT(mXMin, 846.0f),
+              SMS_TPARAM_INIT(mXMax, 2000.0f) {
             load("/Mario/Option.prm");
         }
 
@@ -630,8 +627,6 @@ public:
         TParamT<f32> mXMin;
         TParamT<f32> mXMax;
     };
-
-#undef CONSTRUCT_PARAM
 
     enum State : u32 {
         STATE_NUMBER          = 0x0000000F,

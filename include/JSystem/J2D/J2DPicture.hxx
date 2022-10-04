@@ -39,9 +39,8 @@ public:
     void setBlendKonstColor();
     void setBlendKonstAlpha();
 
-    u32 *_EC;
-    u8 _F0[0xFC - 0xF0];
-    u8 _FC;  // padding?
+    JUTTexture *mTextures[4];
+    u8 mTextureCount;
     u8 _FD;  // ^^
     u8 _FE;  // ^^
     u8 _FF;  // ^^

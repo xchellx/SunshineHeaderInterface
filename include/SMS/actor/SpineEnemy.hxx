@@ -6,19 +6,16 @@
 #include <SMS/params/Params.hxx>
 
 struct TSpineEnemyParams : TParams {
-#define CONSTRUCT_PARAM(name, val)                                                                 \
-    name(this, val, JDrama::TNameRef::calcKeyCode(SMS_STRINGIZE(name)), SMS_STRINGIZE(name))
 
     TSpineEnemyParams(const char *prm)
-        : TParams(prm), CONSTRUCT_PARAM(mSLHeadHeight, 120.0f),
-          CONSTRUCT_PARAM(mSLBodyRadius, 30.0f), CONSTRUCT_PARAM(mSLWallRadius, 50.0f),
-          CONSTRUCT_PARAM(mSLClipRadius, 300.0f), CONSTRUCT_PARAM(mSLFarClip, 10000.0f),
-          CONSTRUCT_PARAM(mSLHitPointMax, 1), CONSTRUCT_PARAM(mSLInstanceNum, 100),
-          CONSTRUCT_PARAM(mSLActiveEnemyNum, 10) {
+        : TParams(prm), SMS_TPARAM_INIT(mSLHeadHeight, 120.0f),
+          SMS_TPARAM_INIT(mSLBodyRadius, 30.0f), SMS_TPARAM_INIT(mSLWallRadius, 50.0f),
+          SMS_TPARAM_INIT(mSLClipRadius, 300.0f), SMS_TPARAM_INIT(mSLFarClip, 10000.0f),
+          SMS_TPARAM_INIT(mSLHitPointMax, 1), SMS_TPARAM_INIT(mSLInstanceNum, 100),
+          SMS_TPARAM_INIT(mSLActiveEnemyNum, 10) {
         load(prm);
     }
 
-#undef CONSTRUCT_PARAM
     TParamRT<f32> mSLHeadHeight;
     TParamRT<f32> mSLBodyRadius;
     TParamRT<f32> mSLWallRadius;

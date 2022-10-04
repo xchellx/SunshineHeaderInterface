@@ -54,3 +54,6 @@ public:
 
     inline void set(T param){};
 };
+
+#define SMS_TPARAM_INIT(name, val)                                                                 \
+    name(this, val, JDrama::TNameRef::calcKeyCode(SMS_STRINGIZE(name)), SMS_STRINGIZE(name))
