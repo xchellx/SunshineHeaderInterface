@@ -80,8 +80,8 @@ namespace JGadget {
                 return *this;
             }
 
-            TNode_ *operator->() const { return mNode; }
-            TNode_ &operator*() { return *mNode; }
+            _T operator->() const { return mNode->mItem; }
+            _T &operator*() { return mNode->mItem; }
 
             TNode_ *mNode;
         };
@@ -97,8 +97,8 @@ namespace JGadget {
         iterator end() { return {reinterpret_cast<TNode_ *>(&mFirst)}; }
 
         iterator erase(iterator iter) {
-            TNode_ *next = iter->mNext;
-            TNode_ *prev = iter->mPrev;
+            TNode_ *next = iter.mNode->mNext;
+            TNode_ *prev = iter.mNode->mPrev;
 
             prev->mNext = next;
             next->mPrev = prev;

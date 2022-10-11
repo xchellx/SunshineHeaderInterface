@@ -3,6 +3,7 @@
 #include <Dolphin/types.h>
 #include <SMS/macros.h>
 
+#include <JSystem/JDrama/JDRNameRef.hxx>
 #include <JSystem/JKernel/JKRMemArchive.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 #include <SMS/params/BaseParam.hxx>

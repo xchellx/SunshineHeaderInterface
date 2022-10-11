@@ -56,7 +56,7 @@ class J2DPane {
 public:
     J2DPane();
     J2DPane(J2DPane *, s16, bool, u32, const JUTRect &);
-    J2DPane(s16, u32, const JUTRect &);
+    J2DPane(u16, u32, const JUTRect &);
     J2DPane(J2DPane *, JSURandomInputStream *, bool);
     virtual ~J2DPane();
 

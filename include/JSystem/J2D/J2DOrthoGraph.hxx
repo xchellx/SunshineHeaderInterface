@@ -6,7 +6,7 @@
 
 class J2DOrthoGraph : public J2DGrafContext {
 public:
-    J2DOrthoGraph(u32, u32, u32, u32);
+    J2DOrthoGraph(int x, int y, int w, int h);
     J2DOrthoGraph(const JUTRect &);
     ~J2DOrthoGraph();
 

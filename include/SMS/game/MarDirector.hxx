@@ -4,6 +4,7 @@
 
 #include <JSystem/JDrama/JDRActor.hxx>
 #include <JSystem/JDrama/JDRDirector.hxx>
+#include <JSystem/JDrama/JDRDisplay.hxx>
 #include <JSystem/JGeometry.hxx>
 #include <JSystem/JStage/JSGObject.hxx>
 
@@ -21,16 +22,18 @@
 #include <SMS/game/GCConsole2.hxx>
 #include <SMS/game/PerformList.hxx>
 
+#include <SMS/Player/MarioGamePad.hxx>
+
 class TMarDirector : public JDrama::TDirector {
 public:
     enum Status {
-        INTRO_INIT    = 0,
-        INTRO_PLAYING = 1,
-        GAME_STARTING = 2,
-        NORMAL        = 4,
-        PAUSE_MENU    = 5,
-        STATE_FREEZE  = 10,
-        SAVE_CARD     = 11
+        STATE_INTRO_INIT    = 0,
+        STATE_INTRO_PLAYING = 1,
+        STATE_GAME_STARTING = 2,
+        STATE_NORMAL        = 4,
+        STATE_PAUSE_MENU    = 5,
+        STATE_FREEZE        = 10,
+        STATE_SAVE_CARD     = 11
     };
 
     enum State { WARP_OUT = 2 };
@@ -66,7 +69,11 @@ public:
     void loadParticle();
     void initLoadParticle();
     void loadResource();
+    s32 setup(JDrama::TDisplay *, TMarioGamePad **, u8 areaID, u8 episodeID);
 
+    TMarioGamePad **mGamePads;
+    TPerformList *mPerformListGX;
+    TPerformList *mPerformListSilhouette;
     TPerformList *mPerformListGXPost;      // 0x0024
     TPerformList *mPerformListMovement;    // 0x0028
     TPerformList *mPerformListCalcAnim;    // 0x002C
@@ -107,6 +114,8 @@ public:
     TDemoCannon *mCannonObj;   // 0x0254
     u32 _15;                   // 0x0258
     TShine *mCollectedShine;   // 0x025C
+    u32 _260;
+    u32 _264;
 };
 
 extern TMarDirector *gpMarDirector;

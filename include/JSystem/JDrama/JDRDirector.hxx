@@ -10,6 +10,7 @@ namespace JDrama {
 
     class TDirector : public TNameRef, public JStage::TSystem {
     public:
+        TDirector(const char *name) : TNameRef(name), mViewObjPtrList(nullptr), _14(0) {}
         virtual ~TDirector();
 
         virtual TDirector *searchF(u16, const char *);
@@ -19,9 +20,6 @@ namespace JDrama {
 
         u32 *mViewObjPtrList;  // TViewObjPtrList *
         u32 _14;
-        JUTGamePad **mGamePads;
-        TPerformList *mPerformListGX;
-        TPerformList *mPerformListSilhouette;
     };
 
 }  // namespace JDrama

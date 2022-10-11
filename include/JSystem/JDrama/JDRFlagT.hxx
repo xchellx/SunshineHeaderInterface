@@ -4,12 +4,11 @@ namespace JDrama {
 
     template <typename T> class TFlagT {
     public:
-        TFlagT(T val) : mFlag(val) {}
+        TFlagT(T val) : mVal(val) {}
         TFlagT(const TFlagT &);
         void set(T);
 
-    private:
-        T mFlag;
+        T mVal;
     };
 
 }  // namespace JDrama

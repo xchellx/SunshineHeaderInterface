@@ -4,6 +4,23 @@
 #include <Dolphin/PPCArch.h>
 #include <Dolphin/printf.h>
 
+#if defined(__GNUC__) || defined(__clang__)
+#define SMS_ALIGN(x) __attribute__((aligned(x)))
+#elif defined(_MSC_VER)
+#define SMS_ALIGN(x) __declspec(align(x))
+#else
+#error "Unknown compiler; can't define SMS_ALIGN"
+#endif
+
+#if defined(__GNUC__) || defined(__clang__)
+#define SMS_ALIGNOF(X) __alignof__(X)
+#elif defined(_MSC_VER)
+#define SMS_ALIGNOF(X) __alignof(X)
+#else
+#error "Unknown compiler; can't define ALIGNOF"
+#endif
+
+
 #define SMS_STRINGIZE_(x) #x
 #define SMS_STRINGIZE(x)  SMS_STRINGIZE_(x)
 

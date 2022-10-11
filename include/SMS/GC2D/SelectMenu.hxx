@@ -3,7 +3,7 @@
 #include <JSystem/J2D/J2DPicture.hxx>
 #include <JSystem/J2D/J2DSetScreen.hxx>
 #include <JSystem/J2D/J2DTextBox.hxx>
-#include <JSystem/J2D/J2DTexture.hxx>
+#include <JSystem/JUtility/JUTTexture.hxx>
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
 #include <SMS/G2D/BoundPane.hxx>
@@ -39,11 +39,11 @@ public:
     TExPane *m0_0;             // 0x0068
     J2DTextBox *m0ttxTextBox;  // 0x006C
 
-    J2DTexture *mShineCountNumberTex[8];  // 0x0080
+    JUTTexture *mShineCountNumberTex[8];  // 0x0080
     J2DPane *mI_0;                        // 0x00A0
     J2DPane *mSc_0;                       // 0x00A4
 
-    J2DTexture *mCoinCountNumberTex[10];  // 0x00A8
+    JUTTexture *mCoinCountNumberTex[10];  // 0x00A8
 
     J2DPane *mA_l;  // 0x0104
     J2DPane *mA_r;  // 0x0108

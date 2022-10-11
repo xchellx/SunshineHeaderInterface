@@ -20,7 +20,6 @@ namespace JDrama {
         virtual f32 JSGGetProjectionFar() const;
         virtual void JSGSetProjectionFar(f32 projectionFar);
 
-    private:
         u16 mFlag;            // 24
         f32 mProjectionNear;  // 28
         f32 mProjectionFar;   // 2C
@@ -45,7 +44,6 @@ namespace JDrama {
         virtual void JSGGetViewTargetPosition(Vec *) const;
         virtual void JSGSetViewTargetPosition(const Vec &targetPos);
 
-    private:
         TVec3f mUpVector;       // 30
         TVec3f mTargetPos;      // 3C
         f32 mProjectionFovy;    // 48
@@ -66,7 +64,6 @@ namespace JDrama {
         virtual f32 JSGGetProjectionAspect() const;
         virtual void JSGSetProjectionAspect(f32 projectionAspect);
 
-    private:
         f32 mProjectionFovy;    // 30
         f32 mProjectionAspect;  // 34
     };
@@ -83,7 +80,6 @@ namespace JDrama {
         virtual f32 *JSGGetProjectionField() const;
         virtual void JSGSetProjectionField(const f32 *projectionField);
 
-    private:
         JGeometry::TVec4<f32> mProjectionField;  // 30
     };
 

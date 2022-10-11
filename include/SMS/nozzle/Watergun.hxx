@@ -40,7 +40,7 @@ public:
     void suck();
     void triggerPressureMovement(const TMarioControllerWork &);
 
-    u32 _00[0x8 / 4];                       // 0x0000
+    u32 _04;                                // 0x0000
     TMario *mMario;                         // 0x0008
     TNozzleBase mNozzleDeform;              // 0x000C
     TNozzleTrigger mNozzleDeformBomb;       // 0x0390

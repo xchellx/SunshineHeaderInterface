@@ -26,6 +26,7 @@ struct TMarioControllerWork {
 
 class TMarioGamePad : public JUTGamePad {
 public:
+    TMarioGamePad(EPadPort port) : JUTGamePad(port) {}
     virtual ~TMarioGamePad();
 
     void onNeutralMarioKey();
@@ -63,4 +64,6 @@ public:
     u16 _E6;  // padding?
     u32 _E8;
     u32 _EC;  // padding?
+
+    static u16 mResetFlag;
 };

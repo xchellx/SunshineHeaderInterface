@@ -10,15 +10,28 @@
 #include <SMS/screen/SMSFader.hxx>
 
 class TApplication {
+public:
+    enum Context {
+        CONTEXT_DIRECT_LOAD_LOOP,
+        CONTEXT_DIRECT_MAIN_LOOP,
+        CONTEXT_GAME_BOOT,
+        CONTEXT_GAME_BOOT_LOGO,
+        CONTEXT_GAME_INTRO,
+        CONTEXT_DIRECT_STAGE,
+        CONTEXT_DIRECT_MOVIE,
+        CONTEXT_GAME_SHUTDOWN,
+        CONTEXT_DIRECT_SHINE_SELECT,
+        CONTEXT_DIRECT_LEVEL_SELECT
+    };
 
 public:
     TApplication();
 
-    void checkAdditionalMovie();
+    bool checkAdditionalMovie();
     void crTimeAry();
     void drawDVDErr();
     void finalize();
-    void gameLoop();
+    u8 gameLoop();
     void initialize();
     void initialize_bootAfter();
     void initialize_nlogoAfter();
@@ -26,8 +39,8 @@ public:
     void proc();
     void setupThreadFuncLogo();
 
-    u32 _00;                         // 0x0000
-    TMarDirector *mMarDirector;      // 0x0004
+    TApplication *mApplication;      // 0x0000
+    JDrama::TDirector *mDirector;    // 0x0004
     u8 mContext;                     // 0x0008
     TGameSequence mPrevScene;        // 0x000A
     TGameSequence mCurrentScene;     // 0x000E
@@ -40,8 +53,10 @@ public:
     TMarioGamePad *mGamePad4;        // 0x002C
     AreaEpisodeArray *mStringPaths;  // 0x0030
     TSMSFader *mFader;               // 0x0034
-    u32 _04[0x8 / 4];                // 0x0038
+    u32 _38;
+    u32 _3C;
     JKRHeap *mCurrentHeap;           // 0x0040
+    u16 _44;
 };
 
 void SetupThreadFuncLogo(void *);
