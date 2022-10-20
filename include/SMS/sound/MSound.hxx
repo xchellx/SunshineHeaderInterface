@@ -5,7 +5,7 @@
 #include <JSystem/JAudio/JAIBasic.hxx>
 #include <JSystem/JKernel/JKRHeap.hxx>
 
-enum MS_SCENE_WAVE {};
+enum MS_SCENE_WAVE { MS_WAVE_DEFAULT = 256, MS_WAVE_DELFINO_PLAZA = 513 };
 
 class MSound : public JAIBasic {
 public:

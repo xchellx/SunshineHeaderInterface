@@ -3,7 +3,7 @@
 #include <Dolphin/types.h>
 #include <SMS/params/Params.hxx>
 
-#include <SMS/camera/CamSaveKindParam.hxx>
+#include <SMS/Camera/CamSaveKindParam.hxx>
 
 struct TCameraKindParam {
     TCameraKindParam(const TCamSaveKindParam &params) { copySaveParam(params); }

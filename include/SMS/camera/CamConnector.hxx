@@ -1,10 +1,10 @@
 #pragma once
 
-#include <JSystem/JDrama/JDRViewConnector.hxx>
+#include <JSystem/JDrama/JDRDStage.hxx>
 
-class TCamConnector : public JDrama::TViewConnector {
+class TCamConnecter : public JDrama::TViewConnecter {
 public:
-    virtual ~TCamConnector();
+    ~TCamConnecter() override;
 
-    virtual void perform(u32, JDrama::TGraphics *);
+    void perform(u32, JDrama::TGraphics *) override;
 };

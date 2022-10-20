@@ -6,7 +6,9 @@
 
 class J2DScreen : public J2DPane {
 public:
-    inline J2DScreen() : J2DPane() {}
+    inline J2DScreen() : J2DPane(), mOverlayColor({0, 0, 0, 0}) {}
+    inline J2DScreen(u16 id, u32 magic, const JUTRect &rect)
+        : J2DPane(id, magic, rect), mOverlayColor({0, 0, 0, 0}) {}
     virtual ~J2DScreen();
 
     virtual void drawSelf(int, int, Mtx *);
@@ -20,7 +22,6 @@ public:
     void draw(int x, int y, const J2DGrafContext *context);
 
     u8 _EC;
-    u32 _D0;
-    u8 _D4[0xF0 - 0xD4];
-    u32 _F0;
+    u16 _EE;
+    JUtility::TColor mOverlayColor;
 };

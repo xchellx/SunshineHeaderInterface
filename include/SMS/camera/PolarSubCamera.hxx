@@ -3,9 +3,9 @@
 #include <Dolphin/types.h>
 #include <JSystem/JDrama/JDRCamera.hxx>
 #include <JSystem/JDrama/JDRGraphics.hxx>
-#include <SMS/camera/CameraKindParam.hxx>
-#include <SMS/camera/CameraInbetween.hxx>
-#include <SMS/camera/CameraMapTool.hxx>
+#include <SMS/Camera/CameraKindParam.hxx>
+#include <SMS/Camera/CameraInbetween.hxx>
+#include <SMS/Camera/CameraMapTool.hxx>
 #include <SMS/npc/BaseNPC.hxx>
 
 class CPolarSubCamera : public JDrama::TLookAtCamera {

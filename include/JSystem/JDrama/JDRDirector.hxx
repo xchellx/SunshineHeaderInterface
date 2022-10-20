@@ -10,16 +10,16 @@ namespace JDrama {
 
     class TDirector : public TNameRef, public JStage::TSystem {
     public:
-        TDirector(const char *name) : TNameRef(name), mViewObjPtrList(nullptr), _14(0) {}
+        TDirector() : TNameRef("<TDirector>"), mViewObjRoot(nullptr), mViewObjStageGroup(nullptr) {}
         virtual ~TDirector();
 
         virtual TDirector *searchF(u16, const char *);
+        virtual s32 direct();
         virtual JStage::TObject *JSGFindObject(const char *,
                                                JStage::TEObject) const;  // JStage::TEObject
-        virtual s32 direct();
 
-        u32 *mViewObjPtrList;  // TViewObjPtrList *
-        u32 _14;
+        TViewObj *mViewObjRoot;
+        TViewObj *mViewObjStageGroup;
     };
 
 }  // namespace JDrama

@@ -22,13 +22,11 @@ enum J2DWrapMode {
 
 class J2DPicture : public J2DPane {
 public:
-    J2DPicture(u32 id, const JUTRect &rect) : J2DPane() {
-        mPalette = nullptr;
-        mFillColor = {255, 255, 255, 255};
-        _140       = {255, 255, 255, 255};
-        _4         = 18;
-        mID        = id;
-        mRect      = rect;
+    J2DPicture(u32 magic, const JUTRect &rect)
+        : J2DPane(18, magic, rect), mPalette(nullptr), mColorMask({255, 255, 255, 255}),
+          mColorOverlay({0, 0, 0, 0}), mTextureCount(0), mVertexColors() {
+        mTypeMagic = 'PIC1';
+        mBinding   = BindingBottom | BindingTop | BindingRight | BindingLeft;
         setBlendKonstColor();
         setBlendKonstAlpha();
     }
@@ -62,14 +60,14 @@ public:
     f32 _11C;
     f32 _120;
     JUTPalette *mPalette;
-    u32 _128;
+    u32 mBinding;
     u32 _12C;
     u8 _130;
     u32 _134;
     u32 _138;
-    JUtility::TColor mFillColor;
-    JUtility::TColor _140;
-    JUtility::TColor _144[4];
+    JUtility::TColor mColorMask;
+    JUtility::TColor mColorOverlay;
+    JUtility::TColor mVertexColors[4];
     JUtility::TColor _154;
     JUtility::TColor _158;
 };

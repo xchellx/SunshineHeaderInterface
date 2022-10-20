@@ -62,6 +62,9 @@ public:
 void SetupThreadFuncLogo(void *);
 void SetupThreadFuncBoot(void *);
 
+f32 SMSGetAnmFrameRate();
+f32 SMSGetVSyncTimesPerSec();
+
 extern TApplication gpApplication;
 
 extern JUTConsole *sReportConsole;
@@ -76,3 +79,6 @@ extern void *bufStageArcBin;
 extern void *spGameHeapBlock;
 extern void *gArbkConsole;
 extern void *gArbkGuide;
+
+extern OSThread gSetupThread;
+extern char *gpSetupThreadStack;

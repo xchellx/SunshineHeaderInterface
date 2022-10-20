@@ -10,7 +10,7 @@ public:
     ~JSUPtrLink();
 
     void *mItemPtr;
-    JSUPtrList *mParentList;  // _4
+    JSUPtrList *mParentList;
     JSUPtrLink *mPrevLink;
     JSUPtrLink *mNextLink;
 };

@@ -6,10 +6,17 @@
 #include <JSystem/JStage/JSGCamera.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 
+#include "module.hxx"
+
 namespace JDrama {
 
     class TCamera : public TPlacement, public JStage::TCamera {
     public:
+        TCamera(f32 near, f32 far, const char *name) : TPlacement(name) {
+            mFlag           = 0;
+            mProjectionNear = near;
+            mProjectionFar  = far;
+        }
         virtual ~TCamera();
 
         virtual u32 getType() const;
@@ -52,6 +59,9 @@ namespace JDrama {
 
     class TPolarCamera : public TCamera {
     public:
+        TPolarCamera(const char *name)
+            : TCamera(50.0f, 10000.0f, name), mProjectionFovy(45.0f), mProjectionAspect(1.3333334f),
+              _38(0.0f, 0.0f, 0.0f), _44(1200.0f) {}
         virtual ~TPolarCamera();
 
         virtual void perform(u32, TGraphics *);
@@ -66,10 +76,20 @@ namespace JDrama {
 
         f32 mProjectionFovy;    // 30
         f32 mProjectionAspect;  // 34
+        TVec3f _38;
+        f32 _44;
     };
 
     class TOrthoProj : public TCamera {
     public:
+        TOrthoProj() : TCamera(-100.0f, 100.0f, "<TOrthoProj>") {
+            mProjectionField[0] = -BetterSMS::getScreenRatioAdjustX();
+            //mProjectionField[0] = 0.0f;
+            mProjectionField[1] = 16.0f;
+            mProjectionField[2] = BetterSMS::getScreenWidth();
+            //mProjectionField[2] = 600.0f;
+            mProjectionField[3] = 464.0f;
+        }
         virtual ~TOrthoProj();
 
         virtual void load(JSUMemoryInputStream &stream);
@@ -80,7 +100,7 @@ namespace JDrama {
         virtual f32 *JSGGetProjectionField() const;
         virtual void JSGSetProjectionField(const f32 *projectionField);
 
-        JGeometry::TVec4<f32> mProjectionField;  // 30
+        f32 mProjectionField[4];  // 30
     };
 
 }  // namespace JDrama

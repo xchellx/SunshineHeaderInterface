@@ -5,7 +5,10 @@
 
 class JUTFont {
 public:
-    class TWidth {};
+    struct TWidth {
+        char mMargin;
+        char mWidth;
+    };
 
     JUTFont();
     virtual ~JUTFont();

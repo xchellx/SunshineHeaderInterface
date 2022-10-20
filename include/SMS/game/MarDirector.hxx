@@ -49,7 +49,7 @@ public:
     void nextStateInitialize(s8);
     void setMario();
     void currentStateFinalize(u8);
-    void changeState();
+    s32 changeState();
     void fireStreamingMovie(s8);
     void fireEndDemoCamera();
     void fireStartDemoCamera(const char *, const TVec3f *, s32, f32, bool, s32 (*)(u32, u32), u32,

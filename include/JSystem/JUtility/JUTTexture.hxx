@@ -6,7 +6,55 @@
 #include <JSystem/JKernel/JKRFileLoader.hxx>
 #include <JSystem/JUtility/JUTPalette.hxx>
 
-class ResTIMG {};
+struct ResTIMG {
+    enum EFormat {
+        I4 = 0,
+        I8 = 1,
+        IA4 = 2,
+        IA8 = 3,
+        RGB565 = 4,
+        RGB5A3 = 5,
+        RGBA32 = 6,
+        C4 = 8,
+        C8 = 9,
+        C14X2 = 10,
+        CMPR = 14
+    };
+
+    enum EWrapMode {
+        ClampToEdge,
+        Repeat,
+        MirroredRepeat
+    };
+
+    enum EFilterMode {
+        Nearest,
+        Linear,
+        NearestMipmapNearest,
+        NearestMipmapLinear,
+        LinearMipmapNearest,
+        LinearMipmapLinear
+    };
+
+    u8 mFormat;
+    u8 mAlphaSetting;
+    u16 mWidth;
+    u16 mHeight;
+    u8 mWrapSMode;
+    u8 mWrapTMode;
+    bool mHasPalette;
+    u8 mPaletteFormat;
+    u16 mPaletteColors;
+    s32 mPaletteOffset;
+    u32 _10;
+    u8 mFilterMinMode;
+    u8 mFilterMagMode;
+    u8 mLODMin;
+    u8 mLODMag;
+    u8 mMipMaps;
+    u16 mLODBias;
+    s32 mTextureOffset;
+};
 
 class JUTTexture {
 public:
