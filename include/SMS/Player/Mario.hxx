@@ -696,7 +696,8 @@ public:
         STATE_G_POUND         = 0x008008A9,  // Ground pounding
         STATE_NPC_PUTDOWN     = 0x80000387,
         STATE_NPC_THROW       = 0x80000588,
-        STATE_NPC_JUMPTHROW   = 0x820008AB
+        STATE_NPC_JUMPTHROW   = 0x820008AB,
+        STATE_NPC_BOUNCE      = 0x02000890
     };
 
     enum Status : u32 {

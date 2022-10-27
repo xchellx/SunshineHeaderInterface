@@ -16,7 +16,7 @@ namespace JDrama {
 
         void testPerform(u32, TGraphics *);
 
-        TFlagT<u16> mViewFlags;  // 0x000C
+        u16 mPerformFlags;  // 0x000C
     };
 
 }  // namespace JDrama

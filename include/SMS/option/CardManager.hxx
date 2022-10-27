@@ -29,7 +29,7 @@ public:
         EXIT
     };
 
-    enum Blocks { A, B, C };
+    enum Blocks { BLOCK_A, BLOCK_B, BLOCK_C };
 
     class TCriteria {
     public:
@@ -60,10 +60,10 @@ public:
     TCardBookmarkInfo *getBookmarkInfos_();
     void getBookmarkInfos();
     s32 getLastStatus();
-    JSUMemoryInputStream *getOptionReadStream(JSUMemoryInputStream *);
-    JSUMemoryOutputStream *getOptionWriteStream(JSUMemoryOutputStream *);
-    JSUMemoryInputStream *getReadStream(JSUMemoryInputStream *);
-    JSUMemoryOutputStream *getWriteStream(JSUMemoryOutputStream *);
+    void getOptionReadStream(JSUMemoryInputStream *);
+    void getOptionWriteStream(JSUMemoryOutputStream *);
+    void getReadStream(JSUMemoryInputStream *);
+    void getWriteStream(JSUMemoryOutputStream *);
     s32 mount_(bool);
     s32 open_(CARDFileInfo *);
     s32 probe();
@@ -97,5 +97,6 @@ public:
 };
 
 void cardmain(void *);
+void detachCallback(s32, s32);
 
 extern TCardManager *gpCardManager;

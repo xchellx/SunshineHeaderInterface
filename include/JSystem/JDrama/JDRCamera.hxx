@@ -86,7 +86,7 @@ namespace JDrama {
             mProjectionField[0] = -BetterSMS::getScreenRatioAdjustX();
             //mProjectionField[0] = 0.0f;
             mProjectionField[1] = 16.0f;
-            mProjectionField[2] = BetterSMS::getScreenWidth();
+            mProjectionField[2] = BetterSMS::getScreenRenderWidth();
             //mProjectionField[2] = 600.0f;
             mProjectionField[3] = 464.0f;
         }

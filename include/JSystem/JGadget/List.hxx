@@ -104,7 +104,7 @@ namespace JGadget {
                 return *this;
             }
 
-            const _T operator->() const { return mNode->mItem; }
+            const _T *operator->() const { return mNode->mItem; }
             const _T &operator*() { return mNode->mItem; }
 
             const TNode_ *mNode;

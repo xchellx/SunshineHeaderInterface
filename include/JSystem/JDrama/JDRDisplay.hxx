@@ -16,6 +16,7 @@ namespace JDrama {
 
         bool _00;
         GXRenderModeObj mRenderObj;
+        u8 _40[0xC];
         u16 mRetraceCount;
         u16 _4E;
         u32 _50[0x10 / 4];

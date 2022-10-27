@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Dolphin/GX_types.h>
+#include <Dolphin/OS.h>
 #include <Dolphin/types.h>
 
 /*!

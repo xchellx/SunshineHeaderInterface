@@ -2,6 +2,7 @@
 #define VI_H
 
 #include <Dolphin/types.h>
+#include <Dolphin/OS.h>
 
 /*!
  * @}
@@ -33,6 +34,8 @@ u32 VIGetNextField();
 u32 VIGetCurrentLine();
 u32 VIGetDTVStatus();
 u32 VIGetTvFormat();
+
+extern OSThreadQueue retraceQueue;
 
 #ifdef __cplusplus
 }
