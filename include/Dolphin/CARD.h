@@ -79,7 +79,7 @@ extern "C" {
 #define CARDGetIconSpeed(stat, n) (((stat)->mIconSpeed >> (2 * (n))) & ~CARD_SPEED_MASK);
 #define CARDSetIconSpeed(stat, n, speed)                                                           \
     ((stat)->mIconSpeed =                                                                          \
-         (u16)(((stat)->mIconFmt & ~(CARD_SPEED_MASK << (2 * (n)))) | ((speed) << (2 * (n)))))
+         (u16)(((stat)->mIconSpeed & ~(CARD_SPEED_MASK << (2 * (n)))) | ((speed) << (2 * (n)))))
 #define CARDSetIconAddr(stat, addr)    ((stat)->mIconAddr = (u32)(addr))
 #define CARDSetCommentAddr(stat, addr) ((stat)->mCommentAddr = (u32)(addr))
 
@@ -175,6 +175,9 @@ typedef struct CARDStat {
     u32 mOffsetIconTlut;
     u32 mOffsetData;
 } CARDStat;
+
+void __CARDSetDiskID(const void *idPtr);
+void __CARDSync(s32 chan);
 
 void CARDInit();
 
