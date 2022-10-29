@@ -67,8 +67,8 @@ public:
         u8 mTriggerR;  // _F
         f32 mAnalogL;  // _10
         f32 mAnalogR;  // _14
-        u32 _18;
-        u32 _1C;
+        u32 mRapidInput;
+        u32 mFramesHeld;
         u32 _20;
         u32 _24;
         u32 _28;
