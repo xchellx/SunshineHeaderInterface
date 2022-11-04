@@ -6,8 +6,6 @@
 #include <JSystem/JStage/JSGCamera.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 
-#include "module.hxx"
-
 namespace JDrama {
 
     class TCamera : public TPlacement, public JStage::TCamera {
@@ -83,11 +81,9 @@ namespace JDrama {
     class TOrthoProj : public TCamera {
     public:
         TOrthoProj() : TCamera(-100.0f, 100.0f, "<TOrthoProj>") {
-            mProjectionField[0] = -BetterSMS::getScreenRatioAdjustX();
-            //mProjectionField[0] = 0.0f;
+            mProjectionField[0] = 0.0f;
             mProjectionField[1] = 16.0f;
-            mProjectionField[2] = BetterSMS::getScreenRenderWidth();
-            //mProjectionField[2] = 600.0f;
+            mProjectionField[2] = 600.0f;
             mProjectionField[3] = 464.0f;
         }
         virtual ~TOrthoProj();

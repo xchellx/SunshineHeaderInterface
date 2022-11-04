@@ -13,12 +13,12 @@ public:
     TRailMapObj(const char *);
     virtual ~TRailMapObj();
 
-    virtual void load(JSUMemoryInputStream &) override;
-    virtual void perform(u32, JDrama::TGraphics *) override;
-    virtual void control() override;
-    virtual u32 getShadowType() override;
-    virtual void initMapObj() override;
-    virtual void setGroundCollision() override;
+    void load(JSUMemoryInputStream &) override;
+    void perform(u32, JDrama::TGraphics *) override;
+    void control() override;
+    u32 getShadowType() override;
+    void initMapObj() override;
+    void setGroundCollision() override;
 
     virtual bool calcRecycle();
     virtual void resetPosition();
@@ -31,7 +31,7 @@ public:
 
     TGraphTracer *mGraphTracer;
     s32 mDistanceToNext;
-    u32 _140;  // flags
+    u32 mControlState;  // 1 = mario contact; 2 = idle
     f32 mTravelSpeed;
     u8 mRailStatus;
     s16 mContextTimer;   // default = 180
