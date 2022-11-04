@@ -104,7 +104,8 @@ public:
     u32 *mpNextState;          // 0x00AC
     u32 _11;                   // 0x00B0
     u8 mNextState;             // 0x00B4
-    u32 _12[0x1C / 4];         // 0x00B8
+    JKRMemArchive* mCurrentStageArchive; // 0x00B8
+    u32 _12[0x18 / 4];         // 0x00BC
     u32 *mGame6Data;           // 0x00D4
     u32 *mAramArchive;         // 0x00D8
     TShineFader *mShineFader;  // 0x00DC
