@@ -14,19 +14,20 @@ public:
     TMapObjBase(const char *);
     virtual ~TMapObjBase();
 
-    virtual void load(JSUMemoryInputStream &) override;
-    virtual void loadAfter() override;
-    virtual void perform(u32, JDrama::TGraphics *) override;
-    virtual bool receiveMessage(THitActor *, u32) override;
-    virtual Mtx44 *getTakingMtx() override;
-    virtual void ensureTakeSituation() override;
-    virtual f32 getRadiusAtY(f32) const override;
-    virtual Mtx44 *getRootJointMtx() const override;
-    virtual void calcRootMatrix() override;
-    virtual void setGroundCollision() override;
-    virtual void control() override;
-    virtual u32 getShadowType() override;
-    virtual void kill() override;
+    void load(JSUMemoryInputStream &) override;
+    void loadAfter() override;
+    void perform(u32, JDrama::TGraphics *) override;
+    bool receiveMessage(THitActor *, u32) override;
+    Mtx44 *getTakingMtx() override;
+    void ensureTakeSituation() override;
+    f32 getRadiusAtY(f32) const override;
+    Mtx44 *getRootJointMtx() const override;
+    void calcRootMatrix() override;
+    void setGroundCollision() override;
+    void control() override;
+    u32 getShadowType() override;
+    void kill() override;
+
     virtual void appear();
     virtual void makeObjAppeared();
     virtual void makeObjDead();
@@ -138,8 +139,8 @@ public:
     static void throwObjFromPointWithRot(TMapObjBase *, const TVec3f &, const TVec3f &, f32, f32);
     static bool waterHitPlane(THitActor *);
 
-    char *mRegisterName;      // 0x00F4
-    u32 _00;                  // 0x00F8
+    const char *mRegisterName;      // 0x00F4
+    u32 mModelLoadFlags;      // 0x00F8
     u16 mState;               // 0x00FC
     u16 _01;                  // 0x00FE
     u16 mSoundIDIndex;        // 0x0100

@@ -4,8 +4,8 @@ namespace JGadget {
 
     class TSingleLinkListNode {
     public:
-        TSingleLinkListNode *mPrev;
         TSingleLinkListNode *mNext;
+        void *mData;
     };
 
     class TLinkListNode {

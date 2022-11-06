@@ -13,14 +13,11 @@
 
 class TConductor : public JDrama::TNameRef {
 public:
-#define CONSTRUCT_PARAM(name, val)                                                                 \
-    name(this, val, JDrama::TNameRef::calcKeyCode(SMS_STRINGIZE(name)), SMS_STRINGIZE(name))
-
     class TConductorParams : public TParams {
         TConductorParams(const char *prm)
-            : CONSTRUCT_PARAM(mEnemyFarClip, 5000.0f), CONSTRUCT_PARAM(mGenerateRadiusMax, 1000.0f),
-              CONSTRUCT_PARAM(mGenerateRadiusMin, 200.0f), CONSTRUCT_PARAM(mGenerateTime, 300),
-              CONSTRUCT_PARAM(mGenerateProp, 0.01f) {
+            : SMS_TPARAM_INIT(mEnemyFarClip, 5000.0f), SMS_TPARAM_INIT(mGenerateRadiusMax, 1000.0f),
+              SMS_TPARAM_INIT(mGenerateRadiusMin, 200.0f), SMS_TPARAM_INIT(mGenerateTime, 300),
+              SMS_TPARAM_INIT(mGenerateProp, 0.01f) {
             load(prm);
         }
 
@@ -30,7 +27,6 @@ public:
         TParamT<s32> mGenerateTime;
         TParamT<f32> mGenerateProp;
     };
-#undef CONSTRUCT_PARAM
 
     struct TConductorPacket {
         size_t _00;
@@ -78,3 +74,5 @@ public:
     u32 _F8;
     u32 _FC;
 };
+
+extern TConductor *gpConductor;

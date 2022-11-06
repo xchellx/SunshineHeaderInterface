@@ -10,6 +10,11 @@ namespace JDrama {
 
     class TCamera : public TPlacement, public JStage::TCamera {
     public:
+        TCamera(f32 near, f32 far, const char *name) : TPlacement(name) {
+            mFlag           = 0;
+            mProjectionNear = near;
+            mProjectionFar  = far;
+        }
         virtual ~TCamera();
 
         virtual u32 getType() const;
@@ -20,7 +25,6 @@ namespace JDrama {
         virtual f32 JSGGetProjectionFar() const;
         virtual void JSGSetProjectionFar(f32 projectionFar);
 
-    private:
         u16 mFlag;            // 24
         f32 mProjectionNear;  // 28
         f32 mProjectionFar;   // 2C
@@ -45,7 +49,6 @@ namespace JDrama {
         virtual void JSGGetViewTargetPosition(Vec *) const;
         virtual void JSGSetViewTargetPosition(const Vec &targetPos);
 
-    private:
         TVec3f mUpVector;       // 30
         TVec3f mTargetPos;      // 3C
         f32 mProjectionFovy;    // 48
@@ -54,6 +57,9 @@ namespace JDrama {
 
     class TPolarCamera : public TCamera {
     public:
+        TPolarCamera(const char *name)
+            : TCamera(50.0f, 10000.0f, name), mProjectionFovy(45.0f), mProjectionAspect(1.3333334f),
+              _38(0.0f, 0.0f, 0.0f), _44(1200.0f) {}
         virtual ~TPolarCamera();
 
         virtual void perform(u32, TGraphics *);
@@ -66,13 +72,20 @@ namespace JDrama {
         virtual f32 JSGGetProjectionAspect() const;
         virtual void JSGSetProjectionAspect(f32 projectionAspect);
 
-    private:
         f32 mProjectionFovy;    // 30
         f32 mProjectionAspect;  // 34
+        TVec3f _38;
+        f32 _44;
     };
 
     class TOrthoProj : public TCamera {
     public:
+        TOrthoProj() : TCamera(-100.0f, 100.0f, "<TOrthoProj>") {
+            mProjectionField[0] = 0.0f;
+            mProjectionField[1] = 16.0f;
+            mProjectionField[2] = 600.0f;
+            mProjectionField[3] = 464.0f;
+        }
         virtual ~TOrthoProj();
 
         virtual void load(JSUMemoryInputStream &stream);
@@ -83,8 +96,7 @@ namespace JDrama {
         virtual f32 *JSGGetProjectionField() const;
         virtual void JSGSetProjectionField(const f32 *projectionField);
 
-    private:
-        JGeometry::TVec4<f32> mProjectionField;  // 30
+        f32 mProjectionField[4];  // 30
     };
 
 }  // namespace JDrama

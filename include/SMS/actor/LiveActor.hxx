@@ -13,9 +13,8 @@
 #include <SMS/collision/BGCheck.hxx>
 #include <SMS/m3d/LodAnm.hxx>
 #include <SMS/manager/LiveManager.hxx>
+#include <SMS/manager/MapCollisionManager.hxx>
 #include <SMS/sound/MAnmSound.hxx>
-
-class TMapCollisionManager;
 
 class TLiveActor : public TTakeActor {
 
@@ -80,7 +79,7 @@ public:
     TRidingInfo mRidingInfo;  // _D4
     f32 _E4;
     u8 _E8;
-    TMapCollisionManager *mColMgr;  // _EC
+    TMapCollisionManager *mCollisionManager;  // _EC
 
     union {
         u32 asU32;
@@ -93,7 +92,9 @@ public:
             bool mCanBeTaken    : 1;
             u32 _03             : 2;
             bool mCanTalk       : 1;
-            u32 _04             : 10;
+            u32 _04             : 8;
+            bool mCullModel     : 1;
+            bool _004           : 1;
             bool mHasPhysics    : 1;
             u32 _05             : 1;
             bool mClipFromScene : 1;

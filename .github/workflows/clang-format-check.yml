@@ -11,4 +11,4 @@ jobs:
       with:
         clang-format-version: '13'
         check-path: 'include'
-        fallback-style: 'LLVM' # optional
+        fallback-style: 'LLVM' # std::optional

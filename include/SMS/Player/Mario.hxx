@@ -5,12 +5,15 @@
 #include <JSystem/J3D/J3DDrawBuffer.hxx>
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JGeometry.hxx>
-#include <JSystem/JUtility/JUTGamePad.hxx>
-
+#include <SMS/Player/MarioBlend.hxx>
+#include <SMS/Player/MarioCap.hxx>
+#include <SMS/Player/MarioDraw.hxx>
+#include <SMS/Player/MarioEffect.hxx>
+#include <SMS/Player/MarioGamePad.hxx>
+#include <SMS/Player/MarioSound.hxx>
 #include <SMS/actor/TakeActor.hxx>
 #include <SMS/actor/Yoshi.hxx>
 #include <SMS/collision/BGCheck.hxx>
-#include <SMS/m3d/M3UModel.hxx>
 #include <SMS/nozzle/Watergun.hxx>
 #include <SMS/params/BaseParam.hxx>
 #include <SMS/params/Params.hxx>
@@ -20,133 +23,13 @@
 
 #define OBJECT_ID_MARIO 0x80000001
 
-class TMario;
-
-class TDrawSyncCallback {
-public:
-    virtual void drawSyncCallback(u16) = 0;
-};
-
-struct TMarioAnimeData {
-    enum FLUDD { FLUDD_ENABLED = 68, FLUDD_DISABLED = 200 };
-
-    enum HAND { HAND_A, HAND_B, HAND_C };
-
-    bool isPumpOK() const;
-
-    u16 mAnimID;
-    u16 mFluddEnabled;  // Note: ENUM? 68 = enabled, 200 = disabled
-    u8 mAnmTexPattern;  // Note: 23 is the max value allowed
-    u8 mMarioHand;      // Note: 1, 2, and 3 seem to be valid values, this determines
-                        // the hand model used(?)
-    u8 unk_1;           // Note: If bit 30 is set, it seems to activate a bit flag to
-                        // multiple pointers, likely mtx related
-    u8 unk_2;           // Note: Value seems to be set but is never used?
-};
-
-class TMarioCap {
-public:
-    TMarioCap(TMario *);
-
-    virtual void perform(u32, JDrama::TGraphics *);
-
-    void createMirrorModel();
-    void mtxEffectHide();
-    void mtxEffectShow();
-};
-
-class M3UModelMario : public M3UModel {
-public:
-    virtual void updateIn() override;
-    virtual void updateOut() override;
-
-    void changeMtxCalcSIAnmBQAnmTransform(int, int, u8);
-    void updateInMotion();
-};
-
-class TMarioSoundValues {
-public:
-    TMarioSoundValues();
-
-    u32 _0;
-    u32 _4;
-    u32 _8;
-    u32 _C;
-    u32 _10;
-    u32 _14;
-    u8 _18;
-    u32 _1C;
-    u8 _20;
-    u16 _22;
-    u8 _24;
-    u16 _26;
-    u16 _28;
-    u8 _2A;
-    u8 _2B;
-    u8 _2C;
-};
-
-struct TMarioControllerWork {
-    enum Buttons { R = 0x20, A = 0x100, B = 0x200 };
-
-    s16 mStickHS16;
-    s16 mStickVS16;
-    Buttons mInput;
-    Buttons mFrameInput;
-    u8 mAnalogRU8;
-    u8 mAnalogLU8;
-    f32 mStickH;
-    f32 mStickV;
-    f32 mStickDist;
-    f32 mAnalogL;
-    f32 mAnalogR;
-};
-
-class TMarioGamePad : public JUTGamePad {
-public:
-    virtual ~TMarioGamePad();
-
-    void onNeutralMarioKey();
-    void read();
-    void reset();
-    void updateMeaning();
-
-    u32 _A4;
-    f32 _A8;
-    f32 _AC;
-    f32 _B0;
-    f32 _B4;
-    f32 _B8;
-    f32 _BC;
-    f32 mStickX;  // _C0
-    f32 mStickY;  // _C4
-    f32 _C8;
-    f32 _CC;
-    u32 mMeaning;
-    u32 _D4;
-    u32 _D8;
-    u16 _DC;
-    u16 _DE;
-    u16 _E0;
-
-    struct {
-        u16 _00         : 8;
-        bool mDisable   : 1;
-        u8 _01          : 5;
-        bool mReadInput : 1;
-        u8 _02          : 1;
-    } State;  // 0x00E2
-
-    u16 _E4;
-    u16 _E6;  // padding?
-    u32 _E8;
-    u32 _EC;  // padding?
-};
-
 class TMario : public TTakeActor, public TDrawSyncCallback {
 public:
-#define CONSTRUCT_PARAM(name, val)                                                                 \
-    name(this, val, JDrama::TNameRef::calcKeyCode(SMS_STRINGIZE(name)), SMS_STRINGIZE(name))
+    enum E_SIDEWALK_TYPE { NONE, LEFT, RIGHT };
+
+    struct JumpSlipRecord {};
+
+    struct TEParams : TParams {};
 
     struct TDeParams : public TParams {
         TDeParams();
@@ -208,9 +91,9 @@ public:
 
     struct TBodyAngleParams : public TParams {
         TBodyAngleParams(const char *prm)
-            : CONSTRUCT_PARAM(mHeadRot, 0.0f), CONSTRUCT_PARAM(mWaistRoll, 0.0f),
-              CONSTRUCT_PARAM(mWaistPitch, 80.0f), CONSTRUCT_PARAM(mWaistRollMax, 0),
-              CONSTRUCT_PARAM(mWaistPitchMax, 1000), CONSTRUCT_PARAM(mWaistAngleChangeRate, 0.07f) {
+            : SMS_TPARAM_INIT(mHeadRot, 0.0f), SMS_TPARAM_INIT(mWaistRoll, 0.0f),
+              SMS_TPARAM_INIT(mWaistPitch, 80.0f), SMS_TPARAM_INIT(mWaistRollMax, 0),
+              SMS_TPARAM_INIT(mWaistPitchMax, 1000), SMS_TPARAM_INIT(mWaistAngleChangeRate, 0.07f) {
             load(prm);
         }
 
@@ -224,7 +107,7 @@ public:
 
     struct TAttackParams : public TParams {
         TAttackParams(const char *prm)
-            : CONSTRUCT_PARAM(mRadius, 100.0f), CONSTRUCT_PARAM(mHeight, 50.0f) {
+            : SMS_TPARAM_INIT(mRadius, 100.0f), SMS_TPARAM_INIT(mHeight, 50.0f) {
             load(prm);
         }
 
@@ -345,9 +228,9 @@ public:
 
     struct THangFenceParams : public TParams {
         THangFenceParams()
-            : CONSTRUCT_PARAM(mMoveSp, 0.1f), CONSTRUCT_PARAM(mAnmRate, 0.5f),
-              CONSTRUCT_PARAM(mRapidTime, 2000), CONSTRUCT_PARAM(mLimitTime, 2400),
-              CONSTRUCT_PARAM(mAnmRapid, 8.0f), CONSTRUCT_PARAM(mDescentSp, 10.0f) {
+            : SMS_TPARAM_INIT(mMoveSp, 0.1f), SMS_TPARAM_INIT(mAnmRate, 0.5f),
+              SMS_TPARAM_INIT(mRapidTime, 2000), SMS_TPARAM_INIT(mLimitTime, 2400),
+              SMS_TPARAM_INIT(mAnmRapid, 8.0f), SMS_TPARAM_INIT(mDescentSp, 10.0f) {
             load("/Mario/Hanging.prm");
         }
 
@@ -360,7 +243,7 @@ public:
     };
 
     struct THangRoofParams : public TParams {
-        THangRoofParams() : CONSTRUCT_PARAM(mAnmMult, 0.3f) { load("/Mario/HangRoof.prm"); }
+        THangRoofParams() : SMS_TPARAM_INIT(mAnmMult, 0.3f) { load("/Mario/HangRoof.prm"); }
 
         TParamT<f32> mAnmMult;
     };
@@ -388,8 +271,8 @@ public:
 
     struct TPullParams : public TParams {
         TPullParams(const char *prm)
-            : CONSTRUCT_PARAM(mPullRateV, 0.3f), CONSTRUCT_PARAM(mPullRateH, 0.05f),
-              CONSTRUCT_PARAM(mOilPullRateV, 0.1f), CONSTRUCT_PARAM(mOilPullRateH, 0.01f) {
+            : SMS_TPARAM_INIT(mPullRateV, 0.3f), SMS_TPARAM_INIT(mPullRateH, 0.05f),
+              SMS_TPARAM_INIT(mOilPullRateV, 0.1f), SMS_TPARAM_INIT(mOilPullRateH, 0.01f) {
             load(prm);
         }
 
@@ -401,9 +284,9 @@ public:
 
     struct TClimbParams : public TParams {
         TClimbParams()
-            : CONSTRUCT_PARAM(mClimbSp, 0.035f), CONSTRUCT_PARAM(mRotateSp, 3.0f),
-              CONSTRUCT_PARAM(mClimbAnmRate, 1.0f / 256.0f), CONSTRUCT_PARAM(mCatchRadius, 100.0f),
-              CONSTRUCT_PARAM(mCatchAngle, 0.8f) {
+            : SMS_TPARAM_INIT(mClimbSp, 0.035f), SMS_TPARAM_INIT(mRotateSp, 3.0f),
+              SMS_TPARAM_INIT(mClimbAnmRate, 1.0f / 256.0f), SMS_TPARAM_INIT(mCatchRadius, 100.0f),
+              SMS_TPARAM_INIT(mCatchAngle, 0.8f) {
             load("/Mario/Bar.prm");
         }
 
@@ -444,8 +327,8 @@ public:
 
     struct THoverParams : public TParams {
         THoverParams()
-            : CONSTRUCT_PARAM(mRotSp, 128), CONSTRUCT_PARAM(mAccelRate, 0.03f),
-              CONSTRUCT_PARAM(mBrake, 0.95f) {
+            : SMS_TPARAM_INIT(mRotSp, 128), SMS_TPARAM_INIT(mAccelRate, 0.03f),
+              SMS_TPARAM_INIT(mBrake, 0.95f) {
             load("/Mario/HHover.prm");
         }
 
@@ -456,9 +339,9 @@ public:
 
     struct TDivingParams : public TParams {
         TDivingParams()
-            : CONSTRUCT_PARAM(mRotSp, 128), CONSTRUCT_PARAM(mGravity, 0.5f),
-              CONSTRUCT_PARAM(mAccelControl, 0.02f), CONSTRUCT_PARAM(mSeaBrake, 0.999f),
-              CONSTRUCT_PARAM(mSeaBrakeY, 0.98f) {
+            : SMS_TPARAM_INIT(mRotSp, 128), SMS_TPARAM_INIT(mGravity, 0.5f),
+              SMS_TPARAM_INIT(mAccelControl, 0.02f), SMS_TPARAM_INIT(mSeaBrake, 0.999f),
+              SMS_TPARAM_INIT(mSeaBrakeY, 0.98f) {
             load("/Mario/Diving.prm");
         }
 
@@ -471,11 +354,11 @@ public:
 
     struct TYoshiParams : public TParams {
         TYoshiParams()
-            : CONSTRUCT_PARAM(mRunYoshiMult, 1.2f), CONSTRUCT_PARAM(mJumpYoshiMult, 1.0f),
-              CONSTRUCT_PARAM(mRotYoshiMult, 1.5f), CONSTRUCT_PARAM(mHeadFront, 80.0f),
-              CONSTRUCT_PARAM(mHeadRadius, 50.0f), CONSTRUCT_PARAM(mHoldOutAccCtrlF, 0.01f),
-              CONSTRUCT_PARAM(mHoldOutAccCtrlB, 0.023f), CONSTRUCT_PARAM(mHoldOutSldCtrl, 0.3f),
-              CONSTRUCT_PARAM(mDecBrake, 1.0f) {
+            : SMS_TPARAM_INIT(mRunYoshiMult, 1.2f), SMS_TPARAM_INIT(mJumpYoshiMult, 1.0f),
+              SMS_TPARAM_INIT(mRotYoshiMult, 1.5f), SMS_TPARAM_INIT(mHeadFront, 80.0f),
+              SMS_TPARAM_INIT(mHeadRadius, 50.0f), SMS_TPARAM_INIT(mHoldOutAccCtrlF, 0.01f),
+              SMS_TPARAM_INIT(mHoldOutAccCtrlB, 0.023f), SMS_TPARAM_INIT(mHoldOutSldCtrl, 0.3f),
+              SMS_TPARAM_INIT(mDecBrake, 1.0f) {
             load("/Mario/Yoshi.prm");
         }
 
@@ -492,11 +375,11 @@ public:
 
     struct TWaterEffectParams : public TParams {
         TWaterEffectParams()
-            : CONSTRUCT_PARAM(mJumpIntoMdlEffectSpY, 10.0f), CONSTRUCT_PARAM(mJumpIntoMinY, 20.0f),
-              CONSTRUCT_PARAM(mJumpIntoMaxY, 50.0f), CONSTRUCT_PARAM(mJumpIntoScaleMin, 0.75f),
-              CONSTRUCT_PARAM(mJumpIntoScaleWidth, 1.0f),
-              CONSTRUCT_PARAM(mRunningRippleSpeed, 30.0f),
-              CONSTRUCT_PARAM(mRunningRippleDepth, 30.0f) {
+            : SMS_TPARAM_INIT(mJumpIntoMdlEffectSpY, 10.0f), SMS_TPARAM_INIT(mJumpIntoMinY, 20.0f),
+              SMS_TPARAM_INIT(mJumpIntoMaxY, 50.0f), SMS_TPARAM_INIT(mJumpIntoScaleMin, 0.75f),
+              SMS_TPARAM_INIT(mJumpIntoScaleWidth, 1.0f),
+              SMS_TPARAM_INIT(mRunningRippleSpeed, 30.0f),
+              SMS_TPARAM_INIT(mRunningRippleDepth, 30.0f) {
             load("/Mario/WaterEffect.prm");
         }
 
@@ -511,11 +394,11 @@ public:
 
     struct TControllerParams : public TParams {
         TControllerParams()
-            : CONSTRUCT_PARAM(mAnalogLRToZeroVal, 30), CONSTRUCT_PARAM(mAnalogLRToMiddleVal, 90),
-              CONSTRUCT_PARAM(mAnalogLRToMaxVal, 150), CONSTRUCT_PARAM(mAnalogLRMiddleVal, 0.1f),
-              CONSTRUCT_PARAM(mStartToWalkLevel, 15.0f), CONSTRUCT_PARAM(mStickRotateTime, 24),
-              CONSTRUCT_PARAM(mLengthMultTimes, 10), CONSTRUCT_PARAM(mLengthMult, 0.935f),
-              CONSTRUCT_PARAM(mSquatRotMidAnalog, 0.7f), CONSTRUCT_PARAM(mSquatRotMidValue, 0.05f) {
+            : SMS_TPARAM_INIT(mAnalogLRToZeroVal, 30), SMS_TPARAM_INIT(mAnalogLRToMiddleVal, 90),
+              SMS_TPARAM_INIT(mAnalogLRToMaxVal, 150), SMS_TPARAM_INIT(mAnalogLRMiddleVal, 0.1f),
+              SMS_TPARAM_INIT(mStartToWalkLevel, 15.0f), SMS_TPARAM_INIT(mStickRotateTime, 24),
+              SMS_TPARAM_INIT(mLengthMultTimes, 10), SMS_TPARAM_INIT(mLengthMult, 0.935f),
+              SMS_TPARAM_INIT(mSquatRotMidAnalog, 0.7f), SMS_TPARAM_INIT(mSquatRotMidValue, 0.05f) {
             load("/Mario/Controller.prm");
         }
 
@@ -559,18 +442,18 @@ public:
 
     struct TDirtyParams : public TParams {
         TDirtyParams()
-            : CONSTRUCT_PARAM(mIncRunning, 0.1f), CONSTRUCT_PARAM(mIncCatching, 0.3f),
-              CONSTRUCT_PARAM(mIncSlipping, 0.2f), CONSTRUCT_PARAM(mDecSwimming, 0.5f),
-              CONSTRUCT_PARAM(mDecWaterHit, 0.2f), CONSTRUCT_PARAM(mDecRotJump, 0.1f),
-              CONSTRUCT_PARAM(mBrakeStartValSlip, 0.99f), CONSTRUCT_PARAM(mBrakeStartValRun, 0.98f),
-              CONSTRUCT_PARAM(mDirtyTimeSlip, 600), CONSTRUCT_PARAM(mDirtyTimeRun, 600),
-              CONSTRUCT_PARAM(mPolSizeSlip, 200.0f), CONSTRUCT_PARAM(mPolSizeRun, 80.0f),
-              CONSTRUCT_PARAM(mPolSizeFootPrint, 200.0f), CONSTRUCT_PARAM(mPolSizeJump, 200.0f),
-              CONSTRUCT_PARAM(mSlopeAngle, 0.99f), CONSTRUCT_PARAM(mDirtyMax, 200.0f),
-              CONSTRUCT_PARAM(mSlipAnmSpeed, 3.0f), CONSTRUCT_PARAM(mSlipRunSp, 0.01f),
-              CONSTRUCT_PARAM(mSlipCatchSp, 0.01f), CONSTRUCT_PARAM(mSlipRotate, 100),
-              CONSTRUCT_PARAM(mSlipCatchRotate, 100), CONSTRUCT_PARAM(mBrakeSlipNoPollute, 0.98f),
-              CONSTRUCT_PARAM(mFogTimeYellow, 240), CONSTRUCT_PARAM(mFogTimeRed, 600) {
+            : SMS_TPARAM_INIT(mIncRunning, 0.1f), SMS_TPARAM_INIT(mIncCatching, 0.3f),
+              SMS_TPARAM_INIT(mIncSlipping, 0.2f), SMS_TPARAM_INIT(mDecSwimming, 0.5f),
+              SMS_TPARAM_INIT(mDecWaterHit, 0.2f), SMS_TPARAM_INIT(mDecRotJump, 0.1f),
+              SMS_TPARAM_INIT(mBrakeStartValSlip, 0.99f), SMS_TPARAM_INIT(mBrakeStartValRun, 0.98f),
+              SMS_TPARAM_INIT(mDirtyTimeSlip, 600), SMS_TPARAM_INIT(mDirtyTimeRun, 600),
+              SMS_TPARAM_INIT(mPolSizeSlip, 200.0f), SMS_TPARAM_INIT(mPolSizeRun, 80.0f),
+              SMS_TPARAM_INIT(mPolSizeFootPrint, 200.0f), SMS_TPARAM_INIT(mPolSizeJump, 200.0f),
+              SMS_TPARAM_INIT(mSlopeAngle, 0.99f), SMS_TPARAM_INIT(mDirtyMax, 200.0f),
+              SMS_TPARAM_INIT(mSlipAnmSpeed, 3.0f), SMS_TPARAM_INIT(mSlipRunSp, 0.01f),
+              SMS_TPARAM_INIT(mSlipCatchSp, 0.01f), SMS_TPARAM_INIT(mSlipRotate, 100),
+              SMS_TPARAM_INIT(mSlipCatchRotate, 100), SMS_TPARAM_INIT(mBrakeSlipNoPollute, 0.98f),
+              SMS_TPARAM_INIT(mFogTimeYellow, 240), SMS_TPARAM_INIT(mFogTimeRed, 600) {
             load("/Mario/Dirty.prm");
         }
 
@@ -602,8 +485,8 @@ public:
 
     struct TMotorParams : public TParams {
         TMotorParams()
-            : CONSTRUCT_PARAM(mMotorReturn, 25), CONSTRUCT_PARAM(mMotorTrample, 8),
-              CONSTRUCT_PARAM(mMotorHipDrop, 15), CONSTRUCT_PARAM(mMotorWall, 6) {
+            : SMS_TPARAM_INIT(mMotorReturn, 25), SMS_TPARAM_INIT(mMotorTrample, 8),
+              SMS_TPARAM_INIT(mMotorHipDrop, 15), SMS_TPARAM_INIT(mMotorWall, 6) {
             load("/Mario/MarioMotor.prm");
         }
 
@@ -615,12 +498,12 @@ public:
 
     struct TParticleParams : public TParams {
         TParticleParams()
-            : CONSTRUCT_PARAM(mMeltInWaterMax, 0.5f), CONSTRUCT_PARAM(mWaveEmitSpeed, 5.0f),
-              CONSTRUCT_PARAM(mWaveAlphaDec, 5), CONSTRUCT_PARAM(mBubbleDepth, 10.0f),
-              CONSTRUCT_PARAM(mBodyBubbleSpMin, 0.0f), CONSTRUCT_PARAM(mBodyBubbleSpMax, 40.0f),
-              CONSTRUCT_PARAM(mBodyBubbleEmitMin, 0.0f), CONSTRUCT_PARAM(mBodyBubbleEmitMax, 0.5f),
-              CONSTRUCT_PARAM(mBubbleToRipple, 0.3f), CONSTRUCT_PARAM(mToroccoWind, 0.001f),
-              CONSTRUCT_PARAM(mToroccoSpark, 0.001f) {
+            : SMS_TPARAM_INIT(mMeltInWaterMax, 0.5f), SMS_TPARAM_INIT(mWaveEmitSpeed, 5.0f),
+              SMS_TPARAM_INIT(mWaveAlphaDec, 5), SMS_TPARAM_INIT(mBubbleDepth, 10.0f),
+              SMS_TPARAM_INIT(mBodyBubbleSpMin, 0.0f), SMS_TPARAM_INIT(mBodyBubbleSpMax, 40.0f),
+              SMS_TPARAM_INIT(mBodyBubbleEmitMin, 0.0f), SMS_TPARAM_INIT(mBodyBubbleEmitMax, 0.5f),
+              SMS_TPARAM_INIT(mBubbleToRipple, 0.3f), SMS_TPARAM_INIT(mToroccoWind, 0.001f),
+              SMS_TPARAM_INIT(mToroccoSpark, 0.001f) {
             load("/Mario/MarioParticle.prm");
         }
 
@@ -639,9 +522,9 @@ public:
 
     struct TEffectParams : public TParams {
         TEffectParams()
-            : CONSTRUCT_PARAM(mDashInc, 1.0f / 3.0f), CONSTRUCT_PARAM(mDashDec, 1.0f / 6.0f),
-              CONSTRUCT_PARAM(mDashMaxBlendInBlur, 180), CONSTRUCT_PARAM(mDashMaxBlendInIris, 180),
-              CONSTRUCT_PARAM(mDashBlendScale, 0.2f) {
+            : SMS_TPARAM_INIT(mDashInc, 1.0f / 3.0f), SMS_TPARAM_INIT(mDashDec, 1.0f / 6.0f),
+              SMS_TPARAM_INIT(mDashMaxBlendInBlur, 180), SMS_TPARAM_INIT(mDashMaxBlendInIris, 180),
+              SMS_TPARAM_INIT(mDashBlendScale, 0.2f) {
             load("/Mario/MarioEffect.prm");
         }
 
@@ -654,12 +537,12 @@ public:
 
     struct TSlipParams : public TParams {
         TSlipParams(const char *prm)
-            : CONSTRUCT_PARAM(mSlipFriction, 0.9f), CONSTRUCT_PARAM(mSlopeAcceleUp, 0.0f),
-              CONSTRUCT_PARAM(mSlopeAcceleDown, 0.0f), CONSTRUCT_PARAM(mSlideAcceleUp, 0.0f),
-              CONSTRUCT_PARAM(mSlideAcceleDown, 0.0f), CONSTRUCT_PARAM(mSlideStopNormal, 15.0f),
-              CONSTRUCT_PARAM(mSlideStopCatch, 15.0f), CONSTRUCT_PARAM(mJumpEnable, 1),
-              CONSTRUCT_PARAM(mMissJump, 1), CONSTRUCT_PARAM(mSlideAngleYSp, 512),
-              CONSTRUCT_PARAM(mStickSlideMult, 0.05) {
+            : SMS_TPARAM_INIT(mSlipFriction, 0.9f), SMS_TPARAM_INIT(mSlopeAcceleUp, 0.0f),
+              SMS_TPARAM_INIT(mSlopeAcceleDown, 0.0f), SMS_TPARAM_INIT(mSlideAcceleUp, 0.0f),
+              SMS_TPARAM_INIT(mSlideAcceleDown, 0.0f), SMS_TPARAM_INIT(mSlideStopNormal, 15.0f),
+              SMS_TPARAM_INIT(mSlideStopCatch, 15.0f), SMS_TPARAM_INIT(mJumpEnable, 1),
+              SMS_TPARAM_INIT(mMissJump, 1), SMS_TPARAM_INIT(mSlideAngleYSp, 512),
+              SMS_TPARAM_INIT(mStickSlideMult, 0.05) {
             load(prm);
         }
 
@@ -678,9 +561,9 @@ public:
 
     struct TUpperBodyParams : public TParams {
         TUpperBodyParams()
-            : CONSTRUCT_PARAM(mPumpWaitTime, 10), CONSTRUCT_PARAM(mPumpAnmSpeed, 0.01f),
-              CONSTRUCT_PARAM(mHoverHeadAngle, -8192), CONSTRUCT_PARAM(mFeelDeepHeadAngle, 8192),
-              CONSTRUCT_PARAM(mFrontWallHeadAngle, -8192) {
+            : SMS_TPARAM_INIT(mPumpWaitTime, 10), SMS_TPARAM_INIT(mPumpAnmSpeed, 0.01f),
+              SMS_TPARAM_INIT(mHoverHeadAngle, -8192), SMS_TPARAM_INIT(mFeelDeepHeadAngle, 8192),
+              SMS_TPARAM_INIT(mFrontWallHeadAngle, -8192) {
             load("/Mario/UpperBody.prm");
         }
 
@@ -693,10 +576,10 @@ public:
 
     struct TDmgEnemyParams : public TParams {
         TDmgEnemyParams(const char *prm)
-            : CONSTRUCT_PARAM(mDamage, 1), CONSTRUCT_PARAM(mDownType, 1),
-              CONSTRUCT_PARAM(mWaterEmit, 0), CONSTRUCT_PARAM(mMotor, 25),
-              CONSTRUCT_PARAM(mMinSpeed, 16.0f), CONSTRUCT_PARAM(mDirty, 0.0f),
-              CONSTRUCT_PARAM(mInvincibleTime, 300) {
+            : SMS_TPARAM_INIT(mDamage, 1), SMS_TPARAM_INIT(mDownType, 1),
+              SMS_TPARAM_INIT(mWaterEmit, 0), SMS_TPARAM_INIT(mMotor, 25),
+              SMS_TPARAM_INIT(mMinSpeed, 16.0f), SMS_TPARAM_INIT(mDirty, 0.0f),
+              SMS_TPARAM_INIT(mInvincibleTime, 300) {
             load(prm);
         }
 
@@ -711,10 +594,10 @@ public:
 
     struct TDemoParams : public TParams {
         TDemoParams()
-            : CONSTRUCT_PARAM(mWarpInBallsDispTime, 6), CONSTRUCT_PARAM(mWarpInBallsTime, 70),
-              CONSTRUCT_PARAM(mWarpInCapturedTime, 120), CONSTRUCT_PARAM(mWarpInTremble, 15.0f),
-              CONSTRUCT_PARAM(mWarpInVecBase, 0.3f), CONSTRUCT_PARAM(mWarpTransTremble, 50.0f),
-              CONSTRUCT_PARAM(mReadRotSp, 1024) {
+            : SMS_TPARAM_INIT(mWarpInBallsDispTime, 6), SMS_TPARAM_INIT(mWarpInBallsTime, 70),
+              SMS_TPARAM_INIT(mWarpInCapturedTime, 120), SMS_TPARAM_INIT(mWarpInTremble, 15.0f),
+              SMS_TPARAM_INIT(mWarpInVecBase, 0.3f), SMS_TPARAM_INIT(mWarpTransTremble, 50.0f),
+              SMS_TPARAM_INIT(mReadRotSp, 1024) {
             load("/Mario/AutoDemo.prm");
         }
 
@@ -728,15 +611,15 @@ public:
     };
 
     struct TSoundParams : public TParams {
-        TSoundParams() : CONSTRUCT_PARAM(mStartFallVoiceSpeed, 60.0f) { load("/Mario/Sound.prm"); }
+        TSoundParams() : SMS_TPARAM_INIT(mStartFallVoiceSpeed, 60.0f) { load("/Mario/Sound.prm"); }
 
         TParamT<f32> mStartFallVoiceSpeed;
     };
 
     struct TOptionParams : public TParams {
         TOptionParams()
-            : CONSTRUCT_PARAM(mZ, -1000.0f), CONSTRUCT_PARAM(mXMin, 846.0f),
-              CONSTRUCT_PARAM(mXMax, 2000.0f) {
+            : SMS_TPARAM_INIT(mZ, -1000.0f), SMS_TPARAM_INIT(mXMin, 846.0f),
+              SMS_TPARAM_INIT(mXMax, 2000.0f) {
             load("/Mario/Option.prm");
         }
 
@@ -745,73 +628,76 @@ public:
         TParamT<f32> mXMax;
     };
 
-#undef CONSTRUCT_PARAM
-
     enum State : u32 {
-        STATE_NUMBER        = 0x0000000F,
-        STATE_DOJUMP        = 0x00000080,
-        STATE_AIRBORN       = 0x00000800,
-        STATE_CUTSCENE      = 0x00001000,
-        STATE_WATERBORN     = 0x00002000,
-        STATE_RUNNING       = 0x04000440,
-        STATE_IDLE          = 0x0C400201,
-        STATE_STOP          = 0x0C00023D,
-        STATE_SPIN          = 0x00000441,
-        STATE_JUMPSPIN      = 0x00000890,
-        STATE_JUMPSPINR     = 0x00000895,
-        STATE_JUMPSPINL     = 0x00000896,
-        STATE_JUMP          = 0x02000880,
-        STATE_SLIP_JUMP     = 0x02000885,
-        STATE_D_JUMP        = 0x02000881,
-        STATE_TRIPLE_J      = 0x00000882,
-        STATE_JMP_LAND      = 0x04000470,
-        STATE_HVY_LAND      = 0x04000473,
-        STATE_D_LAND        = 0x04000472,
-        STATE_T_LAND        = 0x0800023A,
-        STATE_JUMPSIDE      = 0x00000880,
-        STATE_BOUNCE        = 0x00000884,
-        STATE_SIDESTEP      = 0x0C008220,
-        STATE_SIDE_FLIP     = 0x00000887,
-        STATE_FALL          = 0x0000088C,
-        STATE_SWIM          = 0x000024D7,
-        STATE_DIVE          = 0x0080088A,
-        STATE_DIVEJUMP      = 0x02000889,
-        STATE_DIVESLIDE     = 0x00800456,
-        STATE_GOOPSLIDE     = 0x0084045D,
-        STATE_CLIMB         = 0x18100340,
-        STATE_CLIMBUP       = 0x10100343,
-        STATE_WALLJUMP      = 0x02000886,
-        STATE_WALLSLIDE     = 0x000008A7,
-        STATE_ROOFHANG      = 0x00200349,
-        STATE_HANG          = 0x3800034B,
-        STATE_HANGCLIMB     = 0x3000054F,
-        STATE_SLAMSTART     = 0x008008A9,
-        STATE_SLAM          = 0x0080023C,
-        STATE_SPRAY         = 0x0C008220,
-        STATE_THROWN        = 0x000208B8,
-        STATE_HOVER         = 0x0000088B,
-        STATE_STUCK         = 0x0002033C,
-        STATE_TALKING       = 0x10001308,
-        STATE_TURNING_MID   = 0x00000443,
-        STATE_TURNING       = 0x00000444,
-        STATE_YOSHI_ESC     = 0x0000089C,
-        STATE_SHINE_C       = 0x00001302,  // Collected Shine Sprite
-        STATE_DEATH         = 0x00020467,
-        STATE_DOOR_F_O      = 0x00001321,  // Door open fail
-        STATE_WALL_S_L      = 0x04000471,
-        STATE_F_KNCK_H      = 0x000208B0,  // hard knockback from front (bumping wall from dive)
-        STATE_KNCK_LND      = 0x00020462,  // Landing from front knockback
-        STATE_KNCK_GND      = 0x00020466,  // Front knockback while grounded
-        STATE_FIRE_HIT      = 0x000208B7,
-        STATE_FIRE_RVR      = 0x08000239,  // Recover from fire on ground
-        STATE_HOVER_F       = 0x0000088D,  // Falling from hover
-        STATE_SLIDE_R1      = 0x000008A6,  // Recover from slide by flipping
-        STATE_SLIDE_R2      = 0x00000386,  // Recover from slide by getting up
-        STATE_R_SPRAY       = 0x0C008220,  // Recover from spray
-        STATE_G_POUND       = 0x008008A9,  // Ground pounding
-        STATE_NPC_PUTDOWN   = 0x80000387,
-        STATE_NPC_THROW     = 0x80000588,
-        STATE_NPC_JUMPTHROW = 0x820008AB
+        STATE_NUMBER          = 0x0000000F,
+        STATE_DOJUMP          = 0x00000080,
+        STATE_AIRBORN         = 0x00000800,
+        STATE_CUTSCENE        = 0x00001000,
+        STATE_WATERBORN       = 0x00002000,
+        STATE_RUNNING         = 0x04000440,
+        STATE_IDLE            = 0x0C400201,
+        STATE_STOP            = 0x0C00023D,
+        STATE_SPIN            = 0x00000441,
+        STATE_JUMPSPIN        = 0x00000890,
+        STATE_JUMPSPINR       = 0x00000895,
+        STATE_JUMPSPINL       = 0x00000896,
+        STATE_JUMP            = 0x02000880,
+        STATE_SLIP_JUMP       = 0x02000885,
+        STATE_D_JUMP          = 0x02000881,
+        STATE_TRIPLE_J        = 0x00000882,
+        STATE_BACK_FLIP       = 0x00000883,
+        STATE_JMP_LAND        = 0x04000470,
+        STATE_HVY_LAND        = 0x04000473,
+        STATE_D_LAND          = 0x04000472,
+        STATE_T_LAND          = 0x0800023A,
+        STATE_LAND_RECOVER    = 0x0C000230,
+        STATE_D_LAND_RECOVER  = 0x0C000231,
+        STATE_JUMPSIDE        = 0x00000880,
+        STATE_BOUNCE          = 0x00000884,
+        STATE_SIDE_STEP       = 0x0C008220,
+        STATE_SIDE_STEP_LEAVE = 0x0C008222,
+        STATE_SIDE_FLIP       = 0x00000887,
+        STATE_FALL            = 0x0000088C,
+        STATE_SWIM            = 0x000024D7,
+        STATE_DIVE            = 0x0080088A,
+        STATE_DIVEJUMP        = 0x02000889,
+        STATE_DIVESLIDE       = 0x00800456,
+        STATE_GOOPSLIDE       = 0x0084045D,
+        STATE_CLIMB           = 0x18100340,
+        STATE_CLIMBUP         = 0x10100343,
+        STATE_WALLJUMP        = 0x02000886,
+        STATE_WALLSLIDE       = 0x000008A7,
+        STATE_ROOFHANG        = 0x00200349,
+        STATE_HANG            = 0x3800034B,
+        STATE_HANGCLIMB       = 0x3000054F,
+        STATE_SLAMSTART       = 0x008008A9,
+        STATE_SLAM            = 0x0080023C,
+        STATE_SPRAY           = 0x0C008220,
+        STATE_THROWN          = 0x000208B8,
+        STATE_HOVER           = 0x0000088B,
+        STATE_STUCK           = 0x0002033C,
+        STATE_TALKING         = 0x10001308,
+        STATE_TURNING_MID     = 0x00000443,
+        STATE_TURNING         = 0x00000444,
+        STATE_YOSHI_ESC       = 0x0000089C,
+        STATE_SHINE_C         = 0x00001302,  // Collected Shine Sprite
+        STATE_DEATH           = 0x00020467,
+        STATE_DOOR_F_O        = 0x00001321,  // Door open fail
+        STATE_WALL_S_L        = 0x04000471,
+        STATE_F_KNCK_H        = 0x000208B0,  // hard knockback from front (bumping wall from dive)
+        STATE_KNCK_LND        = 0x00020462,  // Landing from front knockback
+        STATE_KNCK_GND        = 0x00020466,  // Front knockback while grounded
+        STATE_FIRE_HIT        = 0x000208B7,
+        STATE_FIRE_RVR        = 0x08000239,  // Recover from fire on ground
+        STATE_HOVER_F         = 0x0000088D,  // Falling from hover
+        STATE_SLIDE_R1        = 0x000008A6,  // Recover from slide by flipping
+        STATE_SLIDE_R2        = 0x00000386,  // Recover from slide by getting up
+        STATE_R_SPRAY         = 0x0C008220,  // Recover from spray
+        STATE_G_POUND         = 0x008008A9,  // Ground pounding
+        STATE_NPC_PUTDOWN     = 0x80000387,
+        STATE_NPC_THROW       = 0x80000588,
+        STATE_NPC_JUMPTHROW   = 0x820008AB,
+        STATE_NPC_BOUNCE      = 0x02000890
     };
 
     enum Status : u32 {
@@ -841,12 +727,13 @@ public:
     };
 
     enum Animation : u32 {
-        ANIMATION_WALLHANG = 0x33,
-        ANIMATION_FALL     = 0x4C,
-        ANIMATION_BOUNCE   = 0x50,
-        ANIMATION_IDLE     = 0xC3,
-        ANIMATION_SHINEGET = 0xCD,
-        ANIMATION_SPINJUMP = 0xF4
+        ANIMATION_WALLHANG      = 0x33,
+        ANIMATION_FALL          = 0x4C,
+        ANIMATION_BOUNCE        = 0x50,
+        ANIMATION_STEADY_STANCE = 0x98,
+        ANIMATION_IDLE          = 0xC3,
+        ANIMATION_SHINEGET      = 0xCD,
+        ANIMATION_SPINJUMP      = 0xF4
     };
 
     enum Effect : u32 {
@@ -890,7 +777,296 @@ public:
     virtual u8 getVoiceStatus();
     virtual void drawSyncCallback(u16) override;
 
-    // add funcs
+    bool actnMain();
+    void addCallBack(JDrama::TGraphics *);
+    void addDamageFog(JDrama::TGraphics *);
+    void addDirty();
+    void addUpper();
+    void addVelocity(f32);
+    void animSound();
+    bool askJumpIntoWaterEffectExist() const;
+    bool barClimb();
+    bool barProcess();
+    bool barWait();
+    void blurEffect();
+    bool boardJumping();
+    void boxDrawPrepare(Mtx);
+    void bubbleFromBody();
+    void bubbleFromMouth(int);
+    void calcAnim(u32, JDrama::TGraphics *);
+    void calcBaseMtx(Mtx);
+    void calcDamagePos(const TVec3f &);
+    void calcGroundMtx(const TVec3f &);
+    void calcView(JDrama::TGraphics *);
+    bool canBendBody();
+    bool canPut();
+    bool canSleep();
+    bool canSlipJump();
+    bool canSquat() const;
+    bool canTake(THitActor *actor);
+    bool catching();
+    bool catchStop();
+    void changeHand(int hand);
+    void changeMontemanWaitingAnim();
+    bool changePlayerDropping(u32 state, u32 jumpSlipState);
+    bool changePlayerJumping(u32 state, u32 jumpSlipState);
+    bool changePlayerStatus(u32 state, u32 jumpSlipState, bool ifGrounded);
+    bool changePlayerTriJump();
+    void changeWireHanging();
+    bool checkAllMotions();
+    bool checkBackTrig();
+    void checkCurrentPlane();
+    void checkDescent();
+    void checkEnforceJump();
+    void checkGraffito();
+    void checkGraffitoElec();
+    void checkGraffitoFire();
+    void checkGraffitoSlip();
+    bool checkGroundAtJumping(const Vec &, int);
+    bool checkGroundAtWalking(Vec *);
+    bool checkGroundPlane(f32 x, f32 y, f32 z, f32 *out, const TBGCheckData **);
+    void checkPlayerAction(JDrama::TGraphics *);
+    void checkPlayerAround(int, f32);
+    bool checkPumpEnable();
+    void checkPumping();
+    void checkRideMovement();
+    void checkRideReCalc();
+    f32 checkRoofPlane(const Vec &, f32, const TBGCheckData **);
+    void checkSink();
+    bool checkStatusType(s32) const;
+    bool checkStickRotate(int *out);
+    bool checkSwimJump();
+    void checkThrowObject();
+    void checkWallPlane(const Vec &pos, f32 width, f32 height);
+    void checkWet();
+    bool considerJumpRotate();
+    bool considerRotateJumpStart();
+    bool considerRotateStart();
+    void considerTake();
+    void considerWaist();
+    void decHP(int);
+    bool demoMain();
+    void dirtyLimitCheck();
+    bool diving();
+    void doJumping();
+    void doPushingAnimation(const Vec &);
+    u8 doRoofMovingProcess();
+    void doRunning();
+    void doRunningAnimation();
+    void doSliding();
+    void doSurfing();
+    void doSwimming();
+    f32 downingCommon(int, f32, int);
+    void drawLogic();
+    void dropObject();
+    void elecEffect();
+    void elecEndEffect();
+    bool electricDamage();
+    void emitBlurHipDrop();
+    void emitBlurHipDropSuper();
+    void emitBlurSpinJump();
+    void emitDirtyFootPrint();
+    void emitFootPrintWithEffect(int, int);
+    void emitGetCoinEffect(TVec3f *);
+    void emitGetEffect();
+    void emitGetWaterEffect();
+    bool emitParticle(int id);
+    bool emitParticle(int id, const TVec3f *);
+    bool emitParticle(int id, s16);
+    void emitRotateShootEffect();
+    void emitSandEffect();
+    void emitSmoke(s16);
+    void emitSweat(s16);
+    void emitSweatSometimes();
+    void entryModels(JDrama::TGraphics *);
+    void fallProcess();
+    bool fenceMove();
+    bool fencePunch();
+    void finalDrawInitialize();
+    bool fireDashing();
+    bool fireDowning();
+    void floorDamageExec(int damage, int type, int emitcount, int tremble);
+    void floorDamageExec(const TEParams &);
+    void flowMove(const TVec3f &);
+    bool footDowning();
+    void frontSlipEffect();
+    s16 getAttackAngle(const THitActor *);
+    Mtx *getCenterAnmMtx();
+    f32 getChangeAngleSpeed();
+    f32 getCurrentFrame(int);
+    TPullParams *getCurrentPullParams(f32 *, f32 *);
+    void *getDmgMapCode(int) const;
+    void *getGesso(THitActor *);
+    f32 getJumpAccelControl() const;
+    f32 getJumpSlideControl() const;
+    J3DFrameCtrl *getMotionFrameCtrl();
+    void getOffYoshi(bool knockedOff);
+    s16 getOnWirePosAngle(TVec3f *);
+    f32 getPumpFrame() const;
+    void getRidingMtx(Mtx out);
+    Mtx *getRootAnmMtx();
+    void getSideWalkValues(E_SIDEWALK_TYPE *out, f32 *, f32 *);
+    f32 getSlideStickMult();
+    f32 getSlideStopCatch();
+    f32 getSlideStopNormal();
+    f32 getSlopeNormalAccele(f32 *, f32 *);
+    f32 getSlopeSlideAccele(f32 *, f32 *);
+    TSurfingParams *getSurfingParamsWater();
+    Mtx *getTakenMtx();
+    u8 getTrampleCt();
+    s16 getWallAngle() const;
+    void gunExec();
+    bool hanging();
+    u8 hangingCheckRoof(TVec3f *);
+    bool hangonCheck(const TBGCheckData *, const Vec &, const Vec &);
+    void hangPole(THitActor *);
+    bool hipAttacking();
+    void hitNormal(THitActor *);
+    void incHP(int);
+    void initMirrorModel();
+    void initParticle();
+    void inOutWaterEffect(f32);
+    bool isAnimeLoopOrStop();
+    bool isForceSlip();
+    bool isFrontSlip(int);
+    bool isInvincible() const;
+    bool isLast1AnimeFrame();
+    bool isMario();
+    bool isRunningInWater();
+    bool isSlipStart();
+    bool isTakeSituation(THitActor *);
+    bool isUnderWater() const;
+    bool isUnUsualStageStart();
+    bool isUpperPumpingStyle() const;
+    bool isWallInFront() const;
+    bool isWearingCap();
+    bool isWearingHelm();
+    bool jumpCatch();
+    u8 jumpDownCommon(int, int, f32);
+    bool jumpEndCommon(int, int);
+    bool jumpEndEvents(u32);
+    u8 jumpingBasic(int, int, int);
+    bool jumpingDemoCommon(u32, int, f32);
+    bool jumpMain();
+    u8 jumpProcess(int);
+    u8 jumpSlipCommon(s16, u32);
+    bool jumpSlipEvents(JumpSlipRecord *);
+    void keepDistance(const THitActor &, f32);
+    void keepDistance(const TVec3f &, f32, f32);
+    void kickFruitEffect();
+    void kickRoofEffect();
+    u8 landing();
+    void loadAnmTexPattern(J3DAnmTexPattern **, char *, J3DModelData *);
+    void loadBas(void **, const char *);
+    bool loserDown();
+    bool loserExec();
+    void makeHistory();
+    void meltInWaterEffect();
+    bool moveMain();
+    void moveParticle();
+    bool moveRoof();
+    void normalizeNozzle();
+    bool oilRun();
+    bool oilSlip();
+    bool onYoshi() const;
+    void playerRefrection(int);
+    bool pulling();
+    bool readBillboard();
+    void resetHistory();
+    void resetNozzle();
+    bool returnStart(const TVec3f *, f32, bool, int);
+    void rippleEffect();
+    bool rocketCheck();
+    void rocketEffectStart();
+    bool rocketing();
+    bool rollingStart(const TVec3f *, f32);
+    bool roofCommonEvents();
+    bool rotating();
+    void rumbleStart(int, int);
+    bool running();
+    bool runningRippleEffect();
+    f32 setAnimation(int id, f32 speed);
+    void setDivHelm();
+    void setGamePad(TMarioGamePad *);
+    void setNormalAttackArea();
+    void setPlayerVelocity(f32 velocity);
+    void setPositions();
+    f32 setReverseAnimation(int id, f32 speed);
+    u32 setStatusToJumping(u32 status, u32);
+    void setUpperDamageRun();
+    void sinkInSandEffect();
+    bool sleepily();
+    bool sleeping();
+    void sleepingEffect();
+    void sleepingEffectKill();
+    void slideProcess(f32, f32);
+    bool slipBackCommon(int, int, int);
+    bool slipFalling();
+    bool slipForeCommon(int, int, int);
+    void slippingBasic(int, int, int);
+    void slopeProcess();
+    void smallTouchDownEffect();
+    void soundMovement();
+    void soundTorocco();
+    bool specMain();
+    bool squating();
+    bool squatStandup();
+    bool startHangLanding(u32);
+    bool startJumpWall();
+    JAISound *startSoundActor(u32 id);
+    bool startTalking();
+    bool startVoice(u32 id);
+    bool startVoiceIfNoVoice(u32 id);
+    void stateMachine();
+    void stateMachineUpper();
+    bool stayWall();
+    bool stopCommon(int, int);
+    void stopProcess();
+    void stopVoice();
+    void strongTouchDownEffect();
+    bool surfing();
+    void surfingEffect();
+    bool swimMain();
+    void swimmingBubbleEffect();
+    bool swimPaddle();
+    void takeOffGlass();
+    bool taking();
+    void thinkDirty();
+    void thinkHeight();
+    void thinkParams();
+    void thinkSand();
+    void thinkSituation();
+    void thinkWaterSurface();
+    void thinkYoshiHeadCollision();
+    void throwMario(const TVec3f &rotation, f32 strength);
+    bool thrownDowning();
+    void toroccoEffect();
+    bool toroccoStart();
+    bool trampleExec(THitActor *);
+    void treeSlipEffect();
+    bool turnEnd();
+    bool turnning();
+    bool waiting();
+    bool waitingCommonEvents();
+    bool waitingStart(const TVec3f *, f32);
+    bool waitMain();
+    u8 waitProcess();
+    u8 walkEnd();
+    u8 walkProcess();
+    bool warpIn();
+    void warpInEffect();
+    void warpInLight();
+    bool warpOut();
+    void warpOutEffect();
+    bool warpRequest(const TVec3f &, f32);
+    void wearGlass();
+    bool winDemo();
+    void windMove(const TVec3f &);
+    bool wireHanging();
+    void wireMove(f32);
+    bool wireRolling();
+    bool wireSWait();
+    bool wireWait();
 
     u32 mActionState;    // 0x0074
     u32 mJumpingState;   // 0x0078
@@ -915,13 +1091,13 @@ public:
     f32 _D0;
     u8 _D4;
     u8 _D5;
-    TBGCheckData *mWallTriangle;        // 0x00D8
-    TBGCheckData *mRoofTriangle;        // 0x00DC
-    TBGCheckData *mFloorTriangle;       // 0x00E0
-    TBGCheckData *mFloorTriangleWater;  // 0x00E4
-    f32 mCeilingAbove;                  // 0x00E8
-    f32 mFloorBelow;                    // 0x00EC
-    f32 mWaterHeight;                   // 0x00F0
+    const TBGCheckData *mWallTriangle;        // 0x00D8
+    const TBGCheckData *mRoofTriangle;        // 0x00DC
+    const TBGCheckData *mFloorTriangle;       // 0x00E0
+    const TBGCheckData *mFloorTriangleWater;  // 0x00E4
+    f32 mCeilingAbove;                        // 0x00E8
+    f32 mFloorBelow;                          // 0x00EC
+    f32 mWaterHeight;                         // 0x00F0
     u16 _F4;
     u16 mLightID;
     u16 _F8;
@@ -943,7 +1119,7 @@ public:
         bool mIsWater             : 1;
         bool mIsShallowWater      : 1;
         bool mHasFludd            : 1;
-        u32 _02                   : 1;
+        bool mIsFluddEmitting     : 1;
         bool mGainHelmet          : 1;
         bool mGainHelmetFlwCamera : 1;
         bool mIsGroundPoundSitUp  : 1;
@@ -964,7 +1140,7 @@ public:
         bool mIsWater             : 1;
         bool mIsShallowWater      : 1;
         bool mHasFludd            : 1;
-        u32 _02                   : 1;
+        bool mIsFluddEmitting     : 1;
         bool mGainHelmet          : 1;
         bool mGainHelmetFlwCamera : 1;
         bool mIsGroundPoundSitUp  : 1;
@@ -1063,7 +1239,7 @@ public:
     f32 _378;
     u16 _37C;  // padding?
     u16 _37E;
-    u32 _380;
+    u32 mFluddUsageState;
     TTakeActor *mGrabTarget;  // 0x0384
     u8 _388;
     u8 mSurfGessoID;        // 0x0389
@@ -1237,3 +1413,17 @@ public:
     TSoundParams mSoundParams;                       // 0x4230
     TOptionParams mOptionParams;                     // 0x424C
 };
+
+extern TMario *gpMarioOriginal;
+extern TMario *gpMarioAddress;
+extern TVec3f *gpMarioPos;
+extern f32 *gpMarioAngleX;
+extern f32 *gpMarioAngleY;
+extern f32 *gpMarioAngleZ;
+extern f32 *gpMarioSpeedX;
+extern f32 *gpMarioSpeedY;
+extern f32 *gpMarioSpeedZ;
+extern s32 *gpMarioLightID;
+extern u32 *gpMarioFlag;
+extern f32 *gpMarioThrowPower;
+extern TBGCheckData *gpMarioGroundPlane;

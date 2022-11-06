@@ -6,6 +6,8 @@ namespace JGadget {
 
     template <typename T> class TAllocator {
     public:
+        TAllocator() = default;
+
         u8 _00;
     };
 

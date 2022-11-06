@@ -21,3 +21,5 @@ public:
     JPAEmitterData *mResource;
     JPATextureResource *mTextureResource;
 };
+
+JPAResourceManager *gpResourceManager;

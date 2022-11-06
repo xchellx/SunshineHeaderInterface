@@ -4,6 +4,7 @@
 
 #include <JSystem/JDrama/JDRActor.hxx>
 #include <JSystem/JDrama/JDRDirector.hxx>
+#include <JSystem/JDrama/JDRDisplay.hxx>
 #include <JSystem/JGeometry.hxx>
 #include <JSystem/JStage/JSGObject.hxx>
 
@@ -21,9 +22,19 @@
 #include <SMS/game/GCConsole2.hxx>
 #include <SMS/game/PerformList.hxx>
 
+#include <SMS/Player/MarioGamePad.hxx>
+
 class TMarDirector : public JDrama::TDirector {
 public:
-    enum Status { INTRO_INIT = 0, INTRO_PLAYING = 1, NORMAL = 4, PAUSE_MENU = 5, SAVE_CARD = 11 };
+    enum Status {
+        STATE_INTRO_INIT    = 0,
+        STATE_INTRO_PLAYING = 1,
+        STATE_GAME_STARTING = 2,
+        STATE_NORMAL        = 4,
+        STATE_PAUSE_MENU    = 5,
+        STATE_FREEZE        = 10,
+        STATE_SAVE_CARD     = 11
+    };
 
     enum State { WARP_OUT = 2 };
 
@@ -38,7 +49,7 @@ public:
     void nextStateInitialize(s8);
     void setMario();
     void currentStateFinalize(u8);
-    void changeState();
+    s32 changeState();
     void fireStreamingMovie(s8);
     void fireEndDemoCamera();
     void fireStartDemoCamera(const char *, const TVec3f *, s32, f32, bool, s32 (*)(u32, u32), u32,
@@ -58,7 +69,11 @@ public:
     void loadParticle();
     void initLoadParticle();
     void loadResource();
+    s32 setup(JDrama::TDisplay *, TMarioGamePad **, u8 areaID, u8 episodeID);
 
+    TMarioGamePad **mGamePads;
+    TPerformList *mPerformListGX;
+    TPerformList *mPerformListSilhouette;
     TPerformList *mPerformListGXPost;      // 0x0024
     TPerformList *mPerformListMovement;    // 0x0028
     TPerformList *mPerformListCalcAnim;    // 0x002C
@@ -89,7 +104,8 @@ public:
     u32 *mpNextState;          // 0x00AC
     u32 _11;                   // 0x00B0
     u8 mNextState;             // 0x00B4
-    u32 _12[0x1C / 4];         // 0x00B8
+    JKRMemArchive* mCurrentStageArchive; // 0x00B8
+    u32 _12[0x18 / 4];         // 0x00BC
     u32 *mGame6Data;           // 0x00D4
     u32 *mAramArchive;         // 0x00D8
     TShineFader *mShineFader;  // 0x00DC
@@ -99,4 +115,10 @@ public:
     TDemoCannon *mCannonObj;   // 0x0254
     u32 _15;                   // 0x0258
     TShine *mCollectedShine;   // 0x025C
+    u32 _260;
+    u32 _264;
 };
+
+extern TMarDirector *gpMarDirector;
+extern f32 gEffectCoronaScale;
+extern float *gpNPCPtrSaveNormal;

@@ -3,6 +3,7 @@
 #include <Dolphin/types.h>
 #include <SMS/macros.h>
 
+#include <JSystem/JDrama/JDRNameRef.hxx>
 #include <JSystem/JKernel/JKRMemArchive.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 #include <SMS/params/BaseParam.hxx>
@@ -34,8 +35,8 @@ public:
     TParamT(TParams *parent, T param, u16 keycode, const char *name)
         : TBaseParam(parent, keycode, name), mValue(param) {}
 
-    T get() const { return mValue; }
-    void set(T param) { mValue = param; }
+    inline T get() const { return mValue; }
+    inline void set(T param) { mValue = param; }
 
     void load(JSUMemoryInputStream &stream) override {
         u32 fakeit;
@@ -52,5 +53,8 @@ public:
     TParamRT(TParams *parent, T param, u16 keycode, const char *name)
         : TParamT<T>(parent, param, keycode, name) {}
 
-    void set(T param){};
+    inline void set(T param){};
 };
+
+#define SMS_TPARAM_INIT(name, val)                                                                 \
+    name(this, val, JDrama::TNameRef::calcKeyCode(SMS_STRINGIZE(name)), SMS_STRINGIZE(name))

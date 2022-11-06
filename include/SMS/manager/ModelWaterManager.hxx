@@ -62,3 +62,7 @@ public:
 
     static THitActor mStaticHitActor;
 };
+
+extern TModelWaterManager *gpModelWaterManager;
+extern JUtility::TColor waterColor[4];
+extern TVec3f gShineShadowPos;

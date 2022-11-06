@@ -70,7 +70,7 @@ public:
 
 class J3DFrameCtrl {
 public:
-    enum Control { OSCILLATION = 4 };
+    enum Control { ONCE, ONCE_RESET, LOOP, OSCILLATE, OSCILLATE_LOOP };
 
     J3DFrameCtrl();
     virtual ~J3DFrameCtrl();
@@ -79,12 +79,12 @@ public:
     void init(s16);
     void update();
 
-    s8 _04;  // anim state
+    u8 mAnimState;  // anim state
     struct {
         bool _00            : 6;
         bool mIsAnmReversed : 1;
         bool mIsAnmDead     : 1;
-    } mAnmFlags;
+    } mAnimFlags;
     s16 _06;
     s16 mNumFrames;
     s16 _0A;

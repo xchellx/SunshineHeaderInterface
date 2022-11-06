@@ -10,10 +10,13 @@ extern "C" {
 #define CARD_SLOTA 0 /*!< memory card slot A */
 #define CARD_SLOTB 1 /*!< memory card slot B */
 
-#define CARD_WORKAREA    (5 * 8 * 1024) /*!< minimum size of the workarea passed to Mount[Async]() */
-#define CARD_READSIZE    512            /*!< minimum size of block to read from memory card */
-#define CARD_FILENAMELEN 32             /*!< maximum filename length */
-#define CARD_MAXFILES    128            /*!< maximum number of files on the memory card */
+#define CARD_DIRENTRY_SIZE 0x44
+#define CARD_WORKAREA      (5 * 8 * 1024) /*!< minimum size of the workarea passed to Mount[Async]() */
+#define CARD_READSIZE      512            /*!< minimum size of block to read from memory card */
+#define CARD_FILENAMELEN   32             /*!< maximum filename length */
+#define CARD_MAXFILES      128            /*!< maximum number of files on the memory card */
+#define CARD_BLOCKS_TO_BYTES(blocks) int(blocks) * 0x2000
+#define CARD_BYTES_TO_BLOCKS(blocks) int(int(blocks) / 0x2000)
 
 #define CARD_ERROR_UNLOCKED    1    /*!< card being unlocked or already unlocked. */
 #define CARD_ERROR_READY       0    /*!< card is ready. */
@@ -76,7 +79,7 @@ extern "C" {
 #define CARDGetIconSpeed(stat, n) (((stat)->mIconSpeed >> (2 * (n))) & ~CARD_SPEED_MASK);
 #define CARDSetIconSpeed(stat, n, speed)                                                           \
     ((stat)->mIconSpeed =                                                                          \
-         (u16)(((stat)->mIconFmt & ~(CARD_SPEED_MASK << (2 * (n)))) | ((speed) << (2 * (n)))))
+         (u16)(((stat)->mIconSpeed & ~(CARD_SPEED_MASK << (2 * (n)))) | ((speed) << (2 * (n)))))
 #define CARDSetIconAddr(stat, addr)    ((stat)->mIconAddr = (u32)(addr))
 #define CARDSetCommentAddr(stat, addr) ((stat)->mCommentAddr = (u32)(addr))
 
@@ -100,10 +103,44 @@ typedef struct CARDDir {
     u32 mFilelen;
     u8 mPermissions;
     u8 mFilename[CARD_FILENAMELEN];
-    u8 mGamecode[4];
-    u8 mCompany[2];
+    u32 mGamecode;
+    u16 mCompany;
     bool mShowall;
 } CARDDir;
+
+typedef struct CARDDirEntry {
+    u32 mGameCode;
+    u16 mCompany;
+    u8 _06;
+    u8 mBannerFmt;
+    char mFilename[CARD_FILENAMELEN];
+    u32 mLastModified;
+    u32 mIconAddr;
+    u16 mIconFmt;
+    u16 mIconSpeed;
+    u8 mPermission;
+    u8 mCopyTimes;
+    u16 mBlock;
+    u16 mLength;
+    u16 _3A;
+    u32 mCommentAddr;
+} CARDDirEntry;
+
+/*! \typedef struct CARDFileInfo
+\brief structure to hold the fileinformations upon open and for later use.
+\param mChannel CARD slot.
+\param mFilenum file index in the card directory structure.
+\param mOffset offset into the file.
+\param mLength length of file.
+\param mBlock block index on memory card.
+*/
+typedef struct CARDFileInfo {
+    s32 mChannel;
+    s32 mFileNo;
+    s32 mOffset;
+    s32 mLength;
+    u16 mBlock;
+} CARDFileInfo;
 
 /*! \typedef struct CARDStat
 \brief structure to hold the additional statistical informations.
@@ -124,47 +161,32 @@ typedef struct CARDDir {
 typedef struct CARDStat {
     char mFilename[CARD_FILENAMELEN];
     u32 mLength;
-    u32 mTime;  // time since 1970 in seconds
-    char mGamecode[4];
-    char mCompany[2];
+    u32 mLastModified;  // time since 2000 in seconds
+    u32 mGameCode;
+    u16 mCompany;
     u8 mBannerFmt;
     u32 mIconAddr;
-    u16 mIconFmt;
-    u16 mIconFmtList[CARD_MAXICONS];
-    u16 mIconSpeed;
-    u16 mIconSpeedList[CARD_MAXICONS];
+    u16 mIconFmt;  // Masks bits for each icon
+    u16 mIconSpeed;  // Masks bits for each icon
     u32 mCommentAddr;
     u32 mOffsetBanner;
     u32 mOffsetBannerTlut;
     u32 mOffsetIcon[CARD_MAXICONS];
-    u32 mOffsetIconTlut[CARD_MAXICONS];
+    u32 mOffsetIconTlut;
     u32 mOffsetData;
 } CARDStat;
 
-/*! \typedef struct CARDFileInfo
-\brief structure to hold the fileinformations upon open and for later use.
-\param mChannel CARD slot.
-\param mFilenum file index in the card directory structure.
-\param mOffset offset into the file.
-\param mLength length of file.
-\param mBlock block index on memory card.
-*/
-typedef struct CARDFileInfo {
-    s32 mChannel;
-    s32 mFileNo;
-    s32 mOffset;
-    s32 mLength;
-    u16 mBlock;
-} CARDFileInfo;
+void __CARDSetDiskID(const void *idPtr);
+void __CARDSync(s32 chan);
 
 void CARDInit();
 
-void CARDCheck(s32 chan);
+s32 CARDCheck(s32 chan);
 s32 CARDProbeEx(s32 chan, s32 *memSize, s32 *sectSize);
-s32 CARDGetStatus(s32 chan, s32 fileNo, CARDFileInfo *stats);
+s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat *stats);
 
-s32 CARDSetStatus(s32 chan, s32 fileNo, CARDFileInfo *stats);
-s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDFileInfo *stats, CARDCallback cb);
+s32 CARDSetStatus(s32 chan, s32 fileNo, CARDStat *stats);
+s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat *stats, CARDCallback cb);
 
 s32 CARDCreate(s32 chan, const char *fileName, s32 size, CARDFileInfo *file);
 s32 CARDCreateAsync(s32 chan, const char *fileName, s32 size, CARDFileInfo *file, CARDCallback cb);
@@ -172,8 +194,8 @@ s32 CARDCreateAsync(s32 chan, const char *fileName, s32 size, CARDFileInfo *file
 s32 CARDFormat(s32 chan);
 s32 CARDFormatAsync(s32 chan, CARDCallback cb);
 
-void CARDMount(s32 chan, void *workArea, CARDCallback detachCB);
-void CARDMountAsync(s32 chan, void *workArea, CARDCallback detachCB, CARDCallback attachCB);
+s32 CARDMount(s32 chan, void *workArea, CARDCallback detachCB);
+s32 CARDMountAsync(s32 chan, void *workArea, CARDCallback detachCB, CARDCallback attachCB);
 s32 CARDUnmount(s32 chan);
 
 s32 CARDRead(CARDFileInfo *file, void *buffer, u32 len, u32 ofs);
@@ -185,7 +207,7 @@ s32 CARDWriteAsync(CARDFileInfo *file, void *buffer, u32 len, u32 ofs, CARDCallb
 s32 CARDOpen(s32 chan, const char *filename, CARDFileInfo *file);
 s32 CARDClose(CARDFileInfo *file);
 
-s32 CARDFreeBlocks(s32 chan, u16 *freeBlocks, void *unk);
+s32 CARDFreeBlocks(s32 chan, u16 *freeBlocks);
 
 #ifdef __cplusplus
 }

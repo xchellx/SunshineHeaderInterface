@@ -6,7 +6,7 @@
 
 class TSelectGrad : public JDrama::TViewObj {
 public:
-    TSelectGrad();
+    TSelectGrad(const char *name);
     virtual ~TSelectGrad();
 
     virtual void perform(u32, JDrama::TGraphics *) override;

@@ -22,6 +22,14 @@ enum J2DWrapMode {
 
 class J2DPicture : public J2DPane {
 public:
+    J2DPicture(u32 magic, const JUTRect &rect)
+        : J2DPane(18, magic, rect), mPalette(nullptr), mColorMask({255, 255, 255, 255}),
+          mColorOverlay({0, 0, 0, 0}), mTextureCount(0), mVertexColors() {
+        mTypeMagic = 'PIC1';
+        mBinding   = BindingBottom | BindingTop | BindingRight | BindingLeft;
+        setBlendKonstColor();
+        setBlendKonstAlpha();
+    }
     J2DPicture(J2DPane *, JSURandomInputStream *, bool);
     virtual ~J2DPicture();
 
@@ -33,33 +41,33 @@ public:
                      J2DWrapMode wrapV, Mtx *);
     void draw(int x, int y, int w, int h, bool invertX, bool invertY, bool rotate90);
     void drawTexCoord(int x, int y, int w, int h, f32, f32, f32, f32, f32, f32, f32, f32, Mtx *);
+    void insert(JUTTexture *texture, u8 index, f32);
     void remove(u8);
     void setTevMode();
     void swap(f32 &, f32 &);
     void setBlendKonstColor();
     void setBlendKonstAlpha();
 
-    u32 *_EC;
-    u8 _F0[0xFC - 0xF0];
-    u8 _FC;  // padding?
-    u8 _FD;  // ^^
-    u8 _FE;  // ^^
-    u8 _FF;  // ^^
-    u8 _100[0x128 - 0x100];
-    u32 _128;
+    JUTTexture *mTextures[4];
+    u8 mTextureCount;
+    u32 _100;
+    f32 _104;
+    f32 _108;
+    f32 _10C;
+    f32 _110;
+    f32 _114;
+    f32 _118;
+    f32 _11C;
+    f32 _120;
+    JUTPalette *mPalette;
+    u32 mBinding;
     u32 _12C;
     u8 _130;
-    u8 _131;  // padding?
-    u8 _132;  // ^^
-    u8 _133;  // ^^
     u32 _134;
     u32 _138;
-    JUtility::TColor mFillColor;
-    u32 _140;
-    u32 _144;
-    u32 _148;
-    u32 _14C;
-    u32 _150;
-    u32 _154;
-    u32 _158;
+    JUtility::TColor mColorMask;
+    JUtility::TColor mColorOverlay;
+    JUtility::TColor mVertexColors[4];
+    JUtility::TColor _154;
+    JUtility::TColor _158;
 };

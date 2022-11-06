@@ -7,6 +7,9 @@
 extern "C" {
 #endif
 
+#define AI_SAMPLE_32K 0
+#define AI_SAMPLE_48K 1
+
 typedef void (*AIDCallback)();
 typedef void (*AISCallback)(u32);
 
@@ -34,6 +37,7 @@ u32 AIGetStreamSampleRate();
 void AIResetStreamSampleCount();
 u32 AIGetStreamSampleCount();
 
+// trigger is the sample bytes pos to trigger the AIS callback
 void AISetStreamTrigger(u32 trigger);
 u32 AIGetStreamTrigger();
 

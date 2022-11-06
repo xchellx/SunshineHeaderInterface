@@ -12,13 +12,14 @@ public:
     JUTGamePad(EPadPort port);
     virtual ~JUTGamePad();
 
+    static bool recalibrate(u32);
+
     void assign();
     void checkResetSwitch();
     void clearForReset();
     void init();
     void initList();
     void read();
-    bool recalibrate(u32);
     void setButtonRepeat(u32, u32, u32);
     void update();
 
@@ -66,8 +67,8 @@ public:
         u8 mTriggerR;  // _F
         f32 mAnalogL;  // _10
         f32 mAnalogR;  // _14
-        u32 _18;
-        u32 _1C;
+        u32 mRapidInput;
+        u32 mFramesHeld;
         u32 _20;
         u32 _24;
         u32 _28;
@@ -85,8 +86,7 @@ public:
         f32 mStickX;
         f32 mStickY;
         f32 mLengthFromNeutral;
-        u16 mAngle;
-        u16 _E;  // i assume unused
+        s16 mAngle;
     };
 
     class CRumble {
@@ -119,9 +119,6 @@ public:
     u32 _90;
     u32 _94;
     u32 _98;
-    u8 mResetFlag;      // _9C
-    u8 _9D;             // padding?
-    u8 _9E;             // ^^
-    u8 _9F;             // ^^
+    u8 mResetFlagJUT;      // _9C
     OSTick mResetTime;  // _A0
 };

@@ -7,6 +7,15 @@
 
 class TBoundPane {
 public:
+    inline TBoundPane(J2DPane *animPane, JUTRect rect)
+        : mPane(animPane), mRect(rect), mActive(false), mCurrentInterpolate(0.0f),
+          mIncInterpolate(1.0f) {}
+
+    void startAnimation() {
+        mActive = true;
+        mCurrentInterpolate = 0.0f;
+    }
+
     void setPanePosition(s32, const JUTPoint &begin, const JUTPoint &mid, const JUTPoint &end);
     void setPaneSize(s32, const JUTPoint &begin, const JUTPoint &mid, const JUTPoint &end);
     void update();

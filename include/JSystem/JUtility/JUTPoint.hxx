@@ -5,7 +5,8 @@
 class JUTPoint {
 public:
     JUTPoint();
+    inline JUTPoint(int x_, int y_) : x(x_), y(y_) {}
 
-    s32 x;  // _0
-    s32 y;  // _4
+    int x;  // _0
+    int y;  // _4
 };

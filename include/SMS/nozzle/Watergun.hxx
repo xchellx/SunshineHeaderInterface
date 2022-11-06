@@ -1,42 +1,46 @@
 #pragma once
 
 #include <Dolphin/types.h>
+#include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JGeometry.hxx>
 #include <SMS/nozzle/NozzleBase.hxx>
 #include <SMS/nozzle/NozzleTrigger.hxx>
 #include <SMS/params/Params.hxx>
 
 class TMario;
-
-struct TWaterEmitInfo : public TParams {
-    TWaterEmitInfo(const char *prm);
-
-    TParamT<s32> mNum;
-    TParamT<s16> mAlive;
-    TParamT<s16> mAttack;
-    TParamT<TVec3f> mDir;
-    TParamT<TVec3f> mPos;
-    TParamT<TVec3f> mV;
-    TParamT<f32> mDirTremble;
-    TParamT<f32> mPow;
-    TParamT<f32> mPowTremble;
-    TParamT<f32> mSize;
-    TParamT<f32> mSizeTremble;
-    TParamT<f32> mHitRadius;
-    TParamT<f32> mHitHeight;
-    TParamT<s32> mFlag;
-    TParamT<s16> mType;
-
-private:
-    TParamT<s16> __padding;
-};
+class TMarioControllerWork;
 
 class TWaterGun {
-
 public:
-    enum NozzleType { Spray, Rocket, Underwater, Yoshi, Hover, Turbo, Sniper };
+    enum TNozzleType : u8 { Spray, Rocket, Underwater, Yoshi, Hover, Turbo, Sniper };
 
-    u32 _00[0x8 / 4];                       // 0x0000
+    TWaterGun(TMario *);
+
+    virtual void perform(u32, JDrama::TGraphics *);
+
+    void calcAnimation(JDrama::TGraphics *);
+    void changeBackup();
+    void changeNozzle(TNozzleType, bool);
+    bool damage();
+    void emit();
+    TNozzleType getCurrentNozzle() const;
+    Mtx *getEmitMtx(int);
+    void getEmitPosDirSpeed(int, TVec3f *pos, TVec3f *dir, TVec3f *speed);
+    Mtx *getNozzleMtx();
+    f32 getPressure();
+    f32 getPressureMax();
+    void init();
+    void initInLoadAfter();
+    bool isEmitting();
+    bool isPressureOn();
+    void movement();
+    void rotateProp(f32);
+    void setAmountToRate(f32);
+    void setBaseTRMtx(Mtx);
+    void suck();
+    void triggerPressureMovement(const TMarioControllerWork &);
+
+    u32 _04;                                // 0x0000
     TMario *mMario;                         // 0x0008
     TNozzleBase mNozzleDeform;              // 0x000C
     TNozzleTrigger mNozzleDeformBomb;       // 0x0390

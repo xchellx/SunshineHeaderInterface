@@ -6,6 +6,7 @@
 
 #include <SMS/actor/LiveActor.hxx>
 #include <SMS/collision/BGCheck.hxx>
+#include <SMS/collision/MapCheck.hxx>
 #include <SMS/collision/MapCollisionBase.hxx>
 
 class TMapCollisionData {
@@ -15,7 +16,7 @@ public:
     void addCheckDataToGrid(TBGCheckData *, int);
     void *allocCheckData(u32);
     void *allocCheckList(int, int);
-    // Flags are 0x4 = ignore water, 0x1 = ignore death planes
+    // Flags are 0x1 = ignore water, 0x4 = ignore death planes
     f32 checkGround(f32 x, f32 y, f32 z, u8 ignoreFlags, const TBGCheckData **) const;
     f32 checkGroundList(f32 x, f32 y, f32 z, u8 ignoreFlags, const TBGCheckList *,
                         const TBGCheckData **);
@@ -52,3 +53,5 @@ public:
 
     static TBGCheckData mIllegalCheckData;
 };
+
+extern TMapCollisionData *gpMapCollisionData;

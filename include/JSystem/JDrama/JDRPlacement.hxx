@@ -14,7 +14,7 @@ namespace JDrama {
             : TViewObj(name), mPosition(0.0f, 0.0f, 0.0f), mPlacementFlags(0) {}
         virtual ~TPlacement();
 
-        virtual void load(JSUMemoryInputStream &);
+        void load(JSUMemoryInputStream &) override;
 
         TVec3f mPosition;
         TFlagT<u16> mPlacementFlags;

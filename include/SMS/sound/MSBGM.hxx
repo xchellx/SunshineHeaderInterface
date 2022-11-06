@@ -70,3 +70,6 @@ public:
 
     static void *smBgmInTrack[4];  // JASystem::TTrack
 };
+
+extern u32 gDemoBGM;
+extern u32 gStageBGM;

@@ -3,10 +3,16 @@
 #include <Dolphin/GX.h>
 
 struct ResTLUT {
-    u8 mTlutFmt;
+    enum EFormat {
+        IA8 = 0,
+        RGB565 = 1,
+        RGB5A3 = 2
+    };
+
+    u8 mFormat;
     u8 mTransparency;
     u16 mLutSize;
-    void *mLut __attribute__((aligned(32)));
+    void *mLut;
 };
 
 enum JUTTransparency { OPAQUE, TRANSPARENT };

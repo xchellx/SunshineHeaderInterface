@@ -2,10 +2,10 @@
 
 #include <Dolphin/MTX.h>
 #include <Dolphin/types.h>
-#include <JSystem/JKernel/JKRHeap.hxx>
 #include <JSystem/JAudio/JAIBasic.hxx>
+#include <JSystem/JKernel/JKRHeap.hxx>
 
-enum MS_SCENE_WAVE {};
+enum MS_SCENE_WAVE { MS_WAVE_DEFAULT = 256, MS_WAVE_DELFINO_PLAZA = 513 };
 
 class MSound : public JAIBasic {
 public:
@@ -62,8 +62,7 @@ public:
 
         SE_YOSHI_FIRST_RIDE = 0x4849,
 
-        SE_NINTENDO_CHAO = 0x7914,
-        SE_NINTENDO_COIN = 0x7915
+        SE_NINTENDO_SOUND = 0x7914
     };
 
     MSound(JKRHeap *, JKRHeap *, u32, u8 *, u8 *, u32);
@@ -111,3 +110,8 @@ public:
 
     u8 _00[0xD2];
 };
+
+extern MSound *gpMSound;
+extern f32 gAudioVolume;
+extern f32 gAudioPitch;
+extern f32 gAudioSpeed;

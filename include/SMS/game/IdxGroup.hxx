@@ -4,11 +4,11 @@
 #include <JSystem/JDrama/JDRViewObj.hxx>
 #include <JSystem/JGadget/List.hxx>
 #include <SMS/actor/HitActor.hxx>
-#include <SMS/game/ViewObjPtrList.hxx>
+#include <JSystem/JDrama/JDRViewObjPtrListT.hxx>
 
-class IdxGroup : public TViewObjPtrListT<THitActor, JDrama::TViewObj> {
+class IdxGroup : public JDrama::TViewObjPtrListT<THitActor> {
 public:
-    IdxGroup(const char *name) : TViewObjPtrListT<THitActor, JDrama::TViewObj>(name){};
+    IdxGroup(const char *name) : TViewObjPtrListT(name){};
     virtual ~IdxGroup();
 
     virtual void loadSuper(JSUMemoryInputStream &stream) override;

@@ -55,3 +55,5 @@ public:
     TMapWarp *mMapWarp;                 // 0x0014
     TMapXlu *mMapXlu;                   // 0x0018
 };
+
+extern TMap *gpMap;

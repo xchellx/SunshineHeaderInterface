@@ -28,3 +28,5 @@ public:
     static u8 mEdgeAlpha;
     static s32 mFlushTime;
 };
+
+extern TPollutionManager *gpPollution;

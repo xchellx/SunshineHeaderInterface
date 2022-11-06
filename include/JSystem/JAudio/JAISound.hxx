@@ -42,7 +42,7 @@ public:
     void setFxmix(f32, u32, u8);
     void setPan(f32, u32, u8);
     void setPauseMode(u8, u8);
-    void setPitch(f32, u32, u8);
+    void setPitch(f32 pitch, u32 interpolation, u8 slot);
     void setPortData(u8, u16);
     void setSeInterDolby(u8, f32, u32, u8);
     void setSeInterFxmix(u8, f32, u32, u8);

@@ -56,16 +56,16 @@ class J2DPane {
 public:
     J2DPane();
     J2DPane(J2DPane *, s16, bool, u32, const JUTRect &);
-    J2DPane(s16, u32, const JUTRect &);
+    J2DPane(u16, u32, const JUTRect &);
     J2DPane(J2DPane *, JSURandomInputStream *, bool);
     virtual ~J2DPane();
 
-    virtual void drawSelf(int, int, Mtx *);
-    virtual bool setConnectParent(bool);
-    virtual void drawSelf(int, int);
-    virtual void resize(int, int);
     virtual void move(int, int);
     virtual void add(int, int);
+    virtual void resize(int, int);
+    virtual bool setConnectParent(bool);
+    virtual void drawSelf(int, int);
+    virtual void drawSelf(int, int, Mtx *);
     virtual J2DPane *search(u32 id);
     virtual void makeMatrix(int, int);
 
@@ -74,19 +74,15 @@ public:
     void setCullBack(GXCullback cullback);
     void setBasePosition(J2DBasePosition basePos);
 
-    u16 _4;
-    u16 _6;           // padding?
-    u32 mID;          // _8
+    u16 mTypeID;
+    u32 mTypeMagic;          // _8
     bool mIsVisible;  // _C
-    u8 _D;            // padding?
-    u8 _E;            // ^^
-    u8 _F;            // ^^
-    u32 _10;
+    u32 mTag;
     JUTRect mRect;          // _14
     JUTRect mCRect;         // _24
     JUTRect mClipRect;      // _34
     JUTRect mScissorBound;  // _44
-    Mtx _54;
+    Mtx mScreenMtx;
     u8 _84[0xB4 - 0x84];
     u32 _B4;
     u32 _B8;
@@ -97,7 +93,10 @@ public:
     u8 mAlpha;
     u8 mAlphaCopy;
     u8 _CE;
-    u8 _CF;  // connectParent
+    bool mConnectParent;
     JSUPtrList mChildrenList;
     JSUPtrLink mPtrLink;
 };
+
+void J2DFillBox(int x, int y, int w, int h, JUtility::TColor color);
+void J2DFillBox(JUTRect rect, JUtility::TColor color);

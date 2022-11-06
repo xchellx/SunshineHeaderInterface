@@ -44,3 +44,5 @@ public:
     u16 _32;  // padding?
     u8 _34[0x6A8 - 0x34];
 };
+
+extern TCameraShake *gpCameraShake;

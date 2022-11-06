@@ -13,7 +13,7 @@ namespace JStage {
         virtual unsigned long JSGGetSystemData(unsigned long);
         virtual void JSGSetSystemData(unsigned long, unsigned long);
         virtual TObject *JSGFindObject(const char *, TEObject) const;
-        virtual unsigned long JSGCreateObject(const char *, TEObject);
+        virtual unsigned long JSGCreateObject(const char *, TEObject, u32);
         virtual void JSGDestroyObject(TObject *);
     };
 

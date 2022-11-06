@@ -3,8 +3,9 @@
 #include <Dolphin/types.h>
 #include <JSystem/JDrama/JDRCamera.hxx>
 #include <JSystem/JDrama/JDRGraphics.hxx>
-#include <SMS/camera/CameraInbetween.hxx>
-#include <SMS/camera/CameraMapTool.hxx>
+#include <SMS/Camera/CameraKindParam.hxx>
+#include <SMS/Camera/CameraInbetween.hxx>
+#include <SMS/Camera/CameraMapTool.hxx>
 #include <SMS/npc/BaseNPC.hxx>
 
 class CPolarSubCamera : public JDrama::TLookAtCamera {
@@ -119,7 +120,7 @@ public:
         bool mDisableMovement : 1;
         u32 _01               : 10;
     } mStateFlags;  // 0x0064
-    f32 *mCamParams;
+    TCameraKindParam *mCamParams;
     TCameraInbetween *mInbetween;  // 0x006C
     u32 _01[0x34 / 4];             // 0x0070
     u16 _02;                       // 0x00A4
@@ -137,24 +138,28 @@ struct TCamParamData {
     f32 mFarCamDist;
     f32 mNearCurveBezierPointOut;
     f32 mFarCurveBezierPointOut;
-    f32 mNearCurveBezierPointIn;
+    s16 mNearAxisFocalRotationY;
+    s16 mFarAxisFocalRotationY;
     f32 mCameraZoomSpeed;
     s16 mCameraRotateSpeed;
     s16 _22;
-    f32 mNearCamHeightFromGround;
-    f32 mFarCamHeightFromGround;
+    f32 mNearCamFocalHeight;
+    f32 mFarCamFocalHeight;
     f32 _2C;
     f32 _30;
     f32 _34;
     f32 _38;
-    f32 mNearCamHOffsetDist;
+    f32 mNearCamAtSideForwardDist;
     f32 _40;
-    f32 mFarCamHOffsetDist;
+    f32 mFarCamAtSideForwardDist;
     f32 _48;
     f32 _4C;
     f32 _50;
     f32 _54;
-    f32 _58;
+    s16 mCamAxisFocalRotationX2;
+    s16 mCamAxisFocalRotationY2;
     f32 mCamXOffset;
     f32 _60[0x9C / 4];
 };
+
+extern CPolarSubCamera *gpCamera;

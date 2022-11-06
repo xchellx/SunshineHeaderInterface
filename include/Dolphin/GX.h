@@ -1624,7 +1624,7 @@ void GXSetTexCoordGen(u16 texcoord, u32 tgen_typ, u32 tgen_src, u32 mtxsrc);
  *
  * The \a normalize argument allows the computed texcoord to be normalized after
  * the multiplication by \a mtxsrc (the first-pass transformation). After the
- * optional normalization step, the texcoord is then multiplied by the 3x4
+ * std::optional normalization step, the texcoord is then multiplied by the 3x4
  * matrix \a postmtx. This matrix is refered to as the post-transform matrix.
  *
  * The result of this step is the texture coordinate that is used to look up the
@@ -2374,7 +2374,7 @@ void GXInitFogAdjTable(GXFogAdjTbl *table, u16 width, f32 projmtx[4][4]);
  * \details The indirect matrix and scale is used to process the results of an
  * indirect lookup in order to produce offsets to use during a regular lookup.
  * The matrix is multiplied by the [S T U] offsets that have been extracted (and
- * optionally biased) from the indirect lookup color. In this matrix-vector
+ * std::optionally biased) from the indirect lookup color. In this matrix-vector
  * multiply, the matrix is on the left and the [S T U] column vector is on the
  * right.
  *
@@ -2856,7 +2856,7 @@ void GXSetTexCopySrc(u16 left, u16 top, u16 wd, u16 ht);
  * specifies the number of texels between adjacent lines in the texture buffer
  * and can be different than the width of the source image. This function also
  * sets the texture format (\a fmt) to be created during the copy operation. An
- * optional box filter can be enabled using \a mipmap. This flag will scale the
+ * std::optional box filter can be enabled using \a mipmap. This flag will scale the
  * source image by 1/2.
  *
  * Normally, the width of the EFB and destination \a wd are the same. When

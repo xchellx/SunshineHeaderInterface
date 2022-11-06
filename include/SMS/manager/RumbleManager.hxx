@@ -33,3 +33,5 @@ public:
     u32 _28;
     u32 *_2C;
 };
+
+extern RumbleMgr *SMSRumbleMgr;

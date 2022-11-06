@@ -13,7 +13,7 @@ namespace JDrama {
         virtual ~TAmbColor();
 
         virtual void load(JSUMemoryInputStream &stream);
-        virtual void perform(u32, TGraphics *);
+        void perform(u32, TGraphics *) override;
 
         u8 r;  // 14
         u8 g;  // 15

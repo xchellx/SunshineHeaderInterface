@@ -13,7 +13,7 @@ enum class J2DTextBoxVBinding { Center, Bottom, Top };
 
 class J2DTextBox : public J2DPane {
 public:
-    J2DTextBox() {}
+    J2DTextBox() : J2DPane() {}
     J2DTextBox(const ResFONT *, const char *);
     J2DTextBox(J2DPane *, JSURandomInputStream *, bool);
     J2DTextBox(u32, const JUTRect &, const ResFONT *, const char *, J2DTextBoxHBinding,
@@ -33,18 +33,18 @@ public:
     void draw(int, int);
 
     JUTFont *mFont;  // _EC
-    u32 _F0;
-    u32 _F4;
+    JUtility::TColor mGradientTop;
+    JUtility::TColor mGradientBottom;
     J2DTextBoxHBinding mHBinding;  // _F8
     J2DTextBoxVBinding mVBinding;  // _FC
-    u32 *mStrPtr;
+    char *mStrPtr;
     u32 _104;
     u32 _108;
-    JUtility::TColor mColor;
-    JUtility::TColor mGradient;
-    u32 _114;
-    u32 _118;
-    u32 _11C;
-    u32 _120;
+    size_t mCharSpacing;
+    size_t mNewlineSize;
+    size_t mCharSizeX;
+    size_t mCharSizeY;
+    JUtility::TColor mColorMask;
+    JUtility::TColor mAdvanceColor;
     bool mInitialized;
 };

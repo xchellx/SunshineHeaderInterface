@@ -6,7 +6,7 @@
 
 namespace JGadget {
 
-    template <class _T, template <class> class _A> class TVector {
+    template <class _T, class _A = TAllocator<_T>> class TVector {
         class TNode_ {
             TNode_ *mPrev;
             TNode_ *mNext;
@@ -21,39 +21,49 @@ namespace JGadget {
 
             bool operator==(iterator &rhs) const { return mCurrent == rhs.mCurrent; }
             bool operator!=(iterator &rhs) const { return mCurrent != rhs.mCurrent; }
-            TNode_ *operator->() const { return mCurrent; }
+            iterator operator++() {
+                ++mCurrent;
+                return *this; 
+            }
+            iterator operator--() {
+                --mCurrent;
+                return *this;
+            }
+            _T operator->() const { return mCurrent; }
+            _T &operator*() const { return mCurrent; }
 
-            TNode_ *mCurrent;
+            _T *mCurrent;
         };
 
-        Vector(_A<_T> allocator) { _00 = allocator->_00; }
+        TVector(_A allocator) { mAllocator = allocator; }
 
-        TNode_ *CreateNode_(TNode_ *prev, TNode_ *next, void **item);
-        void DestroyElement_(void **a, void **b) {
+        TNode_ *CreateNode_(TNode_ *prev, TNode_ *next, _T *item);
+        void DestroyElement_(_T *a, _T *b) {
             for (; a != b; ++a) {
             }
         }
-        void InsertRaw(void **a, u32);  // complete later
+        void InsertRaw(_T *a, u32);  // complete later
 
-        iterator begin() { return iterator(mStart.mCurrent); }
-        iterator end() { return iterator(mEnd.mCurrent); }
+        iterator begin() { return { mStart }; }
+        iterator end() { return { mEnd }; }
         iterator erase(_T *a, _T *b);        // complete later
         iterator insert(_T *a, u32, _T *b);  // complete later
 
-        u8 _00;
-        iterator mStart;
-        iterator mEnd;
-        u32 _0C;
+        _A mAllocator;
+        _T *mStart;
+        _T *mEnd;
+        size_t mCapacity;
         f32 _10;
         u32 _14;
 
-        class TVector_pointer_void : public TVector<void *, TAllocator> {
-            TVector_pointer_void();
-            ~TVector_pointer_void();
+    };
 
-            void insert(void **a, void **b);
-            void reserve(size_t);
-        };
+    class TVector_pointer_void : public TVector<void *> {
+        TVector_pointer_void();
+        ~TVector_pointer_void();
+
+        void insert(void **a, void **b);
+        void reserve(size_t);
     };
 
 }  // namespace JGadget
