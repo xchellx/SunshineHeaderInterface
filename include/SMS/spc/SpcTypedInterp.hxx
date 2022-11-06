@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <SMS/spc/SpcInterp.hxx>
+#include <SMS/SPC/SpcInterp.hxx>
 
 template <typename T> class TSpcTypedInterp : public TSpcInterp {
 public:
@@ -9,3 +9,5 @@ public:
 
     void dispatchBuiltin(u32, u32);
 };
+
+void SpcTrace(const char *, ...);

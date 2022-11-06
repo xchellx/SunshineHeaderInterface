@@ -7,7 +7,7 @@
 #include <JSystem/JGeometry.hxx>
 #include <SMS/actor/LiveActor.hxx>
 #include <SMS/graph/GraphWeb.hxx>
-#include <SMS/manager/LiveManager.hxx>
+#include <SMS/Manager/LiveManager.hxx>
 #include <SMS/params/BaseParam.hxx>
 #include <SMS/params/Params.hxx>
 

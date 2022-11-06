@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <SMS/mapobj/MapObjBall.hxx>
+#include <SMS/MapObj/MapObjBall.hxx>
 
 class TResetFruit : public TMapObjBall {
 public:

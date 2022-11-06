@@ -5,9 +5,9 @@
 #include <JSystem/JDrama/JDRDisplay.hxx>
 #include <JSystem/JUtility/JUTConsole.hxx>
 #include <SMS/Player/Mario.hxx>
-#include <SMS/game/GameSequence.hxx>
-#include <SMS/game/MarDirector.hxx>
-#include <SMS/screen/SMSFader.hxx>
+#include <SMS/System/GameSequence.hxx>
+#include <SMS/System/MarDirector.hxx>
+#include <SMS/GC2D/SMSFader.hxx>
 
 class TApplication {
 public:

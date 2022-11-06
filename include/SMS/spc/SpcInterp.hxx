@@ -1,9 +1,9 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <SMS/spc/SpcBinary.hxx>
-#include <SMS/spc/SpcSlice.hxx>
-#include <SMS/spc/SpcStack.hxx>
+#include <SMS/SPC/SpcBinary.hxx>
+#include <SMS/SPC/SpcSlice.hxx>
+#include <SMS/SPC/SpcStack.hxx>
 
 class TSpcInterp {
 public:

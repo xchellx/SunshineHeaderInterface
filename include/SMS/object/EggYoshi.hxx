@@ -4,7 +4,7 @@
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 #include <SMS/M3DUtil/MActor.hxx>
 #include <SMS/actor/HitActor.hxx>
-#include <SMS/mapobj/MapObjGeneral.hxx>
+#include <SMS/MapObj/MapObjGeneral.hxx>
 
 class TMario;
 

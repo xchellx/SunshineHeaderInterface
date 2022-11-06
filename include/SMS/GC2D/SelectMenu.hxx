@@ -10,7 +10,7 @@
 #include <SMS/G2D/ExPane.hxx>
 #include <SMS/GC2D/SelectDir.hxx>
 #include <SMS/GC2D/SelectGrad.hxx>
-#include <SMS/manager/SelectShineManager.hxx>
+#include <SMS/Manager/SelectShineManager.hxx>
 
 class TSelectMenu : public JDrama::TViewObj {
 public:

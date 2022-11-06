@@ -4,7 +4,6 @@
 #include <JSystem/JDrama/JDRNameRef.hxx>
 #include <JSystem/JStage/JSGSystem.hxx>
 #include <JSystem/JUtility/JUTGamePad.hxx>
-#include <SMS/game/PerformList.hxx>
 
 namespace JDrama {
 

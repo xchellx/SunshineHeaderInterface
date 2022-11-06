@@ -3,7 +3,7 @@
 #include <Dolphin/types.h>
 
 #include <SMS/M3DUtil/MActor.hxx>
-#include <SMS/manager/LiveManager.hxx>
+#include <SMS/Manager/LiveManager.hxx>
 
 class TMActorKeeper {
 public:
