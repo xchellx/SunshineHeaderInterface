@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SMS/Enemy/LiveActor.hxx>
+#include <SMS/Strategic/LiveActor.hxx>
 #include <SMS/SPC/SpcBinary.hxx>
 #include <SMS/SPC/SpcTypedInterp.hxx>
 
