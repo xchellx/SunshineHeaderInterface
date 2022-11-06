@@ -3,7 +3,7 @@
 #include <Dolphin/types.h>
 #include <JSystem/JGeometry.hxx>
 #include <JSystem/JParticle/JPABaseEmitter.hxx>
-#include <SMS/Enemy/Item.hxx>
+#include <SMS/MoveBG/Item.hxx>
 
 class TShine : public TItem {
 public:
