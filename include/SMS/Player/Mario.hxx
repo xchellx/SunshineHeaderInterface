@@ -14,7 +14,7 @@
 #include <SMS/actor/TakeActor.hxx>
 #include <SMS/actor/Yoshi.hxx>
 #include <SMS/collision/BGCheck.hxx>
-#include <SMS/nozzle/Watergun.hxx>
+#include <SMS/Player/Watergun.hxx>
 #include <SMS/params/BaseParam.hxx>
 #include <SMS/params/Params.hxx>
 

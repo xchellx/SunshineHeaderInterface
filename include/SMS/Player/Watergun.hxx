@@ -3,8 +3,8 @@
 #include <Dolphin/types.h>
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JGeometry.hxx>
-#include <SMS/nozzle/NozzleBase.hxx>
-#include <SMS/nozzle/NozzleTrigger.hxx>
+#include <SMS/Player/NozzleBase.hxx>
+#include <SMS/Player/NozzleTrigger.hxx>
 #include <SMS/params/Params.hxx>
 
 class TMario;

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <SMS/pollution/PollutionPos.hxx>
+#include <SMS/Map/PollutionPos.hxx>
 
 #include <SMS/j3d/Joint.hxx>
 

@@ -14,7 +14,7 @@
 #include <SMS/m3d/LodAnm.hxx>
 #include <SMS/manager/LiveManager.hxx>
 #include <SMS/manager/MapCollisionManager.hxx>
-#include <SMS/sound/MAnmSound.hxx>
+#include <SMS/MSound/MAnmSound.hxx>
 
 class TLiveActor : public TTakeActor {
 

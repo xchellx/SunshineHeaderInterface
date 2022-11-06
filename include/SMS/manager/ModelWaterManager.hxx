@@ -7,7 +7,7 @@
 #include <JSystem/JGeometry.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 #include <JSystem/JUtility/JUTColor.hxx>
-#include <SMS/nozzle/Watergun.hxx>
+#include <SMS/Player/Watergun.hxx>
 
 class TModelWaterManager : public JDrama::TViewObj {
 public:
