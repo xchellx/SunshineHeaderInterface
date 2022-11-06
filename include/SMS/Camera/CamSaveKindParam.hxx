@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <SMS/params/Params.hxx>
+#include <SMS/System/Params.hxx>
 
 class TCamSaveKindParam : public TParams {
 public:
