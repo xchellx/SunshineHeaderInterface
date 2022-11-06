@@ -2,7 +2,7 @@
 
 #include <Dolphin/types.h>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
-#include <SMS/mapobj/MapObjRail.hxx>
+#include <SMS/MapObj/MapObjRail.hxx>
 
 class TNormalLift : public TRailMapObj {
 public:

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SMS/actor/LiveActor.hxx>
+#include <SMS/Strategic/LiveActor.hxx>
 
 #include <Dolphin/types.h>
 

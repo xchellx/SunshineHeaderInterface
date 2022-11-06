@@ -5,11 +5,11 @@
 #include <JSystem/JDrama/JDRNameRef.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
 #include <JSystem/JGeometry.hxx>
-#include <SMS/actor/LiveActor.hxx>
-#include <SMS/graph/GraphWeb.hxx>
+#include <SMS/Enemy/LiveActor.hxx>
+#include <SMS/Graph/GraphWeb.hxx>
 #include <SMS/Manager/LiveManager.hxx>
-#include <SMS/params/BaseParam.hxx>
-#include <SMS/params/Params.hxx>
+#include <SMS/System/BaseParam.hxx>
+#include <SMS/System/Params.hxx>
 
 class TConductor : public JDrama::TNameRef {
 public:

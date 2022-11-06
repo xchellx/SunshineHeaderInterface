@@ -2,7 +2,7 @@
 
 #include <Dolphin/MTX.h>
 #include <Dolphin/types.h>
-#include <SMS/graph/RailNode.hxx>
+#include <SMS/Graph/RailNode.hxx>
 
 #include <JSystem/JGeometry.hxx>
 

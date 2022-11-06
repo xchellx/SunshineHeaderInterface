@@ -4,8 +4,8 @@
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
-#include <SMS/actor/HitActor.hxx>
-#include <SMS/object/ObjChara.hxx>
+#include <SMS/Strategic/HitActor.hxx>
+#include <SMS/Strategic/ObjChara.hxx>
 
 struct TModelDataLoadEntry {
     const char *mModelPath;

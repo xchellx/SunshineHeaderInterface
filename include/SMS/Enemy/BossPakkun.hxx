@@ -4,10 +4,10 @@
 #include <JSystem/JDrama/JDRActor.hxx>
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JGeometry.hxx>
-#include <SMS/actor/HitActor.hxx>
-#include <SMS/actor/SpineBase.hxx>
-#include <SMS/actor/SpineEnemy.hxx>
-#include <SMS/manager/EnemyManager.hxx>
+#include <SMS/Strategic/HitActor.hxx>
+#include <SMS/Enemy/SpineBase.hxx>
+#include <SMS/Enemy/SpineEnemy.hxx>
+#include <SMS/Manager/EnemyManager.hxx>
 
 class TBPTornado;
 class TBPPolDrop;

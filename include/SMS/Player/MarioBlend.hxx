@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <SMS/m3d/M3UModel.hxx>
+#include <SMS/M3DUtil/M3UModel.hxx>
 
 class M3UModelMario : public M3UModel {
 public:

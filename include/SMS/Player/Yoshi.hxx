@@ -5,7 +5,7 @@
 #include <JSystem/JGeometry.hxx>
 #include <JSystem/JUtility/JUTColor.hxx>
 #include <SMS/M3DUtil/MActor.hxx>
-#include <SMS/object/EggYoshi.hxx>
+#include <SMS/MoveBG/EggYoshi.hxx>
 
 class TMario;
 

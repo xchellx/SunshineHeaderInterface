@@ -11,12 +11,12 @@
 #include <SMS/Player/MarioEffect.hxx>
 #include <SMS/Player/MarioGamePad.hxx>
 #include <SMS/Player/MarioSound.hxx>
-#include <SMS/actor/TakeActor.hxx>
-#include <SMS/actor/Yoshi.hxx>
-#include <SMS/collision/BGCheck.hxx>
+#include <SMS/Strategic/TakeActor.hxx>
+#include <SMS/Enemy/Yoshi.hxx>
+#include <SMS/Map/BGCheck.hxx>
 #include <SMS/Player/Watergun.hxx>
-#include <SMS/params/BaseParam.hxx>
-#include <SMS/params/Params.hxx>
+#include <SMS/System/BaseParam.hxx>
+#include <SMS/System/Params.hxx>
 
 #define MESSAGE_MARIO_TOSS 7
 #define MESSAGE_MARIO_BURN 10

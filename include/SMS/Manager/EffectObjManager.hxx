@@ -6,9 +6,9 @@
 #include <JSystem/JGadget/Allocator.hxx>
 #include <JSystem/JGadget/List.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
-#include <SMS/actor/HitActor.hxx>
-#include <SMS/object/EffectObjBase.hxx>
-#include <SMS/object/ObjChara.hxx>
+#include <SMS/Strategic/HitActor.hxx>
+#include <SMS/Enemy/EffectObjBase.hxx>
+#include <SMS/Strategic/ObjChara.hxx>
 
 /* Size -- 0x34 */
 class TEffectObjManager : public JDrama::TViewObj {

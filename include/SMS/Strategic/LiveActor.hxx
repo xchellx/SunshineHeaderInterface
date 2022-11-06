@@ -7,11 +7,11 @@
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 #include <SMS/M3DUtil/MActor.hxx>
 #include <SMS/M3DUtil/MActorKeeper.hxx>
-#include <SMS/actor/RidingInfo.hxx>
-#include <SMS/actor/SpineBase.hxx>
-#include <SMS/actor/TakeActor.hxx>
-#include <SMS/collision/BGCheck.hxx>
-#include <SMS/m3d/LodAnm.hxx>
+#include <SMS/Enemy/RidingInfo.hxx>
+#include <SMS/Enemy/SpineBase.hxx>
+#include <SMS/Enemy/TakeActor.hxx>
+#include <SMS/Map/BGCheck.hxx>
+#include <SMS/M3DUtil/LodAnm.hxx>
 #include <SMS/Manager/LiveManager.hxx>
 #include <SMS/Manager/MapCollisionManager.hxx>
 #include <SMS/MSound/MAnmSound.hxx>

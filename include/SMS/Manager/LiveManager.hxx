@@ -1,8 +1,8 @@
 #pragma once
 
 #include <JSystem/JDrama/JDRGraphics.hxx>
-#include <SMS/manager/ObjManager.hxx>
-#include <SMS/spc/SpcBinary.hxx>
+#include <SMS/Manager/ObjManager.hxx>
+#include <SMS/SPC/SpcBinary.hxx>
 
 class TLiveActor;
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <SMS/params/Params.hxx>
+#include <SMS/System/Params.hxx>
 
 struct TWaterEmitInfo : public TParams {
     TWaterEmitInfo(const char *prm);

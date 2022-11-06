@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <SMS/actor/Item.hxx>
+#include <SMS/Enemy/Item.hxx>
 #include <SMS/MapObj/MapObjGeneral.hxx>
 
 class TNozzleBox : public TMapObjGeneral {

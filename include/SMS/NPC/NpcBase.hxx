@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <SMS/actor/SpineEnemy.hxx>
+#include <SMS/Enemy/SpineEnemy.hxx>
 
 class TBaseNPC : public TSpineEnemy {
 public:

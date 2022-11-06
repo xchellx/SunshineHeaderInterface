@@ -4,7 +4,7 @@
 #include <Dolphin/types.h>
 #include <JSystem/JGeometry.hxx>
 
-#include <SMS/actor/LiveActor.hxx>
+#include <SMS/Enemy/LiveActor.hxx>
 #include <SMS/collision/MapCollisionBase.hxx>
 
 class TMapCollisionMove : TMapCollisionBase {

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <SMS/collision/MapCollisionMove.hxx>
-#include <SMS/mapobj/MapObjGeneral.hxx>
+#include <SMS/Map/MapCollisionMove.hxx>
+#include <SMS/MapObj/MapObjGeneral.hxx>
 
 class TMapObjTree : public TMapObjGeneral {
 public:

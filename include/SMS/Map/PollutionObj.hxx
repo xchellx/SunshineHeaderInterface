@@ -3,7 +3,7 @@
 #include <Dolphin/types.h>
 #include <SMS/Map/PollutionPos.hxx>
 
-#include <SMS/j3d/Joint.hxx>
+#include <SMS/Map/Joint.hxx>
 
 class TPollutionObj : public TJointObj {
 

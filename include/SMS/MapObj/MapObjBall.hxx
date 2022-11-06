@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <SMS/mapobj/MapObjGeneral.hxx>
+#include <SMS/MapObj/MapObjGeneral.hxx>
 
 class TMapObjBall : public TMapObjGeneral {
 public:

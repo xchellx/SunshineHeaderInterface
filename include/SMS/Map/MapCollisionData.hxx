@@ -4,7 +4,7 @@
 #include <JSystem/JGeometry.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 
-#include <SMS/actor/LiveActor.hxx>
+#include <SMS/Enemy/LiveActor.hxx>
 #include <SMS/collision/BGCheck.hxx>
 #include <SMS/collision/MapCheck.hxx>
 #include <SMS/collision/MapCollisionBase.hxx>

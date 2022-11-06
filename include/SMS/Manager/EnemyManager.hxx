@@ -2,11 +2,11 @@
 
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <SMS/M3DUtil/MActor.hxx>
-#include <SMS/actor/SpineEnemy.hxx>
-#include <SMS/manager/LiveManager.hxx>
-#include <SMS/manager/ObjManager.hxx>
-#include <SMS/params/Params.hxx>
-#include <SMS/spc/SpcBinary.hxx>
+#include <SMS/Enemy/SpineEnemy.hxx>
+#include <SMS/Manager/LiveManager.hxx>
+#include <SMS/Manager/ObjManager.hxx>
+#include <SMS/System/Params.hxx>
+#include <SMS/SPC/SpcBinary.hxx>
 
 class TLiveActor;
 

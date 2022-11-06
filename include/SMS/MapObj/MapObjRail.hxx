@@ -2,9 +2,9 @@
 
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
-#include <SMS/graph/GraphTracer.hxx>
-#include <SMS/graph/GraphWeb.hxx>
-#include <SMS/mapobj/MapObjGeneral.hxx>
+#include <SMS/Graph/GraphTracer.hxx>
+#include <SMS/Graph/GraphWeb.hxx>
+#include <SMS/MapObj/MapObjGeneral.hxx>
 
 class TRailMapObj : public TMapObjBase {
 public:

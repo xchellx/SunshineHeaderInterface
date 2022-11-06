@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SMS/actor/HitActor.hxx>
+#include <SMS/Strategic/HitActor.hxx>
 
 class TEffectObjBase : public THitActor {
 public:

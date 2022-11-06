@@ -1,5 +1,5 @@
 #include <Dolphin/types.h>
-#include <SMS/collision/MapCollisionBase.hxx>
+#include <SMS/Map/MapCollisionBase.hxx>
 
 class TLiveActor;
 

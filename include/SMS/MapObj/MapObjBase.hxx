@@ -5,9 +5,9 @@
 
 #include <JSystem/J3D/J3DModel.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
-#include <SMS/actor/HitActor.hxx>
-#include <SMS/actor/LiveActor.hxx>
-#include <SMS/mapobj/MapObjInit.hxx>
+#include <SMS/Strategic/HitActor.hxx>
+#include <SMS/Strategic/LiveActor.hxx>
+#include <SMS/MapObj/MapObjInit.hxx>
 
 class TMapObjBase : public TLiveActor {
 public:

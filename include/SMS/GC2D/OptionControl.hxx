@@ -2,9 +2,9 @@
 
 #include <Dolphin/types.h>
 #include <JSystem/J2D/J2DSetScreen.hxx>
-#include <SMS/option/OptionRumbleUnit.hxx>
-#include <SMS/option/OptionSoundUnit.hxx>
-#include <SMS/option/OptionSubtitleUnit.hxx>
+#include <SMS/GC2D/OptionRumbleUnit.hxx>
+#include <SMS/GC2D/OptionSoundUnit.hxx>
+#include <SMS/GC2D/OptionSubtitleUnit.hxx>
 
 enum SelectType {
     RUMBLE    = 0,

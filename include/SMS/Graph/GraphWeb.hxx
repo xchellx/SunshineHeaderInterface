@@ -1,9 +1,9 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <SMS/graph/GraphNode.hxx>
-#include <SMS/graph/RailNode.hxx>
-#include <SMS/graph/SplineRail.hxx>
+#include <SMS/Graph/GraphNode.hxx>
+#include <SMS/Graph/RailNode.hxx>
+#include <SMS/Graph/SplineRail.hxx>
 
 class TGraphWeb {
 public:

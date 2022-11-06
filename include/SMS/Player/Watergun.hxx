@@ -5,7 +5,7 @@
 #include <JSystem/JGeometry.hxx>
 #include <SMS/Player/NozzleBase.hxx>
 #include <SMS/Player/NozzleTrigger.hxx>
-#include <SMS/params/Params.hxx>
+#include <SMS/System/Params.hxx>
 
 class TMario;
 class TMarioControllerWork;

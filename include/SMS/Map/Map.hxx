@@ -4,8 +4,8 @@
 
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
-#include <SMS/collision/BGCheck.hxx>
-#include <SMS/collision/MapCollisionData.hxx>
+#include <SMS/Map/BGCheck.hxx>
+#include <SMS/Map/MapCollisionData.hxx>
 
 class TMapWarp {
 public:

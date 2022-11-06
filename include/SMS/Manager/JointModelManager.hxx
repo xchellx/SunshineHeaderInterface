@@ -3,7 +3,7 @@
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
 #include <SMS/M3DUtil/MActor.hxx>
-#include <SMS/map/JointModel.hxx>
+#include <SMS/Map/JointModel.hxx>
 
 class TJointModelManager : public JDrama::TViewObj {
 public:

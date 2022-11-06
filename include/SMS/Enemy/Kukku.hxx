@@ -1,4 +1,4 @@
-#include <SMS/actor/SpineBase.hxx>
+#include <SMS/Enemy/SpineBase.hxx>
 
 class TKukkuBall : public THitActor {
 public:

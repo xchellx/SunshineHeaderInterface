@@ -2,7 +2,7 @@
 
 #include <Dolphin/types.h>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
-#include <SMS/mapobj/MapObjNormalLift.hxx>
+#include <SMS/MapObj/MapObjNormalLift.hxx>
 
 union U32SplitU16 {
     struct {

@@ -4,8 +4,8 @@
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JDrama/JDRNameRef.hxx>
 #include <JSystem/JUtility/JUTRect.hxx>
-#include <SMS/option/CardManager.hxx>
-#include <SMS/option/OptionControl.hxx>
+#include <SMS/System/CardManager.hxx>
+#include <SMS/GC2D/OptionControl.hxx>
 
 enum TEProgress {
     PROGRESS_UNK_0,

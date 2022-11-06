@@ -2,8 +2,8 @@
 
 #include <Dolphin/types.h>
 #include <JSystem/JDrama/JDRGraphics.hxx>
-#include <SMS/actor/HitActor.hxx>
-#include <SMS/actor/Item.hxx>
+#include <SMS/Strategic/HitActor.hxx>
+#include <SMS/Enemy/Item.hxx>
 
 class TCoin : public TItem {
 public:
