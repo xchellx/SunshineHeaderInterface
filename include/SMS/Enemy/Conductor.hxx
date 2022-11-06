@@ -5,7 +5,7 @@
 #include <JSystem/JDrama/JDRNameRef.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
 #include <JSystem/JGeometry.hxx>
-#include <SMS/Enemy/LiveActor.hxx>
+#include <SMS/Strategic/LiveActor.hxx>
 #include <SMS/Graph/GraphWeb.hxx>
 #include <SMS/Manager/LiveManager.hxx>
 #include <SMS/System/BaseParam.hxx>

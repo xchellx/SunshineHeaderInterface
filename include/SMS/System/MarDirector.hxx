@@ -10,7 +10,7 @@
 
 #include <SMS/GC2D/Guide.hxx>
 
-#include <SMS/Enemy/Yoshi.hxx>
+#include <SMS/Player/Yoshi.hxx>
 #include <SMS/MoveBG/Coin.hxx>
 #include <SMS/MoveBG/Shine.hxx>
 

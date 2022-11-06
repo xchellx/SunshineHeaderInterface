@@ -3,7 +3,7 @@
 #include <Dolphin/types.h>
 
 #include <SMS/Strategic/LiveActor.hxx>
-#include <SMS/collision/MapCollisionBase.hxx>
+#include <SMS/Map/MapCollisionBase.hxx>
 
 class TMapCollisionStatic : public TMapCollisionBase {
 public:

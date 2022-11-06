@@ -12,7 +12,7 @@
 #include <SMS/Player/MarioGamePad.hxx>
 #include <SMS/Player/MarioSound.hxx>
 #include <SMS/Strategic/TakeActor.hxx>
-#include <SMS/Enemy/Yoshi.hxx>
+#include <SMS/Player/Yoshi.hxx>
 #include <SMS/Map/BGCheck.hxx>
 #include <SMS/Player/Watergun.hxx>
 #include <SMS/System/BaseParam.hxx>

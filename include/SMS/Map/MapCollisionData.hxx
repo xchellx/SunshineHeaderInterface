@@ -4,10 +4,10 @@
 #include <JSystem/JGeometry.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 
-#include <SMS/Enemy/LiveActor.hxx>
-#include <SMS/collision/BGCheck.hxx>
-#include <SMS/collision/MapCheck.hxx>
-#include <SMS/collision/MapCollisionBase.hxx>
+#include <SMS/Strategic/LiveActor.hxx>
+#include <SMS/Map/BGCheck.hxx>
+#include <SMS/Map/MapCheck.hxx>
+#include <SMS/Map/MapCollisionBase.hxx>
 
 class TMapCollisionData {
 public:

@@ -3,8 +3,8 @@
 #include <Dolphin/types.h>
 #include <JSystem/JGeometry.hxx>
 
-#include <SMS/Enemy/LiveActor.hxx>
-#include <SMS/collision/BGCheck.hxx>
+#include <SMS/Strategic/LiveActor.hxx>
+#include <SMS/Map/BGCheck.hxx>
 
 class TMapCollisionBase {
 public:
