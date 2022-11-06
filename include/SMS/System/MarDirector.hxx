@@ -15,7 +15,7 @@
 #include <SMS/MoveBG/Shine.hxx>
 
 #include <SMS/GC2D/GCConsole2.hxx>
-#include <SMS/npc/BaseNPC.hxx>
+#include <SMS/NPC/NpcBase.hxx>
 #include <SMS/MoveBG/DemoCannon.hxx>
 #include <SMS/GC2D/ShineFader.hxx>
 
