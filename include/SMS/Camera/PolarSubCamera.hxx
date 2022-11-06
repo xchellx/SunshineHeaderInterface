@@ -6,6 +6,7 @@
 #include <SMS/Camera/CameraKindParam.hxx>
 #include <SMS/Camera/CameraInbetween.hxx>
 #include <SMS/Camera/CameraMapTool.hxx>
+#include <SMS/NPC/NpcBase.hxx>
 
 class CPolarSubCamera : public JDrama::TLookAtCamera {
 public:
