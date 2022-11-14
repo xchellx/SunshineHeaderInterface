@@ -24,7 +24,6 @@ namespace JDrama {
 
         TVec3f mSize;      // 24
         TVec3f mRotation;  // 30
-    private:
         u32 _3C;  // 3C
         TNameRef *mRootRef;
     };
