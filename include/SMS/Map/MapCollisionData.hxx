@@ -22,8 +22,8 @@ public:
                         const TBGCheckData **);
     f32 checkRoof(f32 x, f32 y, f32 z, u8, const TBGCheckData **) const;
     f32 checkRoofList(f32 x, f32 y, f32 z, u8, const TBGCheckList *, const TBGCheckData **);
-    void checkWallList(const TBGCheckList *, const TBGWallCheckRecord *);
-    void checkWalls(TBGWallCheckRecord *) const;
+    size_t checkWallList(const TBGCheckList *, const TBGWallCheckRecord *);
+    size_t checkWalls(TBGWallCheckRecord *) const;
     u16 getEntryID();
     bool getGridArea(const TBGCheckData *, int, int *, int *, int *, int *);
     void init(JSUMemoryInputStream &);
