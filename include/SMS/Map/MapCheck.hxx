@@ -1,12 +1,15 @@
 #pragma once
 
 #include <Dolphin/types.h>
+#include <JSystem/JGeometry.hxx>
 #include <SMS/Map/BGCheck.hxx>
 
 class TBGWallCheckRecord {
 public:
-    u32 _00[0x14 / 4];
+    TVec3f mPosition;
+    f32 _0C;
+    size_t mCollideMax;
     size_t mNumWalls;
-    u32 _18;
+    size_t _18;
     TBGCheckData *mWalls;
 };

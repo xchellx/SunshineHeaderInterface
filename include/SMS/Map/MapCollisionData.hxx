@@ -33,21 +33,24 @@ public:
     void removeCheckListData(u16, s32);
     void updateCheckListNode(s32, s32, s32);
 
-    f32 mAreaSizeX;                   // 0x0000
-    f32 mAreaSizeZ;                   // 0x0004
-    u32 _08[0x8 / 4];                 // 0x0008
-    u32 mUnkSize;                     // 0x0010
-    u32 _14[0x8 / 4];                 // 0x0014
-    size_t mFloorArraySize;           // 0x001C
-    u32 _20[0x8 / 4];                 // 0x0020
-    TBGCheckData *mColTable;          // 0x0028
-    TBGCheckList **mConnectedTris;    // 0x002C ?
-    TBGCheckListWarp *mColWarpTable;  // 0x0030
-    u32 _34;                          // 0x0034
-    size_t mCheckDataLength;          // 0x0038
-    size_t mCheckDataLength2;         // 0x003C
-    u16 _40;                          // 0x0040
-    u16 mEntries[256];                // 0x0042
+    f32 mAreaSizeX;                          // 0x0000
+    f32 mAreaSizeZ;                          // 0x0004
+    size_t mBlockXCount;                     // 0x0008
+    size_t mBlockZCount;                     // 0x000C
+    size_t mBlockTotalCount;                 // 0x0010
+    TBGCheckListRoot *mStaticCollisionRoot;  // 0x0014
+    TBGCheckListRoot *mMoveCollisionRoot;    // 0x0014
+    size_t mCheckDataCount;                  // 0x001C
+    size_t mCheckListCount;                  // 0x0020
+    size_t mCheckListWarpCount;              // 0x0024
+    TBGCheckData *mCollisionTris;            // 0x0028
+    TBGCheckList *mCollisionLists;           // 0x002C
+    TBGCheckListWarp *mCollisionListWarps;   // 0x0030
+    u32 _34;                                 // 0x0034
+    size_t mCheckDataLength;                 // 0x0038
+    size_t mCheckDataLength2;                // 0x003C
+    u16 _40;                                 // 0x0040
+    u16 mEntries[256];                       // 0x0042
     u16 mEntryID;
     u32 _244;
 
