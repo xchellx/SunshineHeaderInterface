@@ -41,11 +41,15 @@ public:
 
 class TBGCheckListRoot {
 public:
+    enum EPlaneType {
+        GROUND,
+        ROOF,
+        WALL
+    };
+
     TBGCheckListRoot();
 
-    TBGCheckList mGround;  // 0x0000
-    TBGCheckList mRoof;  // 0x0004
-    TBGCheckList mWall;  // 0x0008
+    TBGCheckList mCheckList[3];  // 0x0000
 };
 
 class TBGCheckListWarp : public TBGCheckList {
