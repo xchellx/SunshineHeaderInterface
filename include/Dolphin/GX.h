@@ -15,41 +15,41 @@
 extern "C" {
 #endif /* __cplusplus */
 
-extern WGPipe *const wgPipe;
+extern WGPipe wgPipe;
 
 #define GX_LOAD_BP_REG(x)                                                                          \
     do {                                                                                           \
-        wgPipe->U8 = 0x61;                                                                         \
+        wgPipe.U8 = 0x61;                                                                         \
         asm volatile("" ::: "memory");                                                             \
-        wgPipe->U32 = (u32)(x);                                                                    \
+        wgPipe.U32 = (u32)(x);                                                                    \
         asm volatile("" ::: "memory");                                                             \
     } while (0)
 
 #define GX_LOAD_CP_REG(x, y)                                                                       \
     do {                                                                                           \
-        wgPipe->U8 = 0x08;                                                                         \
+        wgPipe.U8 = 0x08;                                                                         \
         asm volatile("" ::: "memory");                                                             \
-        wgPipe->U8 = (u8)(x);                                                                      \
+        wgPipe.U8 = (u8)(x);                                                                      \
         asm volatile("" ::: "memory");                                                             \
-        wgPipe->U32 = (u32)(y);                                                                    \
+        wgPipe.U32 = (u32)(y);                                                                    \
         asm volatile("" ::: "memory");                                                             \
     } while (0)
 
 #define GX_LOAD_XF_REG(x, y)                                                                       \
     do {                                                                                           \
-        wgPipe->U8 = 0x10;                                                                         \
+        wgPipe.U8 = 0x10;                                                                         \
         asm volatile("" ::: "memory");                                                             \
-        wgPipe->U32 = (u32)((x)&0xffff);                                                           \
+        wgPipe.U32 = (u32)((x)&0xffff);                                                           \
         asm volatile("" ::: "memory");                                                             \
-        wgPipe->U32 = (u32)(y);                                                                    \
+        wgPipe.U32 = (u32)(y);                                                                    \
         asm volatile("" ::: "memory");                                                             \
     } while (0)
 
 #define GX_LOAD_XF_REGS(x, n)                                                                      \
     do {                                                                                           \
-        wgPipe->U8 = 0x10;                                                                         \
+        wgPipe.U8 = 0x10;                                                                         \
         asm volatile("" ::: "memory");                                                             \
-        wgPipe->U32 = (u32)(((((n)&0xffff) - 1) << 16) | ((x)&0xffff));                            \
+        wgPipe.U32 = (u32)(((((n)&0xffff) - 1) << 16) | ((x)&0xffff));                            \
         asm volatile("" ::: "memory");                                                             \
     } while (0)
 
@@ -1014,153 +1014,153 @@ void GXCallDispList(void *list, u32 nbytes);
 static inline void GXEnd(void) {}
 
 static inline void GXPosition3f32(f32 x, f32 y, f32 z) {
-    wgPipe->F32 = x;
-    wgPipe->F32 = y;
-    wgPipe->F32 = z;
+    wgPipe.F32 = x;
+    wgPipe.F32 = y;
+    wgPipe.F32 = z;
 }
 
 static inline void GXPosition3u16(u16 x, u16 y, u16 z) {
-    wgPipe->U16 = x;
-    wgPipe->U16 = y;
-    wgPipe->U16 = z;
+    wgPipe.U16 = x;
+    wgPipe.U16 = y;
+    wgPipe.U16 = z;
 }
 
 static inline void GXPosition3s16(s16 x, s16 y, s16 z) {
-    wgPipe->S16 = x;
-    wgPipe->S16 = y;
-    wgPipe->S16 = z;
+    wgPipe.S16 = x;
+    wgPipe.S16 = y;
+    wgPipe.S16 = z;
 }
 
 static inline void GXPosition3u8(u8 x, u8 y, u8 z) {
-    wgPipe->U8 = x;
-    wgPipe->U8 = y;
-    wgPipe->U8 = z;
+    wgPipe.U8 = x;
+    wgPipe.U8 = y;
+    wgPipe.U8 = z;
 }
 
 static inline void GXPosition3s8(s8 x, s8 y, s8 z) {
-    wgPipe->S8 = x;
-    wgPipe->S8 = y;
-    wgPipe->S8 = z;
+    wgPipe.S8 = x;
+    wgPipe.S8 = y;
+    wgPipe.S8 = z;
 }
 
 static inline void GXPosition2f32(f32 x, f32 y) {
-    wgPipe->F32 = x;
-    wgPipe->F32 = y;
+    wgPipe.F32 = x;
+    wgPipe.F32 = y;
 }
 
 static inline void GXPosition2u16(u16 x, u16 y) {
-    wgPipe->U16 = x;
-    wgPipe->U16 = y;
+    wgPipe.U16 = x;
+    wgPipe.U16 = y;
 }
 
 static inline void GXPosition2s16(s16 x, s16 y) {
-    wgPipe->S16 = x;
-    wgPipe->S16 = y;
+    wgPipe.S16 = x;
+    wgPipe.S16 = y;
 }
 
 static inline void GXPosition2u8(u8 x, u8 y) {
-    wgPipe->U8 = x;
-    wgPipe->U8 = y;
+    wgPipe.U8 = x;
+    wgPipe.U8 = y;
 }
 
 static inline void GXPosition2s8(s8 x, s8 y) {
-    wgPipe->S8 = x;
-    wgPipe->S8 = y;
+    wgPipe.S8 = x;
+    wgPipe.S8 = y;
 }
 
-static inline void GXPosition1x8(u8 index) { wgPipe->U8 = index; }
+static inline void GXPosition1x8(u8 index) { wgPipe.U8 = index; }
 
-static inline void GXPosition1x16(u16 index) { wgPipe->U16 = index; }
+static inline void GXPosition1x16(u16 index) { wgPipe.U16 = index; }
 
 static inline void GXNormal3f32(f32 nx, f32 ny, f32 nz) {
-    wgPipe->F32 = nx;
-    wgPipe->F32 = ny;
-    wgPipe->F32 = nz;
+    wgPipe.F32 = nx;
+    wgPipe.F32 = ny;
+    wgPipe.F32 = nz;
 }
 
 static inline void GXNormal3s16(s16 nx, s16 ny, s16 nz) {
-    wgPipe->S16 = nx;
-    wgPipe->S16 = ny;
-    wgPipe->S16 = nz;
+    wgPipe.S16 = nx;
+    wgPipe.S16 = ny;
+    wgPipe.S16 = nz;
 }
 
 static inline void GXNormal3s8(s8 nx, s8 ny, s8 nz) {
-    wgPipe->S8 = nx;
-    wgPipe->S8 = ny;
-    wgPipe->S8 = nz;
+    wgPipe.S8 = nx;
+    wgPipe.S8 = ny;
+    wgPipe.S8 = nz;
 }
 
-static inline void GXNormal1x8(u8 index) { wgPipe->U8 = index; }
+static inline void GXNormal1x8(u8 index) { wgPipe.U8 = index; }
 
-static inline void GXNormal1x16(u16 index) { wgPipe->U16 = index; }
+static inline void GXNormal1x16(u16 index) { wgPipe.U16 = index; }
 
 static inline void GXColor4u8(u8 r, u8 g, u8 b, u8 a) {
-    wgPipe->U8 = r;
-    wgPipe->U8 = g;
-    wgPipe->U8 = b;
-    wgPipe->U8 = a;
+    wgPipe.U8 = r;
+    wgPipe.U8 = g;
+    wgPipe.U8 = b;
+    wgPipe.U8 = a;
 }
 
 static inline void GXColor3u8(u8 r, u8 g, u8 b) {
-    wgPipe->U8 = r;
-    wgPipe->U8 = g;
-    wgPipe->U8 = b;
+    wgPipe.U8 = r;
+    wgPipe.U8 = g;
+    wgPipe.U8 = b;
 }
 
 static inline void GXColor3f32(f32 r, f32 g, f32 b) {
-    wgPipe->U8 = (u8)(r * 255.0);
-    wgPipe->U8 = (u8)(g * 255.0);
-    wgPipe->U8 = (u8)(b * 255.0);
+    wgPipe.U8 = (u8)(r * 255.0);
+    wgPipe.U8 = (u8)(g * 255.0);
+    wgPipe.U8 = (u8)(b * 255.0);
 }
 
-static inline void GXColor1u32(u32 clr) { wgPipe->U32 = clr; }
+static inline void GXColor1u32(u32 clr) { wgPipe.U32 = clr; }
 
-static inline void GXColor1u16(u16 clr) { wgPipe->U16 = clr; }
+static inline void GXColor1u16(u16 clr) { wgPipe.U16 = clr; }
 
-static inline void GXColor1x8(u8 index) { wgPipe->U8 = index; }
+static inline void GXColor1x8(u8 index) { wgPipe.U8 = index; }
 
-static inline void GXColor1x16(u16 index) { wgPipe->U16 = index; }
+static inline void GXColor1x16(u16 index) { wgPipe.U16 = index; }
 
 static inline void GXTexCoord2f32(f32 s, f32 t) {
-    wgPipe->F32 = s;
-    wgPipe->F32 = t;
+    wgPipe.F32 = s;
+    wgPipe.F32 = t;
 }
 
 static inline void GXTexCoord2u16(u16 s, u16 t) {
-    wgPipe->U16 = s;
-    wgPipe->U16 = t;
+    wgPipe.U16 = s;
+    wgPipe.U16 = t;
 }
 
 static inline void GXTexCoord2s16(s16 s, s16 t) {
-    wgPipe->S16 = s;
-    wgPipe->S16 = t;
+    wgPipe.S16 = s;
+    wgPipe.S16 = t;
 }
 
 static inline void GXTexCoord2u8(u8 s, u8 t) {
-    wgPipe->U8 = s;
-    wgPipe->U8 = t;
+    wgPipe.U8 = s;
+    wgPipe.U8 = t;
 }
 
 static inline void GXTexCoord2s8(s8 s, s8 t) {
-    wgPipe->S8 = s;
-    wgPipe->S8 = t;
+    wgPipe.S8 = s;
+    wgPipe.S8 = t;
 }
 
-static inline void GXTexCoord1f32(f32 s) { wgPipe->F32 = s; }
+static inline void GXTexCoord1f32(f32 s) { wgPipe.F32 = s; }
 
-static inline void GXTexCoord1u16(u16 s) { wgPipe->U16 = s; }
+static inline void GXTexCoord1u16(u16 s) { wgPipe.U16 = s; }
 
-static inline void GXTexCoord1s16(s16 s) { wgPipe->S16 = s; }
+static inline void GXTexCoord1s16(s16 s) { wgPipe.S16 = s; }
 
-static inline void GXTexCoord1u8(u8 s) { wgPipe->U8 = s; }
+static inline void GXTexCoord1u8(u8 s) { wgPipe.U8 = s; }
 
-static inline void GXTexCoord1s8(s8 s) { wgPipe->S8 = s; }
+static inline void GXTexCoord1s8(s8 s) { wgPipe.S8 = s; }
 
-static inline void GXTexCoord1x8(u8 index) { wgPipe->U8 = index; }
+static inline void GXTexCoord1x8(u8 index) { wgPipe.U8 = index; }
 
-static inline void GXTexCoord1x16(u16 index) { wgPipe->U16 = index; }
+static inline void GXTexCoord1x16(u16 index) { wgPipe.U16 = index; }
 
-static inline void GXMatrixIndex1x8(u8 index) { wgPipe->U8 = index; }
+static inline void GXMatrixIndex1x8(u8 index) { wgPipe.U8 = index; }
 
 /*!
  * \fn void GXAdjustForOverscan(GXRModeObj *rmin,GXRModeObj *rmout,u16 hor,u16
