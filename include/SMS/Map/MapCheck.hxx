@@ -11,5 +11,5 @@ public:
     size_t mCollideMax;
     size_t mNumWalls;
     u32 mIgnoreFlags;
-    TBGCheckData *mWalls;
+    TBGCheckData *mWalls[4];
 };
