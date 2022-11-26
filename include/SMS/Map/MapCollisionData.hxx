@@ -18,11 +18,7 @@ public:
     void *allocCheckList(int, int);
     // Flags are 0x1 = ignore water, 0x4 = ignore death planes
     f32 checkGround(f32 x, f32 y, f32 z, u8 ignoreFlags, const TBGCheckData **) const;
-    f32 checkGroundList(f32 x, f32 y, f32 z, u8 ignoreFlags, const TBGCheckList *,
-                        const TBGCheckData **);
     f32 checkRoof(f32 x, f32 y, f32 z, u8, const TBGCheckData **) const;
-    f32 checkRoofList(f32 x, f32 y, f32 z, u8, const TBGCheckList *, const TBGCheckData **);
-    size_t checkWallList(const TBGCheckList *, const TBGWallCheckRecord *);
     size_t checkWalls(TBGWallCheckRecord *) const;
     u16 getEntryID();
     bool getGridArea(const TBGCheckData *, int, int *, int *, int *, int *);
@@ -32,6 +28,12 @@ public:
     bool polygonIsInGrid(f32, f32, f32, f32, TBGCheckData *);
     void removeCheckListData(u16, s32);
     void updateCheckListNode(s32, s32, s32);
+
+    static f32 checkGroundList(f32 x, f32 y, f32 z, u8 ignoreFlags, const TBGCheckList *,
+                               const TBGCheckData **);
+    static f32 checkRoofList(f32 x, f32 y, f32 z, u8 ignoreFlags, const TBGCheckList *,
+                             const TBGCheckData **);
+    static size_t checkWallList(const TBGCheckList *, const TBGWallCheckRecord *);
 
     f32 mAreaSizeX;                          // 0x0000
     f32 mAreaSizeZ;                          // 0x0004
