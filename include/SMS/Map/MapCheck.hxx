@@ -7,9 +7,9 @@
 class TBGWallCheckRecord {
 public:
     TVec3f mPosition;
-    f32 _0C;
+    f32 mRadius;
     size_t mCollideMax;
     size_t mNumWalls;
-    size_t _18;
+    u32 mIgnoreFlags;
     TBGCheckData *mWalls;
 };
