@@ -2,18 +2,94 @@
 
 #include <Dolphin/MTX.h>
 #include <Dolphin/math.h>
-#include <SMS/equivtype.hxx>
+#include <JSystem/equivtype.hxx>
 
 namespace JGeometry {
 
     template <typename T> struct TVec2 {
-        TVec2();
+        T x;
+        T y;
+
+        TVec2()              = default;
+        TVec2(const TVec2 &) = default;
+        template <typename TY> TVec2(TY _x, TY _y) : x(_x), y(_y) {}
+
+        operator Vec *() const {
+            static_assert(is_equal_type<T, f32>());
+            return (Vec *)&x;
+        }
+        operator const Vec *() const {
+            static_assert(is_equal_type<T, f32>());
+            return (const Vec *)&x;
+        }
+
+        // Because PAL is missing this operator
+        TVec2 &operator=(const TVec2 &other) {
+            x = other.x;
+            y = other.y;
+            return *this;
+        };
+
+        TVec2 &operator+=(const TVec2 &other) {
+            x += other.x;
+            y += other.y;
+            return *this;
+        }
+
+        TVec2 &operator-=(const TVec2 &other) {
+            x -= other.x;
+            y -= other.y;
+            return *this;
+        }
+
+        TVec2 &operator*=(const TVec2 &other) {
+            x *= other.x;
+            y *= other.y;
+            return *this;
+        }
+
+        TVec2 &operator/=(const TVec2 &other) {
+            x /= other.x;
+            y /= other.y;
+            return *this;
+        }
+
+        TVec2 operator+(const TVec2 &other) { return {x + other.x, y + other.y}; }
+        TVec2 operator-(const TVec2 &other) { return {x - other.x, y - other.y}; }
+        TVec2 operator*(const TVec2 &other) { return {x * other.x, y * other.y}; }
+        TVec2 operator/(const TVec2 &other) { return {x / other.x, y / other.y}; }
+
+        void set(const TVec2 &other) {
+            x = other.x;
+            y = other.y;
+        }
+        void set(const Vec &other) {
+            x = other.x;
+            y = other.y;
+        }
+        void set(T _x, T _y, T _z) {
+            x = _x;
+            y = _y;
+        }
 
         f32 dot(const TVec2 &) const;
         void sub(const TVec2 &);
 
-        T x;
-        T y;
+        static inline TVec2 zero() {
+            return TVec2<T>(static_cast<T>(0), static_cast<T>(0));
+        }
+        static inline TVec2 up() {
+            return TVec2<T>(static_cast<T>(0), static_cast<T>(1));
+        }
+        static inline TVec2 down() {
+            return TVec2<T>(static_cast<T>(0), static_cast<T>(-1));
+        }
+        static inline TVec2 right() {
+            return TVec2<T>(static_cast<T>(1), static_cast<T>(0));
+        }
+        static inline TVec2 left() {
+            return TVec2<T>(static_cast<T>(-1), static_cast<T>(0));
+        }
     };
 
     template <typename T> struct TVec3 {
@@ -21,9 +97,9 @@ namespace JGeometry {
         T y;
         T z;
 
-        TVec3();
-        TVec3(const TVec3 &);
-        template <typename TY> TVec3(TY, TY, TY);
+        TVec3() = default;
+        TVec3(const TVec3 &) = default;
+        template <typename TY> TVec3(TY _x, TY _y, TY _z) : x(_x), y(_y), z(_z) {}
 
         operator Vec *() const {
             static_assert(is_equal_type<T, f32>());
@@ -36,17 +112,44 @@ namespace JGeometry {
 
         // Because PAL is missing this operator
         TVec3 &operator=(const TVec3 &other) {
-            this->x = other.x;
-            this->y = other.y;
-            this->z = other.z;
+            x = other.x;
+            y = other.y;
+            z = other.z;
             return *this;
         };
-        TVec3 &operator*=(const TVec3 &);
-        TVec3 &operator-=(const TVec3 &);
+
+        TVec3 &operator+=(const TVec3 &other) {
+            x += other.x;
+            y += other.y;
+            z += other.z;
+            return *this;
+        }
+
+        TVec3 &operator-=(const TVec3 &other) {
+            x -= other.x;
+            y -= other.y;
+            z -= other.z;
+            return *this;
+        }
+
+        TVec3 &operator*=(const TVec3 &other) {
+            x *= other.x;
+            y *= other.y;
+            z *= other.z;
+            return *this;
+        }
+
+        TVec3 &operator/=(const TVec3 &other) {
+            x /= other.x;
+            y /= other.y;
+            z /= other.z;
+            return *this;
+        }
 
         TVec3 operator+(const TVec3 &other) { return {x + other.x, y + other.y, z + other.z}; }
-
         TVec3 operator-(const TVec3 &other) { return {x - other.x, y - other.y, z - other.z}; }
+        TVec3 operator*(const TVec3 &other) { return {x * other.x, y * other.y, z * other.z}; }
+        TVec3 operator/(const TVec3 &other) { return {x / other.x, y / other.y, z / other.z}; }
 
         void set(const TVec3 &other) {
             x = other.x;
@@ -58,7 +161,7 @@ namespace JGeometry {
             y = other.y;
             z = other.z;
         }
-        void set(f32 _x, f32 _y, f32 _z) {
+        void set(T _x, T _y, T _z) {
             x = _x;
             y = _y;
             z = _z;
@@ -78,6 +181,9 @@ namespace JGeometry {
         void sub(const TVec3 &);
         void sub(const TVec3 &, const TVec3 &);
 
+        static inline TVec3 zero() {
+            return TVec3<T>(static_cast<T>(0), static_cast<T>(0), static_cast<T>(0));
+        }
         static inline TVec3 up() {
             return TVec3<T>(static_cast<T>(0), static_cast<T>(1), static_cast<T>(0));
         }
