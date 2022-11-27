@@ -22,9 +22,8 @@ namespace JDrama {
 
         static u16 calcKeyCode(const char *);
 
-        char *mTypeName;
+        const char *mKeyName;
         u16 mKeyCode;
-        u16 _0A;
     };
 
 }  // namespace JDrama
