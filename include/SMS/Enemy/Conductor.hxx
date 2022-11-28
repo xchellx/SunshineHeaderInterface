@@ -4,7 +4,7 @@
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JDrama/JDRNameRef.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 #include <SMS/Strategic/LiveActor.hxx>
 #include <SMS/Graph/GraphWeb.hxx>
 #include <SMS/Manager/LiveManager.hxx>

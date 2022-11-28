@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 
 template <typename T> T MsClamp(T value, T min, T max);
 f32 MsGetRotFromZaxisY(const TVec3f &);

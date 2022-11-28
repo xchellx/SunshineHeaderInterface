@@ -3,7 +3,7 @@
 #include <Dolphin/types.h>
 
 #include <JSystem/JDrama/JDRGraphics.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 #include <SMS/M3DUtil/MActor.hxx>
 #include <SMS/M3DUtil/MActorKeeper.hxx>

@@ -4,7 +4,7 @@
 
 #include <JSystem/JDrama/JDRNameRef.hxx>
 #include <JSystem/JGadget/List.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 
 namespace JDrama {
 

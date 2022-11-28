@@ -2,7 +2,7 @@
 
 #include <Dolphin/types.h>
 #include <JSystem/JDrama/JDRGraphics.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 #include <JSystem/JUtility/JUTColor.hxx>
 #include <SMS/M3DUtil/MActor.hxx>
 #include <SMS/MoveBG/EggYoshi.hxx>

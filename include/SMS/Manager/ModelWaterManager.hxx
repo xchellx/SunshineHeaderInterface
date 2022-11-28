@@ -4,7 +4,7 @@
 
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 #include <JSystem/JUtility/JUTColor.hxx>
 #include <SMS/Player/Watergun.hxx>

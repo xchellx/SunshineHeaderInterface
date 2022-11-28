@@ -24,6 +24,7 @@ namespace JDrama {
 
         const char *mKeyName;
         u16 mKeyCode;
+        u16 _0A;
     };
 
 }  // namespace JDrama

@@ -8,6 +8,9 @@
 #define Min(a, b)          (((a) < (b)) ? (a) : (b))
 #define Clamp(a, min, max) (Max(Min(a, max), min))
 
+#define DEGREES_TO_RADIANS(x) ((x) * (M_PI / 180.0f))
+#define RADIANS_TO_DEGREES(x) ((x) * (180.0f / M_PI))
+
 #define NAN      0.0f / 0.0f
 #define isnan(x) (x) != (x)
 

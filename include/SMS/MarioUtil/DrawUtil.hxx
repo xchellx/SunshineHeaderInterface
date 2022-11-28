@@ -5,7 +5,7 @@
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/J3D/J3DMaterial.hxx>
 #include <JSystem/J3D/J3DModel.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 
 bool ViewFrustumClipCheck(JDrama::TGraphics *, Vec *, f32);
 void SetViewFrustumClipCheck(f32, f32, f32, f32, f32, f32);

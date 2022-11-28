@@ -3,7 +3,7 @@
 #include <Dolphin/types.h>
 #include <JSystem/JDrama/JDRFlagT.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 
 namespace JDrama {

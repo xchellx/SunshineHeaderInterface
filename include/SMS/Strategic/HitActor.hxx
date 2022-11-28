@@ -4,7 +4,7 @@
 
 #include <JSystem/JDrama/JDRActor.hxx>
 #include <JSystem/JDrama/JDRGraphics.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 
 class THitActor : public JDrama::TActor {
 public:

@@ -7,7 +7,7 @@
 #include <JSystem/J3D/J3DJoint.hxx>
 #include <JSystem/J3D/J3DNode.hxx>
 #include <JSystem/J3D/J3DVertex.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 #include <JSystem/JUtility/JUTNameTab.hxx>
 
 class J3DModelHierarchy;

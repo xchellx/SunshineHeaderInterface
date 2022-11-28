@@ -5,7 +5,7 @@
 #include <JSystem/J3D/J3DModel.hxx>
 #include <JSystem/J3D/J3DModelLoader.hxx>
 #include <JSystem/JDrama/JDRGraphics.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 #include <SMS/Map/BGCheck.hxx>
 
 class MActorAnmBase {

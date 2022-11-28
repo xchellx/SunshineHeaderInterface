@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 #include <JSystem/JParticle/JPABaseEmitter.hxx>
 #include <SMS/MoveBG/Item.hxx>
 

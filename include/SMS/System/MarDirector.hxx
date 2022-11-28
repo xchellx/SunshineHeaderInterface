@@ -5,7 +5,7 @@
 #include <JSystem/JDrama/JDRActor.hxx>
 #include <JSystem/JDrama/JDRDirector.hxx>
 #include <JSystem/JDrama/JDRDisplay.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 #include <JSystem/JStage/JSGObject.hxx>
 
 #include <SMS/GC2D/Guide.hxx>

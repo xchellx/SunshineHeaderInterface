@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 #ifdef NTSCU
 #define __fill_mem                                                   ((int (*)(...))0x80003130)
 #define TRK_memcpy                                                   ((int (*)(...))0x80003244)

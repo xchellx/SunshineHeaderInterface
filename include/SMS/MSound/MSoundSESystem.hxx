@@ -2,7 +2,7 @@
 
 #include <Dolphin/types.h>
 #include <JSystem/JAudio/JAISound.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 
 class JAIActor {};
 

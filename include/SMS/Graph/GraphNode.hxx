@@ -4,7 +4,7 @@
 #include <Dolphin/types.h>
 #include <SMS/Graph/RailNode.hxx>
 
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 
 class TGraphNode {
 

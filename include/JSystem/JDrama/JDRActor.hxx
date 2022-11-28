@@ -2,7 +2,7 @@
 
 #include <Dolphin/types.h>
 #include <JSystem/JDrama/JDRPlacement.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 #include <JSystem/JStage/JSGActor.hxx>
 
 namespace JDrama {

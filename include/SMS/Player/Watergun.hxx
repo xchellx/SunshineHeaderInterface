@@ -2,7 +2,7 @@
 
 #include <Dolphin/types.h>
 #include <JSystem/JDrama/JDRGraphics.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 #include <SMS/Player/NozzleBase.hxx>
 #include <SMS/Player/NozzleTrigger.hxx>
 #include <SMS/System/Params.hxx>

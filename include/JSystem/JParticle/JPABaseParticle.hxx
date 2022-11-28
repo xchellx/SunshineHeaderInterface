@@ -1,6 +1,6 @@
 #pragma once
 
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 
 class JPABaseEmitter;
 

@@ -4,7 +4,7 @@
 #include <Dolphin/types.h>
 #include <JSystem/J3D/J3DDrawBuffer.hxx>
 #include <JSystem/JDrama/JDRGraphics.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 #include <SMS/Player/MarioBlend.hxx>
 #include <SMS/Player/MarioCap.hxx>
 #include <SMS/Player/MarioDraw.hxx>

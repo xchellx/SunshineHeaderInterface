@@ -7,8 +7,7 @@
 namespace JGeometry {
 
     template <typename T> struct TVec2 {
-        T x;
-        T y;
+        T x, y;
 
         TVec2()              = default;
         TVec2(const TVec2 &) = default;
@@ -75,29 +74,17 @@ namespace JGeometry {
         f32 dot(const TVec2 &) const;
         void sub(const TVec2 &);
 
-        static inline TVec2 zero() {
-            return TVec2<T>(static_cast<T>(0), static_cast<T>(0));
-        }
-        static inline TVec2 up() {
-            return TVec2<T>(static_cast<T>(0), static_cast<T>(1));
-        }
-        static inline TVec2 down() {
-            return TVec2<T>(static_cast<T>(0), static_cast<T>(-1));
-        }
-        static inline TVec2 right() {
-            return TVec2<T>(static_cast<T>(1), static_cast<T>(0));
-        }
-        static inline TVec2 left() {
-            return TVec2<T>(static_cast<T>(-1), static_cast<T>(0));
-        }
+        static inline TVec2 zero() { return TVec2<T>(static_cast<T>(0), static_cast<T>(0)); }
+        static inline TVec2 up() { return TVec2<T>(static_cast<T>(0), static_cast<T>(1)); }
+        static inline TVec2 down() { return TVec2<T>(static_cast<T>(0), static_cast<T>(-1)); }
+        static inline TVec2 right() { return TVec2<T>(static_cast<T>(1), static_cast<T>(0)); }
+        static inline TVec2 left() { return TVec2<T>(static_cast<T>(-1), static_cast<T>(0)); }
     };
 
     template <typename T> struct TVec3 {
-        T x;
-        T y;
-        T z;
+        T x, y, z;
 
-        TVec3() = default;
+        TVec3()              = default;
         TVec3(const TVec3 &) = default;
         template <typename TY> TVec3(TY _x, TY _y, TY _z) : x(_x), y(_y), z(_z) {}
 
@@ -168,9 +155,28 @@ namespace JGeometry {
         }
 
         void add(const TVec3 &);
+        void cross(const TVec3 &other, TVec3 &out) const {
+            out.x = y * other.z - z * other.y;
+            out.y = z * other.x - x * other.z;
+            out.z = x * other.y - y * other.x;
+        }
         void div(f32);
-        f32 dot(const TVec3 &) const;
-        void negate();
+        f32 dot(const TVec3 &other) const { return x * other.x + y * other.y + z * other.z; }
+        f32 magnitude() const { return sqrtf(dot()); }
+        void negate() {
+            x = -x;
+            y = -y;
+            z = -z;
+        }
+        void normalize() {
+            const f32 mag = magnitude();
+            if (mag == 0)
+                return;
+
+            x *= 1.0f / mag;
+            y *= 1.0f / mag;
+            z *= 1.0f / mag;
+        }
         void scale(f32);
         void scale(f32, const TVec3 &);
         void scaleAdd(f32, const TVec3 &, const TVec3 &);
@@ -217,26 +223,6 @@ namespace JGeometry {
 
         void xyz();
 
-        T x;
-        T y;
-        T z;
-        T w;
+        T x, y, z, w;
     };
-
-    template <typename T> struct TQuat4 {
-        void rotate(const TVec3<T> &axis, TVec3<T> &dst) const;
-        void setRotate(const TVec3<T> &axis, const TVec3<T> &dst, f32 rotation);
-        void slerp(const TQuat4 &target, f32 time);
-
-        T x;
-        T y;
-        T z;
-        T w;
-    };
-
-};  // namespace JGeometry
-
-typedef JGeometry::TVec2<f32> TVec2f;
-typedef JGeometry::TVec3<f32> TVec3f;
-typedef JGeometry::TVec3<s16> TVec3s;
-typedef JGeometry::TVec4<f32> TVec4f;
+}  // namespace JGeometry

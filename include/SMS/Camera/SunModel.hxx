@@ -4,7 +4,7 @@
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JDrama/JDRActor.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 
 class TSunModel : public JDrama::TActor {
 public:

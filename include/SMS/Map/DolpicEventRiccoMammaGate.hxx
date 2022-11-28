@@ -1,7 +1,7 @@
 #pragma once
 
 #include <JSystem/J3D/J3DJoint.hxx>
-#include <JSystem/JGeometry.hxx>
+#include <JSystem/JGeometry/JGMVec.hxx>
 #include <SMS/event/MapEvent.hxx>
 
 class TDolpicEventRiccoMammaGate : public TMapEvent {
