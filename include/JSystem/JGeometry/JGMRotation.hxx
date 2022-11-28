@@ -9,7 +9,7 @@
 
 namespace JGeometry {
 
-	template <typename MatrixT> struct TRotation3 {
+	template <typename MatrixT = TMtx34f> struct TRotation3 {
 		MatrixT mtx;
 
 		TRotation3() = default;
@@ -24,3 +24,5 @@ namespace JGeometry {
     };
 
 }
+
+typedef JGeometry::TRotation3<> TRotation3f;

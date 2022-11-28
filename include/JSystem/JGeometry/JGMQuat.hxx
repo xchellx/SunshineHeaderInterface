@@ -83,18 +83,18 @@ namespace JGeometry {
         }
 
         void normalize() {
-            const f32 norm = norm();
-            if (norm == 0)
+            const f32 n = norm();
+            if (n == 0)
                 return;
 
-            v *= 1.0f / norm;
-            s *= 1.0f / norm;
+            v *= 1.0f / n;
+            s *= 1.0f / n;
         }
 
         void makeUnitNorm() {
             v.normalize();
-                s = cosf((DEGREES_TO_RADIANS(s) * 0.5f);
-                v = v * sinf(DEGREES_TO_RADIANS(s) * 0.5f);
+            s = cosf(DEGREES_TO_RADIANS(s) * 0.5f);
+            v = v * sinf(DEGREES_TO_RADIANS(s) * 0.5f);
         }
 
         void rotate(const TVec3<T> &axis, TVec3<T> &dst) const;
@@ -149,5 +149,5 @@ namespace JGeometry {
         TQuat4 &operator*(const f32 scalar) const { return {v * scalar, s * scalar}; }
     };
 
-    typedef TQuat4<f32> TQuat4f;
 }  // namespace JGeometry
+typedef JGeometry::TQuat4<f32> TQuat4f;

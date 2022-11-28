@@ -30,14 +30,14 @@ namespace JGeometry {
 
         operator Mtx33 *() const {
             static_assert(is_equal_type<T, f32>());
-            return (Mtx33 *)&x;
+            return (Mtx33 *)&m;
         }
         operator const Mtx33 *() const {
             static_assert(is_equal_type<T, f32>());
-            return (const Mtx33 *)&x;
+            return (const Mtx33 *)&m;
         }
 
-        T *&operator[](const int row) { return m[row]; }
+        T *&operator[](const int row) { return (T *)m[row]; }
 
         T at(u32 row, u32 column) { return m[row][column]; }
     };
@@ -68,15 +68,14 @@ namespace JGeometry {
 
         operator Mtx *() const {
             static_assert(is_equal_type<T, f32>());
-            return (Mtx *)&x;
+            return (Mtx *)&m;
         }
         operator const Mtx *() const {
             static_assert(is_equal_type<T, f32>());
-            return (const Mtx *)&x;
+            return (const Mtx *)&m;
         }
 
-        T *&operator[](const int idx) {
-            return m[idx]; }
+        T *&operator[](const int idx) { return (T *)m[idx]; }
 
         T at(u32 row, u32 column) { return m[row][column]; }
     };
@@ -111,40 +110,27 @@ namespace JGeometry {
 
         operator Mtx44 *() const {
             static_assert(is_equal_type<T, f32>());
-            return (Mtx44 *)&x;
+            return (Mtx44 *)&m;
         }
         operator const Mtx44 *() const {
             static_assert(is_equal_type<T, f32>());
-            return (const Mtx44 *)&x;
+            return (const Mtx44 *)&m;
         }
 
-        T *&operator[](const int idx) { return m[idx]; }
+        T *&operator[](const int idx) { return (T *)m[idx]; }
 
         T at(u32 row, u32 column) { return m[row][column]; }
     };
 
-    template <typename MatrixT> struct TMatrix33 {
-        MatrixT mtx;
+    template <typename MatrixT = SMatrix33<f32>> struct TMatrix33 : public MatrixT {};
+    template <typename MatrixT = SMatrix33<f32>> struct TMatrix34 : public MatrixT {};
+    template <typename MatrixT = SMatrix33<f32>> struct TMatrix44 : public MatrixT {};
 
-        TMatrix33() = default;
-    };
-
-    template <typename MatrixT> struct TMatrix34 {
-        MatrixT mtx;
-
-        TMatrix34() = default;
-    };
-
-    template <typename MatrixT> struct TMatrix44 {
-        MatrixT mtx;
-
-        TMatrix44() = default;
-    };
-
-    typedef SMatrix33<f32> SMtx33f;
-    typedef SMatrix34<f32> SMtx34f;
-    typedef SMatrix44<f32> SMtx44f;
-    typedef TMatrix33<f32> TMtx33f;
-    typedef TMatrix34<f32> TMtx34f;
-    typedef TMatrix44<f32> TMtx44f;
 }  // namespace JGeometry
+
+typedef JGeometry::SMatrix33<f32> SMtx33f;
+typedef JGeometry::SMatrix34<f32> SMtx34f;
+typedef JGeometry::SMatrix44<f32> SMtx44f;
+typedef JGeometry::TMatrix33<> TMtx33f;
+typedef JGeometry::TMatrix34<> TMtx34f;
+typedef JGeometry::TMatrix44<> TMtx44f;
