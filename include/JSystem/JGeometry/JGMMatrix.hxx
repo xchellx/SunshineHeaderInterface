@@ -37,7 +37,7 @@ namespace JGeometry {
             return (const Mtx33 *)&m;
         }
 
-        T *&operator[](const int row) { return (T *)m[row]; }
+        T *operator[](const int row) { return (T *)m[row]; }
 
         T at(u32 row, u32 column) { return m[row][column]; }
     };
@@ -75,7 +75,7 @@ namespace JGeometry {
             return (const Mtx *)&m;
         }
 
-        T *&operator[](const int idx) { return (T *)m[idx]; }
+        T *operator[](const int idx) { return (T *)m[idx]; }
 
         T at(u32 row, u32 column) { return m[row][column]; }
     };
@@ -117,7 +117,7 @@ namespace JGeometry {
             return (const Mtx44 *)&m;
         }
 
-        T *&operator[](const int idx) { return (T *)m[idx]; }
+        T *operator[](const int idx) { return (T *)m[idx]; }
 
         T at(u32 row, u32 column) { return m[row][column]; }
     };
