@@ -124,8 +124,8 @@ namespace JGeometry {
             TVec3f cross;
             v.cross(other.v, cross);
 
-            v = b * w + a * other.w + cross;
-            w = w * other.w - v.dot(other.v);
+            v = other.v * s + v * other.s + cross;
+            s = s * other.s - v.dot(other.v);
             return *this;
         }
 
@@ -143,7 +143,7 @@ namespace JGeometry {
             TVec3f cross;
             v.cross(other.v, cross);
 
-            return {b * w + a * other.w + cross, w * other.w - v.dot(other.v)};
+            return {other.v * s + v * other.s + cross, s * other.s - v.dot(other.v)};
         }
 
         TQuat4 &operator*(const f32 scalar) const { return {v * scalar, s * scalar}; }
