@@ -11,6 +11,9 @@
 #define DEGREES_TO_RADIANS(x) ((x) * (M_PI / 180.0f))
 #define RADIANS_TO_DEGREES(x) ((x) * (180.0f / M_PI))
 
+#define DBL_EPSILON 2.2204460492503131e-016
+#define FLT_EPSILON 0x0.000002p0
+
 #define NAN      0.0f / 0.0f
 #define isnan(x) (x) != (x)
 
