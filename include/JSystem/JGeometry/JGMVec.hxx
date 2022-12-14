@@ -162,7 +162,7 @@ namespace JGeometry {
         }
         void div(f32);
         f32 dot(const TVec3 &other) const { return x * other.x + y * other.y + z * other.z; }
-        f32 magnitude() const { return sqrtf(dot()); }
+        f32 magnitude() const { return sqrtf(dot(*this)); }
         void negate() {
             x = -x;
             y = -y;
@@ -190,12 +190,12 @@ namespace JGeometry {
         void setRotation(Mtx m) {
             const f32 sy = sqrtf(m[2][2] * m[2][2] + m[1][2] * m[1][2]);
             if (sy < 10.0f * FLT_EPSILON) {
-                z = RADIANS_TO_DEGREES(atan2f(m[1][0], -m[1][1]));
+                z = RADIANS_TO_DEGREES(atan2f(-m[1][0], m[1][1]));
                 y = RADIANS_TO_DEGREES(atan2f(m[0][2], -sy));
                 x = 0;
             } else {
-                z = RADIANS_TO_DEGREES(atan2f(-m[0][1], m[0][0]));
-                y = RADIANS_TO_DEGREES(atan2f(-m[0][2], sy));
+                z = RADIANS_TO_DEGREES(atan2f(m[0][1], m[0][0]));
+                y = RADIANS_TO_DEGREES(atan2f(m[0][2], -sy));
                 x = RADIANS_TO_DEGREES(atan2f(m[1][2], m[2][2]));
             }
         }
