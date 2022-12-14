@@ -2,7 +2,7 @@
 
 #include <Dolphin/types.h>
 #include <SMS/Map/PollutionPos.hxx>
-#include <SMS/Map/Joint.hxx>
+#include <SMS/Map/JointModel.hxx>
 
 enum PollutionType {
     POLLUTION_SINK,
