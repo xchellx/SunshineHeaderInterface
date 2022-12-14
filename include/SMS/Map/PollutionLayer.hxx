@@ -4,6 +4,20 @@
 #include <SMS/Map/PollutionPos.hxx>
 #include <SMS/Map/Joint.hxx>
 
+enum PollutionType {
+    POLLUTION_SINK,
+    POLLUTION_FIRE,
+    POLLUTION_STOP,
+    POLLUTION_SLIP,
+    POLLUTION_ELEC,
+    POLLUTION_SINK_DIE,
+    POLLUTION_NULL1,
+    POLLUTION_BURN,
+    POLLUTION_NULL2,
+    POLLUTION_NULL3,
+    POLLUTION_NONE
+};
+
 class TPollutionLayer : public TJointModel {
 
 public:
