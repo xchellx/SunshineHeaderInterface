@@ -4,6 +4,7 @@
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
+#include <SMS/M3DUtil/MActor.hxx>
 #include <SMS/Strategic/HitActor.hxx>
 #include <SMS/Strategic/ObjChara.hxx>
 
