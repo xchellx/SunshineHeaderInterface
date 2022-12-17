@@ -24,7 +24,7 @@ public:
     TInfo *createEffectInfoAry(int);
     JPABaseEmitter *emit(s32 effect, const TVec3f *, u8, const void *);
     JPABaseEmitter *emitAndBindToMtx(s32 effect, Mtx matrix, u8, const void *);
-    JPABaseEmitter *emitAndBindToMtxPtr(s32 effect, Mtx matrix, u8, const void *);
+    JPABaseEmitter *emitAndBindToMtxPtr(s32 effect, Mtx *matrix, u8, const void *);
     JPABaseEmitter *emitAndBindToPosPtr(s32 effect, const TVec3f *, u8, const void *);
     JPABaseEmitter *emitAndBindToSRTMtxPtr(s32 effect, Mtx matrix, u8, const void *);
     JPABaseEmitter *
