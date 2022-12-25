@@ -24,7 +24,7 @@ namespace JGadget {
     public:
         class iterator {
         public:
-            iterator(TNode_ *node) : mCurrent(node) {}
+            iterator(_T *node) : mCurrent(node) {}
             iterator(const iterator &iter) : mCurrent(iter.mCurrent) {}
 
             bool operator==(iterator &rhs) const { return mCurrent == rhs.mCurrent; }
