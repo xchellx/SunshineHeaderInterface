@@ -28,7 +28,7 @@ namespace JGadget {
             iterator(const iterator &iter) : mCurrent(iter.mCurrent) {}
 
             bool operator==(iterator &rhs) const { return mCurrent == rhs.mCurrent; }
-            bool operator!=(iterator &rhs) const { return mCurrent != rhs.mCurrent; }
+
             iterator operator++() {
                 ++mCurrent;
                 return *this; 
