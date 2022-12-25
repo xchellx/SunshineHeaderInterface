@@ -1,18 +1,26 @@
 #pragma once
 
 #include <Dolphin/types.h>
+
 #include <JSystem/JGadget/Allocator.hxx>
 #include <JSystem/JGadget/Node.hxx>
 
 namespace JGadget {
 
-    template <class _T, class _A = TAllocator<_T>> class TVector {
-        class TNode_ {
-            TNode_ *mPrev;
-            TNode_ *mNext;
-            void *mItem;
-        };
+    template <typename _TP, typename _TS, typename _TV> void uninitialized_fill_n(_TP dst, _TS count, const _TV &data) {
+        for (_TS i = 0; i < count; ++i) {
+            *dst++ = data;
+        }
+    }
 
+    template <typename _T> _T *copy(_T *begin, _T *end, _T *dst) {
+        while (begin != end) {
+            *dst++ = *begin++;
+        }
+        return dst;
+    }
+
+    template <class _T, class _A = TAllocator<_T>> class TVector {
     public:
         class iterator {
         public:
@@ -29,25 +37,68 @@ namespace JGadget {
                 --mCurrent;
                 return *this;
             }
-            _T operator->() const { return mCurrent; }
-            _T &operator*() const { return mCurrent; }
+            _T operator->() const { return *mCurrent; }
+            _T &operator*() const { return *mCurrent; }
 
             _T *mCurrent;
         };
 
         TVector(_A allocator) { mAllocator = allocator; }
+        ~TVector() { erase(begin(), end()); }
 
-        TNode_ *CreateNode_(TNode_ *prev, TNode_ *next, _T *item);
         void DestroyElement_(_T *a, _T *b) {
             for (; a != b; ++a) {
             }
         }
-        void InsertRaw(_T *a, u32);  // complete later
+
+        _T *InsertRaw(_T *at, size_t count);
 
         iterator begin() { return { mStart }; }
         iterator end() { return { mEnd }; }
-        iterator erase(_T *a, _T *b);        // complete later
-        iterator insert(_T *a, u32, _T *b);  // complete later
+
+        iterator erase(_T *a, _T *b) {
+            _T *e = copy(b, mEnd, a);
+            for (_T *i = e; i != mEnd; ++i) {
+                delete i;
+            }
+            mEnd = e;
+            return a;
+        }
+
+        iterator insert(_T *at, size_t count, _T *item) {
+            auto *ofs  = at - mBegin;
+            auto *data = InsertRaw(at, count);
+            if (data != end()) {
+                uninitialized_fill_n(data, 1, item);
+            }
+            return mBegin + ofs;
+        }
+
+        void reserve(size_t capacity) {
+            if (mCapacity >= capacity)
+                return;
+
+            _T *reservedBuf = new _T[capacity];
+            if (!reservedBuf)
+                return;
+
+            _T *b = mStart;
+            _T *e = mEnd;
+            size_t size = e - b;
+
+            auto resBufIter = reservedBuf;
+            for (_T *i = b; i != e; ++i) {
+                *resBufIter++ = *i;
+            }
+
+            DestroyElement_(b, e);
+
+            mEnd = reservedBuf + size;
+            mStart = reservedBuf;
+            mCapacity = capacity;
+
+            delete[] b;
+        }
 
         _A mAllocator;
         _T *mStart;
@@ -62,8 +113,8 @@ namespace JGadget {
         TVector_pointer_void();
         ~TVector_pointer_void();
 
-        void insert(void **a, void **b);
-        void reserve(size_t);
+        iterator insert(void **a, void **b);
+        void reserve(size_t capacity);
     };
 
 }  // namespace JGadget

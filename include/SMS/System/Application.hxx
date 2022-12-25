@@ -3,10 +3,13 @@
 #include <Dolphin/types.h>
 
 #include <JSystem/JDrama/JDRDisplay.hxx>
+#include <JSystem/JGadget/Vector.hxx>
 #include <JSystem/JUtility/JUTConsole.hxx>
+
 #include <SMS/Player/Mario.hxx>
 #include <SMS/System/GameSequence.hxx>
 #include <SMS/System/MarDirector.hxx>
+#include <SMS/System/MarNameRefGen.hxx>
 #include <SMS/GC2D/SMSFader.hxx>
 
 class TApplication {
@@ -39,23 +42,22 @@ public:
     void proc();
     void setupThreadFuncLogo();
 
-    TApplication *mApplication;      // 0x0000
-    JDrama::TDirector *mDirector;    // 0x0004
-    u8 mContext;                     // 0x0008
-    TGameSequence mPrevScene;        // 0x000A
-    TGameSequence mCurrentScene;     // 0x000E
-    TGameSequence mNextScene;        // 0x0012
-    u32 mCutSceneID;                 // 0x0018
-    JDrama::TDisplay *mDisplay;      // 0x001C
-    TMarioGamePad *mGamePad1;        // 0x0020
-    TMarioGamePad *mGamePad2;        // 0x0024
-    TMarioGamePad *mGamePad3;        // 0x0028
-    TMarioGamePad *mGamePad4;        // 0x002C
-    AreaEpisodeArray *mStringPaths;  // 0x0030
-    TSMSFader *mFader;               // 0x0034
+    TApplication *mApplication;                                             // 0x0000
+    JDrama::TDirector *mDirector;                                           // 0x0004
+    u8 mContext;                                                            // 0x0008
+    TGameSequence mPrevScene;                                               // 0x000A
+    TGameSequence mCurrentScene;                                            // 0x000E
+    TGameSequence mNextScene;                                               // 0x0012
+    u32 mCutSceneID;                                                        // 0x0018
+    JDrama::TDisplay *mDisplay;                                             // 0x001C
+    TMarioGamePad *mGamePad1;                                               // 0x0020
+    TMarioGamePad *mGamePad2;                                               // 0x0024
+    TMarioGamePad *mGamePad3;                                               // 0x0028
+    TNameRefPtrAryT<TNameRefAryT<TScenarioArchiveName>> *mStageArchiveAry;  // 0x0030
+    TSMSFader *mFader;                                                      // 0x0034
     u32 _38;
     u32 _3C;
-    JKRHeap *mCurrentHeap;           // 0x0040
+    JKRHeap *mCurrentHeap;                                                  // 0x0040
     u16 _44;
 };
 
