@@ -66,12 +66,12 @@ namespace JGadget {
         }
 
         iterator insert(_T *at, size_t count, _T *item) {
-            auto *ofs  = at - mBegin;
+            auto *ofs  = at - mStart;
             auto *data = InsertRaw(at, count);
             if (data != end()) {
                 uninitialized_fill_n(data, 1, item);
             }
-            return mBegin + ofs;
+            return mStart + ofs;
         }
 
         void reserve(size_t capacity) {
