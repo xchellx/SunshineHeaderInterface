@@ -13,11 +13,11 @@ namespace JGeometry {
         TVec2(const TVec2 &) = default;
         template <typename TY> TVec2(TY _x, TY _y) : x(_x), y(_y) {}
 
-        operator Vec *() const {
+        inline operator Vec *() const {
             static_assert(is_equal_type<T, f32>());
             return (Vec *)&x;
         }
-        operator const Vec *() const {
+        inline operator const Vec *() const {
             static_assert(is_equal_type<T, f32>());
             return (const Vec *)&x;
         }
