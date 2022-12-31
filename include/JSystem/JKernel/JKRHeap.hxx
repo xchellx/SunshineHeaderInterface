@@ -176,8 +176,10 @@ void JKRDefaultMemoryErrorRoutine(void *, u32, u32);
 void *operator new(size_t blocksize);
 void *operator new(size_t blocksize, int align) noexcept;
 void *operator new(size_t blocksize, JKRHeap *heap, int align) noexcept;
+void *operator new(size_t blocksize, void *block) noexcept { return block };  // Placement new
 void *operator new[](size_t blocksize);
 void *operator new[](size_t blocksize, int align) noexcept;
 void *operator new[](size_t blocksize, JKRHeap *heap, int align) noexcept;
+void *operator new[](size_t blocksize, void *block) noexcept { return block };  // Placement new
 void operator delete(void *block) noexcept;
 void operator delete[](void *block) noexcept;

@@ -3,12 +3,6 @@
 #include <Dolphin/types.h>
 #include <JSystem/JDrama/JDRFlagT.hxx>
 
-struct AreaEpisodeArray {
-    u32 _00[0x10 / 4];  // 0x0000
-    u32 *startArray;    // 0x0010
-    u32 *endArray;      // 0x0014
-};
-
 class TGameSequence {
 
 public:

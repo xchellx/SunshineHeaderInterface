@@ -31,6 +31,15 @@ typedef unsigned int size_t;
 #endif
 #endif
 
+#if !defined(_PTRDIFF_T)
+#define _PTRDIFF_T
+#ifdef __PTRDIFF_TYPE__
+typedef __PTRDIFF_TYPE__ ptrdiff_t;
+#else
+typedef long ptrdiff_t;
+#endif
+#endif
+
 #ifdef __cplusplus
 #define NULL nullptr
 #else

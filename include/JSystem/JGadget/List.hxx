@@ -48,7 +48,7 @@ namespace JGadget {
         iterator mStart;
     };
 
-    template <class _T, class _A = TAllocator<_T>> class TList {
+    template <class _T, class _Alloc = TAllocator<_T>> class TList {
         struct TNode_ {
             TNode_ *mNext;
             TNode_ *mPrev;
@@ -59,10 +59,21 @@ namespace JGadget {
         };
 
         TNode_ *CreateNode_(TNode_ *next, TNode_ *prev, const _T &item) {
-            return new (JKRHeap::sSystemHeap, 4) TNode_(next, prev, item);
+            TNode_ *node = mAllocator.allocate(1);
+            mAllocator.construct(node, next, prev, item);
+            return node;
         }
 
     public:
+        typedef _T value_type;
+        typedef _Alloc allocator_type;
+        typedef size_t size_type;
+        typedef ptrdiff_t difference_type;
+        typedef value_type &reference;
+        typedef const value_type &const_reference;
+        typedef _Alloc::pointer pointer;
+        typedef _Alloc::const_pointer const_pointer;
+
         class iterator {
         public:
             iterator(TNode_ *node) : mNode(node) {}
@@ -87,29 +98,6 @@ namespace JGadget {
             TNode_ *mNode;
         };
 
-        class const_iterator {
-        public:
-            const_iterator(const TNode_ *node) : mNode(node) {}
-            const_iterator(const iterator &iter) : mNode(iter.mNode) {}
-
-            bool operator==(const const_iterator &rhs) const { return mNode == rhs.mNode; }
-            bool operator!=(const const_iterator &rhs) const { return mNode != rhs.mNode; }
-
-            const_iterator &operator++() {
-                mNode = mNode->mNext;
-                return *this;
-            }
-            const_iterator &operator--() {
-                mNode = mNode->mPrev;
-                return *this;
-            }
-
-            const _T *operator->() const { return mNode->mItem; }
-            const _T &operator*() { return mNode->mItem; }
-
-            const TNode_ *mNode;
-        };
-
         TList() : mAllocator(), mSize(0), mFirst(nullptr), mLast(nullptr) {
             mFirst = reinterpret_cast<TNode_ *>(&mFirst);
             mLast  = reinterpret_cast<TNode_ *>(&mFirst);
@@ -120,14 +108,11 @@ namespace JGadget {
                 insert(end(), item);
             }
         }
-        explicit TList(_A *allocator) { mAllocator = *allocator; }
+        explicit TList(allocator_type *allocator) { mAllocator = *allocator; }
         ~TList() { erase(begin(), end()); }
 
         iterator begin() { return {mFirst}; }
         iterator end() { return {reinterpret_cast<TNode_ *>(&mFirst)}; }
-
-        const_iterator begin() const { return {mFirst}; }
-        const_iterator end() const { return {reinterpret_cast<const TNode_ *>(&mFirst)}; }
 
         size_t size() const { return mSize; }
 
@@ -140,7 +125,7 @@ namespace JGadget {
             delete iter.mNode;
 
             mSize -= 1;
-            return iterator(next);
+            return {next};
         }
 
         iterator erase(iterator start, iterator end) {
@@ -148,61 +133,43 @@ namespace JGadget {
             while (iter != end) {
                 iter = erase(iter);
             }
-            return iterator(iter);
+            return {iter};
         }
 
-        iterator erase(const_iterator iter) {
-            TNode_ *next = iter.mNode->mNext;
-            TNode_ *prev = iter.mNode->mPrev;
-
-            prev->mNext = next;
-            next->mPrev = prev;
-            delete iter.mNode;
-
-            mSize -= 1;
-            return iterator(next);
-        }
-
-        iterator erase(const_iterator start, const_iterator end) {
-            iterator iter = start;
-            while (iter != end) {
-                iter = erase(iter);
-            }
-            return iterator(iter);
-        }
-
-        iterator insert(iterator iter, const _T &node) {
+        iterator insert(iterator iter, const value_type &node) {
             TNode_ *current = iter.mNode;
             TNode_ *prev    = current->mPrev;
 
             TNode_ *newNode = CreateNode_(current, prev, node);
             if (!newNode)
-                return end();
+                return mEnd;
 
             current->mPrev = newNode;
             prev->mNext    = newNode;
             mSize += 1;
 
-            return iterator(newNode);
+            return {newNode};
         }
 
-        iterator insert(const_iterator iter, const _T &node) {
+        iterator insert(iterator iter, value_type &&node) {
+            TNode_ tmp = node;
+
             TNode_ *current = iter.mNode;
             TNode_ *prev    = current->mPrev;
 
-            TNode_ *newNode = CreateNode_(current, prev, node);
+            TNode_ *newNode = CreateNode_(current, prev, tmp);
             if (!newNode)
-                return end();
+                return mEnd;
 
             current->mPrev = newNode;
             prev->mNext    = newNode;
             mSize += 1;
 
-            return iterator(newNode);
+            return {newNode};
         }
 
-        _A mAllocator;
-        size_t mSize;
+        allocator_type mAllocator;
+        size_type mSize;
         TNode_ *mFirst;
         TNode_ *mLast;
     };
