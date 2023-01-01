@@ -6,13 +6,13 @@
 namespace JGadget {
     template <typename T> class TAllocator {
     public:
-        typedef T value_type;
-        typedef T *pointer;
-        typedef T &reference;
-        typedef const T *const_pointer;
-        typedef const T &const_reference;
-        typedef size_t size_type;
-        typedef ptrdiff_t difference_type;
+        typedef typename T value_type;
+        typedef typename T *pointer;
+        typedef typename T &reference;
+        typedef typename const T *const_pointer;
+        typedef typename const T &const_reference;
+        typedef typename size_t size_type;
+        typedef typename ptrdiff_t difference_type;
         template <class U> struct rebind { typedef TAllocator<U> other; };
 
         TAllocator() = default;

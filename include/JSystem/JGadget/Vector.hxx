@@ -25,17 +25,17 @@ namespace JGadget {
 
     template <class _T, class _Alloc = TAllocator<_T>> class TVector {
     public:
-        typedef _T value_type;
-        typedef _Alloc allocator_type;
-        typedef size_t size_type;
-        typedef ptrdiff_t difference_type;
-        typedef value_type &reference;
-        typedef const value_type &const_reference;
-        typedef _Alloc::pointer pointer;
-        typedef _Alloc::const_pointer const_pointer;
+        typedef typename _T value_type;
+        typedef typename _Alloc allocator_type;
+        typedef typename size_t size_type;
+        typedef typename ptrdiff_t difference_type;
+        typedef typename value_type &reference;
+        typedef typename const value_type &const_reference;
+        typedef typename _Alloc::pointer pointer;
+        typedef typename _Alloc::const_pointer const_pointer;
 
         struct iterator {
-            iterator(value_type *node) : mCurrent(node) {}
+            iterator(pointer node) : mCurrent(node) {}
             iterator(const iterator &iter) : mCurrent(iter.mCurrent) {}
 
             bool operator==(const iterator &rhs) const { return mCurrent == rhs.mCurrent; }
@@ -47,12 +47,12 @@ namespace JGadget {
                 return temp;
             }
 
-            iterator operator+=(int i) {
+            iterator &operator+=(int i) {
                 mCurrent += i;
                 return *this;
             }
 
-            iterator operator++() {
+            iterator &operator++() {
                 ++mCurrent;
                 return *this; 
             }
@@ -69,12 +69,12 @@ namespace JGadget {
                 return temp;
             }
 
-            iterator operator-=(int i) {
+            iterator &operator-=(int i) {
                 mCurrent -= i;
                 return *this;
             }
 
-            iterator operator--() {
+            iterator &operator--() {
                 --mCurrent;
                 return *this;
             }
@@ -92,13 +92,21 @@ namespace JGadget {
             pointer mCurrent;
         };
 
-        TVector(allocator_type allocator) { mAllocator = allocator; }
+        explicit TVector(allocator_type allocator) { mAllocator = allocator; }
         ~TVector() { erase(begin(), end()); }
+
+        TVector &operator=(const TVector &other) { 
+            clear();
+            for (auto &i : other) {
+                insert(end(), i);
+            }
+            return *this;
+        }
 
         reference operator[](size_type index) { return mStart[index]; }
         const_reference operator[](size_type index) const { return mStart[index]; }
 
-        allocator_type getAllocator() const { return mAllocator; }
+        allocator_type get_allocator() const { return mAllocator; }
 
         reference at(size_type index) {
             if (index >= size()) {
