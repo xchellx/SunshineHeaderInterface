@@ -16,7 +16,7 @@ namespace JDrama {
 
         void load(JSUMemoryInputStream &) override;
 
-        TVec3f mPosition;
+        TVec3f mTranslation;
         TFlagT<u16> mPlacementFlags;
     };
 

@@ -22,7 +22,7 @@ namespace JDrama {
         virtual void JSGGetRotation(Vec *) const override;
         virtual void JSGSetRotation(const Vec &) override;
 
-        TVec3f mSize;      // 24
+        TVec3f mScale;      // 24
         TVec3f mRotation;  // 30
         u32 _3C;  // 3C
         TNameRef *mRootRef;
