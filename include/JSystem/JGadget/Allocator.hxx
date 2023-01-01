@@ -1,42 +1,77 @@
 #pragma once
 
 #include <Dolphin/types.h>
+
+#include <JSystem/config.hxx>
 #include <JSystem/stddef.hxx>
+#include <JSystem/utility.hxx>
 
 namespace JGadget {
-    template <typename T> class TAllocator {
+    template <typename _T> class TAllocator {
     public:
-        typedef typename T value_type;
-        typedef typename T *pointer;
-        typedef typename T &reference;
-        typedef typename const T *const_pointer;
-        typedef typename const T &const_reference;
+        typedef typename _T value_type;
+        typedef typename _T *pointer;
+        typedef typename _T &reference;
+        typedef typename const _T *const_pointer;
+        typedef typename const _T &const_reference;
         typedef typename size_t size_type;
         typedef typename ptrdiff_t difference_type;
         template <class U> struct rebind { typedef TAllocator<U> other; };
 
-        TAllocator() = default;
+        _GLIBCXX20_CONSTEXPR TAllocator() _GLIBCXX_USE_NOEXCEPT = default;
+        _GLIBCXX20_CONSTEXPR TAllocator(const TAllocator &other) _GLIBCXX_USE_NOEXCEPT = default;
+        template<class _U>
+        _GLIBCXX20_CONSTEXPR
+        TAllocator(const TAllocator<_U> &other) _GLIBCXX_USE_NOEXCEPT = default;
 
-        pointer address(reference _x) const { return JSystem::addressof(_x); }
-        const_pointer address(const_reference _x) const noexcept { return JSystem::addressof(_x); }
+        _GLIBCXX20_CONSTEXPR pointer address(reference _x) const { return JSystem::addressof(_x); }
+        const_pointer address(const_reference _x) const _GLIBCXX_NOEXCEPT { return JSystem::addressof(_x); }
 
-        pointer allocate(size_type _n, const void * = 0) {
+#if __cplusplus < 201703L
+        pointer allocate(size_type _n, const void *hint = 0) {
             if (_n > max_size())
                 return nullptr;
-            return static_cast<T>(::operator new(_n * sizeof(T)));
+            return static_cast<_T>(::operator new(_n * sizeof(_T)));
         }
+#elif __cplusplus >= 201703L
+#if __cplusplus == 201703L
+        pointer allocate(size_type _n, const void *hint) {
+            if (_n > max_size())
+                return nullptr;
+            return static_cast<_T>(::operator new(_n * sizeof(_T)));
+        }
+    #endif
 
-        void deallocate(pointer _p, size_type) { ::operator delete(_p); }
+        _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR pointer allocate(size_t _n) {
+            if (_n > max_size())
+                return nullptr;
+            return static_cast<_T>(::operator new(_n * sizeof(_T)));
+        }
+#endif
 
-        size_type max_size() const { return size_t(-1) / sizeof(T); }
-        
-        void construct(pointer _p, const T &_val) { ::new ((void *)_p) T(_val); }
+        _GLIBCXX20_CONSTEXPR void deallocate(pointer _p, size_type) { ::operator delete(_p); }
 
+#if __cplusplus <= 201703L
+        size_type max_size() const _GLIBCXX_USE_NOEXCEPT { return size_t(-1) / sizeof(value_type); }
+#endif
+
+#if __cplusplus < 201103L
+        void construct(pointer _p, const _T &_val) { ::new ((void *)_p) _T(_val); }
+#elif __cplusplus <= 201703L
         template <typename... _Args> void construct(pointer _p, _Args &&..._args) {
             ::operator new((void *)_p) T(JSystem::forward<_Args>(_args)...);
         }
-        
-        void destroy(pointer _p) { _p->~T(); }
+#else
+        template <typename... _Args> constexpr void construct_at(pointer _p, _Args &&..._args) {
+            ::operator new((void *)_p) T(JSystem::forward<_Args>(_args)...);
+        }
+#endif
+
+#if __cplusplus < 201103L
+        void destroy(pointer _p) { _p->~_T(); }
+#else
+        template <class _U> _GLIBCXX20_CONSTEXPR void destroy(_U *_p) { _p->~_U(); }
+#endif
 
     private:
         u8 _00;

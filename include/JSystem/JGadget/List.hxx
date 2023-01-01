@@ -65,14 +65,14 @@ namespace JGadget {
         }
 
     public:
-        typedef _T value_type;
-        typedef _Alloc allocator_type;
-        typedef size_t size_type;
-        typedef ptrdiff_t difference_type;
-        typedef value_type &reference;
-        typedef const value_type &const_reference;
-        typedef _Alloc::pointer pointer;
-        typedef _Alloc::const_pointer const_pointer;
+        typedef typename _T value_type;
+        typedef typename _Alloc allocator_type;
+        typedef typename size_t size_type;
+        typedef typename ptrdiff_t difference_type;
+        typedef typename value_type &reference;
+        typedef typename const value_type &const_reference;
+        typedef typename _Alloc::pointer pointer;
+        typedef typename _Alloc::const_pointer const_pointer;
 
         class iterator {
         public:

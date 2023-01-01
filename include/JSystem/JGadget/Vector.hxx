@@ -5,6 +5,8 @@
 
 #include <SMS/assert.h>
 
+#include <JSystem/config.hxx>
+#include <JSystem/initializer_list.hxx>
 #include <JSystem/JGadget/Allocator.hxx>
 #include <JSystem/JGadget/Node.hxx>
 
@@ -92,8 +94,74 @@ namespace JGadget {
             pointer mCurrent;
         };
 
-        explicit TVector(allocator_type allocator) { mAllocator = allocator; }
-        ~TVector() { erase(begin(), end()); }
+        _GLIBCXX20_CONSTEXPR TVector() _GLIBCXX_NOEXCEPT_IF(_GLIBCXX_NOEXCEPT_IF(allocator_type()))
+            : mAllocator(), mStart(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f), _14(0) {}
+
+        explicit _GLIBCXX20_CONSTEXPR TVector(const allocator_type &allocator) _GLIBCXX_NOEXCEPT
+            : mAllocator(allocator), mStart(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f), _14(0) {}
+
+        _GLIBCXX20_CONSTEXPR TVector(size_type count, const value_type &value,
+                                     const allocator_type &allocator = allocator_type())
+            : mAllocator(allocator), mStart(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
+              _14(0) {
+            insert(end(), count, value);
+        }
+
+#if __cplusplus >= 201402L
+        explicit _GLIBCXX20_CONSTEXPR TVector(size_type count,
+                                              const allocator_type &allocator = allocator_type())
+            : mAllocator(allocator), mStart(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
+              _14(0) {
+            insert(end(), count, value_type());
+        }
+#else
+        explicit TVector(size_type count)
+            : mAllocator(), mStart(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
+              _14(0) {
+            insert(end(), count, value_type());
+        }
+#endif
+
+        _GLIBCXX20_CONSTEXPR TVector(const TVector &other)
+            : mAllocator(other.mAllocator), _10(other._10), _14(other._14) {
+            for (auto &i : other) {
+                insert(end(), i);
+            }
+        }
+
+        _GLIBCXX20_CONSTEXPR TVector(const TVector &other, const allocator_type &allocator)
+            : mAllocator(allocator), _10(other._10), _14(other._14) {
+            for (auto &i : other) {
+                insert(end(), i);
+            }
+        }
+
+#if __cplusplus >= 201103L
+        _GLIBCXX20_CONSTEXPR TVector(TVector &&other)
+            : mAllocator(other.mAllocator), _10(other._10), _14(other._14) {
+            for (auto &i : other) {
+                insert(end(), i);
+            }
+        }
+
+        _GLIBCXX20_CONSTEXPR TVector(TVector &&other, const allocator_type &allocator)
+            : mAllocator(allocator), _10(other._10), _14(other._14) {
+            for (auto &i : other) {
+                insert(end(), i);
+            }
+        }
+
+        _GLIBCXX20_CONSTEXPR TVector(JSystem::initializer_list<value_type> list,
+                                     const allocator_type &allocator = allocator_type())
+            : mAllocator(allocator), mStart(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
+            _14(0) {
+            for (auto &i : list) {
+                insert(end(), i);
+            }
+        }
+#endif
+
+        _GLIBCXX20_CONSTEXPR ~TVector() { erase(begin(), end()); }
 
         TVector &operator=(const TVector &other) { 
             clear();
@@ -103,36 +171,38 @@ namespace JGadget {
             return *this;
         }
 
-        reference operator[](size_type index) { return mStart[index]; }
-        const_reference operator[](size_type index) const { return mStart[index]; }
+        _GLIBCXX20_CONSTEXPR reference operator[](size_type index) { return mStart[index]; }
+        _GLIBCXX20_CONSTEXPR const_reference operator[](size_type index) const {
+            return mStart[index];
+        }
 
-        allocator_type get_allocator() const { return mAllocator; }
+        _GLIBCXX20_CONSTEXPR allocator_type get_allocator() const { return mAllocator; }
 
-        reference at(size_type index) {
+        _GLIBCXX20_CONSTEXPR reference at(size_type index) {
             if (index >= size()) {
-                OSReport("Attempted to access OOB item (%lu) of Vector (size %lu)!", index, size());
+                /*OSReport("Attempted to access OOB item (%lu) of Vector (size %lu)!", index, size());
                 while (true) {
                     __asm volatile("");
-                }
+                }*/
             }
             return mStart[index];
         }
 
-        const_reference at(size_type index) const {
+        _GLIBCXX20_CONSTEXPR const_reference at(size_type index) const {
             if (index >= size()) {
-                OSReport("Attempted to access OOB item (%lu) of Vector (size %lu)!", index, size());
+                /*OSReport("Attempted to access OOB item (%lu) of Vector (size %lu)!", index, size());
                 while (true) {
                     __asm volatile("");
-                }
+                }*/
             }
             return mStart[index];
         }
 
-        reference front() { return *mBegin; }
-        const_reference front() const { return *mBegin; }
+        _GLIBCXX20_CONSTEXPR reference front() { return *mBegin; }
+        _GLIBCXX20_CONSTEXPR const_reference front() const { return *mBegin; }
 
-        reference back() { return *(mEnd - 1); }
-        const_reference back() const { return *(mEnd - 1); }
+        _GLIBCXX20_CONSTEXPR reference back() { return *(mEnd - 1); }
+        _GLIBCXX20_CONSTEXPR const_reference back() const { return *(mEnd - 1); }
 
         void assign(size_type count, const_reference value) {
             clear();
@@ -144,18 +214,24 @@ namespace JGadget {
             insert(begin(), count, value);
         }
 
-        bool empty() const { return mBegin == mEnd; }
-        void clear() { erase(*begin(), *end()); }
+        _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR bool empty() const _GLIBCXX_NOEXCEPT { return mBegin == mEnd; }
+        _GLIBCXX20_CONSTEXPR void clear() _GLIBCXX_NOEXCEPT { erase(*begin(), *end()); }
 
         size_type capacity() { return mCapacity; }
-        size_type size() { return mStart ? mEnd - mStart : 0; }
+        _GLIBCXX20_CONSTEXPR size_type size() const _GLIBCXX_NOEXCEPT {
+            return mStart ? mEnd - mStart : 0;
+        }
 
-        iterator begin() { return {mStart}; }
-        iterator end() { return {mEnd}; }
+        _GLIBCXX20_CONSTEXPR iterator begin() _GLIBCXX_NOEXCEPT { return {mStart}; }
+        _GLIBCXX20_CONSTEXPR iterator end() _GLIBCXX_NOEXCEPT { return {mEnd}; }
 
-        iterator erase(iterator a) { return erase(*a, *(a + 1)); }
-        iterator erase(iterator a, iterator b) { return erase(*a, *b); }
-        iterator erase(pointer a, pointer b) {
+        _GLIBCXX20_CONSTEXPR iterator erase(iterator a) {
+            return erase(*a, *(a + 1));
+        }
+        _GLIBCXX20_CONSTEXPR iterator erase(iterator a, iterator b) {
+            return erase(*a, *b);
+        }
+        _GLIBCXX20_CONSTEXPR iterator erase(pointer a, pointer b) {
             pointer e = copy(b, mEnd, a);
             for (pointer i = e; i != mEnd; ++i) {
                 mAllocator.destroy(i);
@@ -165,16 +241,20 @@ namespace JGadget {
             return a;
         }
 
-        iterator insert(iterator at, value_type &&item) { return insert(*at, 1, item); }
-        iterator insert(iterator at, const_reference item) { return insert(*at, 1, item); }
-        iterator insert(iterator at, size_type count, const_reference item) {
+        _GLIBCXX20_CONSTEXPR iterator insert(iterator at, value_type &&item) {
+            return insert(*at, 1, item);
+        }
+        _GLIBCXX20_CONSTEXPR iterator insert(iterator at, const_reference item) {
+            return insert(*at, 1, item);
+        }
+        _GLIBCXX20_CONSTEXPR iterator insert(iterator at, size_type count, const_reference item) {
             return insert(*at, count, item);
         }
-        iterator insert(iterator at, size_type count, value_type &&item) {
+        _GLIBCXX20_CONSTEXPR iterator insert(iterator at, size_type count, value_type &&item) {
             value_type tmp = item;
             return insert(*at, count, tmp);
         }
-        iterator insert(pointer at, size_type count, const_reference item) {
+        _GLIBCXX20_CONSTEXPR iterator insert(pointer at, size_type count, const_reference item) {
             auto *ofs  = at - mStart;
             auto *data = InsertRaw(at, count);
             if (data != end()) {
@@ -183,10 +263,18 @@ namespace JGadget {
             return mStart + ofs;
         }
 
-        void push_back(const_reference item) { insert(end(), item); }
-        void pop_back() { erase(end()); }
+#if __cplusplus >= 201103L
+        _GLIBCXX20_CONSTEXPR iterator insert(iterator at, JSystem::initializer_list<value_type> list) {
+            for (auto i : list) {
+                at = insert(at, i);
+            }
+        }
+#endif
 
-        void reserve(size_type capacity) {
+        _GLIBCXX20_CONSTEXPR void push_back(const_reference item) { insert(end(), item); }
+        _GLIBCXX20_CONSTEXPR void pop_back() { erase(end()); }
+
+        _GLIBCXX20_CONSTEXPR void reserve(size_type capacity) {
             if (mCapacity >= capacity)
                 return;
 
@@ -212,7 +300,7 @@ namespace JGadget {
             mAllocator.deallocate(b, 1);
         }
 
-        void resize(size_type s) {
+        _GLIBCXX20_CONSTEXPR void resize(size_type s) {
             const size_type currentSize = size();
             if (s == currentSize)
                 return;
@@ -225,13 +313,13 @@ namespace JGadget {
         }
 
     private:
-        void DestroyElement_(pointer a, pointer b) {
+        _GLIBCXX20_CONSTEXPR void DestroyElement_(pointer a, pointer b) {
             for (; a != b; ++a) {
                 mAllocator.destroy(a);
             }
         }
 
-        pointer InsertRaw(pointer at, size_type count) {
+        _GLIBCXX20_CONSTEXPR pointer InsertRaw(pointer at, size_type count) {
             if (count == 0)
                 return at;
 

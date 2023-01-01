@@ -2,6 +2,9 @@
 
 #include <Dolphin/OS.h>
 #include <Dolphin/types.h>
+
+#include <JSystem/config.hxx>
+#include <JSystem/stddef.hxx>
 #include <JSystem/JKernel/JKRDisposer.hxx>
 #include <JSystem/JSupport/JSUList.hxx>
 
@@ -16,10 +19,10 @@ public:
     virtual void free(void *)        = 0;
     virtual void freeAll();
     virtual void freeTail()            = 0;
-    virtual u32 resize(void *, size_t) = 0;
-    virtual u32 getSize(void *)        = 0;
-    virtual u32 getFreeSize()          = 0;
-    virtual u32 getTotalFreeSize()     = 0;
+    virtual size_t resize(void *, size_t) = 0;
+    virtual size_t getSize(void *)        = 0;
+    virtual size_t getFreeSize()          = 0;
+    virtual size_t getTotalFreeSize()     = 0;
     virtual u32 getHeapType()          = 0;
     virtual bool check()               = 0;
     virtual u32 dump_sort();
@@ -83,10 +86,10 @@ public:
     virtual void free(void *) override;
     virtual void freeAll() override;
     virtual void freeTail() override;
-    virtual u32 resize(void *, size_t) override;
-    virtual u32 getSize(void *) override;
-    virtual u32 getFreeSize() override;
-    virtual u32 getTotalFreeSize() override;
+    virtual size_t resize(void *, size_t) override;
+    virtual size_t getSize(void *) override;
+    virtual size_t getFreeSize() override;
+    virtual size_t getTotalFreeSize() override;
     virtual u32 getHeapType() override;
     virtual bool check() override;
     virtual u32 dump_sort() override;
@@ -128,10 +131,10 @@ public:
     virtual void free(void *) override;
     virtual void freeAll() override;
     virtual void freeTail() override;
-    virtual u32 resize(void *, size_t) override;
-    virtual u32 getSize(void *) override;
-    virtual u32 getFreeSize() override;
-    virtual u32 getTotalFreeSize() override;
+    virtual size_t resize(void *, size_t) override;
+    virtual size_t getSize(void *) override;
+    virtual size_t getFreeSize() override;
+    virtual size_t getTotalFreeSize() override;
     virtual u32 getHeapType() override;
     virtual bool check() override;
     virtual bool dump() override;
@@ -152,10 +155,10 @@ public:
     virtual void free(void *) override;
     virtual void freeAll() override;
     virtual void freeTail() override;
-    virtual u32 resize(void *, size_t) override;
-    virtual u32 getSize(void *) override;
-    virtual u32 getFreeSize() override;
-    virtual u32 getTotalFreeSize() override;
+    virtual size_t resize(void *, size_t) override;
+    virtual size_t getSize(void *) override;
+    virtual size_t getFreeSize() override;
+    virtual size_t getTotalFreeSize() override;
     virtual u32 getHeapType() override;
     virtual bool check() override;
     virtual u32 dump_sort() override;
@@ -173,13 +176,13 @@ public:
 
 void JKRDefaultMemoryErrorRoutine(void *, u32, u32);
 
-void *operator new(size_t blocksize);
-void *operator new(size_t blocksize, int align) noexcept;
-void *operator new(size_t blocksize, JKRHeap *heap, int align) noexcept;
-void *operator new(size_t blocksize, void *block) noexcept { return block };  // Placement new
-void *operator new[](size_t blocksize);
-void *operator new[](size_t blocksize, int align) noexcept;
-void *operator new[](size_t blocksize, JKRHeap *heap, int align) noexcept;
-void *operator new[](size_t blocksize, void *block) noexcept { return block };  // Placement new
-void operator delete(void *block) noexcept;
-void operator delete[](void *block) noexcept;
+_GLIBCXX_NODISCARD void *operator new(size_t blocksize);
+_GLIBCXX_NODISCARD void *operator new(size_t blocksize, int align) _GLIBCXX_NOEXCEPT;
+_GLIBCXX_NODISCARD void *operator new(size_t blocksize, JKRHeap *heap, int align) _GLIBCXX_NOEXCEPT;
+_GLIBCXX_NODISCARD void *operator new(size_t blocksize, void *block) _GLIBCXX_NOEXCEPT { return block };  // Placement new
+_GLIBCXX_NODISCARD void *operator new[](size_t blocksize);
+_GLIBCXX_NODISCARD void *operator new[](size_t blocksize, int align) _GLIBCXX_NOEXCEPT;
+_GLIBCXX_NODISCARD void *operator new[](size_t blocksize, JKRHeap *heap, int align) _GLIBCXX_NOEXCEPT;
+_GLIBCXX_NODISCARD void *operator new[](size_t blocksize, void *block) _GLIBCXX_NOEXCEPT { return block };  // Placement new
+_GLIBCXX_NODISCARD void operator delete(void *block) _GLIBCXX_NOEXCEPT;
+_GLIBCXX_NODISCARD void operator delete[](void *block) _GLIBCXX_NOEXCEPT;
