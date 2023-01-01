@@ -7,24 +7,11 @@
 
 #include <JSystem/config.hxx>
 #include <JSystem/initializer_list.hxx>
+#include <JSystem/utility.hxx>
 #include <JSystem/JGadget/Allocator.hxx>
 #include <JSystem/JGadget/Node.hxx>
 
 namespace JGadget {
-
-    template <typename _TP, typename _TS, typename _TV> void uninitialized_fill_n(_TP dst, _TS count, const _TV &data) {
-        for (_TS i = 0; i < count; ++i) {
-            *dst++ = data;
-        }
-    }
-
-    template <typename _T> _T *copy(_T *begin, _T *end, _T *dst) {
-        while (begin != end) {
-            *dst++ = *begin++;
-        }
-        return dst;
-    }
-
     template <class _T, class _Alloc = TAllocator<_T>> class TVector {
     public:
         typedef typename _T value_type;
@@ -163,7 +150,7 @@ namespace JGadget {
 
         _GLIBCXX20_CONSTEXPR ~TVector() { erase(begin(), end()); }
 
-        TVector &operator=(const TVector &other) { 
+        _GLIBCXX20_CONSTEXPR TVector &operator=(const TVector &other) { 
             clear();
             for (auto &i : other) {
                 insert(end(), i);
