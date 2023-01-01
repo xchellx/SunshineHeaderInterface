@@ -271,8 +271,31 @@ namespace JGadget {
         }
 #endif
 
+#if __cplusplus >= 201103L
+        template <class... _Args>
+        _GLIBCXX20_CONSTEXPR iterator emplace(iterator at, _Args &&...args) {
+            auto *ofs  = at - mStart;
+            auto *data = InsertRaw(at, 1);
+            if (data != end()) {
+#if __cplusplus <= 201703L
+                mAllocator.construct(data, JSystem::forward<_Args>(args)...);
+#else
+                mAllocator.construct_at(data, JSystem::forward<_Args>(args)...);
+#endif
+            }
+            return mStart + ofs;
+        }
+#endif
+
         _GLIBCXX20_CONSTEXPR void push_back(const_reference item) { insert(end(), item); }
         _GLIBCXX20_CONSTEXPR void pop_back() { erase(end()); }
+
+#if __cplusplus >= 201103L
+        template <class... _Args>
+        _GLIBCXX20_CONSTEXPR void emplace_back(_Args &&...args) {
+            emplace(end(), JSystem::forward<_Args>(args)...);
+        }
+#endif
 
         _GLIBCXX20_CONSTEXPR void reserve(size_type capacity) {
             if (mCapacity >= capacity)
@@ -397,6 +420,37 @@ namespace JGadget {
         f32 _10;
         size_type _14;
     };
+
+    template <class _T, class _Alloc>
+    _GLIBCXX20_CONSTEXPR bool operator==(const TVector<_T, _Alloc>& lhs,
+        const TVector<_T, _Alloc>& rhs) {
+        if (lhs.size() != rhs.size())
+            return false;
+
+        for (auto i = lhs.begin(), auto j = rhs.begin(); i != lhs.end() && j != rhs.end(); ++i, ++j) {
+            if (i != j)
+                return false;
+        }
+
+        return true;
+    }
+
+#if __cplusplus <= 201703L
+    template <class _T, class _Alloc>
+    bool operator!=(const TVector<_T, _Alloc> &lhs,
+                                         const TVector<_T, _Alloc> &rhs) {
+        if (lhs.size() != rhs.size())
+            return true;
+
+        for (auto i = lhs.begin(), auto j = rhs.begin(); i != lhs.end() && j != rhs.end();
+             ++i, ++j) {
+            if (i != j)
+                return true;
+        }
+
+        return false;
+    }
+#endif
 
     class TVector_pointer_void : public TVector<void *> {
         TVector_pointer_void();
