@@ -9,13 +9,13 @@
 namespace JGadget {
     template <typename _T> class TAllocator {
     public:
-        typedef typename _T value_type;
-        typedef typename _T *pointer;
-        typedef typename _T &reference;
-        typedef typename const _T *const_pointer;
-        typedef typename const _T &const_reference;
-        typedef typename size_t size_type;
-        typedef typename ptrdiff_t difference_type;
+        typedef _T value_type;
+        typedef _T *pointer;
+        typedef _T &reference;
+        typedef const _T *const_pointer;
+        typedef const _T &const_reference;
+        typedef size_t size_type;
+        typedef ptrdiff_t difference_type;
         template <class U> struct rebind { typedef TAllocator<U> other; };
 
         _GLIBCXX20_CONSTEXPR TAllocator() _GLIBCXX_USE_NOEXCEPT = default;

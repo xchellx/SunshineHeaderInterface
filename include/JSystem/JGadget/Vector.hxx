@@ -14,14 +14,14 @@
 namespace JGadget {
     template <class _T, class _Alloc = TAllocator<_T>> class TVector {
     public:
-        typedef typename _T value_type;
-        typedef typename _Alloc allocator_type;
-        typedef typename size_t size_type;
-        typedef typename ptrdiff_t difference_type;
-        typedef typename value_type &reference;
-        typedef typename const value_type &const_reference;
-        typedef typename _Alloc::pointer pointer;
-        typedef typename _Alloc::const_pointer const_pointer;
+        typedef _T value_type;
+        typedef _Alloc allocator_type;
+        typedef size_t size_type;
+        typedef ptrdiff_t difference_type;
+        typedef value_type &reference;
+        typedef const value_type &const_reference;
+        typedef _Alloc::pointer pointer;
+        typedef _Alloc::const_pointer const_pointer;
 
         struct iterator {
             friend class TVector;
