@@ -432,9 +432,9 @@ namespace std {
 #endif
 // First includes.
 // Pick up any OS-specific definitions.
-#include <bits/os_defines.h>
+#include <JSystem/bits/os_defines.h>
 // Pick up any CPU-specific definitions.
-#include <bits/cpu_defines.h>
+#include <JSystem/bits/cpu_defines.h>
 // If platform uses neither visibility nor psuedo-visibility,
 // specify empty default for namespace annotation macros.
 #ifndef _GLIBCXX_PSEUDO_VISIBILITY
@@ -560,27 +560,6 @@ namespace std {
 #define _GLIBCXX_HAVE_BUILTIN_IS_CONSTANT_EVALUATED 1
 #endif
 #endif  // GCC
-// PSTL configuration
-#if __cplusplus >= 201703L
-// This header is not installed for freestanding:
-#if __has_include(<pstl/pstl_config.h>)
-// Preserved here so we have some idea which version of upstream we've pulled in
-// #define PSTL_VERSION 104
-// #define PSTL_VERSION_MAJOR (PSTL_VERSION/100)
-// #define PSTL_VERSION_MINOR (PSTL_VERSION - PSTL_VERSION_MAJOR * 100)
-// For now this defaults to being based on the presence of Thread Building Blocks
-#ifndef _GLIBCXX_USE_TBB_PAR_BACKEND
-#define _GLIBCXX_USE_TBB_PAR_BACKEND __has_include(<tbb/tbb.h>)
-#endif
-// This section will need some rework when a new (default) backend type is added
-#if _GLIBCXX_USE_TBB_PAR_BACKEND
-#define __PSTL_USE_PAR_POLICIES 1
-#endif
-#define __PSTL_ASSERT(_Condition)               __glibcxx_assert(_Condition)
-#define __PSTL_ASSERT_MSG(_Condition, _Message) __glibcxx_assert(_Condition)
-#include <pstl/pstl_config.h>
-#endif  // __has_include
-#endif  // C++17
 // End of prewritten config; the settings discovered at configure time follow.
 /* config.h.  Generated from config.h.in by configure.  */
 /* config.h.in.  Generated from configure.ac by autoheader.  */
