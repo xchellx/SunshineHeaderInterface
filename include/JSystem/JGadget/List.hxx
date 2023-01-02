@@ -88,6 +88,7 @@ namespace JGadget {
             return node;
         }
 
+    public:
         struct iterator {
             friend class TList;
 
