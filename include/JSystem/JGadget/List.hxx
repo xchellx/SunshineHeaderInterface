@@ -361,16 +361,16 @@ namespace JGadget {
         size_t size() const _GLIBCXX_NOEXCEPT { return mSize; }
 
         iterator begin() _GLIBCXX_NOEXCEPT { return {mBegin}; }
-        const_iterator begin() _GLIBCXX_NOEXCEPT const { return {mBegin}; }
+        const_iterator begin() const _GLIBCXX_NOEXCEPT { return {mBegin}; }
         iterator end() _GLIBCXX_NOEXCEPT {
             return {reinterpret_cast<TNode_ *>(&mBegin)}; }
-        const_iterator end() _GLIBCXX_NOEXCEPT const {
+        const_iterator end() const _GLIBCXX_NOEXCEPT {
             return {reinterpret_cast<TNode_ *>(&mBegin)};
         }
 
 #if __cplusplus >= 201103L
-        const_iterator cbegin() _GLIBCXX_NOEXCEPT const { return {mBegin}; }
-        const_iterator cend() _GLIBCXX_NOEXCEPT const {
+        const_iterator cbegin() const _GLIBCXX_NOEXCEPT { return {mBegin}; }
+        const_iterator cend() const _GLIBCXX_NOEXCEPT {
             return {reinterpret_cast<TNode_ *>(&mBegin)};
         }
 #endif

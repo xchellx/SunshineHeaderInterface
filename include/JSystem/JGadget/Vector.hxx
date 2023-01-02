@@ -298,13 +298,15 @@ namespace JGadget {
         }
 
         _GLIBCXX20_CONSTEXPR iterator begin() _GLIBCXX_NOEXCEPT { return {mBegin}; }
-        _GLIBCXX20_CONSTEXPR const_iterator begin() _GLIBCXX_NOEXCEPT const { return {mBegin}; }
+        _GLIBCXX20_CONSTEXPR const_iterator begin() const _GLIBCXX_NOEXCEPT {
+            return {mBegin};
+        }
         _GLIBCXX20_CONSTEXPR iterator end() _GLIBCXX_NOEXCEPT { return {mEnd}; }
-        _GLIBCXX20_CONSTEXPR const_iterator end() _GLIBCXX_NOEXCEPT const { return {mEnd}; }
+        _GLIBCXX20_CONSTEXPR const_iterator end() const _GLIBCXX_NOEXCEPT { return {mEnd}; }
 
 #if __cplusplus >= 201103L
-        _GLIBCXX20_CONSTEXPR const_iterator cbegin() _GLIBCXX_NOEXCEPT const { return {mBegin}; }
-        _GLIBCXX20_CONSTEXPR const_iterator cend() _GLIBCXX_NOEXCEPT const {
+        _GLIBCXX20_CONSTEXPR const_iterator cbegin() const _GLIBCXX_NOEXCEPT { return {mBegin}; }
+        _GLIBCXX20_CONSTEXPR const_iterator cend() const _GLIBCXX_NOEXCEPT {
             return {reinterpret_cast<TNode_ *>(&mBegin)};
         }
 #endif
