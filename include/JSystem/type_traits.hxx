@@ -23,7 +23,7 @@
  *  This is a Standard C++ Library header.
  */
 
-namespace JSystem {
+namespace JSystem  {
 
         /**
          * @defgroup metaprogramming Metaprogramming
@@ -186,11 +186,11 @@ namespace JSystem {
         template <typename _Res, typename... _ArgTypes>
         struct is_function<_Res(_ArgTypes...) &&> : public true_type {};
         template <typename _Res, typename... _ArgTypes>
-        struct is_function<_Res(_ArgTypes......)> : public true_type {};
+        struct is_function<_Res(_ArgTypes..., ...)> : public true_type {};
         template <typename _Res, typename... _ArgTypes>
-        struct is_function<_Res(_ArgTypes......) &> : public true_type {};
+        struct is_function<_Res(_ArgTypes..., ...) &> : public true_type {};
         template <typename _Res, typename... _ArgTypes>
-        struct is_function<_Res(_ArgTypes......) &&> : public true_type {};
+        struct is_function<_Res(_ArgTypes..., ...) &&> : public true_type {};
         template <typename _Res, typename... _ArgTypes>
         struct is_function<_Res(_ArgTypes...) const> : public true_type {};
         template <typename _Res, typename... _ArgTypes>
@@ -199,13 +199,13 @@ namespace JSystem {
         struct is_function<_Res(_ArgTypes...) const &&> : public true_type {
         };
         template <typename _Res, typename... _ArgTypes>
-        struct is_function<_Res(_ArgTypes......) const> : public true_type {
+        struct is_function<_Res(_ArgTypes..., ...) const> : public true_type {
         };
         template <typename _Res, typename... _ArgTypes>
-        struct is_function<_Res(_ArgTypes......) const &>
+        struct is_function<_Res(_ArgTypes..., ...) const &>
             : public true_type {};
         template <typename _Res, typename... _ArgTypes>
-        struct is_function<_Res(_ArgTypes......) const &&>
+        struct is_function<_Res(_ArgTypes..., ...) const &&>
             : public true_type {};
         template <typename _Res, typename... _ArgTypes>
         struct is_function<_Res(_ArgTypes...) volatile> : public true_type {
@@ -217,13 +217,13 @@ namespace JSystem {
         struct is_function<_Res(_ArgTypes...) volatile &&>
             : public true_type {};
         template <typename _Res, typename... _ArgTypes>
-        struct is_function<_Res(_ArgTypes......) volatile>
+        struct is_function<_Res(_ArgTypes..., ...) volatile>
             : public true_type {};
         template <typename _Res, typename... _ArgTypes>
-        struct is_function<_Res(_ArgTypes......) volatile &>
+        struct is_function<_Res(_ArgTypes..., ...) volatile &>
             : public true_type {};
         template <typename _Res, typename... _ArgTypes>
-        struct is_function<_Res(_ArgTypes......) volatile &&>
+        struct is_function<_Res(_ArgTypes..., ...) volatile &&>
             : public true_type {};
         template <typename _Res, typename... _ArgTypes>
         struct is_function<_Res(_ArgTypes...) const volatile>
@@ -235,13 +235,13 @@ namespace JSystem {
         struct is_function<_Res(_ArgTypes...) const volatile &&>
             : public true_type {};
         template <typename _Res, typename... _ArgTypes>
-        struct is_function<_Res(_ArgTypes......) const volatile>
+        struct is_function<_Res(_ArgTypes..., ...) const volatile>
             : public true_type {};
         template <typename _Res, typename... _ArgTypes>
-        struct is_function<_Res(_ArgTypes......) const volatile &>
+        struct is_function<_Res(_ArgTypes..., ...) const volatile &>
             : public true_type {};
         template <typename _Res, typename... _ArgTypes>
-        struct is_function<_Res(_ArgTypes......) const volatile &&>
+        struct is_function<_Res(_ArgTypes..., ...) const volatile &&>
             : public true_type {};
 #define __cpp_lib_is_null_pointer 201309
         template <typename> struct __is_null_pointer_helper : public false_type {};
@@ -288,7 +288,7 @@ namespace JSystem {
         template <typename _Res, typename... _Args>
         struct __is_referenceable<_Res(_Args...)> : public true_type {};
         template <typename _Res, typename... _Args>
-        struct __is_referenceable<_Res(_Args......)> : public true_type {};
+        struct __is_referenceable<_Res(_Args..., ...)> : public true_type {};
         // Type properties.
         /// is_const
         template <typename> struct is_const : public false_type {};
