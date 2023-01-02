@@ -197,8 +197,8 @@ namespace JGadget {
             : mAllocator(other.mAllocator), mSize(0), mBegin(nullptr), mEnd(nullptr) {
             mBegin = reinterpret_cast<TNode_ *>(&mBegin);
             mEnd   = reinterpret_cast<TNode_ *>(&mBegin);
-            for (auto &item : other) {
-                insert(end(), item);
+            for (auto i : other) {
+                insert(end(), i);
             }
         }
 
@@ -245,7 +245,7 @@ namespace JGadget {
 
         TList &operator=(const TList &other) {
             clear();
-            for (auto &i : other) {
+            for (auto i : other) {
                 insert(end(), i);
             }
             return *this;
@@ -303,8 +303,8 @@ namespace JGadget {
             prev->mNext = next;
             next->mPrev = prev;
 
-            mAllocator.destroy(iter.mNode.mItem);
-            mAllocator.deallocate(iter.mNode, 1);
+            mAllocator.destroy(&iter.mNode->mItem);
+            delete iter.mNode;
 
             mSize -= 1;
             return {next};
