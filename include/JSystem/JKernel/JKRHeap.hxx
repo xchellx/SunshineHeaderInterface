@@ -179,13 +179,13 @@ void JKRDefaultMemoryErrorRoutine(void *, u32, u32);
 _GLIBCXX_NODISCARD void *operator new(size_t blocksize);
 _GLIBCXX_NODISCARD void *operator new(size_t blocksize, int align) _GLIBCXX_NOEXCEPT;
 _GLIBCXX_NODISCARD void *operator new(size_t blocksize, JKRHeap *heap, int align) _GLIBCXX_NOEXCEPT;
-_GLIBCXX_NODISCARD void *operator new(void *block) _GLIBCXX_NOEXCEPT {
+_GLIBCXX_NODISCARD void *operator new(size_t blocksize, void *block) _GLIBCXX_NOEXCEPT {
     return block;
 };  // Placement new
 _GLIBCXX_NODISCARD void *operator new[](size_t blocksize);
 _GLIBCXX_NODISCARD void *operator new[](size_t blocksize, int align) _GLIBCXX_NOEXCEPT;
 _GLIBCXX_NODISCARD void *operator new[](size_t blocksize, JKRHeap *heap, int align) _GLIBCXX_NOEXCEPT;
-_GLIBCXX_NODISCARD void *operator new[](void *block) _GLIBCXX_NOEXCEPT {
+_GLIBCXX_NODISCARD void *operator new[](size_t blocksize, void *block) _GLIBCXX_NOEXCEPT {
     return block;
 };  // Placement new
 void operator delete(void *block) _GLIBCXX_NOEXCEPT;

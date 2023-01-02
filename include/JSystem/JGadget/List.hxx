@@ -367,7 +367,7 @@ namespace JGadget {
         }
 
 #if __cplusplus >= 201103L
-        iterator insert(iterator at, JSystem::initializer_list list) {
+        iterator insert(iterator at, JSystem::initializer_list<value_type> list) {
             for (auto i : list) {
                 at = insert(at, node);
             }
