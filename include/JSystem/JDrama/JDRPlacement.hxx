@@ -11,7 +11,7 @@ namespace JDrama {
     class TPlacement : public TViewObj {
     public:
         TPlacement(const char *name)
-            : TViewObj(name), mPosition(0.0f, 0.0f, 0.0f), mPlacementFlags(0) {}
+            : TViewObj(name), mTranslation(0.0f, 0.0f, 0.0f), mPlacementFlags(0) {}
         virtual ~TPlacement();
 
         void load(JSUMemoryInputStream &) override;
