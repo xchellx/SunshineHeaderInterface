@@ -84,8 +84,8 @@ namespace JGadget {
             friend class TList;
 
             iterator(TNode_ *node) : mNode(node) {}
-            iterator(const TNode_ *node) : mNode(node) {}
-            iterator(const iterator &iter) : mNode(iter.mNode) {}
+            iterator(const iterator &iter) = default;
+            iterator(iterator &&iter) = default;
 
             bool operator==(const iterator &rhs) const { return mNode == rhs.mNode; }
             bool operator!=(const iterator &rhs) const { return mNode != rhs.mNode; }
@@ -147,6 +147,75 @@ namespace JGadget {
 
         private:
             TNode_ *mNode;
+        };
+
+        struct const_iterator {
+            friend class TList;
+
+            explicit const_iterator(const TNode_ *node) : mNode(node) {}
+            const_iterator(const const_iterator &iter) = default;
+            const_iterator(const_iterator &&iter) = default;
+
+            bool operator==(const const_iterator &rhs) const { return mNode == rhs.mNode; }
+            bool operator!=(const const_iterator &rhs) const { return mNode != rhs.mNode; }
+
+            const_iterator operator+(int i) {
+                const_iterator temp{mNode};
+                for (size_t k = 0; k < i; ++k) {
+                    temp->mNode = temp->mNode->mNext;  // Undefined behavior if past end
+                }
+                return temp;
+            }
+
+            const_iterator &operator+=(int i) {
+                for (size_t k = 0; k < i; ++k) {
+                    mNode = mNode->mNext;  // Undefined behavior if past end
+                }
+                return *this;
+            }
+
+            const_iterator &operator++() {
+                mNode = mNode->mNext;
+                return *this;
+            }
+
+            const_iterator operator++(int) {
+                const_iterator temp{mNode};
+                mNode = mNode->mNext;
+                return temp;
+            }
+
+            const_iterator operator-(int i) {
+                const_iterator temp{mNode};
+                for (size_t k = 0; k < i; ++k) {
+                    temp->mNode = temp->mNode->mPrev;  // Undefined behavior if past begin
+                }
+                return temp;
+            }
+
+            const_iterator &operator-=(int i) {
+                for (size_t k = 0; k < i; ++k) {
+                    mNode = mNode->mPrev;  // Undefined behavior if past begin
+                }
+                return *this;
+            }
+
+            const_iterator &operator--() {
+                mNode = mNode->mPrev;
+                return *this;
+            }
+
+            const_iterator operator--(int) {
+                iterator temp{mNode};
+                mNode = mNode->mPrev;
+                return temp;
+            }
+
+            const _T *operator->() const { return &mNode->mItem; }
+            const _T &operator*() { return mNode->mItem; }
+
+        private:
+            const TNode_ *mNode;
         };
 
         TList() : mAllocator(), mSize(0), mBegin(nullptr), mEnd(nullptr) {
@@ -291,10 +360,20 @@ namespace JGadget {
         }
         size_t size() const _GLIBCXX_NOEXCEPT { return mSize; }
 
-        _GLIBCXX20_CONSTEXPR iterator begin() _GLIBCXX_NOEXCEPT { return {mBegin}; }
-        _GLIBCXX20_CONSTEXPR iterator end() _GLIBCXX_NOEXCEPT {
+        iterator begin() _GLIBCXX_NOEXCEPT { return {mBegin}; }
+        const_iterator begin() _GLIBCXX_NOEXCEPT const { return {mBegin}; }
+        iterator end() _GLIBCXX_NOEXCEPT {
+            return {reinterpret_cast<TNode_ *>(&mBegin)}; }
+        const_iterator end() _GLIBCXX_NOEXCEPT const {
             return {reinterpret_cast<TNode_ *>(&mBegin)};
         }
+
+#if __cplusplus >= 201103L
+        const_iterator cbegin() _GLIBCXX_NOEXCEPT const { return {mBegin}; }
+        const_iterator cend() _GLIBCXX_NOEXCEPT const {
+            return {reinterpret_cast<TNode_ *>(&mBegin)};
+        }
+#endif
 
         iterator erase(iterator iter) {
             TNode_ *next = iter.mNode->mNext;
@@ -310,15 +389,15 @@ namespace JGadget {
             return {next};
         }
 
-        iterator erase(iterator start, iterator end) {
+        iterator erase(const_iterator start, const_iterator end) {
             iterator iter = start;
             while (iter != end) {
                 iter = erase(iter);
             }
-            return {iter};
+            return iter;
         }
 
-        iterator insert(iterator at, const value_type &node) {
+        iterator insert(const_iterator at, const value_type &node) {
             TNode_ *current = at.mNode;
             TNode_ *prev    = current->mPrev;
 
@@ -333,7 +412,7 @@ namespace JGadget {
             return {newNode};
         }
 
-        iterator insert(iterator at, value_type &&node) {
+        iterator insert(const_iterator at, value_type &&node) {
             value_type tmp = node;
 
             TNode_ *current = at.mNode;
@@ -350,23 +429,30 @@ namespace JGadget {
             return {newNode};
         }
 
-        iterator insert(iterator at, size_type count, const value_type &node) {
+        iterator insert(const_iterator at, size_type count, const value_type &node) {
             for (size_t i = 0; i < count; ++i) {
                 at = insert(at, node);
             }
             return at;
         }
 
+        iterator insert(const_iterator at, size_type count, value_type &&node) {
+            value_type tmp = node;
+            for (size_t i = 0; i < count; ++i) {
+                at = insert(at, tmp);
+            }
+            return at;
+        }
+
 #if __cplusplus >= 201103L
-        iterator insert(iterator at, JSystem::initializer_list<value_type> list) {
+        iterator insert(const_iterator at, JSystem::initializer_list<value_type> list) {
             for (auto &i : list) {
                 at = insert(at, i);
             }
             return at;
         }
 
-        template <class... _Args>
-        iterator emplace(iterator at, _Args &&...args) {
+        template <class... _Args> iterator emplace(const_iterator at, _Args &&...args) {
             value_type tmp;
 
 #if __cplusplus <= 201703L
@@ -490,7 +576,7 @@ namespace JGadget {
             }
         }
 
-        void splice(iterator at, TList &other) {
+        void splice(const_iterator at, TList &other) {
             iterator i = --other.end();
             while (true) {
                 splice(at, other, i);
@@ -502,7 +588,7 @@ namespace JGadget {
             }
         }
 
-        void splice(iterator at, TList &other, iterator sp) {
+        void splice(const_iterator at, TList &other, const_iterator sp) {
             TNode_ *current = at.mNode;
             TNode_ *prev = current->mPrev;
 
@@ -520,7 +606,7 @@ namespace JGadget {
             other.mSize -= 1;
         }
 
-        void splice(iterator at, TList &other, iterator first, iterator last) {
+        void splice(const_iterator at, TList &other, const_iterator first, const_iterator last) {
             while (first != last) {
                 splice(at, other, first++);
             }

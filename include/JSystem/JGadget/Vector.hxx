@@ -28,6 +28,7 @@ namespace JGadget {
 
             explicit _GLIBCXX20_CONSTEXPR iterator(pointer node) : mCurrent(node) {}
             _GLIBCXX20_CONSTEXPR iterator(const iterator &iter) = default;
+            _GLIBCXX20_CONSTEXPR iterator(iterator &&iter)      = default;
 
             _GLIBCXX20_CONSTEXPR bool operator==(const iterator &rhs) const {
                 return mCurrent == rhs.mCurrent;
@@ -85,6 +86,71 @@ namespace JGadget {
 
         private:
             pointer mCurrent;
+        };
+
+        struct const_iterator {
+            friend class TVector;
+
+            explicit _GLIBCXX20_CONSTEXPR const_iterator(pointer node) : mCurrent(node) {}
+            _GLIBCXX20_CONSTEXPR const_iterator(const iterator &iter) = default;
+            _GLIBCXX20_CONSTEXPR const_iterator(iterator &&iter) = default;
+
+            _GLIBCXX20_CONSTEXPR bool operator==(const iterator &rhs) const {
+                return mCurrent == rhs.mCurrent;
+            }
+            _GLIBCXX20_CONSTEXPR bool operator!=(const iterator &rhs) const {
+                return mCurrent != rhs.mCurrent;
+            }
+
+            _GLIBCXX20_CONSTEXPR const_iterator operator+(int i) {
+                const_iterator temp{mCurrent};
+                temp->mCurrent += i;
+                return temp;
+            }
+
+            _GLIBCXX20_CONSTEXPR const_iterator &operator+=(int i) {
+                mCurrent += i;
+                return *this;
+            }
+
+            _GLIBCXX20_CONSTEXPR const_iterator &operator++() {
+                ++mCurrent;
+                return *this;
+            }
+
+            _GLIBCXX20_CONSTEXPR const_iterator operator++(int) {
+                const_iterator temp{mCurrent};
+                ++mCurrent;
+                return temp;
+            }
+
+            _GLIBCXX20_CONSTEXPR const_iterator operator-(int i) {
+                const_iterator temp{mCurrent};
+                temp->mCurrent -= i;
+                return temp;
+            }
+
+            _GLIBCXX20_CONSTEXPR const_iterator &operator-=(int i) {
+                mCurrent -= i;
+                return *this;
+            }
+
+            _GLIBCXX20_CONSTEXPR const_iterator &operator--() {
+                --mCurrent;
+                return *this;
+            }
+
+            _GLIBCXX20_CONSTEXPR const_iterator operator--(int) {
+                const_iterator temp{mCurrent};
+                --mCurrent;
+                return temp;
+            }
+
+            const_pointer operator->() const { return *mCurrent; }
+            const_reference operator*() const { return *mCurrent; }
+
+        private:
+            const_pointer mCurrent;
         };
 
         _GLIBCXX20_CONSTEXPR TVector() _GLIBCXX_NOEXCEPT_IF(_GLIBCXX_NOEXCEPT_IF(allocator_type()))
@@ -232,14 +298,25 @@ namespace JGadget {
         }
 
         _GLIBCXX20_CONSTEXPR iterator begin() _GLIBCXX_NOEXCEPT { return {mBegin}; }
+        _GLIBCXX20_CONSTEXPR const_iterator begin() _GLIBCXX_NOEXCEPT const { return {mBegin}; }
         _GLIBCXX20_CONSTEXPR iterator end() _GLIBCXX_NOEXCEPT { return {mEnd}; }
+        _GLIBCXX20_CONSTEXPR const_iterator end() _GLIBCXX_NOEXCEPT const { return {mEnd}; }
 
-        _GLIBCXX20_CONSTEXPR iterator erase(iterator a) {
+#if __cplusplus >= 201103L
+        _GLIBCXX20_CONSTEXPR const_iterator cbegin() _GLIBCXX_NOEXCEPT const { return {mBegin}; }
+        _GLIBCXX20_CONSTEXPR const_iterator cend() _GLIBCXX_NOEXCEPT const {
+            return {reinterpret_cast<TNode_ *>(&mBegin)};
+        }
+#endif
+
+        _GLIBCXX20_CONSTEXPR iterator erase(const_iterator a) {
             return erase(*a, *(a + 1));
         }
-        _GLIBCXX20_CONSTEXPR iterator erase(iterator a, iterator b) {
+        _GLIBCXX20_CONSTEXPR iterator erase(const_iterator a, const_iterator b) {
             return erase(*a, *b);
         }
+
+    private:
         _GLIBCXX20_CONSTEXPR iterator erase(pointer a, pointer b) {
             pointer e = copy(b, mEnd, a);
             for (pointer i = e; i != mEnd; ++i) {
@@ -250,19 +327,24 @@ namespace JGadget {
             return a;
         }
 
-        _GLIBCXX20_CONSTEXPR iterator insert(iterator at, value_type &&item) {
+    public:
+        _GLIBCXX20_CONSTEXPR iterator insert(const_iterator at, value_type &&item) {
             return insert(*at, 1, item);
         }
-        _GLIBCXX20_CONSTEXPR iterator insert(iterator at, const_reference item) {
+        _GLIBCXX20_CONSTEXPR iterator insert(const_iterator at, const_reference item) {
             return insert(*at, 1, item);
         }
-        _GLIBCXX20_CONSTEXPR iterator insert(iterator at, size_type count, const_reference item) {
+        _GLIBCXX20_CONSTEXPR iterator insert(const_iterator at, size_type count,
+                                             const_reference item) {
             return insert(*at, count, item);
         }
-        _GLIBCXX20_CONSTEXPR iterator insert(iterator at, size_type count, value_type &&item) {
+        _GLIBCXX20_CONSTEXPR iterator insert(const_iterator at, size_type count,
+                                             value_type &&item) {
             value_type tmp = item;
             return insert(*at, count, tmp);
         }
+
+    private:
         _GLIBCXX20_CONSTEXPR iterator insert(pointer at, size_type count, const_reference item) {
             auto *ofs  = at - mBegin;
             auto *data = InsertRaw(at, count);
@@ -272,15 +354,17 @@ namespace JGadget {
             return mBegin + ofs;
         }
 
+    public:
 #if __cplusplus >= 201103L
-        _GLIBCXX20_CONSTEXPR iterator insert(iterator at, JSystem::initializer_list<value_type> list) {
+        _GLIBCXX20_CONSTEXPR iterator insert(const_iterator at,
+                                             JSystem::initializer_list<value_type> list) {
             for (auto &i : list) {
                 at = insert(at, i);
             }
         }
 
         template <class... _Args>
-        _GLIBCXX20_CONSTEXPR iterator emplace(iterator at, _Args &&...args) {
+        _GLIBCXX20_CONSTEXPR iterator emplace(const_iterator at, _Args &&...args) {
             auto *ofs  = at - mBegin;
             auto *data = InsertRaw(at, 1);
             if (data != end()) {
