@@ -80,83 +80,12 @@ namespace JGadget {
         }
 
     public:
-        struct const_iterator {
-            friend class TList;
-
-            explicit const_iterator(const TNode_ *node) : mNode(node) {}
-            const_iterator(const const_iterator &iter) = default;
-            const_iterator(const_iterator &&iter)      = default;
-
-            bool operator==(const const_iterator &rhs) const { return mNode == rhs.mNode; }
-            bool operator!=(const const_iterator &rhs) const { return mNode != rhs.mNode; }
-
-            const_iterator operator+(int i) {
-                const_iterator temp{mNode};
-                for (size_t k = 0; k < i; ++k) {
-                    temp->mNode = temp->mNode->mNext;  // Undefined behavior if past end
-                }
-                return temp;
-            }
-
-            const_iterator &operator+=(int i) {
-                for (size_t k = 0; k < i; ++k) {
-                    mNode = mNode->mNext;  // Undefined behavior if past end
-                }
-                return *this;
-            }
-
-            const_iterator &operator++() {
-                mNode = mNode->mNext;
-                return *this;
-            }
-
-            const_iterator operator++(int) {
-                const_iterator temp{mNode};
-                mNode = mNode->mNext;
-                return temp;
-            }
-
-            const_iterator operator-(int i) {
-                const_iterator temp{mNode};
-                for (size_t k = 0; k < i; ++k) {
-                    temp->mNode = temp->mNode->mPrev;  // Undefined behavior if past begin
-                }
-                return temp;
-            }
-
-            const_iterator &operator-=(int i) {
-                for (size_t k = 0; k < i; ++k) {
-                    mNode = mNode->mPrev;  // Undefined behavior if past begin
-                }
-                return *this;
-            }
-
-            const_iterator &operator--() {
-                mNode = mNode->mPrev;
-                return *this;
-            }
-
-            const_iterator operator--(int) {
-                iterator temp{mNode};
-                mNode = mNode->mPrev;
-                return temp;
-            }
-
-            const _T *operator->() const { return &mNode->mItem; }
-            const _T &operator*() { return mNode->mItem; }
-
-        private:
-            const TNode_ *mNode;
-        };
-
         struct iterator {
             friend class TList;
 
             iterator(TNode_ *node) : mNode(node) {}
             iterator(const iterator &iter) = default;
-            iterator(iterator &&iter)      = default;
-
-            const_iterator operator const_iterator() { return const_iterator(mNode); }
+            iterator(iterator &&iter) = default;
 
             bool operator==(const iterator &rhs) const { return mNode == rhs.mNode; }
             bool operator!=(const iterator &rhs) const { return mNode != rhs.mNode; }
@@ -218,6 +147,76 @@ namespace JGadget {
 
         private:
             TNode_ *mNode;
+        };
+
+        struct const_iterator {
+            friend class TList;
+
+            explicit const_iterator(const TNode_ *node) : mNode(node) {}
+            const_iterator(const iterator &iter) : mNode(iter.mNode) {}
+            const_iterator(const const_iterator &iter) = default;
+            const_iterator(const_iterator &&iter) = default;
+
+            bool operator==(const const_iterator &rhs) const { return mNode == rhs.mNode; }
+            bool operator!=(const const_iterator &rhs) const { return mNode != rhs.mNode; }
+
+            const_iterator operator+(int i) {
+                const_iterator temp{mNode};
+                for (size_t k = 0; k < i; ++k) {
+                    temp->mNode = temp->mNode->mNext;  // Undefined behavior if past end
+                }
+                return temp;
+            }
+
+            const_iterator &operator+=(int i) {
+                for (size_t k = 0; k < i; ++k) {
+                    mNode = mNode->mNext;  // Undefined behavior if past end
+                }
+                return *this;
+            }
+
+            const_iterator &operator++() {
+                mNode = mNode->mNext;
+                return *this;
+            }
+
+            const_iterator operator++(int) {
+                const_iterator temp{mNode};
+                mNode = mNode->mNext;
+                return temp;
+            }
+
+            const_iterator operator-(int i) {
+                const_iterator temp{mNode};
+                for (size_t k = 0; k < i; ++k) {
+                    temp->mNode = temp->mNode->mPrev;  // Undefined behavior if past begin
+                }
+                return temp;
+            }
+
+            const_iterator &operator-=(int i) {
+                for (size_t k = 0; k < i; ++k) {
+                    mNode = mNode->mPrev;  // Undefined behavior if past begin
+                }
+                return *this;
+            }
+
+            const_iterator &operator--() {
+                mNode = mNode->mPrev;
+                return *this;
+            }
+
+            const_iterator operator--(int) {
+                iterator temp{mNode};
+                mNode = mNode->mPrev;
+                return temp;
+            }
+
+            const _T *operator->() const { return &mNode->mItem; }
+            const _T &operator*() { return mNode->mItem; }
+
+        private:
+            const TNode_ *mNode;
         };
 
         TList() : mAllocator(), mSize(0), mBegin(nullptr), mEnd(nullptr) {

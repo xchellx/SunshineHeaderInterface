@@ -23,17 +23,83 @@ namespace JGadget {
         typedef typename _Alloc::pointer pointer;
         typedef typename _Alloc::const_pointer const_pointer;
 
-        struct const_iterator {
+        struct iterator {
             friend class TVector;
 
-            explicit _GLIBCXX20_CONSTEXPR const_iterator(pointer node) : mCurrent(node) {}
-            _GLIBCXX20_CONSTEXPR const_iterator(const iterator &iter) = default;
-            _GLIBCXX20_CONSTEXPR const_iterator(iterator &&iter) = default;
+            explicit _GLIBCXX20_CONSTEXPR iterator(pointer node) : mCurrent(node) {}
+            _GLIBCXX20_CONSTEXPR iterator(const iterator &iter) = default;
+            _GLIBCXX20_CONSTEXPR iterator(iterator &&iter)      = default;
 
             _GLIBCXX20_CONSTEXPR bool operator==(const iterator &rhs) const {
                 return mCurrent == rhs.mCurrent;
             }
             _GLIBCXX20_CONSTEXPR bool operator!=(const iterator &rhs) const {
+                return mCurrent != rhs.mCurrent;
+            }
+
+            _GLIBCXX20_CONSTEXPR iterator operator+(int i) {
+                iterator temp{mCurrent};
+                temp->mCurrent += i;
+                return temp;
+            }
+
+            _GLIBCXX20_CONSTEXPR iterator &operator+=(int i) {
+                mCurrent += i;
+                return *this;
+            }
+
+            _GLIBCXX20_CONSTEXPR iterator &operator++() {
+                ++mCurrent;
+                return *this; 
+            }
+
+            _GLIBCXX20_CONSTEXPR iterator operator++(int) {
+                iterator temp{mCurrent};
+                ++mCurrent;
+                return temp;
+            }
+
+            _GLIBCXX20_CONSTEXPR iterator operator-(int i) {
+                iterator temp{mCurrent};
+                temp->mCurrent -= i;
+                return temp;
+            }
+
+            _GLIBCXX20_CONSTEXPR iterator &operator-=(int i) {
+                mCurrent -= i;
+                return *this;
+            }
+
+            _GLIBCXX20_CONSTEXPR iterator &operator--() {
+                --mCurrent;
+                return *this;
+            }
+
+            _GLIBCXX20_CONSTEXPR iterator operator--(int) {
+                iterator temp{mCurrent};
+                --mCurrent;
+                return temp;
+            }
+
+            pointer operator->() const { return *mCurrent; }
+            reference operator*() const { return *mCurrent; }
+
+        private:
+            pointer mCurrent;
+        };
+
+        struct const_iterator {
+            friend class TVector;
+
+            explicit _GLIBCXX20_CONSTEXPR const_iterator(pointer node) : mCurrent(node) {}
+            _GLIBCXX20_CONSTEXPR const_iterator(const iterator &iter) : mCurrent(iter.mCurrent) {}
+            _GLIBCXX20_CONSTEXPR const_iterator(const const_iterator &iter) = default;
+            _GLIBCXX20_CONSTEXPR const_iterator(const_iterator &&iter) = default;
+
+            _GLIBCXX20_CONSTEXPR bool operator==(const const_iterator &rhs) const {
+                return mCurrent == rhs.mCurrent;
+            }
+            _GLIBCXX20_CONSTEXPR bool operator!=(const const_iterator &rhs) const {
                 return mCurrent != rhs.mCurrent;
             }
 
@@ -86,75 +152,6 @@ namespace JGadget {
 
         private:
             const_pointer mCurrent;
-        };
-
-        struct iterator {
-            friend class TVector;
-
-            explicit _GLIBCXX20_CONSTEXPR iterator(pointer node) : mCurrent(node) {}
-            _GLIBCXX20_CONSTEXPR iterator(const iterator &iter) = default;
-            _GLIBCXX20_CONSTEXPR iterator(iterator &&iter)      = default;
-
-            _GLIBCXX20_CONSTEXPR const_iterator operator const_iterator() {
-                return const_iterator(mCurrent);
-            }
-
-            _GLIBCXX20_CONSTEXPR bool operator==(const iterator &rhs) const {
-                return mCurrent == rhs.mCurrent;
-            }
-            _GLIBCXX20_CONSTEXPR bool operator!=(const iterator &rhs) const {
-                return mCurrent != rhs.mCurrent;
-            }
-
-            _GLIBCXX20_CONSTEXPR iterator operator+(int i) {
-                iterator temp{mCurrent};
-                temp->mCurrent += i;
-                return temp;
-            }
-
-            _GLIBCXX20_CONSTEXPR iterator &operator+=(int i) {
-                mCurrent += i;
-                return *this;
-            }
-
-            _GLIBCXX20_CONSTEXPR iterator &operator++() {
-                ++mCurrent;
-                return *this;
-            }
-
-            _GLIBCXX20_CONSTEXPR iterator operator++(int) {
-                iterator temp{mCurrent};
-                ++mCurrent;
-                return temp;
-            }
-
-            _GLIBCXX20_CONSTEXPR iterator operator-(int i) {
-                iterator temp{mCurrent};
-                temp->mCurrent -= i;
-                return temp;
-            }
-
-            _GLIBCXX20_CONSTEXPR iterator &operator-=(int i) {
-                mCurrent -= i;
-                return *this;
-            }
-
-            _GLIBCXX20_CONSTEXPR iterator &operator--() {
-                --mCurrent;
-                return *this;
-            }
-
-            _GLIBCXX20_CONSTEXPR iterator operator--(int) {
-                iterator temp{mCurrent};
-                --mCurrent;
-                return temp;
-            }
-
-            pointer operator->() const { return *mCurrent; }
-            reference operator*() const { return *mCurrent; }
-
-        private:
-            pointer mCurrent;
         };
 
         _GLIBCXX20_CONSTEXPR TVector() _GLIBCXX_NOEXCEPT_IF(_GLIBCXX_NOEXCEPT_IF(allocator_type()))
