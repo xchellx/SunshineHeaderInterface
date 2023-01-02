@@ -2,9 +2,11 @@
 
 #include <Dolphin/OS.h>
 #include <Dolphin/types.h>
-#include <JKernel/JKRHeap.hxx>
+
+#include <JSystem/initializer_list.hxx>
 #include <JSystem/JGadget/Allocator.hxx>
 #include <JSystem/JGadget/Node.hxx>
+#include <JSystem/JKernel/JKRHeap.hxx>
 
 namespace JGadget {
 
@@ -55,8 +57,8 @@ namespace JGadget {
         typedef ptrdiff_t difference_type;
         typedef value_type &reference;
         typedef const value_type &const_reference;
-        typedef _Alloc::pointer pointer;
-        typedef _Alloc::const_pointer const_pointer;
+        typedef typename _Alloc::pointer pointer;
+        typedef typename _Alloc::const_pointer const_pointer;
 
     private:
         struct TNode_ {
@@ -249,7 +251,7 @@ namespace JGadget {
 
         ~TList() { clear(); }
 
-        TList &operator=(const TVector &other) {
+        TList &operator=(const TList &other) {
             clear();
             for (auto &i : other) {
                 insert(end(), i);
