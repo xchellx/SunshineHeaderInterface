@@ -88,10 +88,10 @@ namespace JGadget {
         };
 
         _GLIBCXX20_CONSTEXPR TVector() _GLIBCXX_NOEXCEPT_IF(_GLIBCXX_NOEXCEPT_IF(allocator_type()))
-            : mAllocator(), mStart(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f), _14(0) {}
+            : mAllocator(), mBegin(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f), _14(0) {}
 
         explicit _GLIBCXX20_CONSTEXPR TVector(const allocator_type &allocator) _GLIBCXX_NOEXCEPT
-            : mAllocator(allocator), mStart(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f), _14(0) {}
+            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f), _14(0) {}
 
 #if __cplusplus >= 201103L
         _GLIBCXX20_CONSTEXPR TVector(size_type count, const value_type &value,
@@ -103,7 +103,7 @@ namespace JGadget {
 #else
         explicit TVector(size_type count, const value_type &value = value_type(),
                          const allocator_type &allocator = allocator_type())
-            : mAllocator(allocator), mStart(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
+            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
               _14(0) {
             insert(end(), count, value);
         }
@@ -118,7 +118,7 @@ namespace JGadget {
         }
 #else
         explicit TVector(size_type count)
-            : mAllocator(), mStart(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
+            : mAllocator(), mBegin(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
               _14(0) {
             insert(end(), count, value_type());
         }
@@ -173,9 +173,9 @@ namespace JGadget {
             return *this;
         }
 
-        _GLIBCXX20_CONSTEXPR reference operator[](size_type index) { return mStart[index]; }
+        _GLIBCXX20_CONSTEXPR reference operator[](size_type index) { return mBegin[index]; }
         _GLIBCXX20_CONSTEXPR const_reference operator[](size_type index) const {
-            return mStart[index];
+            return mBegin[index];
         }
 
         _GLIBCXX20_CONSTEXPR allocator_type get_allocator() const { return mAllocator; }
@@ -187,7 +187,7 @@ namespace JGadget {
                     __asm volatile("");
                 }*/
             }
-            return mStart[index];
+            return mBegin[index];
         }
 
         _GLIBCXX20_CONSTEXPR const_reference at(size_type index) const {
@@ -197,7 +197,7 @@ namespace JGadget {
                     __asm volatile("");
                 }*/
             }
-            return mStart[index];
+            return mBegin[index];
         }
 
         _GLIBCXX20_CONSTEXPR reference front() { return *mBegin; }
@@ -228,10 +228,10 @@ namespace JGadget {
             return difference_type(-1) / sizeof(difference_type);
         }
         _GLIBCXX20_CONSTEXPR size_type size() const _GLIBCXX_NOEXCEPT {
-            return mStart ? mEnd - mStart : 0;
+            return mBegin ? mEnd - mBegin : 0;
         }
 
-        _GLIBCXX20_CONSTEXPR iterator begin() _GLIBCXX_NOEXCEPT { return {mStart}; }
+        _GLIBCXX20_CONSTEXPR iterator begin() _GLIBCXX_NOEXCEPT { return {mBegin}; }
         _GLIBCXX20_CONSTEXPR iterator end() _GLIBCXX_NOEXCEPT { return {mEnd}; }
 
         _GLIBCXX20_CONSTEXPR iterator erase(iterator a) {
@@ -264,17 +264,17 @@ namespace JGadget {
             return insert(*at, count, tmp);
         }
         _GLIBCXX20_CONSTEXPR iterator insert(pointer at, size_type count, const_reference item) {
-            auto *ofs  = at - mStart;
+            auto *ofs  = at - mBegin;
             auto *data = InsertRaw(at, count);
             if (data != end()) {
                 uninitialized_fill_n(data, count, item);
             }
-            return mStart + ofs;
+            return mBegin + ofs;
         }
 
 #if __cplusplus >= 201103L
         _GLIBCXX20_CONSTEXPR iterator insert(iterator at, JSystem::initializer_list<value_type> list) {
-            for (auto i : list) {
+            for (auto &i : list) {
                 at = insert(at, i);
             }
         }
@@ -312,7 +312,7 @@ namespace JGadget {
             if (!reservedBuf)
                 return;
 
-            pointer b          = mStart;
+            pointer b          = mBegin;
             pointer e          = mEnd;
             size_type size = e - b;
 
@@ -324,7 +324,7 @@ namespace JGadget {
             DestroyElement_(b, e);
 
             mEnd      = reservedBuf + size;
-            mStart    = reservedBuf;
+            mBegin    = reservedBuf;
             mCapacity = capacity;
 
             mAllocator.deallocate(b, 1);
@@ -382,7 +382,7 @@ namespace JGadget {
 
                 // Copy construct the values before the insertion
                 pointer nbiter = nbuffer;
-                for (pointer i = mStart; i != at; ++i) {
+                for (pointer i = mBegin; i != at; ++i) {
                     mAllocator.construct(nbiter++, *i);
                 }
 
@@ -393,12 +393,12 @@ namespace JGadget {
                 }
 
                 // Destroy old buffer
-                DestroyElement_(mStart, mEnd);
+                DestroyElement_(mBegin, mEnd);
 
-                pointer vbegin = mStart;
+                pointer vbegin = mBegin;
 
                 mEnd      = nbuffer + count + vsize;
-                mStart    = nbuffer;
+                mBegin    = nbuffer;
                 mCapacity = ncapacity;
 
                 mAllocator.deallocate(vbegin, 1);
@@ -437,7 +437,7 @@ namespace JGadget {
         }
 
         allocator_type mAllocator;
-        pointer mStart;
+        pointer mBegin;
         pointer mEnd;
         size_type mCapacity;
         f32 _10;
@@ -446,13 +446,17 @@ namespace JGadget {
 
     template <class _T, class _Alloc>
     _GLIBCXX20_CONSTEXPR bool operator==(const TVector<_T, _Alloc>& lhs,
-        const TVector<_T, _Alloc>& rhs) {
+                                         const TVector<_T, _Alloc> &rhs) {
         if (lhs.size() != rhs.size())
             return false;
 
-        for (auto i = lhs.begin(), auto j = rhs.begin(); i != lhs.end() && j != rhs.end(); ++i, ++j) {
+        auto i = lhs.begin();
+        auto j = rhs.begin();
+        while (i != lhs.end() && j != rhs.end()) {
             if (i != j)
                 return false;
+            ++i;
+            ++j;
         }
 
         return true;
@@ -460,15 +464,17 @@ namespace JGadget {
 
 #if __cplusplus <= 201703L
     template <class _T, class _Alloc>
-    bool operator!=(const TVector<_T, _Alloc> &lhs,
-                                         const TVector<_T, _Alloc> &rhs) {
+    bool operator!=(const TVector<_T, _Alloc> &lhs, const TVector<_T, _Alloc> &rhs) {
         if (lhs.size() != rhs.size())
             return true;
 
-        for (auto i = lhs.begin(), auto j = rhs.begin(); i != lhs.end() && j != rhs.end();
-             ++i, ++j) {
+        auto i = lhs.begin();
+        auto j = rhs.begin();
+        while (i != lhs.end() && j != rhs.end()) {
             if (i != j)
                 return true;
+            ++i;
+            ++j;
         }
 
         return false;

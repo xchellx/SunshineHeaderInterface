@@ -76,16 +76,7 @@ namespace JGadget {
         };
 
         TNode_ *CreateNode_(TNode_ *next, TNode_ *prev, const value_type &item) {
-            TNode_ *node = mAllocator.allocate(1);
-#if __cplusplus < 201103L
-            TNode_ tmp = {next, prev, item};
-            mAllocator.construct(tmp);
-#elif __cplusplus <= 201703L
-            mAllocator.construct(node, next, prev, item);
-#else
-            mAllocator.construct_at(node, next, prev, item);
-            #endif
-            return node;
+            return new TNode_(next, prev, item);
         }
 
     public:
@@ -244,8 +235,8 @@ namespace JGadget {
             : mAllocator(allocator), mSize(0), mBegin(nullptr), mEnd(nullptr) {
             mBegin = reinterpret_cast<TNode_ *>(&mBegin);
             mEnd   = reinterpret_cast<TNode_ *>(&mBegin);
-            for (auto &item : list) {
-                insert(end(), item);
+            for (auto &i : list) {
+                insert(end(), i);
             }
         }
 #endif
@@ -293,7 +284,7 @@ namespace JGadget {
         _GLIBCXX_NODISCARD bool empty() const _GLIBCXX_NOEXCEPT {
             return mBegin == mEnd && mSize == 0;
         }
-        void clear() _GLIBCXX_NOEXCEPT { erase(*begin(), *end()); }
+        void clear() _GLIBCXX_NOEXCEPT { erase(begin(), end()); }
 
         size_type max_size() const _GLIBCXX_NOEXCEPT {
             return difference_type(-1) / sizeof(difference_type);
@@ -343,7 +334,7 @@ namespace JGadget {
         }
 
         iterator insert(iterator at, value_type &&node) {
-            TNode_ tmp = node;
+            value_type tmp = node;
 
             TNode_ *current = at.mNode;
             TNode_ *prev    = current->mPrev;
@@ -368,8 +359,8 @@ namespace JGadget {
 
 #if __cplusplus >= 201103L
         iterator insert(iterator at, JSystem::initializer_list<value_type> list) {
-            for (auto i : list) {
-                at = insert(at, node);
+            for (auto &i : list) {
+                at = insert(at, i);
             }
             return at;
         }
@@ -378,30 +369,28 @@ namespace JGadget {
         iterator emplace(iterator at, _Args &&...args) {
             value_type tmp;
 
-            if (data != end()) {
 #if __cplusplus <= 201703L
-                mAllocator.construct(tmp, JSystem::forward<_Args>(args)...);
+            mAllocator.construct(tmp, JSystem::forward<_Args>(args)...);
 #else
-                mAllocator.construct_at(tmp, JSystem::forward<_Args>(args)...);
+            mAllocator.construct_at(tmp, JSystem::forward<_Args>(args)...);
 #endif
-            }
 
             return insert(at, tmp);
         }
 #endif
 
 #if __cplusplus >= 201703L
-        template <class... _Args> reference emplace_back(Args &&...args){
+        template <class... _Args> reference emplace_back(_Args &&...args) {
             return *emplace(end(), JSystem::forward<_Args>(args)...);
         }
-        template <class... _Args> reference emplace_front(Args &&...args) {
+        template <class... _Args> reference emplace_front(_Args &&...args) {
             return *emplace(begin(), JSystem::forward<_Args>(args)...);
         }
 #else
-        template <class... _Args> void emplace_back(Args &&...args) {
+        template <class... _Args> void emplace_back(_Args &&...args) {
             emplace(end(), JSystem::forward<_Args>(args)...);
         }
-        template <class... _Args> void emplace_front(Args &&...args) {
+        template <class... _Args> void emplace_front(_Args &&...args) {
             emplace(begin(), JSystem::forward<_Args>(args)...);
         }
 #endif
@@ -549,10 +538,13 @@ namespace JGadget {
         if (lhs.size() != rhs.size())
             return false;
 
-        for (auto i = lhs.begin(), auto j = rhs.begin(); i != lhs.end() && j != rhs.end();
-             ++i, ++j) {
+        auto i = lhs.begin();
+        auto j = rhs.begin();
+        while (i != lhs.end() && j != rhs.end()) {
             if (i != j)
                 return false;
+            ++i;
+            ++j;
         }
 
         return true;
@@ -564,10 +556,13 @@ namespace JGadget {
         if (lhs.size() != rhs.size())
             return true;
 
-        for (auto i = lhs.begin(), auto j = rhs.begin(); i != lhs.end() && j != rhs.end();
-             ++i, ++j) {
+        auto i = lhs.begin();
+        auto j = rhs.begin();
+        while (i != lhs.end() && j != rhs.end()) {
             if (i != j)
                 return true;
+            ++i;
+            ++j;
         }
 
         return false;
