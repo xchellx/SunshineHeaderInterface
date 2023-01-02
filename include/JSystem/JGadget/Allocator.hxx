@@ -3,7 +3,7 @@
 #include <Dolphin/types.h>
 
 #include <JSystem/config.hxx>
-#include <JSystem/stddef.hxx>
+#include <JSystem/type_traits.hxx>
 #include <JSystem/utility.hxx>
 
 namespace JGadget {

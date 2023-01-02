@@ -2,7 +2,7 @@
 
 #include <Dolphin/types.h>
 
-#include <JSystem/stddef.hxx>
+#include <JSystem/type_traits.hxx>
 
 namespace JGadget {
 	template <class T1, class T2> struct TPair {

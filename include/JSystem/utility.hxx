@@ -1,6 +1,6 @@
 #pragma once
 
-#include <JSystem/stddef.hxx>
+#include <JSystem/type_traits.hxx>
 
 namespace JSystem {
 
