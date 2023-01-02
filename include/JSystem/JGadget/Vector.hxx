@@ -24,51 +24,57 @@ namespace JGadget {
         typedef typename _Alloc::const_pointer const_pointer;
 
         struct iterator {
-            iterator(pointer node) : mCurrent(node) {}
-            iterator(const iterator &iter) : mCurrent(iter.mCurrent) {}
+            friend class TVector;
 
-            bool operator==(const iterator &rhs) const { return mCurrent == rhs.mCurrent; }
-            bool operator!=(const iterator &rhs) const { return mCurrent != rhs.mCurrent; }
+            explicit _GLIBCXX20_CONSTEXPR iterator(pointer node) : mCurrent(node) {}
+            _GLIBCXX20_CONSTEXPR iterator(const iterator &iter) = default;
 
-            iterator operator+(int i) {
+            _GLIBCXX20_CONSTEXPR bool operator==(const iterator &rhs) const {
+                return mCurrent == rhs.mCurrent;
+            }
+            _GLIBCXX20_CONSTEXPR bool operator!=(const iterator &rhs) const {
+                return mCurrent != rhs.mCurrent;
+            }
+
+            _GLIBCXX20_CONSTEXPR iterator operator+(int i) {
                 iterator temp{mCurrent};
                 temp->mCurrent += i;
                 return temp;
             }
 
-            iterator &operator+=(int i) {
+            _GLIBCXX20_CONSTEXPR iterator &operator+=(int i) {
                 mCurrent += i;
                 return *this;
             }
 
-            iterator &operator++() {
+            _GLIBCXX20_CONSTEXPR iterator &operator++() {
                 ++mCurrent;
                 return *this; 
             }
 
-            iterator operator++(int) {
+            _GLIBCXX20_CONSTEXPR iterator operator++(int) {
                 iterator temp{mCurrent};
                 ++mCurrent;
                 return temp;
             }
 
-            iterator operator-(int i) {
+            _GLIBCXX20_CONSTEXPR iterator operator-(int i) {
                 iterator temp{mCurrent};
                 temp->mCurrent -= i;
                 return temp;
             }
 
-            iterator &operator-=(int i) {
+            _GLIBCXX20_CONSTEXPR iterator &operator-=(int i) {
                 mCurrent -= i;
                 return *this;
             }
 
-            iterator &operator--() {
+            _GLIBCXX20_CONSTEXPR iterator &operator--() {
                 --mCurrent;
                 return *this;
             }
 
-            iterator operator--(int) {
+            _GLIBCXX20_CONSTEXPR iterator operator--(int) {
                 iterator temp{mCurrent};
                 --mCurrent;
                 return temp;
@@ -87,17 +93,26 @@ namespace JGadget {
         explicit _GLIBCXX20_CONSTEXPR TVector(const allocator_type &allocator) _GLIBCXX_NOEXCEPT
             : mAllocator(allocator), mStart(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f), _14(0) {}
 
+#if __cplusplus >= 201103L
         _GLIBCXX20_CONSTEXPR TVector(size_type count, const value_type &value,
                                      const allocator_type &allocator = allocator_type())
+            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
+              _14(0) {
+            insert(end(), count, value);
+        }
+#else
+        explicit TVector(size_type count, const value_type &value = value_type(),
+                         const allocator_type &allocator = allocator_type())
             : mAllocator(allocator), mStart(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
               _14(0) {
             insert(end(), count, value);
         }
+#endif
 
 #if __cplusplus >= 201402L
         explicit _GLIBCXX20_CONSTEXPR TVector(size_type count,
                                               const allocator_type &allocator = allocator_type())
-            : mAllocator(allocator), mStart(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
+            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
               _14(0) {
             insert(end(), count, value_type());
         }
@@ -116,6 +131,7 @@ namespace JGadget {
             }
         }
 
+#if __cplusplus >= 201103L
         _GLIBCXX20_CONSTEXPR TVector(const TVector &other, const allocator_type &allocator)
             : mAllocator(allocator), _10(other._10), _14(other._14) {
             for (auto &i : other) {
@@ -123,7 +139,6 @@ namespace JGadget {
             }
         }
 
-#if __cplusplus >= 201103L
         _GLIBCXX20_CONSTEXPR TVector(TVector &&other)
             : mAllocator(other.mAllocator), _10(other._10), _14(other._14) {
             for (auto &i : other) {
@@ -140,7 +155,7 @@ namespace JGadget {
 
         _GLIBCXX20_CONSTEXPR TVector(JSystem::initializer_list<value_type> list,
                                      const allocator_type &allocator = allocator_type())
-            : mAllocator(allocator), mStart(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
+            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
             _14(0) {
             for (auto &i : list) {
                 insert(end(), i);
@@ -148,7 +163,7 @@ namespace JGadget {
         }
 #endif
 
-        _GLIBCXX20_CONSTEXPR ~TVector() { erase(begin(), end()); }
+        _GLIBCXX20_CONSTEXPR ~TVector() { clear(); }
 
         _GLIBCXX20_CONSTEXPR TVector &operator=(const TVector &other) { 
             clear();
@@ -191,20 +206,27 @@ namespace JGadget {
         _GLIBCXX20_CONSTEXPR reference back() { return *(mEnd - 1); }
         _GLIBCXX20_CONSTEXPR const_reference back() const { return *(mEnd - 1); }
 
-        void assign(size_type count, const_reference value) {
+        _GLIBCXX20_CONSTEXPR void assign(size_type count, const_reference value) {
             clear();
             insert(begin(), count, value);
         }
 
-        void assign(size_type count, value_type &&value) {
+#if __cplusplus >= 201103L
+        _GLIBCXX20_CONSTEXPR void assign(JSystem::initializer_list<value_type> list) {
             clear();
-            insert(begin(), count, value);
+            for (auto &i : list) {
+                insert(end(), i);
+            }
         }
+#endif
 
         _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR bool empty() const _GLIBCXX_NOEXCEPT { return mBegin == mEnd; }
         _GLIBCXX20_CONSTEXPR void clear() _GLIBCXX_NOEXCEPT { erase(*begin(), *end()); }
 
-        size_type capacity() { return mCapacity; }
+        _GLIBCXX20_CONSTEXPR size_type capacity() const _GLIBCXX_NOEXCEPT { return mCapacity; }
+        _GLIBCXX20_CONSTEXPR size_type max_size() const _GLIBCXX_NOEXCEPT {
+            return difference_type(-1) / sizeof(difference_type);
+        }
         _GLIBCXX20_CONSTEXPR size_type size() const _GLIBCXX_NOEXCEPT {
             return mStart ? mEnd - mStart : 0;
         }
@@ -256,12 +278,10 @@ namespace JGadget {
                 at = insert(at, i);
             }
         }
-#endif
 
-#if __cplusplus >= 201103L
         template <class... _Args>
         _GLIBCXX20_CONSTEXPR iterator emplace(iterator at, _Args &&...args) {
-            auto *ofs  = at - mStart;
+            auto *ofs  = at - mBegin;
             auto *data = InsertRaw(at, 1);
             if (data != end()) {
 #if __cplusplus <= 201703L
@@ -270,7 +290,7 @@ namespace JGadget {
                 mAllocator.construct_at(data, JSystem::forward<_Args>(args)...);
 #endif
             }
-            return mStart + ofs;
+            return mBegin + ofs;
         }
 #endif
 
@@ -310,17 +330,33 @@ namespace JGadget {
             mAllocator.deallocate(b, 1);
         }
 
-        _GLIBCXX20_CONSTEXPR void resize(size_type s) {
+        _GLIBCXX20_CONSTEXPR void resize(size_type s) { resize(s, value_type()); }
+
+#if __cplusplus >= 201103L
+        _GLIBCXX20_CONSTEXPR void resize(size_type s, const value_type &value) {
             const size_type currentSize = size();
             if (s == currentSize)
                 return;
 
             if (s < currentSize) {
-                erase(*begin() + s, *end());
+                erase(begin() + s, end());
             } else {
-                insert(*end(), s - currentSize, value_type());
+                insert(end(), s - currentSize, value);
             }
         }
+#else
+        void resize(size_type s, value_type value = value_type()) {
+            const size_type currentSize = size();
+            if (s == currentSize)
+                return;
+
+            if (s < currentSize) {
+                erase(begin() + s, end());
+            } else {
+                insert(end(), s - currentSize, value);
+            }
+        }
+#endif
 
     private:
         _GLIBCXX20_CONSTEXPR void DestroyElement_(pointer a, pointer b) {

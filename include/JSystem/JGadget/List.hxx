@@ -49,21 +49,6 @@ namespace JGadget {
     };
 
     template <class _T, class _Alloc = TAllocator<_T>> class TList {
-        struct TNode_ {
-            TNode_ *mNext;
-            TNode_ *mPrev;
-            _T mItem;
-
-            TNode_(TNode_ *next, TNode_ *prev, _T item) : mNext(next), mPrev(prev), mItem(item) {}
-            ~TNode_() {}
-        };
-
-        TNode_ *CreateNode_(TNode_ *next, TNode_ *prev, const _T &item) {
-            TNode_ *node = mAllocator.allocate(1);
-            mAllocator.construct(node, next, prev, item);
-            return node;
-        }
-
     public:
         typedef typename _T value_type;
         typedef typename _Alloc allocator_type;
@@ -74,8 +59,37 @@ namespace JGadget {
         typedef typename _Alloc::pointer pointer;
         typedef typename _Alloc::const_pointer const_pointer;
 
-        class iterator {
-        public:
+    private:
+        struct TNode_ {
+            TNode_ *mNext;
+            TNode_ *mPrev;
+            value_type mItem;
+
+            TNode_(TNode_ *next, TNode_ *prev, const value_type &item)
+                : mNext(next), mPrev(prev), mItem(item) {}
+#if __cplusplus >= 201103L
+            TNode_(TNode_ *next, TNode_ *prev, value_type &&item)
+                : mNext(next), mPrev(prev), mItem(item) {}
+#endif
+            ~TNode_() {}
+        };
+
+        TNode_ *CreateNode_(TNode_ *next, TNode_ *prev, const value_type &item) {
+            TNode_ *node = mAllocator.allocate(1);
+#if __cplusplus < 201103L
+            TNode_ tmp = {next, prev, item};
+            mAllocator.construct(tmp);
+#elif __cplusplus <= 201703L
+            mAllocator.construct(node, next, prev, item);
+#else
+            mAllocator.construct_at(node, next, prev, item);
+            #endif
+            return node;
+        }
+
+        struct iterator {
+            friend class TList;
+
             iterator(TNode_ *node) : mNode(node) {}
             iterator(const TNode_ *node) : mNode(node) {}
             iterator(const iterator &iter) : mNode(iter.mNode) {}
@@ -83,38 +97,211 @@ namespace JGadget {
             bool operator==(const iterator &rhs) const { return mNode == rhs.mNode; }
             bool operator!=(const iterator &rhs) const { return mNode != rhs.mNode; }
 
+            iterator operator+(int i) {
+                iterator temp{mNode};
+                for (size_t k = 0; k < i; ++k) {
+                    temp->mNode = temp->mNode->mNext;  // Undefined behavior if past end
+                }
+                return temp;
+            }
+
+            iterator &operator+=(int i) {
+                for (size_t k = 0; k < i; ++k) {
+                    mNode = mNode->mNext;  // Undefined behavior if past end
+                }
+                return *this;
+            }
+
             iterator &operator++() {
                 mNode = mNode->mNext;
                 return *this;
             }
+
+            iterator operator++(int) {
+                iterator temp{mNode};
+                mNode = mNode->mNext;
+                return temp;
+            }
+
+            iterator operator-(int i) {
+                iterator temp{mNode};
+                for (size_t k = 0; k < i; ++k) {
+                    temp->mNode = temp->mNode->mPrev;  // Undefined behavior if past begin
+                }
+                return temp;
+            }
+
+            iterator &operator-=(int i) {
+                for (size_t k = 0; k < i; ++k) {
+                    mNode = mNode->mPrev;  // Undefined behavior if past begin
+                }
+                return *this;
+            }
+
             iterator &operator--() {
                 mNode = mNode->mPrev;
                 return *this;
             }
 
-            _T operator->() const { return mNode->mItem; }
+            iterator operator--(int) {
+                iterator temp{mNode};
+                mNode = mNode->mPrev;
+                return temp;
+            }
+
+            _T *operator->() const { return &mNode->mItem; }
             _T &operator*() { return mNode->mItem; }
 
+        private:
             TNode_ *mNode;
         };
 
-        TList() : mAllocator(), mSize(0), mFirst(nullptr), mLast(nullptr) {
-            mFirst = reinterpret_cast<TNode_ *>(&mFirst);
-            mLast  = reinterpret_cast<TNode_ *>(&mFirst);
+        TList() : mAllocator(), mSize(0), mBegin(nullptr), mEnd(nullptr) {
+            mBegin = reinterpret_cast<TNode_ *>(&mBegin);
+            mEnd  = reinterpret_cast<TNode_ *>(&mBegin);
         }
-        TList(const TList &other) {
-            mAllocator = other.mAllocator;
+
+        explicit TList(const allocator_type &allocator)
+            : mAllocator(allocator), mSize(0), mBegin(nullptr), mEnd(nullptr) {
+            mBegin = reinterpret_cast<TNode_ *>(&mBegin);
+            mEnd   = reinterpret_cast<TNode_ *>(&mBegin);
+        }
+
+#if __cplusplus >= 201103L
+        TList(size_type count, const value_type &value,
+              const allocator_type &allocator = allocator_type())
+            : mAllocator(allocator), mSize(0), mBegin(nullptr), mEnd(nullptr) {
+            mBegin = reinterpret_cast<TNode_ *>(&mBegin);
+            mEnd   = reinterpret_cast<TNode_ *>(&mBegin);
+            insert(end(), count, value);
+        }
+#else
+        explicit TList(size_type count, const value_type &value = value_type(),
+                       const allocator_type &allocator = allocator_type())
+            : mAllocator(allocator), mSize(0), mBegin(nullptr), mEnd(nullptr) {
+            mBegin = reinterpret_cast<TNode_ *>(&mBegin);
+            mEnd = reinterpret_cast<TNode_ *>(&mBegin);
+            insert(end(), count, value);
+        }
+#endif
+
+#if __cplusplus >= 201402L
+        explicit TList(size_type count, const allocator_type &allocator = allocator_type())
+            : mAllocator(allocator), mSize(0), mBegin(nullptr), mEnd(nullptr) {
+            mBegin = reinterpret_cast<TNode_ *>(&mBegin);
+            mEnd   = reinterpret_cast<TNode_ *>(&mBegin);
+            insert(end(), count, value_type());
+        }
+#else
+        explicit TList(size_type count) : mAllocator(), mSize(0), mBegin(nullptr), mEnd(nullptr) {
+            mBegin = reinterpret_cast<TNode_ *>(&mBegin);
+            mEnd = reinterpret_cast<TNode_ *>(&mBegin);
+            insert(end(), count, value_type());
+        }
+#endif
+
+        TList(const TList &other)
+            : mAllocator(other.mAllocator), mSize(0), mBegin(nullptr), mEnd(nullptr) {
+            mBegin = reinterpret_cast<TNode_ *>(&mBegin);
+            mEnd   = reinterpret_cast<TNode_ *>(&mBegin);
             for (auto &item : other) {
                 insert(end(), item);
             }
         }
-        explicit TList(allocator_type *allocator) { mAllocator = *allocator; }
-        ~TList() { erase(begin(), end()); }
 
-        iterator begin() { return {mFirst}; }
-        iterator end() { return {reinterpret_cast<TNode_ *>(&mFirst)}; }
+#if __cplusplus >= 201103L
+        TList(const TList &other, const allocator_type &allocator)
+            : mAllocator(allocator), mSize(0), mBegin(nullptr), mEnd(nullptr) {
+            mBegin = reinterpret_cast<TNode_ *>(&mBegin);
+            mEnd   = reinterpret_cast<TNode_ *>(&mBegin);
+            for (auto &item : other) {
+                insert(end(), item);
+            }
+        }
+        
+        TList(TList &&other)
+            : mAllocator(other.mAllocator), mSize(0), mBegin(nullptr), mEnd(nullptr) {
+            mBegin = reinterpret_cast<TNode_ *>(&mBegin);
+            mEnd   = reinterpret_cast<TNode_ *>(&mBegin);
+            for (auto &item : other) {
+                insert(end(), item);
+            }
+        }
 
-        size_t size() const { return mSize; }
+        TList(TList &&other, const allocator_type &allocator)
+            : mAllocator(allocator), mSize(0), mBegin(nullptr), mEnd(nullptr) {
+            mBegin = reinterpret_cast<TNode_ *>(&mBegin);
+            mEnd   = reinterpret_cast<TNode_ *>(&mBegin);
+            for (auto &item : other) {
+                insert(end(), item);
+            }
+        }
+
+        TList(JSystem::initializer_list<value_type> list,
+              const allocator_type &allocator = allocator_type())
+            : mAllocator(allocator), mSize(0), mBegin(nullptr), mEnd(nullptr) {
+            mBegin = reinterpret_cast<TNode_ *>(&mBegin);
+            mEnd   = reinterpret_cast<TNode_ *>(&mBegin);
+            for (auto &item : list) {
+                insert(end(), item);
+            }
+        }
+#endif
+
+        ~TList() { clear(); }
+
+        TList &operator=(const TVector &other) {
+            clear();
+            for (auto &i : other) {
+                insert(end(), i);
+            }
+            return *this;
+        }
+
+        _GLIBCXX20_CONSTEXPR allocator_type get_allocator() const { return mAllocator; }
+
+        reference front() { return *begin(); }
+        const_reference front() const { return *begin(); }
+
+        reference back() {
+            iterator tmp = end();
+            --tmp;
+            return *tmp;
+        }
+        const_reference back() const {
+            iterator tmp = end();
+            --tmp;
+            return *tmp;
+        }
+
+        _GLIBCXX20_CONSTEXPR void assign(size_type count, const_reference value) {
+            clear();
+            insert(begin(), count, value);
+        }
+
+#if __cplusplus >= 201103L
+        _GLIBCXX20_CONSTEXPR void assign(JSystem::initializer_list<value_type> list) {
+            clear();
+            for (auto &i : list) {
+                insert(end(), i);
+            }
+        }
+#endif
+
+        _GLIBCXX_NODISCARD bool empty() const _GLIBCXX_NOEXCEPT {
+            return mBegin == mEnd && mSize == 0;
+        }
+        void clear() _GLIBCXX_NOEXCEPT { erase(*begin(), *end()); }
+
+        size_type max_size() const _GLIBCXX_NOEXCEPT {
+            return difference_type(-1) / sizeof(difference_type);
+        }
+        size_t size() const _GLIBCXX_NOEXCEPT { return mSize; }
+
+        _GLIBCXX20_CONSTEXPR iterator begin() _GLIBCXX_NOEXCEPT { return {mBegin}; }
+        _GLIBCXX20_CONSTEXPR iterator end() _GLIBCXX_NOEXCEPT {
+            return {reinterpret_cast<TNode_ *>(&mBegin)};
+        }
 
         iterator erase(iterator iter) {
             TNode_ *next = iter.mNode->mNext;
@@ -122,7 +309,9 @@ namespace JGadget {
 
             prev->mNext = next;
             next->mPrev = prev;
-            delete iter.mNode;
+
+            mAllocator.destroy(iter.mNode.mItem);
+            mAllocator.deallocate(iter.mNode, 1);
 
             mSize -= 1;
             return {next};
@@ -136,8 +325,8 @@ namespace JGadget {
             return {iter};
         }
 
-        iterator insert(iterator iter, const value_type &node) {
-            TNode_ *current = iter.mNode;
+        iterator insert(iterator at, const value_type &node) {
+            TNode_ *current = at.mNode;
             TNode_ *prev    = current->mPrev;
 
             TNode_ *newNode = CreateNode_(current, prev, node);
@@ -151,10 +340,10 @@ namespace JGadget {
             return {newNode};
         }
 
-        iterator insert(iterator iter, value_type &&node) {
+        iterator insert(iterator at, value_type &&node) {
             TNode_ tmp = node;
 
-            TNode_ *current = iter.mNode;
+            TNode_ *current = at.mNode;
             TNode_ *prev    = current->mPrev;
 
             TNode_ *newNode = CreateNode_(current, prev, tmp);
@@ -168,11 +357,220 @@ namespace JGadget {
             return {newNode};
         }
 
+        iterator insert(iterator at, size_type count, const value_type &node) {
+            for (size_t i = 0; i < count; ++i) {
+                at = insert(at, node);
+            }
+            return at;
+        }
+
+#if __cplusplus >= 201103L
+        iterator insert(iterator at, JSystem::initializer_list list) {
+            for (auto i : list) {
+                at = insert(at, node);
+            }
+            return at;
+        }
+
+        template <class... _Args>
+        iterator emplace(iterator at, _Args &&...args) {
+            value_type tmp;
+
+            if (data != end()) {
+#if __cplusplus <= 201703L
+                mAllocator.construct(tmp, JSystem::forward<_Args>(args)...);
+#else
+                mAllocator.construct_at(tmp, JSystem::forward<_Args>(args)...);
+#endif
+            }
+
+            return insert(at, tmp);
+        }
+#endif
+
+#if __cplusplus >= 201703L
+        template <class... _Args> reference emplace_back(Args &&...args){
+            return *emplace(end(), JSystem::forward<_Args>(args)...);
+        }
+        template <class... _Args> reference emplace_front(Args &&...args) {
+            return *emplace(begin(), JSystem::forward<_Args>(args)...);
+        }
+#else
+        template <class... _Args> void emplace_back(Args &&...args) {
+            emplace(end(), JSystem::forward<_Args>(args)...);
+        }
+        template <class... _Args> void emplace_front(Args &&...args) {
+            emplace(begin(), JSystem::forward<_Args>(args)...);
+        }
+#endif
+
+        void pop_back() {
+            if (empty())
+                return;
+            erase(--end());
+        }
+
+        void pop_front() {
+            if (empty())
+                return;
+            erase(begin());
+        }
+
+        void push_back() {
+            if (empty())
+                return;
+            erase(--end());
+        }
+
+        void push_back(const value_type &value) { insert(end(), value); }
+        void push_front(const value_type &value) { insert(begin(), value); }
+
+#if __cplusplus >= 201103L
+        void push_back(value_type &&value) { insert(end(), value); }
+        void push_front(value_type &&value) { insert(begin(), value); }
+#endif
+
+        void resize(size_type s) { resize(s, value_type()); }
+
+#if __cplusplus >= 201103L
+        void resize(size_type s, const value_type &value) {
+            const size_type currentSize = size();
+            if (s == currentSize)
+                return;
+
+            if (s < currentSize) {
+                erase(begin() + s, end());
+            } else {
+                insert(end(), s - currentSize, value);
+            }
+        }
+#else
+        void resize(size_type s, value_type value = value_type()) {
+            const size_type currentSize = size();
+            if (s == currentSize)
+                return;
+
+            if (s < currentSize) {
+                erase(begin() + s, *end());
+            } else {
+                insert(end(), s - currentSize, value);
+            }
+        }
+#endif
+
+#if __cplusplus > 201703L
+        size_type remove(const value_type &value) {
+            size_type removed = 0;
+            for (auto i = begin(); i != end(); ++i) {
+                if (*i == value) {
+                    i = erase(i);
+                    removed += 1;
+                }
+            }
+            return removed;
+        }
+
+        template <class _UnaryPredicate> size_type remove_if(_UnaryPredicate p) {
+            size_type removed = 0;
+            for (auto i = begin(); i != end(); ++i) {
+                if (p(*i)) {
+                    i = erase(i);
+                    removed += 1;
+                }
+            }
+            return removed;
+        }
+#else
+        void remove(const value_type &value) {
+            for (auto i = begin(); i != end(); ++i) {
+                if (*i == value) {
+                    i = erase(i);
+                    removed += 1;
+                }
+            }
+        }
+
+        template <class _UnaryPredicate> void remove_if(_UnaryPredicate p) {
+            for (auto i = begin(); i != end(); ++i) {
+                if (p(*i)) {
+                    i = erase(i);
+                    removed += 1;
+                }
+            }
+        }
+
+        void splice(iterator at, TList &other) {
+            iterator i = --other.end();
+            while (true) {
+                splice(at, other, i);
+
+                if (i == other.begin())
+                    break;
+
+                --i;
+            }
+        }
+
+        void splice(iterator at, TList &other, iterator sp) {
+            TNode_ *current = at.mNode;
+            TNode_ *prev = current->mPrev;
+
+            TNode_ *transfer = sp.mNode;
+            transfer->mNext = current;
+            transfer->mPrev = prev;
+
+            if (!transfer)
+                return;
+
+            current->mPrev = newNode;
+            prev->mNext = newNode;
+
+            mSize += 1;
+            other.mSize -= 1;
+        }
+
+        void splice(iterator at, TList &other, iterator first, iterator last) {
+            while (first != last) {
+                splice(at, other, first++);
+            }
+        }
+#endif
+
         allocator_type mAllocator;
         size_type mSize;
-        TNode_ *mFirst;
-        TNode_ *mLast;
+        TNode_ *mBegin;
+        TNode_ *mEnd;
     };
+
+    template <class _T, class _Alloc>
+    bool operator==(const TList<_T, _Alloc> &lhs, const TList<_T, _Alloc> &rhs) {
+        if (lhs.size() != rhs.size())
+            return false;
+
+        for (auto i = lhs.begin(), auto j = rhs.begin(); i != lhs.end() && j != rhs.end();
+             ++i, ++j) {
+            if (i != j)
+                return false;
+        }
+
+        return true;
+    }
+
+#if __cplusplus <= 201703L
+    template <class _T, class _Alloc>
+    bool operator!=(const TList<_T, _Alloc> &lhs, const TList<_T, _Alloc> &rhs) {
+        if (lhs.size() != rhs.size())
+            return true;
+
+        for (auto i = lhs.begin(), auto j = rhs.begin(); i != lhs.end() && j != rhs.end();
+             ++i, ++j) {
+            if (i != j)
+                return true;
+        }
+
+        return false;
+    }
+#endif
 
     template <typename _T, size_t _S> class TLinkList {
     public:
