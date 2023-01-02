@@ -314,11 +314,29 @@ namespace JGadget {
 
         TList &operator=(const TList &other) {
             clear();
-            for (auto i : other) {
+            for (const auto &i : other) {
                 insert(end(), i);
             }
             return *this;
         }
+
+#if __cplusplus >= 201103L
+        TList &operator=(TList &&other) {
+            clear();
+            for (const auto &i : other) {
+                insert(end(), i);
+            }
+            return *this;
+        }
+
+        TList &operator=(JSystem::initializer_list<value_type> list) {
+            clear();
+            for (const auto &i : list) {
+                insert(end(), i);
+            }
+            return *this;
+        }
+#endif
 
         _GLIBCXX20_CONSTEXPR allocator_type get_allocator() const { return mAllocator; }
 
@@ -360,18 +378,19 @@ namespace JGadget {
         }
         size_t size() const _GLIBCXX_NOEXCEPT { return mSize; }
 
-        iterator begin() _GLIBCXX_NOEXCEPT { return {mBegin}; }
-        const_iterator begin() const _GLIBCXX_NOEXCEPT { return {mBegin}; }
+        iterator begin() _GLIBCXX_NOEXCEPT { return iterator(mBegin); }
+        const_iterator begin() const _GLIBCXX_NOEXCEPT { return const_iterator(mBegin); }
         iterator end() _GLIBCXX_NOEXCEPT {
-            return {reinterpret_cast<TNode_ *>(&mBegin)}; }
+            return iterator(reinterpret_cast<TNode_ *>(&mBegin));
+    }
         const_iterator end() const _GLIBCXX_NOEXCEPT {
-            return {reinterpret_cast<TNode_ *>(&mBegin)};
+            return const_iterator(reinterpret_cast<const TNode_ *>(&mBegin));
         }
 
 #if __cplusplus >= 201103L
         const_iterator cbegin() const _GLIBCXX_NOEXCEPT { return {mBegin}; }
         const_iterator cend() const _GLIBCXX_NOEXCEPT {
-            return {reinterpret_cast<TNode_ *>(&mBegin)};
+            return {reinterpret_cast<const TNode_ *>(&mBegin)};
         }
 #endif
 

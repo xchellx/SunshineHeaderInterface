@@ -233,11 +233,29 @@ namespace JGadget {
 
         _GLIBCXX20_CONSTEXPR TVector &operator=(const TVector &other) { 
             clear();
-            for (auto &i : other) {
+            for (const auto &i : other) {
                 insert(end(), i);
             }
             return *this;
         }
+
+#if __cplusplus >= 201103L
+        _GLIBCXX20_CONSTEXPR TVector &operator=(TVector &&other) {
+            clear();
+            for (const auto &i : other) {
+                insert(end(), i);
+            }
+            return *this;
+        }
+
+        _GLIBCXX20_CONSTEXPR TVector &operator=(JSystem::initializer_list<value_type> list) {
+            clear();
+            for (const auto &i : list) {
+                insert(end(), i);
+            }
+            return *this;
+        }
+#endif
 
         _GLIBCXX20_CONSTEXPR reference operator[](size_type index) { return mBegin[index]; }
         _GLIBCXX20_CONSTEXPR const_reference operator[](size_type index) const {
@@ -297,12 +315,13 @@ namespace JGadget {
             return mBegin ? mEnd - mBegin : 0;
         }
 
-        _GLIBCXX20_CONSTEXPR iterator begin() _GLIBCXX_NOEXCEPT { return {mBegin}; }
+        _GLIBCXX20_CONSTEXPR iterator begin() _GLIBCXX_NOEXCEPT { return iterator(mBegin); }
         _GLIBCXX20_CONSTEXPR const_iterator begin() const _GLIBCXX_NOEXCEPT {
-            return {mBegin};
+            return const_iterator(mBegin);
         }
-        _GLIBCXX20_CONSTEXPR iterator end() _GLIBCXX_NOEXCEPT { return {mEnd}; }
-        _GLIBCXX20_CONSTEXPR const_iterator end() const _GLIBCXX_NOEXCEPT { return {mEnd}; }
+        _GLIBCXX20_CONSTEXPR iterator end() _GLIBCXX_NOEXCEPT { return iterator(mEnd); }
+        _GLIBCXX20_CONSTEXPR const_iterator end() const _GLIBCXX_NOEXCEPT { return const_iterator(mEnd);
+    }
 
 #if __cplusplus >= 201103L
         _GLIBCXX20_CONSTEXPR const_iterator cbegin() const _GLIBCXX_NOEXCEPT { return {mBegin}; }
