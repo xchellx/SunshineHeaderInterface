@@ -23,10 +23,9 @@ namespace JGadget {
         typedef typename _Alloc::pointer pointer;
         typedef typename _Alloc::const_pointer const_pointer;
 
-        struct const_iterator;
-
         struct iterator {
             friend class TVector;
+            friend struct const_iterator;
 
             explicit _GLIBCXX20_CONSTEXPR iterator(pointer node) : mCurrent(node) {}
             _GLIBCXX20_CONSTEXPR iterator(const iterator &iter) = default;
@@ -96,6 +95,7 @@ namespace JGadget {
 
         struct const_iterator {
             friend class TVector;
+            friend struct iterator;
 
             explicit _GLIBCXX20_CONSTEXPR const_iterator(pointer node) : mCurrent(node) {}
             _GLIBCXX20_CONSTEXPR const_iterator(const iterator &iter) : mCurrent(iter.mCurrent) {}

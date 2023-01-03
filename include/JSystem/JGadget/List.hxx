@@ -82,9 +82,13 @@ namespace JGadget {
     public:
         struct iterator {
             friend class TList;
+            friend struct const_iterator;
 
             iterator(TNode_ *node) : mNode(node) {}
             iterator(const iterator &iter) = default;
+
+        private:
+            iterator(const const_iterator &iter) : mNode(iter.mNode) {}
 
             bool operator==(const iterator &rhs) const { return mNode == rhs.mNode; }
             bool operator!=(const iterator &rhs) const { return mNode != rhs.mNode; }
@@ -150,6 +154,7 @@ namespace JGadget {
 
         struct const_iterator {
             friend class TList;
+            friend struct iterator;
 
             explicit const_iterator(const TNode_ *node) : mNode(node) {}
             const_iterator(const iterator &iter) : mNode(iter.mNode) {}
