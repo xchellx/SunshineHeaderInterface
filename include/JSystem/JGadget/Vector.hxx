@@ -23,6 +23,8 @@ namespace JGadget {
         typedef typename _Alloc::pointer pointer;
         typedef typename _Alloc::const_pointer const_pointer;
 
+        struct const_iterator;
+
         struct iterator {
             friend class TVector;
 
@@ -30,6 +32,11 @@ namespace JGadget {
             _GLIBCXX20_CONSTEXPR iterator(const iterator &iter) = default;
             _GLIBCXX20_CONSTEXPR iterator(iterator &&iter)      = default;
 
+        private:
+            // For internal conversion (erase)
+            _GLIBCXX20_CONSTEXPR iterator(const const_iterator &iter) : mCurrent(const_cast<pointer>(iter.mCurrent)) {}
+
+        public:
             _GLIBCXX20_CONSTEXPR bool operator==(const iterator &rhs) const {
                 return mCurrent == rhs.mCurrent;
             }
@@ -331,12 +338,19 @@ namespace JGadget {
         }
 #endif
 
+#if __cplusplus >= 201103L
         _GLIBCXX20_CONSTEXPR iterator erase(const_iterator a) {
-            return erase(*a, *(a + 1));
+            return erase(*iterator(a), *iterator(a + 1));
         }
         _GLIBCXX20_CONSTEXPR iterator erase(const_iterator a, const_iterator b) {
-            return erase(*a, *b);
+            return erase(*iterator(a), *iterator(b));
         }
+#else
+    iterator erase(iterator a) { return erase(*a, *(a + 1)); }
+    iterator erase(iterator a, iterator b) {
+        return erase(*a, *b);
+    }
+#endif
 
     private:
         _GLIBCXX20_CONSTEXPR iterator erase(pointer a, pointer b) {

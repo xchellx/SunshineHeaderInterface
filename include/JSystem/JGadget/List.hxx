@@ -395,7 +395,8 @@ namespace JGadget {
         }
 #endif
 
-        iterator erase(iterator iter) {
+#if __cplusplus >= 201103L
+        iterator erase(const_iterator iter) {
             TNode_ *next = iter.mNode->mNext;
             TNode_ *prev = iter.mNode->mPrev;
 
@@ -410,12 +411,35 @@ namespace JGadget {
         }
 
         iterator erase(const_iterator start, const_iterator end) {
+            const_iterator iter = start;
+            while (iter != end) {
+                iter = erase(iter);
+            }
+            return iter;
+        }
+#else
+        iterator erase(iterator iter) {
+            TNode_ *next = iter.mNode->mNext;
+            TNode_ *prev = iter.mNode->mPrev;
+
+            prev->mNext = next;
+            next->mPrev = prev;
+
+            mAllocator.destroy(&iter.mNode->mItem);
+            delete iter.mNode;
+
+            mSize -= 1;
+            return {next};
+        }
+
+        iterator erase(iterator start, iterator end) {
             iterator iter = start;
             while (iter != end) {
                 iter = erase(iter);
             }
             return iter;
         }
+#endif
 
         iterator insert(const_iterator at, const value_type &node) {
             TNode_ *current = at.mNode;
