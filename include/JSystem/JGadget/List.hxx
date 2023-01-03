@@ -3,10 +3,10 @@
 #include <Dolphin/OS.h>
 #include <Dolphin/types.h>
 
-#include <JSystem/initializer_list.hxx>
 #include <JSystem/JGadget/Allocator.hxx>
 #include <JSystem/JGadget/Node.hxx>
 #include <JSystem/JKernel/JKRHeap.hxx>
+#include <JSystem/initializer_list.hxx>
 
 namespace JGadget {
 
@@ -60,9 +60,9 @@ namespace JGadget {
         typedef typename _Alloc::pointer pointer;
         typedef typename _Alloc::const_pointer const_pointer;
 
-    private:
         struct const_iterator;
 
+    private:
         struct TNode_ {
             TNode_ *mNext;
             TNode_ *mPrev;
@@ -90,7 +90,8 @@ namespace JGadget {
             iterator(const iterator &iter) = default;
 
         private:
-            iterator(const const_iterator &iter) : mNode(iter.mNode) {}
+            explicit iterator(const const_iterator &iter)
+                : mNode(const_cast<TNode_ *>(iter.mNode)) {}
 
         public:
             bool operator==(const iterator &rhs) const { return mNode == rhs.mNode; }
@@ -227,7 +228,7 @@ namespace JGadget {
 
         TList() : mAllocator(), mSize(0), mBegin(nullptr), mEnd(nullptr) {
             mBegin = reinterpret_cast<TNode_ *>(&mBegin);
-            mEnd  = reinterpret_cast<TNode_ *>(&mBegin);
+            mEnd   = reinterpret_cast<TNode_ *>(&mBegin);
         }
 
         explicit TList(const allocator_type &allocator)
@@ -249,7 +250,7 @@ namespace JGadget {
                        const allocator_type &allocator = allocator_type())
             : mAllocator(allocator), mSize(0), mBegin(nullptr), mEnd(nullptr) {
             mBegin = reinterpret_cast<TNode_ *>(&mBegin);
-            mEnd = reinterpret_cast<TNode_ *>(&mBegin);
+            mEnd   = reinterpret_cast<TNode_ *>(&mBegin);
             insert(end(), count, value);
         }
 #endif
@@ -264,7 +265,7 @@ namespace JGadget {
 #else
         explicit TList(size_type count) : mAllocator(), mSize(0), mBegin(nullptr), mEnd(nullptr) {
             mBegin = reinterpret_cast<TNode_ *>(&mBegin);
-            mEnd = reinterpret_cast<TNode_ *>(&mBegin);
+            mEnd   = reinterpret_cast<TNode_ *>(&mBegin);
             insert(end(), count, value_type());
         }
 #endif
@@ -287,7 +288,7 @@ namespace JGadget {
                 insert(end(), item);
             }
         }
-        
+
         TList(TList &&other)
             : mAllocator(other.mAllocator), mSize(0), mBegin(nullptr), mEnd(nullptr) {
             mBegin = reinterpret_cast<TNode_ *>(&mBegin);
@@ -387,9 +388,7 @@ namespace JGadget {
 
         iterator begin() _GLIBCXX_NOEXCEPT { return iterator(mBegin); }
         const_iterator begin() const _GLIBCXX_NOEXCEPT { return const_iterator(mBegin); }
-        iterator end() _GLIBCXX_NOEXCEPT {
-            return iterator(reinterpret_cast<TNode_ *>(&mBegin));
-    }
+        iterator end() _GLIBCXX_NOEXCEPT { return iterator(reinterpret_cast<TNode_ *>(&mBegin)); }
         const_iterator end() const _GLIBCXX_NOEXCEPT {
             return const_iterator(reinterpret_cast<const TNode_ *>(&mBegin));
         }
@@ -640,17 +639,17 @@ namespace JGadget {
 
         void splice(const_iterator at, TList &other, const_iterator sp) {
             TNode_ *current = at.mNode;
-            TNode_ *prev = current->mPrev;
+            TNode_ *prev    = current->mPrev;
 
             TNode_ *transfer = sp.mNode;
-            transfer->mNext = current;
-            transfer->mPrev = prev;
+            transfer->mNext  = current;
+            transfer->mPrev  = prev;
 
             if (!transfer)
                 return;
 
             current->mPrev = newNode;
-            prev->mNext = newNode;
+            prev->mNext    = newNode;
 
             mSize += 1;
             other.mSize -= 1;

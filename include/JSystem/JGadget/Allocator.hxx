@@ -18,14 +18,16 @@ namespace JGadget {
         typedef ptrdiff_t difference_type;
         template <class U> struct rebind { typedef TAllocator<U> other; };
 
-        _GLIBCXX20_CONSTEXPR TAllocator() _GLIBCXX_USE_NOEXCEPT = default;
+        _GLIBCXX20_CONSTEXPR TAllocator() _GLIBCXX_USE_NOEXCEPT                        = default;
         _GLIBCXX20_CONSTEXPR TAllocator(const TAllocator &other) _GLIBCXX_USE_NOEXCEPT = default;
-        template<class _U>
+        template <class _U>
         _GLIBCXX20_CONSTEXPR TAllocator(const TAllocator<_U> &other) _GLIBCXX_USE_NOEXCEPT
             : _00(other._00) {}
 
         _GLIBCXX20_CONSTEXPR pointer address(reference _x) const { return JSystem::addressof(_x); }
-        const_pointer address(const_reference _x) const _GLIBCXX_NOEXCEPT { return JSystem::addressof(_x); }
+        const_pointer address(const_reference _x) const _GLIBCXX_NOEXCEPT {
+            return JSystem::addressof(_x);
+        }
 
 #if __cplusplus < 201703L
         pointer allocate(size_type _n, const void *hint = 0) {
@@ -40,7 +42,7 @@ namespace JGadget {
                 return nullptr;
             return static_cast<_T>(::operator new(_n * sizeof(_T)));
         }
-    #endif
+#endif
 
         _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR pointer allocate(size_t _n) {
             return static_cast<_T>(::operator new(_n * sizeof(_T)));
@@ -54,14 +56,14 @@ namespace JGadget {
 #endif
 
 #if __cplusplus < 201103L
-        void construct(pointer _p, const _T &_val) { ::new ((void *)_p) _T(_val); }
+        void construct(pointer _p, const value_type &_val) { ::new ((void *)_p) value_type(_val); }
 #elif __cplusplus <= 201703L
         template <typename... _Args> void construct(pointer _p, _Args &&..._args) {
-            ::operator new((void *)_p) T(JSystem::forward<_Args>(_args)...);
+            ::new ((void *)_p) value_type(JSystem::forward<_Args>(_args)...);
         }
 #else
         template <typename... _Args> constexpr void construct_at(pointer _p, _Args &&..._args) {
-            ::operator new((void *)_p) T(JSystem::forward<_Args>(_args)...);
+            ::new ((void *)_p) value_type(JSystem::forward<_Args>(_args)...);
         }
 #endif
 
@@ -75,7 +77,7 @@ namespace JGadget {
         u8 _00;
     };
 
-    template <typename T> inline bool operator==(const TAllocator<T>&, const TAllocator<T>&) {
+    template <typename T> inline bool operator==(const TAllocator<T> &, const TAllocator<T> &) {
         return true;
     }
 
