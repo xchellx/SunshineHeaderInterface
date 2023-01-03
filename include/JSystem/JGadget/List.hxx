@@ -90,6 +90,7 @@ namespace JGadget {
         private:
             iterator(const const_iterator &iter) : mNode(iter.mNode) {}
 
+        public:
             bool operator==(const iterator &rhs) const { return mNode == rhs.mNode; }
             bool operator!=(const iterator &rhs) const { return mNode != rhs.mNode; }
 
@@ -444,11 +445,11 @@ namespace JGadget {
         }
 #endif
 
-        iterator insert(const_iterator at, const value_type &node) {
-            TNode_ *current = at.mNode;
+        iterator insert(const_iterator at, const value_type &value) {
+            TNode_ *current = const_cast<TNode_ *>(at.mNode);
             TNode_ *prev    = current->mPrev;
 
-            TNode_ *newNode = CreateNode_(current, prev, node);
+            TNode_ *newNode = CreateNode_(current, prev, value);
             if (!newNode)
                 return mEnd;
 
@@ -459,10 +460,10 @@ namespace JGadget {
             return {newNode};
         }
 
-        iterator insert(const_iterator at, value_type &&node) {
-            value_type tmp = node;
+        iterator insert(const_iterator at, value_type &&value) {
+            value_type tmp = value;
 
-            TNode_ *current = at.mNode;
+            TNode_ *current = const_cast<TNode_ *>(at.mNode);
             TNode_ *prev    = current->mPrev;
 
             TNode_ *newNode = CreateNode_(current, prev, tmp);
@@ -476,15 +477,15 @@ namespace JGadget {
             return {newNode};
         }
 
-        iterator insert(const_iterator at, size_type count, const value_type &node) {
+        iterator insert(const_iterator at, size_type count, const value_type &value) {
             for (size_t i = 0; i < count; ++i) {
-                at = insert(at, node);
+                at = insert(at, value);
             }
             return at;
         }
 
-        iterator insert(const_iterator at, size_type count, value_type &&node) {
-            value_type tmp = node;
+        iterator insert(const_iterator at, size_type count, value_type &&value) {
+            value_type tmp = value;
             for (size_t i = 0; i < count; ++i) {
                 at = insert(at, tmp);
             }
