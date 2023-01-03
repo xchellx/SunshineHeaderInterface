@@ -61,6 +61,8 @@ namespace JGadget {
         typedef typename _Alloc::const_pointer const_pointer;
 
     private:
+        struct const_iterator;
+
         struct TNode_ {
             TNode_ *mNext;
             TNode_ *mPrev;
@@ -82,7 +84,7 @@ namespace JGadget {
     public:
         struct iterator {
             friend class TList;
-            friend struct const_iterator;
+            friend struct TList::const_iterator;
 
             iterator(TNode_ *node) : mNode(node) {}
             iterator(const iterator &iter) = default;
@@ -155,7 +157,7 @@ namespace JGadget {
 
         struct const_iterator {
             friend class TList;
-            friend struct iterator;
+            friend struct TList::iterator;
 
             explicit const_iterator(const TNode_ *node) : mNode(node) {}
             const_iterator(const iterator &iter) : mNode(iter.mNode) {}
