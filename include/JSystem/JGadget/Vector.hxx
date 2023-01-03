@@ -30,7 +30,6 @@ namespace JGadget {
 
             explicit _GLIBCXX20_CONSTEXPR iterator(pointer node) : mCurrent(node) {}
             _GLIBCXX20_CONSTEXPR iterator(const iterator &iter) = default;
-            _GLIBCXX20_CONSTEXPR iterator(iterator &&iter)      = default;
 
         private:
             // For internal conversion (erase)
@@ -101,7 +100,6 @@ namespace JGadget {
             explicit _GLIBCXX20_CONSTEXPR const_iterator(pointer node) : mCurrent(node) {}
             _GLIBCXX20_CONSTEXPR const_iterator(const iterator &iter) : mCurrent(iter.mCurrent) {}
             _GLIBCXX20_CONSTEXPR const_iterator(const const_iterator &iter) = default;
-            _GLIBCXX20_CONSTEXPR const_iterator(const_iterator &&iter) = default;
 
             _GLIBCXX20_CONSTEXPR bool operator==(const const_iterator &rhs) const {
                 return mCurrent == rhs.mCurrent;

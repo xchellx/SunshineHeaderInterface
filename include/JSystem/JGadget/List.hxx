@@ -85,7 +85,6 @@ namespace JGadget {
 
             iterator(TNode_ *node) : mNode(node) {}
             iterator(const iterator &iter) = default;
-            iterator(iterator &&iter) = default;
 
             bool operator==(const iterator &rhs) const { return mNode == rhs.mNode; }
             bool operator!=(const iterator &rhs) const { return mNode != rhs.mNode; }
@@ -155,7 +154,6 @@ namespace JGadget {
             explicit const_iterator(const TNode_ *node) : mNode(node) {}
             const_iterator(const iterator &iter) : mNode(iter.mNode) {}
             const_iterator(const const_iterator &iter) = default;
-            const_iterator(const_iterator &&iter) = default;
 
             bool operator==(const const_iterator &rhs) const { return mNode == rhs.mNode; }
             bool operator!=(const const_iterator &rhs) const { return mNode != rhs.mNode; }
@@ -411,7 +409,7 @@ namespace JGadget {
         }
 
         iterator erase(const_iterator start, const_iterator end) {
-            const_iterator iter = start;
+            iterator iter = iterator(start);
             while (iter != end) {
                 iter = erase(iter);
             }
