@@ -65,17 +65,25 @@ namespace JGadget {
         typedef _Hash hasher;
         typedef _Pred key_equal;
         typedef _Alloc allocator_type;
-        typedef _Alloc::reference reference;
-        typedef _Alloc::const_reference const_reference;
-        typedef _Alloc::pointer pointer;
-        typedef _Alloc::const_pointer const_pointer;
+        typedef typename _Alloc::reference reference;
+        typedef typename _Alloc::const_reference const_reference;
+        typedef typename _Alloc::pointer pointer;
+        typedef typename _Alloc::const_pointer const_pointer;
         typedef size_t size_type;
-        typedef ptrdiff_t difference_type; 
-        typedef TList<value_type> items_type;
+        typedef ptrdiff_t difference_type;
 
-        static constexpr size_t SurfaceSize = 64;
+        struct const_iterator;
 
-        using ItemList = JGadget::TList<Item>;
+        struct iterator {
+            friend class TUnorderedMap;
+            friend struct TUnorderedMap::const_iterator;
+
+            iterator()
+        };
+
+
+        struct local_iterator;
+        struct const_local_iterator;
 
         TUnorderedMap() = default;
         TUnorderedMap(const TUnorderedMap &ump) = default;
@@ -83,6 +91,7 @@ namespace JGadget {
         TUnorderedMap(const TUnorderedMap& ump, const allocator_type& alloc) {
 
         }
+
         TUnorderedMap(TUnorderedMap &&, const allocator_type &alloc) {}
         explicit TUnorderedMap(size_t n, const hasher& hf, const key_equal& ke,
             const allocator_type& alloc) {
@@ -205,6 +214,6 @@ namespace JGadget {
         u16 getHash(const JDrama::TNameRef &key) const { return key.mKeyCode; }
 
         allocator_type mAllocator;
-        ItemList *mItemBuffer;
+        TList<value_type, allocator_type> mBuckets;
     };
 }

@@ -162,23 +162,23 @@ namespace JGadget {
         };
 
         _GLIBCXX20_CONSTEXPR TVector() _GLIBCXX_NOEXCEPT_IF(_GLIBCXX_NOEXCEPT_IF(allocator_type()))
-            : mAllocator(), mBegin(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f), _14(0) {}
+            : mAllocator(), mBegin(nullptr), mEnd(nullptr), mCapacity(0), mGrowthFactor(2.0f), mNextResize(0) {}
 
         explicit _GLIBCXX20_CONSTEXPR TVector(const allocator_type &allocator) _GLIBCXX_NOEXCEPT
-            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f), _14(0) {}
+            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), mGrowthFactor(2.0f), mNextResize(0) {}
 
 #if __cplusplus >= 201103L
         _GLIBCXX20_CONSTEXPR TVector(size_type count, const value_type &value,
                                      const allocator_type &allocator = allocator_type())
-            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
-              _14(0) {
+            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), mGrowthFactor(2.0f),
+              mNextResize(0) {
             insert(end(), count, value);
         }
 #else
         explicit TVector(size_type count, const value_type &value = value_type(),
                          const allocator_type &allocator = allocator_type())
-            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
-              _14(0) {
+            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), mGrowthFactor(2.0f),
+              mNextResize(0) {
             insert(end(), count, value);
         }
 #endif
@@ -186,20 +186,20 @@ namespace JGadget {
 #if __cplusplus >= 201402L
         explicit _GLIBCXX20_CONSTEXPR TVector(size_type count,
                                               const allocator_type &allocator = allocator_type())
-            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
-              _14(0) {
+            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), mGrowthFactor(2.0f),
+              mNextResize(0) {
             insert(end(), count, value_type());
         }
 #else
         explicit TVector(size_type count)
-            : mAllocator(), mBegin(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
-              _14(0) {
+            : mAllocator(), mBegin(nullptr), mEnd(nullptr), mCapacity(0), mGrowthFactor(2.0f),
+              mNextResize(0) {
             insert(end(), count, value_type());
         }
 #endif
 
         _GLIBCXX20_CONSTEXPR TVector(const TVector &other)
-            : mAllocator(other.mAllocator), _10(other._10), _14(other._14) {
+            : mAllocator(other.mAllocator), mGrowthFactor(other.mGrowthFactor), mNextResize(other.mNextResize) {
             for (auto &i : other) {
                 insert(end(), i);
             }
@@ -207,21 +207,21 @@ namespace JGadget {
 
 #if __cplusplus >= 201103L
         _GLIBCXX20_CONSTEXPR TVector(const TVector &other, const allocator_type &allocator)
-            : mAllocator(allocator), _10(other._10), _14(other._14) {
+            : mAllocator(allocator), mGrowthFactor(other.mGrowthFactor), mNextResize(other.mNextResize) {
             for (auto &i : other) {
                 insert(end(), i);
             }
         }
 
         _GLIBCXX20_CONSTEXPR TVector(TVector &&other)
-            : mAllocator(other.mAllocator), _10(other._10), _14(other._14) {
+            : mAllocator(other.mAllocator), mGrowthFactor(other.mGrowthFactor), mNextResize(other.mNextResize) {
             for (auto &i : other) {
                 insert(end(), i);
             }
         }
 
         _GLIBCXX20_CONSTEXPR TVector(TVector &&other, const allocator_type &allocator)
-            : mAllocator(allocator), _10(other._10), _14(other._14) {
+            : mAllocator(allocator), mGrowthFactor(other.mGrowthFactor), mNextResize(other.mNextResize) {
             for (auto &i : other) {
                 insert(end(), i);
             }
@@ -229,8 +229,8 @@ namespace JGadget {
 
         _GLIBCXX20_CONSTEXPR TVector(JSystem::initializer_list<value_type> list,
                                      const allocator_type &allocator = allocator_type())
-            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), _10(2.0f),
-            _14(0) {
+            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), mGrowthFactor(2.0f),
+            mNextResize(0) {
             for (auto &i : list) {
                 insert(end(), i);
             }
@@ -493,7 +493,7 @@ namespace JGadget {
             size_type vcapacity = capacity();
 
             if (vcapacity < count + vsize) {
-                size_type ncapacity = Max(_14 + _10, count + vsize);
+                size_type ncapacity = Max(mNextResize + mGrowthFactor, count + vsize);
 
                 // Allocate the new buffer since we maxxed the capacity
                 pointer nbuffer = mAllocator.allocate(ncapacity);
@@ -560,8 +560,8 @@ namespace JGadget {
         pointer mBegin;
         pointer mEnd;
         size_type mCapacity;
-        f32 _10;
-        size_type _14;
+        f32 mGrowthFactor;
+        size_type mNextResize;
     };
 
     template <class _T, class _Alloc>
