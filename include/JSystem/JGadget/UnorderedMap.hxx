@@ -5,10 +5,7 @@
 
 #include <JSystem/JDrama/JDRNameRef.hxx>
 #include <JSystem/JGadget/Allocator.hxx>
-#include <JSystem/JGadget/Node.hxx>
 #include <JSystem/JGadget/Pair.hxx>
-#include <JSystem/JGadget/List.hxx>
-#include <JSystem/JGadget/Vector.hxx>
 #include <JSystem/function.hxx>
 
 namespace JGadget {
