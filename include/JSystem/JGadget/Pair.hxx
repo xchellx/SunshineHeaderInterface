@@ -5,12 +5,12 @@
 #include <JSystem/type_traits.hxx>
 
 namespace JGadget {
-	template <class T1, class T2> struct TPair {
+    template <class T1, class T2> struct TPair {
         typedef T1 first_type;
         typedef T2 second_type;
 
-		_GLIBCXX_CONSTEXPR TPair() = default;
-        TPair(const TPair &p) = default;
+        _GLIBCXX_CONSTEXPR TPair() = default;
+        TPair(const TPair &p)      = default;
 
 #if __cplusplus >= 201103L
         TPair(TPair &&p) = default;
@@ -35,13 +35,12 @@ namespace JGadget {
 #endif
 
         TPair &operator=(const TPair &p) {
-            first = p.first;
+            first  = p.first;
             second = p.second;
         }
 
 #if __cplusplus >= 201103L
-        template <class U1, class U2>
-        TPair &operator=(const TPair<U1, U2> &p) {
+        template <class U1, class U2> TPair &operator=(const TPair<U1, U2> &p) {
             first  = p.first;
             second = p.second;
         }
@@ -54,7 +53,19 @@ namespace JGadget {
         }
 #endif
 
-		first_type first;
+        first_type first;
         second_type second;
-	};
-}
+    };
+
+    template <class T1, class T2>
+    _GLIBCXX14_CONSTEXPR bool operator==(const TPair<T1, T2> &a, const TPair<T1, T2> &b) {
+        return a.first == b.first && a.second == a.second;
+    }
+
+#if __cplusplus <= 201703L
+    template <class T1, class T2>
+    _GLIBCXX14_CONSTEXPR bool operator!=(const TPair<T1, T2> &a, const TPair<T1, T2> &b) {
+        return a.first != b.first || a.second != a.second;
+    }
+#endif
+}  // namespace JGadget

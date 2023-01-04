@@ -21,8 +21,8 @@ namespace JGadget {
         _GLIBCXX20_CONSTEXPR TAllocator() _GLIBCXX_USE_NOEXCEPT                        = default;
         _GLIBCXX20_CONSTEXPR TAllocator(const TAllocator &other) _GLIBCXX_USE_NOEXCEPT = default;
         template <class _U>
-        _GLIBCXX20_CONSTEXPR TAllocator(const TAllocator<_U> &other) _GLIBCXX_USE_NOEXCEPT
-            : _00(other._00) {}
+        _GLIBCXX20_CONSTEXPR TAllocator(const TAllocator<_U> &other) _GLIBCXX_USE_NOEXCEPT : _00() {
+        }
 
         _GLIBCXX20_CONSTEXPR pointer address(reference _x) const { return JSystem::addressof(_x); }
         const_pointer address(const_reference _x) const _GLIBCXX_NOEXCEPT {
@@ -33,19 +33,19 @@ namespace JGadget {
         pointer allocate(size_type _n, const void *hint = 0) {
             if (_n > max_size())
                 return nullptr;
-            return static_cast<_T>(::operator new(_n * sizeof(_T)));
+            return static_cast<_T *>(::operator new(_n * sizeof(_T)));
         }
 #elif __cplusplus >= 201703L
 #if __cplusplus == 201703L
         pointer allocate(size_type _n, const void *hint) {
             if (_n > max_size())
                 return nullptr;
-            return static_cast<_T>(::operator new(_n * sizeof(_T)));
+            return static_cast<_T *>(::operator new(_n * sizeof(_T)));
         }
 #endif
 
         _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR pointer allocate(size_t _n) {
-            return static_cast<_T>(::operator new(_n * sizeof(_T)));
+            return static_cast<_T *>(::operator new(_n * sizeof(_T)));
         }
 #endif
 

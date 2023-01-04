@@ -1,8 +1,15 @@
 #pragma once
 
+#include <JSystem/config.hxx>
 #include <JSystem/type_traits.hxx>
 
 namespace JSystem {
+
+#if __cplusplus > 201703L
+    [[__nodiscard__]] constexpr bool is_constant_evaluated() noexcept {
+        return __builtin_is_constant_evaluated();
+    }
+#endif
 
     template <typename _Tp, typename _Ts, typename _Tv>
     void uninitialized_fill_n(_Tp dst, _Ts count, const _Tv &data) {

@@ -1,21 +1,24 @@
 #pragma once
 
-#include <Dolphin/types.h>
+#include <Dolphin/OS.h>
+#include <Dolphin/math.h>
 #include <Dolphin/mem.h>
+#include <Dolphin/types.h>
 
 #include <JSystem/JDrama/JDRNameRef.hxx>
 #include <JSystem/JGadget/Allocator.hxx>
 #include <JSystem/JGadget/Pair.hxx>
 #include <JSystem/function.hxx>
+#include <JSystem/initializer_list.hxx>
 
 namespace JGadget {
-    #define _JGADGET_MAP_DEFAULT_BUCKETS 64
+#define _JGADGET_MAP_DEFAULT_BUCKETS 64
 
     template <typename _T> struct hash {
         typedef size_t result_type;
         typedef _T argument_type;
 
-        result_type operator()(argument_type v) { return 0; }
+        inline result_type operator()(argument_type v) const { return 0; }
     };
 
     using str_hash = hash<const char *>;
@@ -23,38 +26,38 @@ namespace JGadget {
     using u32_hash = hash<u32>;
     using u64_hash = hash<u64>;
 
-    template <> u16_hash::result_type u16_hash::operator()(argument_type v) {
+    template <> inline u16_hash::result_type u16_hash::operator()(argument_type v) const {
         u32 p   = 0x5555;  // pattern of alternating 0 and 1
-        u32 c   = 17317;  // random uneven integer constant;
+        u32 c   = 17317;   // random uneven integer constant;
         u32 mix = p * (v ^ (v >> 16));
-        return c * (mix ^ (mix >> 16);
+        return c * (mix ^ (mix >> 16));
     }
 
-    template <> u32_hash::result_type u32_hash::operator()(argument_type v) {
-        x = ((x >> 16) ^ x) * 0x45d9f3b;
-        x = ((x >> 16) ^ x) * 0x45d9f3b;
-        x = (x >> 16) ^ x;
-        return x;
+    template <> inline u32_hash::result_type u32_hash::operator()(argument_type v) const {
+        v = ((v >> 16) ^ v) * 0x45d9f3b;
+        v = ((v >> 16) ^ v) * 0x45d9f3b;
+        v = (v >> 16) ^ v;
+        return v;
     }
 
-    template <> u64_hash::result_type u64_hash::operator()(argument_type v) {
-        x = (x ^ (x >> 30)) * argument_type(0xbf58476d1ce4e5b9);
-        x = (x ^ (x >> 27)) * argument_type(0x94d049bb133111eb);
-        x = x ^ (x >> 31);
-        return x;
+    template <> inline u64_hash::result_type u64_hash::operator()(argument_type v) const {
+        v = (v ^ (v >> 30)) * argument_type(0xbf58476d1ce4e5b9);
+        v = (v ^ (v >> 27)) * argument_type(0x94d049bb133111eb);
+        v = v ^ (v >> 31);
+        return v;
     }
 
-    template <> str_hash::result_type str_hash::operator()(argument_type v) {
+    template <> inline str_hash::result_type str_hash::operator()(argument_type v) const {
         return JDrama::TNameRef::calcKeyCode(v);
     }
 
-    struct str_equal_to : binary_function<const char *, const char *, bool> {
-        constexpr result_type operator()(first_argument_type a, second_argument_type b) {
+    struct str_equal_to : JSystem::binary_function<const char *, const char *, bool> {
+        inline constexpr result_type operator()(first_argument_type a, second_argument_type b) {
             return JDrama::TNameRef::calcKeyCode(a) == JDrama::TNameRef::calcKeyCode(b);
         }
     };
 
-    template <class _Key, class _T, class _Hash = str_hash, class _Pred = equal_to<_Key>,
+    template <class _Key, class _T, class _Hash = hash<_Key>, class _Pred = JSystem::equal_to<_Key>,
               class _Alloc = TAllocator<TPair<const _Key, _T>>>
     class TUnorderedMap {
     public:
@@ -80,10 +83,8 @@ namespace JGadget {
             bool operator!=(const TNode_ &other) const { return mValue != other.mValue; }
         };
 
-        typedef typename allocator_type::template rebind<TNode_>::other
-            node_allocator_t;
-        typedef typename allocator_type::template rebind<TNode_ *>::other
-            bucket_allocator_t;
+        typedef typename allocator_type::template rebind<TNode_>::other node_allocator_t;
+        typedef typename allocator_type::template rebind<TNode_ *>::other bucket_allocator_t;
 
     public:
         struct const_iterator;
@@ -146,20 +147,23 @@ namespace JGadget {
         private:
             const_iterator(TNode_ *node, TNode_ **bucket) : mElement(node), mBucket(bucket) {}
             const_iterator(TNode_ **bucket) : mElement(*bucket), mBucket(bucket) {}
-            const_iterator(const iterator &iter)
-                : mElement(const_cast<TNode_ *>(iter.mElement)) {}
+            const_iterator(const iterator &iter) : mElement(const_cast<TNode_ *>(iter.mElement)) {}
 
         public:
-            bool operator==(const iterator &rhs) const { return *mElement == *(rhs.mElement); }
-            bool operator!=(const iterator &rhs) const { return *mElement != *(rhs.mElement); }
+            bool operator==(const const_iterator &rhs) const {
+                return *mElement == *(rhs.mElement);
+            }
+            bool operator!=(const const_iterator &rhs) const {
+                return *mElement != *(rhs.mElement);
+            }
 
-            iterator &operator++() {
+            const_iterator &operator++() {
                 next();
                 return *this;
             }
 
-            iterator operator++(int) {
-                iterator temp{mElement, mBucket};
+            const_iterator operator++(int) {
+                const_iterator temp{mElement, mBucket};
                 next();
                 return temp;
             }
@@ -186,6 +190,8 @@ namespace JGadget {
             TNode_ **mBucket;
         };
 
+        struct const_local_iterator;
+
         struct local_iterator {
             friend class TUnorderedMap;
             friend struct TUnorderedMap::const_local_iterator;
@@ -198,8 +204,12 @@ namespace JGadget {
                 : mElement(const_cast<TNode_ *>(iter.mElement)) {}
 
         public:
-            bool operator==(const local_iterator &rhs) const { return *mElement == *(rhs.mElement); }
-            bool operator!=(const local_iterator &rhs) const { return *mElement != *(rhs.mElement); }
+            bool operator==(const local_iterator &rhs) const {
+                return *mElement == *(rhs.mElement);
+            }
+            bool operator!=(const local_iterator &rhs) const {
+                return *mElement != *(rhs.mElement);
+            }
 
             local_iterator &operator++() {
                 mElement = mElement->mNext;
@@ -259,7 +269,7 @@ namespace JGadget {
         TUnorderedMap() : TUnorderedMap(_JGADGET_MAP_DEFAULT_BUCKETS) {}
 
         explicit TUnorderedMap(size_t buckets, const hasher &hf = hasher(),
-                               const key_equal &ke = key_equal(),
+                               const key_equal &ke         = key_equal(),
                                const allocator_type &alloc = allocator_type())
             : mNodeAllocator(alloc), mHasher(hf), mKeyEqual(ke), mBuckets(nullptr),
               mBucketCount(buckets), mElementCount(0), mMaxLoadFactor(1.0f) {
@@ -289,8 +299,8 @@ namespace JGadget {
 
 #if __cplusplus >= 201103L
         TUnorderedMap(JSystem::initializer_list<value_type> list,
-                      size_t buckets = _JGADGET_MAP_DEFAULT_BUCKETS,
-                      const hasher &hf = hasher(), const key_equal &ke = key_equal(),
+                      size_t buckets = _JGADGET_MAP_DEFAULT_BUCKETS, const hasher &hf = hasher(),
+                      const key_equal &ke         = key_equal(),
                       const allocator_type &alloc = allocator_type())
             : TUnorderedMap(buckets, hf, ke, alloc) {
             for (auto &i : list) {
@@ -303,8 +313,8 @@ namespace JGadget {
                       const allocator_type &alloc)
             : TUnorderedMap(list, buckets, hasher(), key_equal(), alloc) {}
 
-        TUnorderedMap(JSystem::initializer_list<value_type> list, size_t buckets,
-                      const hasher &hf, const allocator_type &alloc)
+        TUnorderedMap(JSystem::initializer_list<value_type> list, size_t buckets, const hasher &hf,
+                      const allocator_type &alloc)
             : TUnorderedMap(list, buckets, hf, key_equal(), alloc) {}
 #endif
 #endif
@@ -312,7 +322,7 @@ namespace JGadget {
         TUnorderedMap &operator=(const TUnorderedMap &other) {
             clear();
 
-            mBucketCount = other.mBucketCount;
+            mBucketCount  = other.mBucketCount;
             mElementCount = other.mElementCount;
             for (size_type i = 0; i < other.mBucketCount; ++i) {
                 TNode_ *n     = other.mBuckets;
@@ -360,7 +370,7 @@ namespace JGadget {
         }
 #endif
 
-        _GLIBCXX_NODISCARD empty() const _GLIBCXX_NOEXCEPT { return begin() == end(); }
+        _GLIBCXX_NODISCARD bool empty() const _GLIBCXX_NOEXCEPT { return begin() == end(); }
 
         size_type max_size() const { return difference_type(-1) / sizeof(difference_type); }
         size_type size() const {
@@ -372,26 +382,22 @@ namespace JGadget {
         }
 
         void clear() _GLIBCXX_NOEXCEPT {
-            deallocate_nodes(mBuckets, mBucketCount)
+            deallocate_nodes(mBuckets, mBucketCount);
             deallocate_buckets(mBuckets, mBucketCount);
         }
 
-        local_iterator begin(size_type bucket) { return iterator(mBegin); }
+        local_iterator begin(size_type bucket) { return local_iterator(mBuckets[bucket]); }
         const_local_iterator begin(size_type bucket) const {
-            return const_iterator(mBegin);
+            return const_local_iterator(mBuckets[bucket]);
         }
-        local_iterator end(size_type bucket) { return iterator(mEnd); }
-        const_local_iterator end(size_type bucket) const {
-            return const_iterator(mEnd);
-        }
+        local_iterator end(size_type bucket) { return local_iterator(nullptr); }
+        const_local_iterator end(size_type bucket) const { return const_local_iterator(nullptr); }
 
 #if __cplusplus >= 201103L
         const_local_iterator cbegin(size_type bucket) const {
-            return const_iterator(mBegin);
+            return const_local_iterator(mBuckets[bucket]);
         }
-        const_local_iterator cend(size_type bucket) const {
-            return const_iterator(mEnd);
-        }
+        const_local_iterator cend(size_type bucket) const { return const_local_iterator(nullptr); }
 #endif
 
         size_type bucket_count() const { return mBucketCount - 1; }
@@ -406,9 +412,7 @@ namespace JGadget {
             return n;
         }
 
-        size_type bucket(const key_type &key) const {
-            return bucket_index(key, bucket_count());
-        }
+        size_type bucket(const key_type &key) const { return bucket_index(key, bucket_count()); }
 
         f32 load_factor() const { return static_cast<f32>(size()) / bucket_count(); }
 
@@ -416,7 +420,8 @@ namespace JGadget {
         void max_load_factor(f32 factor) { mMaxLoadFactor = factor; }
 
         TPair<iterator, bool> insert(const value_type &value) {
-            if (TNode_ *p = find_node(value.first))
+            size_type n = bucket(value.first);
+            if (TNode_ *p = find_node(mBuckets[n], value.first))
                 return {iterator(p, mBuckets + n), false};
 
             TNode_ *newnode = allocate_node(value);
@@ -439,7 +444,8 @@ namespace JGadget {
 
 #if __cplusplus >= 201703L
         TPair<iterator, bool> insert_or_assign(const key_type &key, mapped_type &&value) {
-            if (TNode_ *p = find_node(value.first)) {
+            size_type n = bucket(value.first);
+            if (TNode_ *p = find_node(mBuckets[n], value.first)) {
                 p->mValue.second = value;
                 return {iterator(p, mBuckets + n), false};
             }
@@ -464,9 +470,10 @@ namespace JGadget {
 #endif
 
         template <class... Args> TPair<iterator, bool> emplace(Args &&...args) {
-            value_type value = value_type(std::forward<Args>(args)...);
+            value_type value = value_type(forward<Args>(args)...);
 
-            if (TNode_ *p = find_node(value.first))
+            size_type n = bucket(value.first);
+            if (TNode_ *p = find_node(mBuckets[n], value.first))
                 return {iterator(p, mBuckets + n), false};
 
             TNode_ *newnode = allocate_node(value);
@@ -485,7 +492,7 @@ namespace JGadget {
         iterator erase(const_iterator pos) {
             iterator result = pos;
             result++;
-            erase_node(it.mElement, it.mBucket);
+            erase_node(pos.mElement, pos.mBucket);
         }
 
         iterator erase(const_iterator first, const_iterator last) {
@@ -500,7 +507,7 @@ namespace JGadget {
             size_type n                       = bucket(key);
 
             TNode_ **slot = mBuckets + n;
-            while (*slot && !mKeyEqual(hash, get_hash((*slot)->mValue.first)))
+            while (*slot && !mKeyEqual(key, (*slot)->mValue.first))
                 slot = &((*slot)->mNext);
 
             if (!*slot)
@@ -531,13 +538,13 @@ namespace JGadget {
         }
 
         mapped_type &operator[](const key_type &key) {
-            auto ins = insert(value_type(key, mapped_type()));
-            return ins->second;
+            TPair<iterator, bool> ins = insert(value_type(key, mapped_type()));
+            return ins.first->second;
         }
 
         mapped_type &operator[](key_type &&key) const {
-            auto ins = insert(value_type(key, mapped_type()));
-            return ins->second;
+            TPair<iterator, bool> ins = insert(value_type(key, mapped_type()));
+            return ins.first->second;
         }
 
         size_type count(const key_type &key) {
@@ -546,12 +553,14 @@ namespace JGadget {
         }
 
         iterator &find(const key_type &key) {
-            TNode_ *p = find_node(key);
+            size_type n = bucket(key);
+            TNode_ *p   = find_node(mBuckets[n], key);
             return p ? iterator(p, mBuckets + n) : end();
         }
 
         const_iterator &find(const key_type &key) const {
-            TNode_ *p = find_node(key);
+            size_type n = bucket(key);
+            TNode_ *p   = find_node(mBuckets[n], key);
             return p ? const_iterator(p, mBuckets + n) : end();
         }
 
@@ -568,11 +577,11 @@ namespace JGadget {
 
         void rehash(size_type count) {
             count = Max(count, size() / max_load_factor());
-            
+
             TNode_ **nbkts = allocate_buckets(count);
 
             for (size_type i = 0; i < mBucketCount; ++i) {
-                while (TNode_ *p = mBucketCount[i]) {
+                while (TNode_ *p = mBuckets[i]) {
                     size_type nidx = bucket_index(p->mValue.first, count);
                     mBuckets[i]    = p->mNext;
                     p->mNext       = nbkts[nidx];
@@ -584,17 +593,15 @@ namespace JGadget {
             }
         }
 
-        void resize(size_type count) {
-            rehash(int((count / max_load_factor()) + 1.0f));
-        }
+        void resize(size_type count) { rehash(int((count / max_load_factor()) + 1.0f)); }
 
         hasher hash_function() const { return mHasher; }
         hasher key_eq() const { return mKeyEqual; }
 
     private:
         size_type bucket_index(const key_type &key, size_type n) const { return get_hash(key) % n; }
-        hasher::result_type get_hash(const key_type &key) const { return mHasher(key); }
-        hasher::result_type get_hash(key_type &&key) const { return mHasher(key); }
+        typename hasher::result_type get_hash(const key_type &key) const { return mHasher(key); }
+        typename hasher::result_type get_hash(key_type &&key) const { return mHasher(key); }
 
         void erase_node(TNode_ *p, TNode_ **b) {
             TNode_ *cur = *b;
@@ -603,7 +610,7 @@ namespace JGadget {
             else {
                 TNode_ *next = cur->mNext;
                 while (next != p) {
-                    cur = next;
+                    cur  = next;
                     next = cur->mNext;
                 }
                 cur->mNext = next->mNext;
@@ -612,15 +619,14 @@ namespace JGadget {
             --mElementCount;
         }
 
-        TNode_ *find_node(const key_type &k) {
-            typename hasher::result_type hash = get_hash(key);
-            size_type n                       = bucket(key);
-            return find_node(mBuckets[n], hash);
+        TNode_ *find_node(const key_type &key) {
+            size_type n = bucket(key);
+            return find_node(mBuckets[n], key);
         }
 
-        TNode_ *find_node(TNode_ *p, typename hasher::result_type hash) {
+        TNode_ *find_node(TNode_ *p, const key_type &key) {
             for (; p; p = p->mNext) {
-                if (mKeyEqual(get_hash(p->mValue.first), hash))
+                if (mKeyEqual(p->mValue.first, key))
                     return p;
             }
             return nullptr;
@@ -628,7 +634,11 @@ namespace JGadget {
 
         TNode_ *allocate_node(const value_type &v) {
             TNode_ *n = mNodeAllocator.allocate(1);
+#if __cplusplus <= 201703L
             get_allocator().construct(&n->mValue, v);
+#else
+            get_allocator().construct_at(&n->mValue, v);
+#endif
             n->mNext = nullptr;
             return n;
         }
@@ -652,7 +662,7 @@ namespace JGadget {
 
         TNode_ **allocate_buckets(size_type n) {
             bucket_allocator_t alloc(mNodeAllocator);
-            TNode_ **p = alloc.allocate(n + 1); // Add 1 for sentinel
+            TNode_ **p = alloc.allocate(n + 1);  // Add 1 for sentinel
             memset(p, 0, sizeof(p) * n);
             p[n] = reinterpret_cast<TNode_ *>(0x1000);
             return p;
@@ -672,5 +682,5 @@ namespace JGadget {
         f32 mMaxLoadFactor;
     };
 
-    #undef _JGADGET_MAP_DEFAULT_BUCKETS
-}
+#undef _JGADGET_MAP_DEFAULT_BUCKETS
+}  // namespace JGadget

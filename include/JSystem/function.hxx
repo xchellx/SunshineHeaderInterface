@@ -53,10 +53,6 @@
  *  Do not attempt to use it directly. @headername{functional}
  */
 
-#if __cplusplus > 201103L
-#include <bits/move.h>
-#endif
-
 #include <JSystem/utility.hxx>
 
 namespace JSystem {
@@ -346,7 +342,7 @@ namespace JSystem {
     template <typename _Tp> struct greater<_Tp *> : public binary_function<_Tp *, _Tp *, bool> {
         constexpr bool operator()(_Tp *__x, _Tp *__y) const noexcept {
 #if __cplusplus >= 201402L
-            if (__is_constant_evaluated())
+            if (is_constant_evaluated())
                 return __x > __y;
 #endif
             return (unsigned int *)__x > (unsigned int *)__y;
@@ -357,7 +353,7 @@ namespace JSystem {
     template <typename _Tp> struct less<_Tp *> : public binary_function<_Tp *, _Tp *, bool> {
         constexpr bool operator()(_Tp *__x, _Tp *__y) const noexcept {
 #if __cplusplus >= 201402L
-            if (__is_constant_evaluated())
+            if (is_constant_evaluated())
                 return __x < __y;
 #endif
             return (unsigned int *)__x < (unsigned int *)__y;
@@ -369,7 +365,7 @@ namespace JSystem {
     struct greater_equal<_Tp *> : public binary_function<_Tp *, _Tp *, bool> {
         constexpr bool operator()(_Tp *__x, _Tp *__y) const noexcept {
 #if __cplusplus >= 201402L
-            if (__is_constant_evaluated())
+            if (is_constant_evaluated())
                 return __x >= __y;
 #endif
             return (unsigned int *)__x >= (unsigned int *)__y;
@@ -380,7 +376,7 @@ namespace JSystem {
     template <typename _Tp> struct less_equal<_Tp *> : public binary_function<_Tp *, _Tp *, bool> {
         constexpr bool operator()(_Tp *__x, _Tp *__y) const noexcept {
 #if __cplusplus >= 201402L
-            if (__is_constant_evaluated())
+            if (is_constant_evaluated())
                 return __x <= __y;
 #endif
             return (unsigned int *)__x <= (unsigned int *)__y;
@@ -1146,3 +1142,5 @@ namespace JSystem {
     template <typename _Func, typename _SfinaeType>
     using __has_is_transparent_t = typename __has_is_transparent<_Func, _SfinaeType>::type;
 #endif
+
+}
