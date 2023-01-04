@@ -1,17 +1,19 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <SMS/assert.h>
+#include <Dolphin/mem.h>
 
 #include <JSystem/JDrama/JDRNameRef.hxx>
 #include <JSystem/JGadget/Allocator.hxx>
 #include <JSystem/JGadget/Node.hxx>
 #include <JSystem/JGadget/Pair.hxx>
+#include <JSystem/JGadget/List.hxx>
+#include <JSystem/JGadget/Vector.hxx>
 #include <JSystem/function.hxx>
 
-using namespace JSystem;
-
 namespace JGadget {
+    #define _JGADGET_MAP_DEFAULT_BUCKETS 64
+
     template <typename _T> struct hash {
         typedef size_t result_type;
         typedef _T argument_type;
@@ -72,148 +74,606 @@ namespace JGadget {
         typedef size_t size_type;
         typedef ptrdiff_t difference_type;
 
+    private:
+        struct TNode_ {
+            TNode_ *mNext;
+            value_type mValue;
+
+            bool operator==(const TNode_ &other) const { return mValue == other.mValue; }
+            bool operator!=(const TNode_ &other) const { return mValue != other.mValue; }
+        };
+
+        typedef typename allocator_type::template rebind<TNode_>::other
+            node_allocator_t;
+        typedef typename allocator_type::template rebind<TNode_ *>::other
+            bucket_allocator_t;
+
+    public:
         struct const_iterator;
 
         struct iterator {
             friend class TUnorderedMap;
             friend struct TUnorderedMap::const_iterator;
 
-            iterator()
+            iterator(const iterator &iter) = default;
+
+        private:
+            iterator(TNode_ *node, TNode_ **bucket) : mElement(node), mBucket(bucket) {}
+            iterator(TNode_ **bucket) : mElement(*bucket), mBucket(bucket) {}
+            explicit iterator(const const_iterator &iter)
+                : mElement(const_cast<TNode_ *>(iter.mElement)) {}
+
+        public:
+            bool operator==(const iterator &rhs) const { return *mElement == *(rhs.mElement); }
+            bool operator!=(const iterator &rhs) const { return *mElement != *(rhs.mElement); }
+
+            iterator &operator++() {
+                next();
+                return *this;
+            }
+
+            iterator operator++(int) {
+                iterator temp{mElement, mBucket};
+                next();
+                return temp;
+            }
+
+            pointer operator->() const { return &mElement->mValue; }
+            reference operator*() { return mElement->mValue; }
+
+        private:
+            void next() {
+                mElement = mElement->mNext;
+                if (!mElement) {
+                    next_bucket();
+                }
+            }
+
+            void next_bucket() {
+                ++mBucket;
+                while (!*mBucket)  // Requires sentinel
+                    ++mBucket;
+                mElement = *mBucket;
+            }
+
+            TNode_ *mElement;
+            TNode_ **mBucket;
         };
 
+        struct const_iterator {
+            friend class TUnorderedMap;
+            friend struct TUnorderedMap::iterator;
 
-        struct local_iterator;
-        struct const_local_iterator;
+            const_iterator(const const_iterator &iter) = default;
 
-        TUnorderedMap() = default;
-        TUnorderedMap(const TUnorderedMap &ump) = default;
-        TUnorderedMap(TUnorderedMap &&ump) = default;
-        TUnorderedMap(const TUnorderedMap& ump, const allocator_type& alloc) {
+        private:
+            const_iterator(TNode_ *node, TNode_ **bucket) : mElement(node), mBucket(bucket) {}
+            const_iterator(TNode_ **bucket) : mElement(*bucket), mBucket(bucket) {}
+            const_iterator(const iterator &iter)
+                : mElement(const_cast<TNode_ *>(iter.mElement)) {}
 
-        }
+        public:
+            bool operator==(const iterator &rhs) const { return *mElement == *(rhs.mElement); }
+            bool operator!=(const iterator &rhs) const { return *mElement != *(rhs.mElement); }
 
-        TUnorderedMap(TUnorderedMap &&, const allocator_type &alloc) {}
-        explicit TUnorderedMap(size_t n, const hasher& hf, const key_equal& ke,
-            const allocator_type& alloc) {
+            iterator &operator++() {
+                next();
+                return *this;
+            }
 
-        }
+            iterator operator++(int) {
+                iterator temp{mElement, mBucket};
+                next();
+                return temp;
+            }
 
-        TDictS() { mItemBuffer = new ItemList[SurfaceSize]; }
-        ~TDictS() { delete[] mItemBuffer; }
+            const_pointer operator->() const { return &mElement->mValue; }
+            const_reference operator*() { return mElement->mValue; }
 
-        _V *operator[](const char *key) { return get(key); }
-
-        bool hasKey(const char *key) const {
-            const u32 index = getIndex(getHash(key));
-
-            auto &itemList = mItemBuffer[index];
-            for (auto &item : itemList) {
-                if (strcmp(item.mKey, key) == 0) {
-                    return true;
+        private:
+            void next() {
+                mElement = mElement->mNext;
+                if (!mElement) {
+                    next_bucket();
                 }
             }
 
-            return false;
+            void next_bucket() {
+                ++mBucket;
+                while (!*mBucket)  // Requires sentinel
+                    ++mBucket;
+                mElement = *mBucket;
+            }
+
+            TNode_ *mElement;
+            TNode_ **mBucket;
+        };
+
+        struct local_iterator {
+            friend class TUnorderedMap;
+            friend struct TUnorderedMap::const_local_iterator;
+
+            local_iterator(const local_iterator &iter) = default;
+
+        private:
+            local_iterator(TNode_ *node) : mElement(node) {}
+            explicit local_iterator(const const_local_iterator &iter)
+                : mElement(const_cast<TNode_ *>(iter.mElement)) {}
+
+        public:
+            bool operator==(const local_iterator &rhs) const { return *mElement == *(rhs.mElement); }
+            bool operator!=(const local_iterator &rhs) const { return *mElement != *(rhs.mElement); }
+
+            local_iterator &operator++() {
+                mElement = mElement->mNext;
+                return *this;
+            }
+
+            local_iterator operator++(int) {
+                local_iterator temp{mElement};
+                mElement = mElement->mNext;
+                return temp;
+            }
+
+            pointer operator->() const { return &mElement->mValue; }
+            reference operator*() { return mElement->mValue; }
+
+        private:
+            TNode_ *mElement;
+        };
+
+        struct const_local_iterator {
+            friend class TUnorderedMap;
+            friend struct TUnorderedMap::local_iterator;
+
+            const_local_iterator(const const_local_iterator &iter) = default;
+
+        private:
+            const_local_iterator(TNode_ *node) : mElement(node) {}
+            const_local_iterator(const local_iterator &iter)
+                : mElement(const_cast<TNode_ *>(iter.mElement)) {}
+
+        public:
+            bool operator==(const const_local_iterator &rhs) const {
+                return *mElement == *(rhs.mElement);
+            }
+            bool operator!=(const const_local_iterator &rhs) const {
+                return *mElement != *(rhs.mElement);
+            }
+
+            const_local_iterator &operator++() {
+                mElement = mElement->mNext;
+                return *this;
+            }
+
+            const_local_iterator operator++(int) {
+                const_local_iterator temp{mElement};
+                mElement = mElement->mNext;
+                return temp;
+            }
+
+            const_pointer operator->() const { return &mElement->mValue; }
+            const_reference operator*() { return mElement->mValue; }
+
+        private:
+            TNode_ *mElement;
+        };
+
+        TUnorderedMap() : TUnorderedMap(_JGADGET_MAP_DEFAULT_BUCKETS) {}
+
+        explicit TUnorderedMap(size_t buckets, const hasher &hf = hasher(),
+                               const key_equal &ke = key_equal(),
+                               const allocator_type &alloc = allocator_type())
+            : mNodeAllocator(alloc), mHasher(hf), mKeyEqual(ke), mBuckets(nullptr),
+              mBucketCount(buckets), mElementCount(0), mMaxLoadFactor(1.0f) {
+            mBuckets = allocate_buckets(mBucketCount);
         }
 
-        _V get(const char *key) const {
-            const u32 index = getIndex(getHash(key));
+        TUnorderedMap(size_t buckets, const allocator_type &alloc)
+            : TUnorderedMap(buckets, hasher(), key_equal(), alloc) {}
 
-            auto &itemList = mItemBuffer[index];
-            for (auto &item : itemList) {
-                if (strcmp(item.mKey, key) == 0) {
-                    return item.mValue;
+        TUnorderedMap(size_t buckets, const hasher &hf, const allocator_type &alloc)
+            : TUnorderedMap(buckets, hf, key_equal(), alloc) {}
+
+        TUnorderedMap(const TUnorderedMap &ump) : TUnorderedMap(ump, ump.mNodeAllocator) {}
+
+        TUnorderedMap(const TUnorderedMap &ump, const allocator_type &alloc)
+            : TUnorderedMap(ump.mBucketCount, ump.mHasher, ump.mKeyEqual, ump.mNodeAllocator) {
+            for (size_type i = 0; i < ump.mBucketCount; ++i) {
+                TNode_ *n     = ump.mBuckets;
+                TNode_ **tail = mBuckets + i;
+                while (n) {
+                    *tail = allocate_node(n->mValue);
+                    tail  = &((*tail)->mNext);
+                    n     = n->mNext;
+                }
+            }
+        }
+
+#if __cplusplus >= 201103L
+        TUnorderedMap(JSystem::initializer_list<value_type> list,
+                      size_t buckets = _JGADGET_MAP_DEFAULT_BUCKETS,
+                      const hasher &hf = hasher(), const key_equal &ke = key_equal(),
+                      const allocator_type &alloc = allocator_type())
+            : TUnorderedMap(buckets, hf, ke, alloc) {
+            for (auto &i : list) {
+                insert(i);
+            }
+        }
+
+#if __cplusplus >= 201402L
+        TUnorderedMap(JSystem::initializer_list<value_type> list, size_t buckets,
+                      const allocator_type &alloc)
+            : TUnorderedMap(list, buckets, hasher(), key_equal(), alloc) {}
+
+        TUnorderedMap(JSystem::initializer_list<value_type> list, size_t buckets,
+                      const hasher &hf, const allocator_type &alloc)
+            : TUnorderedMap(list, buckets, hf, key_equal(), alloc) {}
+#endif
+#endif
+
+        TUnorderedMap &operator=(const TUnorderedMap &other) {
+            clear();
+
+            mBucketCount = other.mBucketCount;
+            mElementCount = other.mElementCount;
+            for (size_type i = 0; i < other.mBucketCount; ++i) {
+                TNode_ *n     = other.mBuckets;
+                TNode_ **tail = mBuckets + i;
+                while (n) {
+                    *tail = allocate_node(n->mValue);
+                    tail  = &((*tail)->mNext);
+                    n     = n->mNext;
                 }
             }
 
-            return nullptr;
+            return *this;
         }
 
-        void set(const char *key, _V value) {
-            const u32 index = getIndex(getHash(key));
+        ~TUnorderedMap() { clear(); }
 
-            auto &itemList = mItemBuffer[index];
-            for (auto &item : itemList) {
-                if (strcmp(item.mKey, key) == 0) {
-                    item.mValue = value;
-                    return;
+        allocator_type get_allocator() const _GLIBCXX_NOEXCEPT { return mNodeAllocator; }
+
+        iterator begin() _GLIBCXX_NOEXCEPT {
+            iterator i(mBuckets);
+            if (!i.mElement)
+                i.next_bucket();
+            return i;
+        }
+        const_iterator begin() const _GLIBCXX_NOEXCEPT {
+            const_iterator i(mBuckets);
+            if (!i.mElement)
+                i.next_bucket();
+            return i;
+        }
+        iterator end() _GLIBCXX_NOEXCEPT { return iterator(mBuckets + mBucketCount); }
+        const_iterator end() const _GLIBCXX_NOEXCEPT {
+            return const_iterator(mBuckets + mBucketCount);
+        }
+
+#if __cplusplus >= 201103L
+        const_iterator cbegin() const _GLIBCXX_NOEXCEPT {
+            const_iterator i(mBuckets);
+            if (!i.mElement)
+                i.next_bucket();
+            return i;
+        }
+        const_iterator cend() const _GLIBCXX_NOEXCEPT {
+            return const_iterator(mBuckets + mBucketCount);
+        }
+#endif
+
+        _GLIBCXX_NODISCARD empty() const _GLIBCXX_NOEXCEPT { return begin() == end(); }
+
+        size_type max_size() const { return difference_type(-1) / sizeof(difference_type); }
+        size_type size() const {
+            size_type n;
+            for (auto i = begin(); i != end(); ++i) {
+                ++n;
+            }
+            return n;
+        }
+
+        void clear() _GLIBCXX_NOEXCEPT {
+            deallocate_nodes(mBuckets, mBucketCount)
+            deallocate_buckets(mBuckets, mBucketCount);
+        }
+
+        local_iterator begin(size_type bucket) { return iterator(mBegin); }
+        const_local_iterator begin(size_type bucket) const {
+            return const_iterator(mBegin);
+        }
+        local_iterator end(size_type bucket) { return iterator(mEnd); }
+        const_local_iterator end(size_type bucket) const {
+            return const_iterator(mEnd);
+        }
+
+#if __cplusplus >= 201103L
+        const_local_iterator cbegin(size_type bucket) const {
+            return const_iterator(mBegin);
+        }
+        const_local_iterator cend(size_type bucket) const {
+            return const_iterator(mEnd);
+        }
+#endif
+
+        size_type bucket_count() const { return mBucketCount - 1; }
+
+        size_type max_bucket_count() const { return difference_type(-1) / sizeof(difference_type); }
+
+        size_type bucket_size(size_type bucket) const {
+            size_type n;
+            for (auto i = begin(bucket); i != end(bucket); ++i) {
+                ++n;
+            }
+            return n;
+        }
+
+        size_type bucket(const key_type &key) const {
+            return bucket_index(key, bucket_count());
+        }
+
+        f32 load_factor() const { return static_cast<f32>(size()) / bucket_count(); }
+
+        f32 max_load_factor() const { return mMaxLoadFactor; }
+        void max_load_factor(f32 factor) { mMaxLoadFactor = factor; }
+
+        TPair<iterator, bool> insert(const value_type &value) {
+            if (TNode_ *p = find_node(value.first))
+                return {iterator(p, mBuckets + n), false};
+
+            TNode_ *newnode = allocate_node(value);
+
+            if (load_factor() > max_load_factor()) {
+                n = bucket_index(value.first, bucket_count() * 2);
+                rehash(bucket_count() * 2);
+            }
+
+            newnode->mNext = mBuckets[n];
+            mBuckets[n]    = newnode;
+            ++mElementCount;
+            return {iterator(newnode, mBuckets + n), true};
+        }
+
+        TPair<iterator, bool> insert(value_type &&value) {
+            value_type tmp = value;
+            return insert(tmp);
+        }
+
+#if __cplusplus >= 201703L
+        TPair<iterator, bool> insert_or_assign(const key_type &key, mapped_type &&value) {
+            if (TNode_ *p = find_node(value.first)) {
+                p->mValue.second = value;
+                return {iterator(p, mBuckets + n), false};
+            }
+
+            TNode_ *newnode = allocate_node(value_type(key, value));
+
+            if (load_factor() > max_load_factor()) {
+                n = bucket_index(value.first, bucket_count() * 2);
+                rehash(bucket_count() * 2);
+            }
+
+            newnode->mNext = mBuckets[n];
+            mBuckets[n]    = newnode;
+            ++mElementCount;
+            return {iterator(newnode, mBuckets + n), true};
+        }
+
+        TPair<iterator, bool> insert_or_assign(key_type &&key, mapped_type &&value) {
+            value_type tmpk = key;
+            return insert_or_assign(tmpk, value);
+        }
+#endif
+
+        template <class... Args> TPair<iterator, bool> emplace(Args &&...args) {
+            value_type value = value_type(std::forward<Args>(args)...);
+
+            if (TNode_ *p = find_node(value.first))
+                return {iterator(p, mBuckets + n), false};
+
+            TNode_ *newnode = allocate_node(value);
+
+            if (load_factor() > max_load_factor()) {
+                n = bucket_index(value.first, bucket_count() * 2);
+                rehash(bucket_count() * 2);
+            }
+
+            newnode->mNext = mBuckets[n];
+            mBuckets[n]    = newnode;
+            ++mElementCount;
+            return {iterator(newnode, mBuckets + n), true};
+        }
+
+        iterator erase(const_iterator pos) {
+            iterator result = pos;
+            result++;
+            erase_node(it.mElement, it.mBucket);
+        }
+
+        iterator erase(const_iterator first, const_iterator last) {
+            while (first != last) {
+                first = erase(first);
+            }
+            return last;
+        }
+
+        size_type erase(const key_type &key) {
+            typename hasher::result_type hash = get_hash(key);
+            size_type n                       = bucket(key);
+
+            TNode_ **slot = mBuckets + n;
+            while (*slot && !mKeyEqual(hash, get_hash((*slot)->mValue.first)))
+                slot = &((*slot)->mNext);
+
+            if (!*slot)
+                return 0;
+
+            TNode_ *p = *slot;
+            *slot     = p->mNext;
+            deallocate_node(p);
+            --mElementCount;
+
+            return 1;
+        }
+
+        mapped_type &at(const key_type &key) {
+            TNode_ *p = find_node(key);
+            if (p)
+                return p->mValue.second;
+            OSPanic(__FILE__, __LINE__, "Unordered Map lookup failed, no such key exists!");
+            return mapped_type();
+        }
+
+        const mapped_type &at(const key_type &key) const {
+            TNode_ *p = find_node(key);
+            if (p)
+                return p->mValue.second;
+            OSPanic(__FILE__, __LINE__, "Unordered Map lookup failed, no such key exists!");
+            return mapped_type();
+        }
+
+        mapped_type &operator[](const key_type &key) {
+            auto ins = insert(value_type(key, mapped_type()));
+            return ins->second;
+        }
+
+        mapped_type &operator[](key_type &&key) const {
+            auto ins = insert(value_type(key, mapped_type()));
+            return ins->second;
+        }
+
+        size_type count(const key_type &key) {
+            TNode_ *p = find_node(key);
+            return p ? 1 : 0;
+        }
+
+        iterator &find(const key_type &key) {
+            TNode_ *p = find_node(key);
+            return p ? iterator(p, mBuckets + n) : end();
+        }
+
+        const_iterator &find(const key_type &key) const {
+            TNode_ *p = find_node(key);
+            return p ? const_iterator(p, mBuckets + n) : end();
+        }
+
+#if __cplusplus > 201703L
+        bool contains(const key_type &key) { return find_node(key); }
+#endif
+
+        TPair<iterator, iterator> equal_range(const key_type &key) {
+            auto i = find(key);
+            if (i == end())
+                return {end(), end()};
+            return {i, i + 1};
+        }
+
+        void rehash(size_type count) {
+            count = Max(count, size() / max_load_factor());
+            
+            TNode_ **nbkts = allocate_buckets(count);
+
+            for (size_type i = 0; i < mBucketCount; ++i) {
+                while (TNode_ *p = mBucketCount[i]) {
+                    size_type nidx = bucket_index(p->mValue.first, count);
+                    mBuckets[i]    = p->mNext;
+                    p->mNext       = nbkts[nidx];
+                    nbkts[nidx]    = p;
                 }
-            }
-            itemList.insert(itemList.end(), {key, value});
-        }
-
-        _V *pop(const char *key) {
-            const u32 index = getIndex(getHash(key));
-
-            auto &itemList = mItemBuffer[index];
-            for (auto i = itemList.begin(); i != itemList.end(); ++i) {
-                Item &item = i.mNode->mItem;
-                if (strcmp(item.mKey, key) == 0) {
-                    itemList.erase(i);
-                    return &item.mValue;
-                }
-            }
-
-            return nullptr;
-        }
-
-        _V &setDefault(const char *key, const _V &default_) {
-            const u32 index = getIndex(getHash(key));
-
-            auto &itemList = mItemBuffer[index];
-            for (auto &item : itemList) {
-                if (strcmp(item.mKey, key) == 0) {
-                    return &item.mValue;
-                }
-            }
-
-            itemList.insert(itemList.end(), {key, default_});
-            return default_;
-        }
-
-        _V &setDefault(const char *key, _V *&&default_) {
-            const u32 index = getIndex(getHash(key));
-
-            auto &itemList = mItemBuffer[index];
-            for (auto &item : itemList) {
-                if (strcmp(item.mKey, key) == 0) {
-                    delete default_;
-                    return &item.mValue;
-                }
-            }
-
-            itemList.insert(itemList.end(), {key, *default_});
-            return *default_;
-        }
-
-        void items(ItemList &out) const {
-            if (!mItemBuffer)
-                return;
-
-            for (u32 i = 0; i < SurfaceSize; ++i) {
-                for (auto &item : mItemBuffer[i]) {
-                    out.insert(out.end(), item);
-                }
+                deallocate_buckets(mBuckets, mBucketCount);
+                mBucketCount = count;
+                mBuckets     = nbkts;
             }
         }
 
-        void empty() {
-            if (!mItemBuffer)
-                return;
-
-            for (u32 i = 0; i < SurfaceSize; ++i) {
-                auto &itemList = mItemBuffer[i];
-                itemList.erase(itemList.begin(), itemList.end());
-            }
+        void resize(size_type count) {
+            rehash(int((count / max_load_factor()) + 1.0f));
         }
+
+        hasher hash_function() const { return mHasher; }
+        hasher key_eq() const { return mKeyEqual; }
 
     private:
-        constexpr u32 getIndex(u16 hash) const { return hash % SurfaceSize; }
+        size_type bucket_index(const key_type &key, size_type n) const { return get_hash(key) % n; }
+        hasher::result_type get_hash(const key_type &key) const { return mHasher(key); }
+        hasher::result_type get_hash(key_type &&key) const { return mHasher(key); }
 
-        u16 getHash(const char *key) const { return JDrama::TNameRef::calcKeyCode(key); }
-        u16 getHash(const JDrama::TNameRef &key) const { return key.mKeyCode; }
+        void erase_node(TNode_ *p, TNode_ **b) {
+            TNode_ *cur = *b;
+            if (cur == p)
+                *b = cur->mNext;
+            else {
+                TNode_ *next = cur->mNext;
+                while (next != p) {
+                    cur = next;
+                    next = cur->mNext;
+                }
+                cur->mNext = next->mNext;
+            }
+            deallocate_node(p);
+            --mElementCount;
+        }
 
-        allocator_type mAllocator;
-        TList<value_type, allocator_type> mBuckets;
+        TNode_ *find_node(const key_type &k) {
+            typename hasher::result_type hash = get_hash(key);
+            size_type n                       = bucket(key);
+            return find_node(mBuckets[n], hash);
+        }
+
+        TNode_ *find_node(TNode_ *p, typename hasher::result_type hash) {
+            for (; p; p = p->mNext) {
+                if (mKeyEqual(get_hash(p->mValue.first), hash))
+                    return p;
+            }
+            return nullptr;
+        }
+
+        TNode_ *allocate_node(const value_type &v) {
+            TNode_ *n = mNodeAllocator.allocate(1);
+            get_allocator().construct(&n->mValue, v);
+            n->mNext = nullptr;
+            return n;
+        }
+
+        void deallocate_node(TNode_ *n) {
+            get_allocator().destroy(&n->mValue);
+            mNodeAllocator.deallocate(n, 1);
+        }
+
+        void deallocate_nodes(TNode_ **array, size_type n) {
+            for (size_type i = 0; i < n; ++i) {
+                TNode_ *p = array[i];
+                while (p) {
+                    TNode_ *tmp = p;
+                    p           = p->mNext;
+                    deallocate_node(tmp);
+                }
+                array[i] = nullptr;
+            }
+        }
+
+        TNode_ **allocate_buckets(size_type n) {
+            bucket_allocator_t alloc(mNodeAllocator);
+            TNode_ **p = alloc.allocate(n + 1); // Add 1 for sentinel
+            memset(p, 0, sizeof(p) * n);
+            p[n] = reinterpret_cast<TNode_ *>(0x1000);
+            return p;
+        }
+
+        void deallocate_buckets(TNode_ **p, size_type n) {
+            bucket_allocator_t alloc(mNodeAllocator);
+            alloc.deallocate(p, n + 1);
+        }
+
+        node_allocator_t mNodeAllocator;
+        hasher mHasher;
+        key_equal mKeyEqual;
+        TNode_ **mBuckets;
+        size_type mBucketCount;
+        size_type mElementCount;
+        f32 mMaxLoadFactor;
     };
+
+    #undef _JGADGET_MAP_DEFAULT_BUCKETS
 }
