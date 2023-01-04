@@ -29,10 +29,10 @@ namespace JGadget {
             friend class TVector;
             friend struct TVector::const_iterator;
 
-            explicit _GLIBCXX20_CONSTEXPR iterator(pointer node) : mCurrent(node) {}
             _GLIBCXX20_CONSTEXPR iterator(const iterator &iter) = default;
 
         private:
+            explicit _GLIBCXX20_CONSTEXPR iterator(pointer node) : mCurrent(node) {}
             // For internal conversion (erase)
             _GLIBCXX20_CONSTEXPR iterator(const const_iterator &iter) : mCurrent(const_cast<pointer>(iter.mCurrent)) {}
 
@@ -97,12 +97,15 @@ namespace JGadget {
 
         struct const_iterator {
             friend class TVector;
-            friend struct iterator;
+            friend struct TVector::iterator;
 
-            explicit _GLIBCXX20_CONSTEXPR const_iterator(pointer node) : mCurrent(node) {}
             _GLIBCXX20_CONSTEXPR const_iterator(const iterator &iter) : mCurrent(iter.mCurrent) {}
             _GLIBCXX20_CONSTEXPR const_iterator(const const_iterator &iter) = default;
 
+        private:
+            explicit _GLIBCXX20_CONSTEXPR const_iterator(pointer node) : mCurrent(node) {}
+
+        public:
             _GLIBCXX20_CONSTEXPR bool operator==(const const_iterator &rhs) const {
                 return mCurrent == rhs.mCurrent;
             }
