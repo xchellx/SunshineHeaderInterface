@@ -25,7 +25,7 @@ namespace JGadget {
 
         TLinkListNode *CreateNode_(TLinkListNode *prev, TLinkListNode *next, void **item);
 
-        iterator begin() { return iterator(mBegin->mCurrent); }
+        iterator begin() { return iterator(mBegin); }
         iterator end();
         iterator Erase(iterator start, iterator end);
         iterator Insert(iterator iter);
