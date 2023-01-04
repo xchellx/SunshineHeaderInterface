@@ -2,7 +2,7 @@
 
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
-#include <JSystem/JGadget/List.hxx>
+#include <JSystem/JGadget/LinkList.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 
 #define PERFORM_ON_MOVEMENT 0x00000001
