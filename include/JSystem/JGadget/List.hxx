@@ -22,33 +22,6 @@ namespace JGadget {
         };
     }  // namespace
 
-    class TNodeLinkList {
-    public:
-        class iterator {
-        public:
-            iterator(TLinkListNode *node) : mCurrent(node) {}
-            iterator(const iterator &iter) : mCurrent(iter.mCurrent) {}
-
-            bool operator==(iterator &rhs) const { return mCurrent == rhs.mCurrent; }
-            bool operator!=(iterator &rhs) const { return mCurrent != rhs.mCurrent; }
-            TLinkListNode *operator->() const { return mCurrent; }
-
-            TLinkListNode *mCurrent;
-        };
-
-        TLinkListNode *CreateNode_(TLinkListNode *prev, TLinkListNode *next, void **item);
-
-        iterator begin() { return iterator(mStart.mCurrent); }
-        iterator end();
-        iterator Erase(iterator start, iterator end);
-        iterator Insert(iterator iter);
-        void Remove(TLinkListNode *node);
-        template <typename _T> void Remove_if(_T _p, TNodeLinkList &list);
-
-        size_t mSize;
-        iterator mStart;
-    };
-
     template <class _T, class _Alloc = TAllocator<_T>> class TList {
     public:
         typedef _T value_type;
@@ -86,10 +59,10 @@ namespace JGadget {
             friend class TList;
             friend struct TList::const_iterator;
 
-            iterator(TNode_ *node) : mNode(node) {}
             iterator(const iterator &iter) = default;
 
         private:
+            iterator(TNode_ *node) : mNode(node) {}
             explicit iterator(const const_iterator &iter)
                 : mNode(const_cast<TNode_ *>(iter.mNode)) {}
 
@@ -149,8 +122,8 @@ namespace JGadget {
                 return temp;
             }
 
-            _T *operator->() const { return &mNode->mItem; }
-            _T &operator*() { return mNode->mItem; }
+            pointer operator->() const { return &mNode->mItem; }
+            reference operator*() { return mNode->mItem; }
 
         private:
             TNode_ *mNode;
@@ -160,10 +133,13 @@ namespace JGadget {
             friend class TList;
             friend struct TList::iterator;
 
-            explicit const_iterator(const TNode_ *node) : mNode(node) {}
             const_iterator(const iterator &iter) : mNode(iter.mNode) {}
             const_iterator(const const_iterator &iter) = default;
 
+        private:
+            explicit const_iterator(const TNode_ *node) : mNode(node) {}
+
+        public:
             bool operator==(const const_iterator &rhs) const { return mNode == rhs.mNode; }
             bool operator!=(const const_iterator &rhs) const { return mNode != rhs.mNode; }
 
@@ -219,8 +195,8 @@ namespace JGadget {
                 return temp;
             }
 
-            const _T *operator->() const { return &mNode->mItem; }
-            const _T &operator*() { return mNode->mItem; }
+            const_pointer operator->() const { return &mNode->mItem; }
+            const_reference &operator*() { return mNode->mItem; }
 
         private:
             const TNode_ *mNode;
@@ -703,82 +679,6 @@ namespace JGadget {
         return false;
     }
 #endif
-
-    template <typename _T, size_t _S> class TLinkList {
-    public:
-        TLinkListNode *Element_getNode();
-        _T *Element_getValue();
-    };
-
-    class TSingleNodeLinkList {
-    public:
-        class iterator {
-        public:
-            iterator(TSingleLinkListNode *node) : mNode(node) {}
-            iterator(const iterator &iter) : mNode(iter.mNode) {}
-
-            bool operator==(const iterator &rhs) const { return mNode == rhs.mNode; }
-            bool operator!=(const iterator &rhs) const { return mNode != rhs.mNode; }
-
-            iterator &operator++() {
-                mNode = mNode->mNext;
-                return *this;
-            }
-
-            TSingleLinkListNode *operator->() const { return mNode; }
-            TSingleLinkListNode &operator*() { return *mNode; }
-
-            TSingleLinkListNode *mNode;
-        };
-
-        void Initialize_();
-
-        iterator Insert(iterator iter, TSingleLinkListNode *node);
-
-        iterator Erase(iterator iter) {
-            auto searchIter = begin();
-            while (searchIter != end()) {
-                TSingleLinkListNode *next = searchIter->mNext;
-                if (next == iter.mNode) {
-                    searchIter->mNext = iter->mNext;
-                    delete iter.mNode;
-
-                    mSize -= 1;
-                    return iterator(searchIter->mNext);
-                }
-                ++searchIter;
-            }
-            return end();
-        }
-
-        iterator Erase(iterator start, iterator end) {
-            iterator iter = start;
-            while (iter != end) {
-                iter = Erase(iter);
-            }
-            return iterator(iter);
-        }
-
-        iterator end();
-        iterator begin() { return {mStart}; }
-
-        size_t mSize;
-        TSingleLinkListNode *mStart;
-        TSingleLinkListNode *mEnd;
-    };
-
-    template <typename _T, size_t _S> class TSingleLinkList {
-    public:
-        class iterator {
-        public:
-            iterator(TSingleLinkListNode *node) : mCurrent(node) {}
-            iterator(const iterator &iter) : mCurrent(iter.mCurrent) {}
-
-            TSingleLinkListNode *mCurrent;
-        };
-        size_t mSize;
-        TSingleLinkList mNode;
-    };
 
     class TList_pointer_void : public TList<void *> {
     public:
