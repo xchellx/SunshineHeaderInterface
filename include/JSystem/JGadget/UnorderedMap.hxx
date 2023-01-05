@@ -471,23 +471,21 @@ namespace JGadget {
         }
 
         mapped_type &at(const key_type &key) {
-            static mapped_type _def;
             TNode_ *p = find_node(key);
-            if (p)
-                return p->mValue.second;
-            OSPanic(__FILE__, __LINE__, "Unordered Map lookup failed, no such key exists!");
-            __OSUnhandledException(6, OSGetCurrentContext(), 0);
-            return _def;
+            if (!p) {
+                OSPanic(__FILE__, __LINE__, "Unordered Map lookup failed, no such key exists!");
+                __OSUnhandledException(6, OSGetCurrentContext(), 0);
+            }
+            return p->mValue.second;
         }
 
         const mapped_type &at(const key_type &key) const {
-            static const mapped_type _def;
             TNode_ *p = find_node(key);
-            if (p)
-                return p->mValue.second;
-            OSPanic(__FILE__, __LINE__, "Unordered Map lookup failed, no such key exists!");
-            __OSUnhandledException(6, OSGetCurrentContext(), 0);
-            return _def;
+            if (!p) {
+                OSPanic(__FILE__, __LINE__, "Unordered Map lookup failed, no such key exists!");
+                __OSUnhandledException(6, OSGetCurrentContext(), 0);
+            }
+            return p->mValue.second;
         }
 
         mapped_type &operator[](const key_type &key) {

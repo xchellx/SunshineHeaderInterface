@@ -277,20 +277,16 @@ namespace JGadget {
 
         _GLIBCXX20_CONSTEXPR reference at(size_type index) {
             if (index >= size()) {
-                /*OSReport("Attempted to access OOB item (%lu) of Vector (size %lu)!", index, size());
-                while (true) {
-                    __asm volatile("");
-                }*/
+                OSPanic(__FILE__, __LINE__, "Attempted OOB access to Vector of size %lu (index %lu)!", size(), index);
+                __OSUnhandledException(6, OSGetCurrentContext(), 0);
             }
             return mBegin[index];
         }
 
         _GLIBCXX20_CONSTEXPR const_reference at(size_type index) const {
             if (index >= size()) {
-                /*OSReport("Attempted to access OOB item (%lu) of Vector (size %lu)!", index, size());
-                while (true) {
-                    __asm volatile("");
-                }*/
+                OSPanic(__FILE__, __LINE__, "Attempted OOB access to Vector of size %lu (index %lu)!", size(), index);
+                __OSUnhandledException(6, OSGetCurrentContext(), 0);
             }
             return mBegin[index];
         }
