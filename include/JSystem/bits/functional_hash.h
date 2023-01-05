@@ -32,7 +32,7 @@
 
 #include <JSystem/bits/hash_bytes.h>
 #include <JSystem/bits/c++config.h>
-#include <JSystem/type_traits>
+#include <JSystem/type_traits.hxx>
 
 namespace JSystem {
     /** @defgroup hashes Hashes
