@@ -5,7 +5,7 @@
 
 #include <SMS/assert.h>
 
-#include <JSystem/config.hxx>
+#include <JSystem/bits/c++config.h>
 #include <JSystem/initializer_list.hxx>
 #include <JSystem/utility.hxx>
 #include <JSystem/JGadget/Allocator.hxx>
@@ -559,6 +559,7 @@ namespace JGadget {
             return at;
         }
 
+    private:
         allocator_type mAllocator;
         pointer mBegin;
         pointer mEnd;
@@ -576,10 +577,8 @@ namespace JGadget {
         auto i = lhs.begin();
         auto j = rhs.begin();
         while (i != lhs.end() && j != rhs.end()) {
-            if (i != j)
+            if (i++ != j++)
                 return false;
-            ++i;
-            ++j;
         }
 
         return true;
@@ -594,10 +593,8 @@ namespace JGadget {
         auto i = lhs.begin();
         auto j = rhs.begin();
         while (i != lhs.end() && j != rhs.end()) {
-            if (i != j)
+            if (i++ != j++)
                 return true;
-            ++i;
-            ++j;
         }
 
         return false;

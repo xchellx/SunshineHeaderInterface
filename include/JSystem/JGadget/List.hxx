@@ -638,6 +638,7 @@ namespace JGadget {
         }
 #endif
 
+    private:
         allocator_type mAllocator;
         size_type mSize;
         TNode_ *mBegin;
@@ -652,10 +653,8 @@ namespace JGadget {
         auto i = lhs.begin();
         auto j = rhs.begin();
         while (i != lhs.end() && j != rhs.end()) {
-            if (i != j)
+            if (i++ != j++)
                 return false;
-            ++i;
-            ++j;
         }
 
         return true;
@@ -670,10 +669,8 @@ namespace JGadget {
         auto i = lhs.begin();
         auto j = rhs.begin();
         while (i != lhs.end() && j != rhs.end()) {
-            if (i != j)
+            if (i++ != j++)
                 return true;
-            ++i;
-            ++j;
         }
 
         return false;

@@ -35,7 +35,7 @@ namespace JSystem  {
          *
          * @{
          */
-        #include <JSystem/config.hxx>
+        #include <JSystem/bits/c++config.h>
 
         typedef decltype(nullptr) nullptr_t;
 

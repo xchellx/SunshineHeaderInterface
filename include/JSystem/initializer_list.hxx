@@ -2,7 +2,7 @@
 
 #include <Dolphin/types.h>
 
-#include <JSystem/config.hxx>
+#include <JSystem/bits/c++config.h>
 
 #if __cplusplus >= 201103L
 
