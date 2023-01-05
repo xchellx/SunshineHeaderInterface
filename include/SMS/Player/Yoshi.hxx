@@ -46,7 +46,7 @@ public:
     s32 mCurJuice;             // 0x000C
     TMario *mMario;            // 0x0010
     u32 _02[0xC / 4];          // 0x0014
-    TVec3f mPosition;          // 0x0020
+    TVec3f mTranslation;       // 0x0020
     u32 _03[0x8 / 4];          // 0x002C
     MActor *mActor;            // 0x0034
     u32 _04[0x4C / 4];         // 0x0038
