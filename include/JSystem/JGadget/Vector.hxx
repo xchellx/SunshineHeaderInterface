@@ -88,7 +88,7 @@ namespace JGadget {
                 return temp;
             }
 
-            pointer operator->() const { return *mCurrent; }
+            pointer operator->() const { return mCurrent; }
             reference operator*() const { return *mCurrent; }
 
         private:
@@ -157,7 +157,7 @@ namespace JGadget {
                 return temp;
             }
 
-            const_pointer operator->() const { return *mCurrent; }
+            const_pointer operator->() const { return mCurrent; }
             const_reference operator*() const { return *mCurrent; }
 
         private:

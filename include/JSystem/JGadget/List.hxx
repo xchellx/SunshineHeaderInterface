@@ -3,10 +3,11 @@
 #include <Dolphin/OS.h>
 #include <Dolphin/types.h>
 
+#include <JSystem/initializer_list.hxx>
+#include <JSystem/utility.hxx>
 #include <JSystem/JGadget/Allocator.hxx>
 #include <JSystem/JGadget/Node.hxx>
 #include <JSystem/JKernel/JKRHeap.hxx>
-#include <JSystem/initializer_list.hxx>
 
 namespace JGadget {
 
@@ -122,7 +123,7 @@ namespace JGadget {
                 return temp;
             }
 
-            pointer operator->() const { return &mNode->mItem; }
+            pointer operator->() const { return JSystem::addressof(mNode->mItem); }
             reference operator*() { return mNode->mItem; }
 
         private:
@@ -195,7 +196,7 @@ namespace JGadget {
                 return temp;
             }
 
-            const_pointer operator->() const { return &mNode->mItem; }
+            const_pointer operator->() const { return JSystem::addressof(mNode->mItem); }
             const_reference &operator*() { return mNode->mItem; }
 
         private:
