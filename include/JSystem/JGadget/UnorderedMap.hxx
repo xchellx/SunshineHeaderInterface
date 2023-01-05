@@ -8,50 +8,51 @@
 #include <JSystem/JDrama/JDRNameRef.hxx>
 #include <JSystem/JGadget/Allocator.hxx>
 #include <JSystem/JGadget/Pair.hxx>
+#include <JSystem/bits/functional_hash.h>
 #include <JSystem/function.hxx>
 #include <JSystem/initializer_list.hxx>
-#include <JSystem/bits/functional_hash.h>
 
 namespace JGadget {
 #define _JGADGET_MAP_DEFAULT_BUCKETS 64
 
-    //using str_hash = hash<const char *>;
-    //using u16_hash = hash<u16>;
-    //using u32_hash = hash<u32>;
-    //using u64_hash = hash<u64>;
+    // using str_hash = hash<const char *>;
+    // using u16_hash = hash<u16>;
+    // using u32_hash = hash<u32>;
+    // using u64_hash = hash<u64>;
 
-    //template <> inline u16_hash::result_type u16_hash::operator()(argument_type v) const {
-    //    u32 p   = 0x5555;  // pattern of alternating 0 and 1
-    //    u32 c   = 17317;   // random uneven integer constant;
-    //    u32 mix = p * (v ^ (v >> 16));
-    //    return c * (mix ^ (mix >> 16));
-    //}
+    // template <> inline u16_hash::result_type u16_hash::operator()(argument_type v) const {
+    //     u32 p   = 0x5555;  // pattern of alternating 0 and 1
+    //     u32 c   = 17317;   // random uneven integer constant;
+    //     u32 mix = p * (v ^ (v >> 16));
+    //     return c * (mix ^ (mix >> 16));
+    // }
 
-    //template <> inline u32_hash::result_type u32_hash::operator()(argument_type v) const {
-    //    v = ((v >> 16) ^ v) * 0x45d9f3b;
-    //    v = ((v >> 16) ^ v) * 0x45d9f3b;
-    //    v = (v >> 16) ^ v;
-    //    return v;
-    //}
+    // template <> inline u32_hash::result_type u32_hash::operator()(argument_type v) const {
+    //     v = ((v >> 16) ^ v) * 0x45d9f3b;
+    //     v = ((v >> 16) ^ v) * 0x45d9f3b;
+    //     v = (v >> 16) ^ v;
+    //     return v;
+    // }
 
-    //template <> inline u64_hash::result_type u64_hash::operator()(argument_type v) const {
-    //    v = (v ^ (v >> 30)) * argument_type(0xbf58476d1ce4e5b9);
-    //    v = (v ^ (v >> 27)) * argument_type(0x94d049bb133111eb);
-    //    v = v ^ (v >> 31);
-    //    return v;
-    //}
+    // template <> inline u64_hash::result_type u64_hash::operator()(argument_type v) const {
+    //     v = (v ^ (v >> 30)) * argument_type(0xbf58476d1ce4e5b9);
+    //     v = (v ^ (v >> 27)) * argument_type(0x94d049bb133111eb);
+    //     v = v ^ (v >> 31);
+    //     return v;
+    // }
 
-    //template <> inline str_hash::result_type str_hash::operator()(argument_type v) const {
-    //    return JDrama::TNameRef::calcKeyCode(v);
-    //}
+    // template <> inline str_hash::result_type str_hash::operator()(argument_type v) const {
+    //     return JDrama::TNameRef::calcKeyCode(v);
+    // }
 
-    //struct str_equal_to : JSystem::binary_function<const char *, const char *, bool> {
-    //    inline constexpr result_type operator()(first_argument_type a, second_argument_type b) {
-    //        return JDrama::TNameRef::calcKeyCode(a) == JDrama::TNameRef::calcKeyCode(b);
-    //    }
-    //};
+    // struct str_equal_to : JSystem::binary_function<const char *, const char *, bool> {
+    //     inline constexpr result_type operator()(first_argument_type a, second_argument_type b) {
+    //         return JDrama::TNameRef::calcKeyCode(a) == JDrama::TNameRef::calcKeyCode(b);
+    //     }
+    // };
 
-    template <class _Key, class _T, class _Hash = JSystem::hash<_Key>, class _Pred = JSystem::equal_to<_Key>,
+    template <class _Key, class _T, class _Hash = JSystem::hash<_Key>,
+              class _Pred  = JSystem::equal_to<_Key>,
               class _Alloc = TAllocator<TPair<const _Key, _T>>>
     class TUnorderedMap {
     public:
@@ -281,7 +282,7 @@ namespace JGadget {
         TUnorderedMap(const TUnorderedMap &ump, const allocator_type &alloc)
             : TUnorderedMap(ump.mBucketCount, ump.mHasher, ump.mKeyEqual, ump.mNodeAllocator) {
             for (size_type i = 0; i < ump.mBucketCount; ++i) {
-                TNode_ *n     = ump.mBuckets;
+                TNode_ *n     = ump.mBuckets[i];
                 TNode_ **tail = mBuckets + i;
                 while (n) {
                     *tail = allocate_node(n->mValue);
@@ -516,19 +517,23 @@ namespace JGadget {
         }
 
         mapped_type &at(const key_type &key) {
+            static mapped_type _def;
             TNode_ *p = find_node(key);
             if (p)
                 return p->mValue.second;
             OSPanic(__FILE__, __LINE__, "Unordered Map lookup failed, no such key exists!");
-            return mapped_type();
+            __OSUnhandledException(6, OSGetCurrentContext(), 0);
+            return _def;
         }
 
         const mapped_type &at(const key_type &key) const {
+            static const mapped_type _def;
             TNode_ *p = find_node(key);
             if (p)
                 return p->mValue.second;
             OSPanic(__FILE__, __LINE__, "Unordered Map lookup failed, no such key exists!");
-            return mapped_type();
+            __OSUnhandledException(6, OSGetCurrentContext(), 0);
+            return _def;
         }
 
         mapped_type &operator[](const key_type &key) {

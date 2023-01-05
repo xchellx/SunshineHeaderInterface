@@ -59,13 +59,13 @@ namespace JGadget {
 
     template <class T1, class T2>
     _GLIBCXX14_CONSTEXPR bool operator==(const TPair<T1, T2> &a, const TPair<T1, T2> &b) {
-        return a.first == b.first && a.second == a.second;
+        return a.first == b.first && a.second == b.second;
     }
 
 #if __cplusplus <= 201703L
     template <class T1, class T2>
     _GLIBCXX14_CONSTEXPR bool operator!=(const TPair<T1, T2> &a, const TPair<T1, T2> &b) {
-        return a.first != b.first || a.second != a.second;
+        return a.first != b.first || a.second != b.second;
     }
 #endif
 }  // namespace JGadget
