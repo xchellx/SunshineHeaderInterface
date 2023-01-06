@@ -5,9 +5,11 @@
 
 #include <SMS/assert.h>
 
-#include <JSystem/bits/c++config.h>
 #include <JSystem/initializer_list.hxx>
+#include <JSystem/memory.hxx>
 #include <JSystem/utility.hxx>
+
+#include <JSystem/bits/c++config.h>
 #include <JSystem/JGadget/Allocator.hxx>
 #include <JSystem/JGadget/Node.hxx>
 

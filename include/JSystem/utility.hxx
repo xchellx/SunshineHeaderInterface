@@ -3,6 +3,8 @@
 #include <JSystem/bits/c++config.h>
 #include <JSystem/type_traits.hxx>
 
+#if __cplusplus >= 201103L
+
 namespace JSystem {
 
 #if __cplusplus > 201703L
@@ -11,25 +13,12 @@ namespace JSystem {
     }
 #endif
 
-    template <typename _Tp, typename _Ts, typename _Tv>
-    void uninitialized_fill_n(_Tp dst, _Ts count, const _Tv &data) {
-        for (_Ts i = 0; i < count; ++i) {
-            *dst++ = data;
-        }
-    }
-
     template <typename _T> _T *copy(_T *begin, _T *end, _T *dst) {
         while (begin != end) {
             *dst++ = *begin++;
         }
         return dst;
     }
-
-    template <typename _Tp> inline _GLIBCXX17_CONSTEXPR _Tp *addressof(_Tp &__r) _GLIBCXX_NOEXCEPT {
-        return reinterpret_cast<_Tp *>(
-            &const_cast<char &>(reinterpret_cast<const volatile char &>(__r)));
-    }
-    template <typename _Tp> const _Tp *addressof(const _Tp &&) = delete;
 
     template <class _Tp> inline constexpr _Tp &&forward(typename remove_reference<_Tp>::type &t) noexcept {
         return static_cast<_Tp &&>(t);
@@ -63,12 +52,11 @@ namespace JSystem {
     }
     /// @} group utilities
 
-#if __cplusplus >= 201103L
-#define _GLIBCXX_MOVE(__val)         std::move(__val)
-#define _GLIBCXX_FORWARD(_Tp, __val) std::forward<_Tp>(__val)
+}  // namespace JSystem
+
+#define _GLIBCXX_MOVE(__val)         JSystem::move(__val)
+#define _GLIBCXX_FORWARD(_Tp, __val) JSystem::forward<_Tp>(__val)
 #else
 #define _GLIBCXX_MOVE(__val)         (__val)
 #define _GLIBCXX_FORWARD(_Tp, __val) (__val)
 #endif
-
-}  // namespace JSystem
