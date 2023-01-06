@@ -14,14 +14,14 @@ namespace JSystem {
 
     template <class _ForwardIt, class _NoThrowForwardIt>
     _ForwardIt uninitialized_copy(_ForwardIt first, _ForwardIt last, _NoThrowForwardIt d_first) {
-        for (; first != last; ++d_first, (void) ++first) {
+        for (; first != last; ++d_first, (void)++first) {
 #if __cplusplus > 201703L
-            ::new (const_cast<void *>(
-                static_cast<const volatile void *>(JSystem::addressof(*d_first)))) _T(*first);
+            ::new (const_cast<void *>(static_cast<const volatile void *>(
+                JSystem::addressof(*d_first)))) typename _ForwardIt::value_type(*first);
 #elif __cplusplus >= 201103L
-            ::new (static_cast<void *>(JSystem::addressof(*d_first)) _T(*first);
+            ::new (static_cast<void *>(JSystem::addressof(*d_first)) typename _ForwardIt::value_type(*first);
 #else
-            ::new (static_cast<void *>(&*d_first) _T(*first);
+            ::new (static_cast<void *>(&*d_first) typename _ForwardIt::value_type(*first);
 #endif
         }
         return first;
@@ -30,12 +30,12 @@ namespace JSystem {
 #if __cplusplus >= 201103L
     template <class _ForwardIt, class _Size, class _NoThrowForwardIt>
     _ForwardIt uninitialized_copy_n(_ForwardIt first, _Size count, _NoThrowForwardIt d_first) {
-        for (; n--; ++d_first, (void)++first) {
+        for (; count--; ++d_first, (void)++first) {
 #if __cplusplus > 201703L
-            ::new (const_cast<void *>(
-                static_cast<const volatile void *>(JSystem::addressof(*d_first)))) _T(*first);
+            ::new (const_cast<void *>(static_cast<const volatile void *>(
+                JSystem::addressof(*d_first)))) typename _ForwardIt::value_type(*first);
 #else
-            ::new (static_cast<void *>(JSystem::addressof(*d_first)) _T(*first);
+            ::new (static_cast<void *>(JSystem::addressof(*d_first)) typename _ForwardIt::value_type(*first);
 #endif
         }
         return first;
@@ -46,12 +46,13 @@ namespace JSystem {
     _ForwardIt uninitialized_fill(_ForwardIt first, _ForwardIt last, const _T &data) {
         for (; first != last; ++first) {
 #if __cplusplus > 201703L
-            ::new (const_cast<void *>(
-                static_cast<const volatile void *>(JSystem::addressof(*first)))) _T(data);
+            ::new (
+                const_cast<void *>(static_cast<const volatile void *>(JSystem::addressof(*first))))
+                typename _ForwardIt::value_type(data);
 #elif __cplusplus >= 201103L
-            ::new (static_cast<void *>(JSystem::addressof(*first)) _T(data);
+            ::new (static_cast<void *>(JSystem::addressof(*first)) typename _ForwardIt::value_type(data);
 #else
-            ::new (static_cast<void *>(&*first) _T(data);
+            ::new (static_cast<void *>(&*first) typename _ForwardIt::value_type(data);
 #endif
         }
         return first;
@@ -81,14 +82,15 @@ namespace JSystem {
 #endif
 
 #if __cplusplus >= 201703L
-        template <class _ForwardIt, class _NoThrowForwardIt>
+    template <class _ForwardIt, class _NoThrowForwardIt>
     _ForwardIt uninitialized_move(_ForwardIt first, _ForwardIt last, _NoThrowForwardIt d_first) {
         for (; first != last; ++d_first, (void)++first) {
 #if __cplusplus > 201703L
-            ::new (const_cast<void *>(static_cast<const volatile void *>(
-                JSystem::addressof(*d_first)))) _T(JSystem::move(*first));
+            ::new (const_cast<void *>(
+                static_cast<const volatile void *>(JSystem::addressof(*d_first))))
+                typename _ForwardIt::value_type(JSystem::move(*first));
 #else
-            ::new (static_cast<void *>(JSystem::addressof(*d_first)) _T(JSystem::move(*first));
+            ::new (static_cast<void *>(JSystem::addressof(*d_first)) typename _ForwardIt::value_type(JSystem::move(*first));
 #endif
         }
         return first;
@@ -96,25 +98,27 @@ namespace JSystem {
 
     template <class _ForwardIt, class _Size, class _NoThrowForwardIt>
     _ForwardIt uninitialized_move_n(_ForwardIt first, _Size count, _NoThrowForwardIt d_first) {
-        for (; n--; ++d_first, (void)++first) {
+        for (; count--; ++d_first, (void)++first) {
 #if __cplusplus > 201703L
             ::new (const_cast<void *>(
-                static_cast<const volatile void *>(JSystem::addressof(*d_first)))) _T(JSystem::move(*first));
+                static_cast<const volatile void *>(JSystem::addressof(*d_first))))
+                typename _ForwardIt::value_type(JSystem::move(*first));
 #else
-            ::new (static_cast<void *>(JSystem::addressof(*d_first)) _T(JSystem::move(*first));
+            ::new (static_cast<void *>(JSystem::addressof(*d_first)) typename _ForwardIt::value_type(JSystem::move(*first));
 #endif
         }
         return first;
     }
-    
+
     template <class _ForwardIt>
     _ForwardIt uninitialized_default_construct(_ForwardIt first, _ForwardIt last) {
         for (; first != last; ++first) {
 #if __cplusplus > 201703L
-            ::new (const_cast<void *>(
-                static_cast<const volatile void *>(JSystem::addressof(*d_first)))) _T;
+            ::new (
+                const_cast<void *>(static_cast<const volatile void *>(JSystem::addressof(*first))))
+                typename _ForwardIt::value_type;
 #else
-            ::new (static_cast<void *>(JSystem::addressof(*d_first)) _T;
+            ::new (static_cast<void *>(JSystem::addressof(*first)) typename _ForwardIt::value_type;
 #endif
         }
         return first;
@@ -122,12 +126,13 @@ namespace JSystem {
 
     template <class _ForwardIt, class _Size>
     _ForwardIt uninitialized_default_construct_n(_ForwardIt first, _Size count) {
-        for (; n--; ++first) {
+        for (; count--; ++first) {
 #if __cplusplus > 201703L
-            ::new (const_cast<void *>(
-                static_cast<const volatile void *>(JSystem::addressof(*d_first)))) _T;
+            ::new (
+                const_cast<void *>(static_cast<const volatile void *>(JSystem::addressof(*first))))
+                typename _ForwardIt::value_type;
 #else
-            ::new (static_cast<void *>(JSystem::addressof(*d_first)) _T;
+            ::new (static_cast<void *>(JSystem::addressof(*first)) typename _ForwardIt::value_type;
 #endif
         }
         return first;
@@ -137,10 +142,11 @@ namespace JSystem {
     _ForwardIt uninitialized_value_construct(_ForwardIt first, _ForwardIt last) {
         for (; first != last; ++first) {
 #if __cplusplus > 201703L
-            ::new (const_cast<void *>(
-                static_cast<const volatile void *>(JSystem::addressof(*d_first)))) _T;
+            ::new (
+                const_cast<void *>(static_cast<const volatile void *>(JSystem::addressof(*first))))
+                typename _ForwardIt::value_type;
 #else
-            ::new (static_cast<void *>(JSystem::addressof(*d_first)) _T;
+            ::new (static_cast<void *>(JSystem::addressof(*first)) typename _ForwardIt::value_type;
 #endif
         }
         return first;
@@ -148,15 +154,16 @@ namespace JSystem {
 
     template <class _ForwardIt, class _Size>
     _ForwardIt uninitialized_value_construct_n(_ForwardIt first, _Size count) {
-        for (; n--; ++first) {
+        for (; count--; ++first) {
 #if __cplusplus > 201703L
-            ::new (const_cast<void *>(
-                static_cast<const volatile void *>(JSystem::addressof(*d_first)))) _T();
+            ::new (
+                const_cast<void *>(static_cast<const volatile void *>(JSystem::addressof(*first))))
+                typename _ForwardIt::value_type();
 #else
-            ::new (static_cast<void *>(JSystem::addressof(*d_first)) _T();
+            ::new (static_cast<void *>(JSystem::addressof(*first)) typename _ForwardIt::value_type();
 #endif
         }
         return first;
     }
 #endif
-}
+}  // namespace JSystem

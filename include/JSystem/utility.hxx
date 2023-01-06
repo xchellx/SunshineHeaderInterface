@@ -13,14 +13,28 @@ namespace JSystem {
     }
 #endif
 
-    template <typename _T> _T *copy(_T *begin, _T *end, _T *dst) {
-        while (begin != end) {
-            *dst++ = *begin++;
+    template <class InputIt, class OutputIt>
+    _GLIBCXX20_CONSTEXPR OutputIt copy(InputIt first, InputIt last, OutputIt d_first) {
+        for (; first != last; (void)++first, (void)++d_first) {
+            *d_first = *first;
         }
-        return dst;
+        return d_first;
     }
 
-    template <class _Tp> inline constexpr _Tp &&forward(typename remove_reference<_Tp>::type &t) noexcept {
+    template <class InputIt, class OutputIt, class UnaryPredicate>
+    _GLIBCXX20_CONSTEXPR OutputIt copy_if(InputIt first, InputIt last, OutputIt d_first,
+                                          UnaryPredicate pred) {
+        for (; first != last; ++first) {
+            if (pred(*first)) {
+                *d_first = *first;
+                ++d_first;
+            }
+        }
+        return d_first;
+    }
+
+    template <class _Tp>
+    inline constexpr _Tp &&forward(typename remove_reference<_Tp>::type &t) noexcept {
         return static_cast<_Tp &&>(t);
     }
 

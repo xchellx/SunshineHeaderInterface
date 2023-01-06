@@ -513,7 +513,7 @@ namespace JGadget {
             return ins.first->second;
         }
 
-        mapped_type &operator[](key_type &&key) const {
+        mapped_type &operator[](key_type &&key) {
             TPair<iterator, bool> ins = insert(value_type(key, mapped_type()));
             return ins.first->second;
         }

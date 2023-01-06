@@ -10,10 +10,12 @@
 #define __ppc__
 #endif
 
+#ifndef SMS_DEBUG
 #ifdef NDEBUG
 #define SMS_DEBUG 0
 #else
 #define SMS_DEBUG 1
+#endif
 #endif
 
 #include <Kuribo/sdk/kuribo_sdk.h>

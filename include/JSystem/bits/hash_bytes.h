@@ -18,13 +18,13 @@ namespace {
 
     inline std::size_t shift_mix(std::size_t v) { return v ^ (v >> 47); }
 #endif
-}
+}  // namespace
 
 namespace JSystem {
 #if __SIZEOF_SIZE_T__ == 4
 
     // Implementation of Murmur hash for 32-bit size_t.
-    size_t _Hash_bytes(const void *ptr, size_t len, size_t seed) {
+    inline size_t _Hash_bytes(const void *ptr, size_t len, size_t seed) {
         const size_t m  = 0x5bd1e995;
         size_t hash     = seed ^ len;
         const char *buf = static_cast<const char *>(ptr);
@@ -69,7 +69,7 @@ namespace JSystem {
     // N.B. This function should work on unsigned char, otherwise it does not
     // correctly implement the FNV-1a algorithm (see PR59406).
     // The existing behaviour is retained for backwards compatibility.
-    size_t _Fnv_hash_bytes(const void *ptr, size_t len, size_t hash) {
+    inline size_t _Fnv_hash_bytes(const void *ptr, size_t len, size_t hash) {
         const char *cptr = static_cast<const char *>(ptr);
         for (; len; --len) {
             hash ^= static_cast<size_t>(*cptr++);
@@ -81,7 +81,7 @@ namespace JSystem {
 #elif __SIZEOF_SIZE_T__ == 8
 
     // Implementation of Murmur hash for 64-bit size_t.
-    size_t _Hash_bytes(const void *ptr, size_t len, size_t seed) {
+    inline size_t _Hash_bytes(const void *ptr, size_t len, size_t seed) {
         static const size_t mul = (((size_t)0xc6a4a793UL) << 32UL) + (size_t)0x5bd1e995UL;
         const char *const buf   = static_cast<const char *>(ptr);
 
@@ -109,7 +109,7 @@ namespace JSystem {
     // N.B. This function should work on unsigned char, otherwise it does not
     // correctly implement the FNV-1a algorithm (see PR59406).
     // The existing behaviour is retained for backwards compatibility.
-    size_t _Fnv_hash_bytes(const void *ptr, size_t len, size_t hash) {
+    inline size_t _Fnv_hash_bytes(const void *ptr, size_t len, size_t hash) {
         const char *cptr = static_cast<const char *>(ptr);
         for (; len; --len) {
             hash ^= static_cast<size_t>(*cptr++);
@@ -121,7 +121,7 @@ namespace JSystem {
 #else
 
     // Dummy hash implementation for unusual sizeof(size_t).
-    size_t _Hash_bytes(const void *ptr, size_t len, size_t seed) {
+    inline size_t _Hash_bytes(const void *ptr, size_t len, size_t seed) {
         size_t hash      = seed;
         const char *cptr = reinterpret_cast<const char *>(ptr);
         for (; len; --len)
@@ -129,7 +129,7 @@ namespace JSystem {
         return hash;
     }
 
-    size_t _Fnv_hash_bytes(const void *ptr, size_t len, size_t seed) {
+    inline size_t _Fnv_hash_bytes(const void *ptr, size_t len, size_t seed) {
         return _Hash_bytes(ptr, len, seed);
     }
 
