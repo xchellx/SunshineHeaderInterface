@@ -49,6 +49,11 @@ namespace JGadget {
         struct const_iterator;
 
         struct iterator {
+            typedef _T value_type;
+            typedef ptrdiff_t difference_type;
+            typedef typename _Alloc::pointer pointer;
+            typedef typename _Alloc::const_pointer const_pointer;
+
             friend class TUnorderedMap;
             friend struct TUnorderedMap::const_iterator;
 
@@ -99,6 +104,11 @@ namespace JGadget {
         };
 
         struct const_iterator {
+            typedef _T value_type;
+            typedef ptrdiff_t difference_type;
+            typedef typename _Alloc::pointer pointer;
+            typedef typename _Alloc::const_pointer const_pointer;
+
             friend class TUnorderedMap;
             friend struct TUnorderedMap::iterator;
 
@@ -152,6 +162,11 @@ namespace JGadget {
         struct const_local_iterator;
 
         struct local_iterator {
+            typedef _T value_type;
+            typedef ptrdiff_t difference_type;
+            typedef typename _Alloc::pointer pointer;
+            typedef typename _Alloc::const_pointer const_pointer;
+
             friend class TUnorderedMap;
             friend struct TUnorderedMap::const_local_iterator;
 
@@ -185,6 +200,11 @@ namespace JGadget {
         };
 
         struct const_local_iterator {
+            typedef _T value_type;
+            typedef ptrdiff_t difference_type;
+            typedef typename _Alloc::pointer pointer;
+            typedef typename _Alloc::const_pointer const_pointer;
+
             friend class TUnorderedMap;
             friend struct TUnorderedMap::local_iterator;
 

@@ -28,6 +28,11 @@ namespace JGadget {
         struct const_iterator;
 
         struct iterator {
+            typedef _T value_type;
+            typedef ptrdiff_t difference_type;
+            typedef typename _Alloc::pointer pointer;
+            typedef typename _Alloc::const_pointer const_pointer;
+
             friend class TVector;
             friend struct TVector::const_iterator;
 
@@ -98,6 +103,11 @@ namespace JGadget {
         };
 
         struct const_iterator {
+            typedef _T value_type;
+            typedef ptrdiff_t difference_type;
+            typedef typename _Alloc::pointer pointer;
+            typedef typename _Alloc::const_pointer const_pointer;
+
             friend class TVector;
             friend struct TVector::iterator;
 
