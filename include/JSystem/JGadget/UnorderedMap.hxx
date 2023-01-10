@@ -425,7 +425,7 @@ namespace JGadget {
 #endif
 
         template <class... Args> TPair<iterator, bool> emplace(Args &&...args) {
-            value_type value = value_type(forward<Args>(args)...);
+            value_type value = value_type(JSystem::forward<Args>(args)...);
 
             size_type n = bucket(value.first);
             if (TNode_ *p = find_node(mBuckets[n], value.first))
