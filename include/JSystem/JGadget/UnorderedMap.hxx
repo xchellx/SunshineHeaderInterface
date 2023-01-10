@@ -247,7 +247,6 @@ namespace JGadget {
                                const allocator_type &alloc = allocator_type())
             : mNodeAllocator(alloc), mHasher(hf), mKeyEqual(ke), mBuckets(nullptr),
               mBucketCount(buckets), mElementCount(0), mMaxLoadFactor(1.0f) {
-            OSReport("Constructing new map with %lu buckets\n", buckets);
             mBuckets = allocate_buckets(buckets);
         }
 
@@ -487,7 +486,6 @@ namespace JGadget {
         mapped_type &operator[](const key_type &key) {
             size_type n = bucket_index(key, mBucketCount);
             TNode_ *p   = find_node(mBuckets[n], key);
-            OSReport("Found [p]? %d\n", p ? 1 : 0);
             if (!p)
                 return insert_bucket(value_type(key, mapped_type()), n)->second;
             return (p->mValue).second;
@@ -496,7 +494,6 @@ namespace JGadget {
         mapped_type &operator[](key_type &&key) {
             size_type n = bucket_index(key, mBucketCount);
             TNode_ *p   = find_node(mBuckets[n], key);
-            OSReport("Found [p]? %d\n", p ? 1 : 0);
             if (!p)
                 return insert_bucket(value_type(key, mapped_type()), n)->second;
             return (p->mValue).second;
@@ -535,7 +532,6 @@ namespace JGadget {
             if (count < next)
                 count = next;
 
-            OSReport("Rehashing!\n");
             TNode_ **nbkts = allocate_buckets(count);
 
             for (size_type i = 0; i < mBucketCount; ++i) {
@@ -620,7 +616,6 @@ namespace JGadget {
 
         TNode_ **allocate_buckets(size_type n) {
             bucket_allocator_t alloc(mNodeAllocator);
-            OSReport("Number of buckets allocating: %lu\n", n);
             TNode_ **p = alloc.allocate(n + 1);  // Add 1 for sentinel
             memset(p, 0, sizeof(p) * n);
             p[n] = reinterpret_cast<TNode_ *>(0x1000);
