@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Dolphin/types.h>
 #include <Dolphin/math.h>
+#include <Dolphin/types.h>
 
 #include <SMS/assert.h>
 
@@ -9,9 +9,9 @@
 #include <JSystem/memory.hxx>
 #include <JSystem/utility.hxx>
 
-#include <JSystem/bits/c++config.h>
 #include <JSystem/JGadget/Allocator.hxx>
 #include <JSystem/JGadget/Node.hxx>
+#include <JSystem/bits/c++config.h>
 
 namespace JGadget {
     template <class _T, class _Alloc = TAllocator<_T>> class TVector {
@@ -41,7 +41,8 @@ namespace JGadget {
         private:
             explicit _GLIBCXX20_CONSTEXPR iterator(pointer node) : mCurrent(node) {}
             // For internal conversion (erase)
-            _GLIBCXX20_CONSTEXPR iterator(const const_iterator &iter) : mCurrent(const_cast<pointer>(iter.mCurrent)) {}
+            _GLIBCXX20_CONSTEXPR iterator(const const_iterator &iter)
+                : mCurrent(const_cast<pointer>(iter.mCurrent)) {}
 
         public:
             _GLIBCXX20_CONSTEXPR bool operator==(const iterator &rhs) const {
@@ -64,7 +65,7 @@ namespace JGadget {
 
             _GLIBCXX20_CONSTEXPR iterator &operator++() {
                 ++mCurrent;
-                return *this; 
+                return *this;
             }
 
             _GLIBCXX20_CONSTEXPR iterator operator++(int) {
@@ -177,23 +178,24 @@ namespace JGadget {
         };
 
         _GLIBCXX20_CONSTEXPR TVector() _GLIBCXX_NOEXCEPT_IF(_GLIBCXX_NOEXCEPT_IF(allocator_type()))
-            : mAllocator(), mBegin(nullptr), mEnd(nullptr), mCapacity(0), mGrowthFactor(2.0f), mNextResize(0) {}
+            : mAllocator(), mBegin(nullptr), mEnd(nullptr), mCapacity(0), mGrowthFactor(2.0f),
+              mNextResize(0) {}
 
         explicit _GLIBCXX20_CONSTEXPR TVector(const allocator_type &allocator) _GLIBCXX_NOEXCEPT
-            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), mGrowthFactor(2.0f), mNextResize(0) {}
+            : TVector() {
+            mAllocator = allocator;
+        }
 
 #if __cplusplus >= 201103L
         _GLIBCXX20_CONSTEXPR TVector(size_type count, const value_type &value,
                                      const allocator_type &allocator = allocator_type())
-            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), mGrowthFactor(2.0f),
-              mNextResize(0) {
+            : TVector(allocator) {
             insert(end(), count, value);
         }
 #else
         explicit TVector(size_type count, const value_type &value = value_type(),
                          const allocator_type &allocator = allocator_type())
-            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), mGrowthFactor(2.0f),
-              mNextResize(0) {
+            : TVector(allocator) {
             insert(end(), count, value);
         }
 #endif
@@ -201,20 +203,18 @@ namespace JGadget {
 #if __cplusplus >= 201402L
         explicit _GLIBCXX20_CONSTEXPR TVector(size_type count,
                                               const allocator_type &allocator = allocator_type())
-            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), mGrowthFactor(2.0f),
-              mNextResize(0) {
+            : TVector(allocator) {
             insert(end(), count, value_type());
         }
 #else
-        explicit TVector(size_type count)
-            : mAllocator(), mBegin(nullptr), mEnd(nullptr), mCapacity(0), mGrowthFactor(2.0f),
-              mNextResize(0) {
+        explicit TVector(size_type count) : TVector(allocator) {
             insert(end(), count, value_type());
         }
 #endif
 
         _GLIBCXX20_CONSTEXPR TVector(const TVector &other)
-            : mAllocator(other.mAllocator), mGrowthFactor(other.mGrowthFactor), mNextResize(other.mNextResize) {
+            : mAllocator(other.mAllocator), mGrowthFactor(other.mGrowthFactor),
+              mNextResize(other.mNextResize) {
             for (auto &i : other) {
                 insert(end(), i);
             }
@@ -222,21 +222,24 @@ namespace JGadget {
 
 #if __cplusplus >= 201103L
         _GLIBCXX20_CONSTEXPR TVector(const TVector &other, const allocator_type &allocator)
-            : mAllocator(allocator), mGrowthFactor(other.mGrowthFactor), mNextResize(other.mNextResize) {
+            : mAllocator(allocator), mGrowthFactor(other.mGrowthFactor),
+              mNextResize(other.mNextResize) {
             for (auto &i : other) {
                 insert(end(), i);
             }
         }
 
         _GLIBCXX20_CONSTEXPR TVector(TVector &&other)
-            : mAllocator(other.mAllocator), mGrowthFactor(other.mGrowthFactor), mNextResize(other.mNextResize) {
+            : mAllocator(other.mAllocator), mGrowthFactor(other.mGrowthFactor),
+              mNextResize(other.mNextResize) {
             for (auto &i : other) {
                 insert(end(), i);
             }
         }
 
         _GLIBCXX20_CONSTEXPR TVector(TVector &&other, const allocator_type &allocator)
-            : mAllocator(allocator), mGrowthFactor(other.mGrowthFactor), mNextResize(other.mNextResize) {
+            : mAllocator(allocator), mGrowthFactor(other.mGrowthFactor),
+              mNextResize(other.mNextResize) {
             for (auto &i : other) {
                 insert(end(), i);
             }
@@ -244,8 +247,7 @@ namespace JGadget {
 
         _GLIBCXX20_CONSTEXPR TVector(JSystem::initializer_list<value_type> list,
                                      const allocator_type &allocator = allocator_type())
-            : mAllocator(allocator), mBegin(nullptr), mEnd(nullptr), mCapacity(0), mGrowthFactor(2.0f),
-            mNextResize(0) {
+            : TVector(allocator) {
             for (auto &i : list) {
                 insert(end(), i);
             }
@@ -254,7 +256,7 @@ namespace JGadget {
 
         _GLIBCXX20_CONSTEXPR ~TVector() { clear(); }
 
-        _GLIBCXX20_CONSTEXPR TVector &operator=(const TVector &other) { 
+        _GLIBCXX20_CONSTEXPR TVector &operator=(const TVector &other) {
             clear();
             for (const auto &i : other) {
                 insert(end(), i);
@@ -289,7 +291,8 @@ namespace JGadget {
 
         _GLIBCXX20_CONSTEXPR reference at(size_type index) {
             if (index >= size()) {
-                OSPanic(__FILE__, __LINE__, "Attempted OOB access to Vector of size %lu (index %lu)!", size(), index);
+                OSPanic(__FILE__, __LINE__,
+                        "Attempted OOB access to Vector of size %lu (index %lu)!", size(), index);
                 __OSUnhandledException(6, OSGetCurrentContext(), 0);
             }
             return mBegin[index];
@@ -297,7 +300,8 @@ namespace JGadget {
 
         _GLIBCXX20_CONSTEXPR const_reference at(size_type index) const {
             if (index >= size()) {
-                OSPanic(__FILE__, __LINE__, "Attempted OOB access to Vector of size %lu (index %lu)!", size(), index);
+                OSPanic(__FILE__, __LINE__,
+                        "Attempted OOB access to Vector of size %lu (index %lu)!", size(), index);
                 __OSUnhandledException(6, OSGetCurrentContext(), 0);
             }
             return mBegin[index];
@@ -323,7 +327,9 @@ namespace JGadget {
         }
 #endif
 
-        _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR bool empty() const _GLIBCXX_NOEXCEPT { return mBegin == mEnd; }
+        _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR bool empty() const _GLIBCXX_NOEXCEPT {
+            return mBegin == mEnd;
+        }
         _GLIBCXX20_CONSTEXPR void clear() _GLIBCXX_NOEXCEPT { erase(*begin(), *end()); }
 
         _GLIBCXX20_CONSTEXPR size_type capacity() const _GLIBCXX_NOEXCEPT { return mCapacity; }
@@ -339,11 +345,14 @@ namespace JGadget {
             return const_iterator(mBegin);
         }
         _GLIBCXX20_CONSTEXPR iterator end() _GLIBCXX_NOEXCEPT { return iterator(mEnd); }
-        _GLIBCXX20_CONSTEXPR const_iterator end() const _GLIBCXX_NOEXCEPT { return const_iterator(mEnd);
-    }
+        _GLIBCXX20_CONSTEXPR const_iterator end() const _GLIBCXX_NOEXCEPT {
+            return const_iterator(mEnd);
+        }
 
 #if __cplusplus >= 201103L
-        _GLIBCXX20_CONSTEXPR const_iterator cbegin() const _GLIBCXX_NOEXCEPT { return const_iterator(mBegin); }
+        _GLIBCXX20_CONSTEXPR const_iterator cbegin() const _GLIBCXX_NOEXCEPT {
+            return const_iterator(mBegin);
+        }
         _GLIBCXX20_CONSTEXPR const_iterator cend() const _GLIBCXX_NOEXCEPT {
             return const_iterator(mEnd);
         }
@@ -357,10 +366,8 @@ namespace JGadget {
             return erase(*iterator(a), *iterator(b));
         }
 #else
-    iterator erase(iterator a) { return erase(*a, *(a + 1)); }
-    iterator erase(iterator a, iterator b) {
-        return erase(*a, *b);
-    }
+        iterator erase(iterator a) { return erase(*a, *(a + 1)); }
+        iterator erase(iterator a, iterator b) { return erase(*a, *b); }
 #endif
 
     private:
@@ -429,8 +436,7 @@ namespace JGadget {
         _GLIBCXX20_CONSTEXPR void pop_back() { erase(end()); }
 
 #if __cplusplus >= 201103L
-        template <class... _Args>
-        _GLIBCXX20_CONSTEXPR void emplace_back(_Args &&...args) {
+        template <class... _Args> _GLIBCXX20_CONSTEXPR void emplace_back(_Args &&...args) {
             emplace(end(), JSystem::forward<_Args>(args)...);
         }
 #endif
@@ -443,8 +449,8 @@ namespace JGadget {
             if (!reservedBuf)
                 return;
 
-            pointer b          = mBegin;
-            pointer e          = mEnd;
+            pointer b      = mBegin;
+            pointer e      = mEnd;
             size_type size = e - b;
 
             auto resBufIter = reservedBuf;
@@ -500,7 +506,7 @@ namespace JGadget {
             if (count == 0)
                 return at;
 
-            size_type vsize = size();
+            size_type vsize     = size();
             size_type vcapacity = capacity();
 
             if (vcapacity < count + vsize) {
@@ -577,7 +583,7 @@ namespace JGadget {
     };
 
     template <class _T, class _Alloc>
-    _GLIBCXX20_CONSTEXPR bool operator==(const TVector<_T, _Alloc>& lhs,
+    _GLIBCXX20_CONSTEXPR bool operator==(const TVector<_T, _Alloc> &lhs,
                                          const TVector<_T, _Alloc> &rhs) {
         if (lhs.size() != rhs.size())
             return false;
