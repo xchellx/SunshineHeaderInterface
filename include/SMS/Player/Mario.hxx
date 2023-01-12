@@ -1209,7 +1209,7 @@ public:
     u16 _2B8;
     u16 mOBTimer;  // 0x02BA
     f32 _2BC;
-    u32 _2C0;
+    TLiveActor *mPriorityCollisionOwner;
     Mtx _2C4;
     f32 _2F4;
     f32 _2F8;

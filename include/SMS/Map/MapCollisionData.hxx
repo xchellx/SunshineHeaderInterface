@@ -33,7 +33,7 @@ public:
                                const TBGCheckData **);
     static f32 checkRoofList(f32 x, f32 y, f32 z, u8 ignoreFlags, const TBGCheckList *,
                              const TBGCheckData **);
-    static size_t checkWallList(const TBGCheckList *, const TBGWallCheckRecord *);
+    static size_t checkWallList(const TBGCheckList *, TBGWallCheckRecord *);
 
     f32 mAreaSizeX;                          // 0x0000
     f32 mAreaSizeZ;                          // 0x0004
