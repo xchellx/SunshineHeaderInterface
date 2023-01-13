@@ -48,10 +48,10 @@ public:
     TBGCheckData *mCollisionTris;            // 0x0028
     TBGCheckList *mCollisionLists;           // 0x002C
     TBGCheckListWarp *mCollisionListWarps;   // 0x0030
-    u32 _34;                                 // 0x0034
-    size_t mCheckListCount;                  // 0x0038
-    size_t mCheckMoveCount;                  // 0x003C
-    u16 _40;                                 // 0x0040
+    size_t mCheckDataCount;                  // 0x0034
+    size_t mCheckListStaticCount;            // 0x0038
+    size_t mCheckListMoveRemaining;          // 0x003C
+    u16 mCheckListWarpCount;                 // 0x0040
     u16 mEntries[256];                       // 0x0042
     u16 mEntryID;
     u32 _244;

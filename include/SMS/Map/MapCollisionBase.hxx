@@ -6,6 +6,12 @@
 #include <SMS/Strategic/LiveActor.hxx>
 #include <SMS/Map/BGCheck.hxx>
 
+enum CollisionType {
+    COLLISION_STATIC,
+    COLLISION_MOVE,
+    COLLISION_WARP
+};
+
 class TMapCollisionBase {
 public:
     TMapCollisionBase() {}
