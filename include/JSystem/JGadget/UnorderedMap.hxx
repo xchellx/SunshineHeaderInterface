@@ -517,7 +517,10 @@ namespace JGadget {
         }
 
 #if __cplusplus > 201703L
-        bool contains(const key_type &key) { return find_node(key); }
+        bool contains(const key_type &key) {
+            size_type n = bucket(key);
+            return find_node(mBuckets[n], key) != nullptr;
+        }
 #endif
 
         TPair<iterator, iterator> equal_range(const key_type &key) {
