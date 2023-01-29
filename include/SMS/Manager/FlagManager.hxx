@@ -108,16 +108,7 @@ public:
         s32 mBJRBalloonCount;      // 0x00F8
         s32 _00;                   // 0x00FC
         s32 mShadowMarioEvent;     // 0x0100
-        u32 _01[0xF0 / 4];         // 0x0104
-        u8 mCustomShineIDs[0x80];  // 0x01F4
-        // TODO: RESIZE BASED ON `SMS_MAX_SHINES'
-        struct {
-            bool mIsGamePlus : 1;  // 0x0274
-            u8 mHUDElement   : 4;
-            u32 _00          : 27;
-            u32 _01          : 32;
-            u32 _02          : 32;
-        } CustomFlags;
+        u32 _01[0x180 / 4];        // 0x0104;
     } Type6Flag;
 
     struct {
