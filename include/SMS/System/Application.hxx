@@ -65,6 +65,7 @@ public:
 void SetupThreadFuncLogo(void *);
 void SetupThreadFuncBoot(void *);
 
+void *SMSLoadArchive(const char *path, void *, u32, JKRHeap *heap);
 f32 SMSGetAnmFrameRate();
 f32 SMSGetVSyncTimesPerSec();
 
