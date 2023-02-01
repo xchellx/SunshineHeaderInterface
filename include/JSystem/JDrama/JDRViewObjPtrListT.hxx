@@ -20,6 +20,6 @@ namespace JDrama {
         virtual void loadSuper(JSUMemoryInputStream &stream);
         virtual void loadAfterSuper();
 
-        JGadget::TList_pointer_void mViewObjList;
+        JGadget::TList<void *> mViewObjList;  // TODO: revert to TList_pointer_void when insert register bug is fixed
     };
 }
