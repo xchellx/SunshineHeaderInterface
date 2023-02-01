@@ -3,9 +3,8 @@
 #include <Dolphin/types.h>
 
 constexpr size_t ObjDataTableSize = 360;
-const u8 gLiveManagerName[]{0x96, 0xD8, 0x83, 0x7D, 0x83, 0x6C, 0x81, 0x5B,
-                            0x83, 0x57, 0x83, 0x83, 0x81, 0x5B, 0x00, 0x00};
-const u8 gUnkManagerName[]{0x93, 0x47, 0x83, 0x4F, 0x83, 0x8B, 0x81, 0x5B, 0x83, 0x76, 0x00, 0x00};
+const char *gLiveManagerName      = "\x96\xD8\x83\x7D\x83\x6C\x81\x5B\x83\x57\x83\x83\x81\x5B\x00";
+const char *gUnkManagerName       = "\x93\x47\x83\x4F\x83\x8B\x81\x5B\x83\x76\x00";
 
 enum MapColType { MAP_STATIC, MAP_MOVE, MAP_WARP };
 
