@@ -50,10 +50,7 @@ public:
     TGameSequence mNextScene;                                               // 0x0012
     u32 mCutSceneID;                                                        // 0x0018
     JDrama::TDisplay *mDisplay;                                             // 0x001C
-    TMarioGamePad *mGamePad1;                                               // 0x0020
-    TMarioGamePad *mGamePad2;                                               // 0x0024
-    TMarioGamePad *mGamePad3;                                               // 0x0028
-    TMarioGamePad *mGamePad4;                                               // 0x002C
+    TMarioGamePad *mGamePads[4];                                            // 0x0020
     TNameRefPtrAryT<TNameRefAryT<TScenarioArchiveName>> *mStageArchiveAry;  // 0x0030
     TSMSFader *mFader;                                                      // 0x0034
     u32 _38;
