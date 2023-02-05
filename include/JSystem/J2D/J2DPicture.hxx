@@ -13,6 +13,8 @@ enum J2DBinding {
     BindingLeft   = (1 << 3),
 };
 
+enum J2DMirrorFlag { MirrorX = (1 << 0), MirrorY = (1 << 1) };
+
 enum J2DWrapMode {
     WrapNone,
     WrapClamp,
@@ -25,8 +27,10 @@ public:
     J2DPicture(u32 magic, const JUTRect &rect)
         : J2DPane(18, magic, rect), mPalette(nullptr), mColorMask({255, 255, 255, 255}),
           mColorOverlay({0, 0, 0, 0}), mTextureCount(0), mVertexColors() {
-        mTypeMagic = 'PIC1';
-        mBinding   = BindingBottom | BindingTop | BindingRight | BindingLeft;
+        mTypeMagic   = 'PIC1';
+        mBinding     = BindingBottom | BindingTop | BindingRight | BindingLeft;
+        mMirrorFlags = 0;
+        mRotate90    = false;
         setBlendKonstColor();
         setBlendKonstAlpha();
     }
@@ -61,8 +65,8 @@ public:
     f32 _120;
     JUTPalette *mPalette;
     u32 mBinding;
-    u32 _12C;
-    u8 _130;
+    u32 mMirrorFlags;
+    bool mRotate90;
     u32 _134;
     u32 _138;
     JUtility::TColor mColorMask;
