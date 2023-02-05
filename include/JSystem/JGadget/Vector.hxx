@@ -330,7 +330,7 @@ namespace JGadget {
         _GLIBCXX_NODISCARD _GLIBCXX20_CONSTEXPR bool empty() const _GLIBCXX_NOEXCEPT {
             return mBegin == mEnd;
         }
-        _GLIBCXX20_CONSTEXPR void clear() _GLIBCXX_NOEXCEPT { erase(*begin(), *end()); }
+        _GLIBCXX20_CONSTEXPR void clear() _GLIBCXX_NOEXCEPT { erase(&(*begin()), &(*end())); }
 
         _GLIBCXX20_CONSTEXPR size_type capacity() const _GLIBCXX_NOEXCEPT { return mCapacity; }
         _GLIBCXX20_CONSTEXPR size_type max_size() const _GLIBCXX_NOEXCEPT {
@@ -366,46 +366,47 @@ namespace JGadget {
             return erase(*iterator(a), *iterator(b));
         }
 #else
-        iterator erase(iterator a) { return erase(*a, *(a + 1)); }
-        iterator erase(iterator a, iterator b) { return erase(*a, *b); }
+        iterator erase(iterator a) { return erase(&(*a), &(*(a + 1))); }
+        iterator erase(iterator a, iterator b) { return erase(&(*a, *b);
+        }
 #endif
 
     private:
         _GLIBCXX20_CONSTEXPR iterator erase(pointer a, pointer b) {
-            pointer e = copy(b, mEnd, a);
+            pointer e = JSystem::copy(b, mEnd, a);
             for (pointer i = e; i != mEnd; ++i) {
                 mAllocator.destroy(i);
                 mAllocator.deallocate(i, 1);
             }
             mEnd = e;
-            return a;
+            return iterator(a);
         }
 
     public:
         _GLIBCXX20_CONSTEXPR iterator insert(const_iterator at, value_type &&item) {
-            return insert(*at, 1, item);
+            return insert(&(*iterator(at)), 1, item);
         }
         _GLIBCXX20_CONSTEXPR iterator insert(const_iterator at, const_reference item) {
-            return insert(*at, 1, item);
+            return insert(&(*iterator(at)), 1, item);
         }
         _GLIBCXX20_CONSTEXPR iterator insert(const_iterator at, size_type count,
                                              const_reference item) {
-            return insert(*at, count, item);
+            return insert(&(*iterator(at)), count, item);
         }
         _GLIBCXX20_CONSTEXPR iterator insert(const_iterator at, size_type count,
                                              value_type &&item) {
             value_type tmp = item;
-            return insert(*at, count, tmp);
+            return insert(&(*iterator(at)), count, tmp);
         }
 
     private:
         _GLIBCXX20_CONSTEXPR iterator insert(pointer at, size_type count, const_reference item) {
-            auto *ofs  = at - mBegin;
+            auto ofs   = at - mBegin;
             auto *data = InsertRaw(at, count);
-            if (data != end()) {
-                uninitialized_fill_n(data, count, item);
+            if (data != &(*end())) {
+                JSystem::uninitialized_fill_n(data, count, item);
             }
-            return mBegin + ofs;
+            return iterator(mBegin + ofs);
         }
 
     public:
@@ -520,13 +521,21 @@ namespace JGadget {
                 // Copy construct the values before the insertion
                 pointer nbiter = nbuffer;
                 for (pointer i = mBegin; i != at; ++i) {
+#if __cplusplus <= 201703L
                     mAllocator.construct(nbiter++, *i);
+#else
+                    mAllocator.construct_at(nbiter++, *i);
+#endif
                 }
 
                 // Copy construct the values after the insertion
                 pointer naiter = nbiter + count;
                 for (pointer i = at; i != mEnd; ++i) {
+#if __cplusplus <= 201703L
                     mAllocator.construct(naiter++, *i);
+#else
+                    mAllocator.construct_at(naiter++, *i);
+#endif
                 }
 
                 // Destroy old buffer
@@ -547,7 +556,11 @@ namespace JGadget {
                 // Copy construct the values after the end
                 pointer newiter = mEnd;
                 for (pointer i = mEnd - count; i != mEnd; ++i) {
+#if __cplusplus <= 201703L
                     mAllocator.construct(newiter++, *i);
+#else
+                    mAllocator.construct_at(newiter++, *i);
+#endif
                 }
 
                 // Copy new values into inserted space? (Makes no sense)
@@ -557,12 +570,16 @@ namespace JGadget {
                 }
 
                 for (pointer i = at; i != mEnd - count; ++i) {
-                    mAllocator.destroy(*i);
+                    mAllocator.destroy(i);
                 }
             } else {
                 pointer insertIter = ieiter;
                 for (pointer i = at; i != mEnd; ++i) {
+#if __cplusplus <= 201703L
                     mAllocator.construct(insertIter++, *i);
+#else
+                    mAllocator.construct_at(insertIter++, *i);
+#endif
                 }
 
                 // Destroy old elements
