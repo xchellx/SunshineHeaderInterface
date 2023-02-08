@@ -669,13 +669,22 @@ namespace JGadget {
         return false;
     }
 #endif
-
-    class TList_pointer_void : public TList<void *> {
+    using void_item = void*;
+    class TList_pointer_void : public TAllocator<void_item> {
     public:
-        iterator insert(iterator iterator, void *const &node);
+        void insert(TList<void_item, TAllocator>::iterator iterator, const void_item& node);
     };
 
     template <typename _T> class TList_pointer : public TList_pointer_void {
+    public:
+        class iterator {
+        public:
+            iterator(_T* node) : mCurrent(node) {}
+            iterator(const iterator& iter) : mCurrent(iter.mCurrent) {}
+
+            _T* mCurrent;
+        };
+
         iterator end();
         iterator insert(iterator iterator, const _T &node);
     };

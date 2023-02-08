@@ -76,6 +76,7 @@ namespace JGadget {
 
     private:
         u8 _00;
+        u8 _04;
     };
 
     template <typename T> inline bool operator==(const TAllocator<T> &, const TAllocator<T> &) {
