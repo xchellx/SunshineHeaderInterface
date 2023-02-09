@@ -670,9 +670,9 @@ namespace JGadget {
     }
 #endif
     using void_item = void*;
-    class TList_pointer_void : public TAllocator<void_item> {
+    class TList_pointer_void : JGadget::TList<void_item> {
     public:
-        void insert(TList<void_item, TAllocator>::iterator iterator, const void_item& node);
+        iterator insert(iterator iterator, const void_item& node);
     };
 
     template <typename _T> class TList_pointer : public TList_pointer_void {
