@@ -504,13 +504,13 @@ namespace JGadget {
             return p ? 1 : 0;
         }
 
-        iterator &find(const key_type &key) {
+        iterator find(const key_type &key) {
             size_type n = bucket(key);
             TNode_ *p   = find_node(mBuckets[n], key);
             return p ? iterator(p, mBuckets + n) : end();
         }
 
-        const_iterator &find(const key_type &key) const {
+        const_iterator find(const key_type &key) const {
             size_type n = bucket(key);
             TNode_ *p   = find_node(mBuckets[n], key);
             return p ? const_iterator(p, mBuckets + n) : end();
