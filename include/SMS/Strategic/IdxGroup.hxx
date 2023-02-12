@@ -12,6 +12,4 @@ public:
     virtual ~IdxGroup();
 
     virtual void loadSuper(JSUMemoryInputStream &stream) override;
-
-    JGadget::TList_pointer<THitActor *> mHitActorList;
 };

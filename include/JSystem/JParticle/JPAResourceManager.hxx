@@ -22,4 +22,4 @@ public:
     JPATextureResource *mTextureResource;
 };
 
-JPAResourceManager *gpResourceManager;
+extern JPAResourceManager *gpResourceManager;
