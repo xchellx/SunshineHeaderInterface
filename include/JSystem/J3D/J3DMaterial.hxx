@@ -2,11 +2,14 @@
 
 #include <Dolphin/MTX.h>
 #include <Dolphin/types.h>
+#include <JSystem/J3D/J3DMaterial.hxx>
 #include <JSystem/J3D/J3DColor.hxx>
 #include <JSystem/J3D/J3DPacket.hxx>
 #include <JSystem/J3D/J3DShape.hxx>
 #include <JSystem/J3D/J3DTexture.hxx>
 #include <JSystem/JSupport/JSUInputStream.hxx>
+
+class J3DTevBlock;
 
 class J3DPEBlock {
 public:
@@ -36,6 +39,7 @@ struct J3DTevStage {
     u8 mAlphaOp;
     u8 _06;
     u8 _07;
+    J3DTevBlock *mTevBlock;
 };
 
 struct J3DTevSwapModeInfo {};
