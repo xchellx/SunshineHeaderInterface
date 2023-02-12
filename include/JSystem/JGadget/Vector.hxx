@@ -207,14 +207,14 @@ namespace JGadget {
             insert(end(), count, value_type());
         }
 #else
-        explicit TVector(size_type count) : TVector(allocator) {
+        explicit TVector(size_type count) : TVector(allocator_type()) {
             insert(end(), count, value_type());
         }
 #endif
 
-        _GLIBCXX20_CONSTEXPR TVector(const TVector &other)
-            : mAllocator(other.mAllocator), mGrowthFactor(other.mGrowthFactor),
-              mNextResize(other.mNextResize) {
+        _GLIBCXX20_CONSTEXPR TVector(const TVector &other) : TVector(other.mAllocator) {
+            mGrowthFactor = other.mGrowthFactor;
+            mNextResize   = other.mNextResize;
             for (auto &i : other) {
                 insert(end(), i);
             }
@@ -222,24 +222,26 @@ namespace JGadget {
 
 #if __cplusplus >= 201103L
         _GLIBCXX20_CONSTEXPR TVector(const TVector &other, const allocator_type &allocator)
-            : mAllocator(allocator), mGrowthFactor(other.mGrowthFactor),
-              mNextResize(other.mNextResize) {
+            : TVector(allocator) {
+            mGrowthFactor = other.mGrowthFactor;
+            mNextResize   = other.mNextResize;
             for (auto &i : other) {
                 insert(end(), i);
             }
         }
 
-        _GLIBCXX20_CONSTEXPR TVector(TVector &&other)
-            : mAllocator(other.mAllocator), mGrowthFactor(other.mGrowthFactor),
-              mNextResize(other.mNextResize) {
+        _GLIBCXX20_CONSTEXPR TVector(TVector &&other) : TVector(other.mAllocator) {
+            mGrowthFactor = other.mGrowthFactor;
+            mNextResize   = other.mNextResize;
             for (auto &i : other) {
                 insert(end(), i);
             }
         }
 
         _GLIBCXX20_CONSTEXPR TVector(TVector &&other, const allocator_type &allocator)
-            : mAllocator(allocator), mGrowthFactor(other.mGrowthFactor),
-              mNextResize(other.mNextResize) {
+            : TVector(allocator) {
+            mGrowthFactor = other.mGrowthFactor;
+            mNextResize   = other.mNextResize;
             for (auto &i : other) {
                 insert(end(), i);
             }
