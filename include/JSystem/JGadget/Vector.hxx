@@ -375,12 +375,8 @@ namespace JGadget {
 
     private:
         _GLIBCXX20_CONSTEXPR iterator erase(pointer a, pointer b) {
-            pointer e = JSystem::copy(b, mEnd, a);
-            for (pointer i = e; i != mEnd; ++i) {
-                mAllocator.destroy(i);
-                mAllocator.deallocate(i, 1);
-            }
-            mEnd = e;
+            DestroyElement_(a, b);
+            mEnd = JSystem::copy(b, mEnd, a);
             return iterator(a);
         }
 
