@@ -19,7 +19,7 @@ public:
     static void *getGlbResource(const char *, JKRFileLoader *);
     static u32 getResSize(void *resource, JKRFileLoader *);
     static void *findVolume(const char **);
-    static JKRArchive *findFirstFile(const char *);
+    static JKRArcFinder *findFirstFile(const char *);
     static u8 *fetchVolumeName(u8 *, u32, const char *);
 
     JSUPtrLink mPtrLink2;  // _18
