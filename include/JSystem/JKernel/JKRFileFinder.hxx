@@ -6,6 +6,7 @@ class JKRArchive;
 
 class JKRFileFinder {
 public:
+    u32 _0;
     u32 _4;
     u16 _8;
     u16 _A;
@@ -16,11 +17,10 @@ public:
 class JKRArcFinder : public JKRFileFinder {
 public:
     JKRArcFinder(JKRArchive *, u32, u32);
-    virtual ~JKRArcFinder();
+    virtual ~JKRArcFinder() override;
 
     virtual bool findNextFile();
 
-    u32 _0C;
     u8 _10;
     u8 _11;
     u8 _12;                // padding?
