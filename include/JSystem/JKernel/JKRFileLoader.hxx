@@ -2,6 +2,7 @@
 
 #include <Dolphin/types.h>
 #include <JSystem/JKernel/JKRDisposer.hxx>
+#include <JSystem/JKernel/JKRFileFinder.hxx>
 #include <JSystem/JSupport/JSUList.hxx>
 
 class JKRArchive;
