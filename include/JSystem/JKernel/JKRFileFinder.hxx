@@ -6,11 +6,11 @@ class JKRArchive;
 
 class JKRFileFinder {
 public:
-    virtual ~JKRFileFinder();
-
     u32 _4;
     u16 _8;
     u16 _A;
+
+    virtual ~JKRFileFinder();
 };
 
 class JKRArcFinder : public JKRFileFinder {
