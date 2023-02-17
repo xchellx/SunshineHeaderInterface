@@ -371,7 +371,7 @@ namespace JGadget {
         const_local_iterator cend(size_type bucket) const { return const_local_iterator(nullptr); }
 #endif
 
-        size_type bucket_count() const { return mBucketCount - 1; }
+        size_type bucket_count() const { return mBucketCount; }
 
         size_type max_bucket_count() const { return difference_type(-1) / sizeof(difference_type); }
 
@@ -484,7 +484,7 @@ namespace JGadget {
         }
 
         mapped_type &operator[](const key_type &key) {
-            size_type n = bucket_index(key, mBucketCount);
+            size_type n = bucket(key);
             TNode_ *p   = find_node(mBuckets[n], key);
             if (!p)
                 return insert_bucket(value_type(key, mapped_type()), n)->second;
@@ -492,7 +492,7 @@ namespace JGadget {
         }
 
         mapped_type &operator[](key_type &&key) {
-            size_type n = bucket_index(key, mBucketCount);
+            size_type n = bucket(key);
             TNode_ *p   = find_node(mBuckets[n], key);
             if (!p)
                 return insert_bucket(value_type(key, mapped_type()), n)->second;
