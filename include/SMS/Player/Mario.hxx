@@ -1079,7 +1079,9 @@ public:
     u16 mAccelerationDirection;  // 0x0090
     u16 _92;                     // padding?
     TVec3s mAngle;               // 0x0094
-    JGeometry::TVec3<u16> _9A;
+    s16 mModelAngleY;            // 0x009A
+    s16 _9C;
+    s16 _9E;
     u16 _A0;
     TVec3f mSpeed;      // 0x00A4
     f32 mForwardSpeed;  // 0x00B0
