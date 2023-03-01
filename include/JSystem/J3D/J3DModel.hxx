@@ -94,7 +94,7 @@ public:
     Mtx mBaseMtx;
     u32 _50;
     u32 _54;
-    Mtx44 *mJointArray;
+    Mtx *mJointArray;
     u32 _5C;
     u32 _60;
     u32 _64;
