@@ -372,8 +372,7 @@ namespace JGadget {
         }
 #else
         iterator erase(iterator a) { return erase(&(*a), &(*(a + 1))); }
-        iterator erase(iterator a, iterator b) { return erase(&(*a, *b);
-        }
+        iterator erase(iterator a, iterator b) { return erase(&(*a, *b); }
 #endif
 
     private:
