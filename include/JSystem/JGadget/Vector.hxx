@@ -116,7 +116,7 @@ namespace JGadget {
             _GLIBCXX20_CONSTEXPR const_iterator(const const_iterator &iter) = default;
 
         private:
-            explicit _GLIBCXX20_CONSTEXPR const_iterator(pointer node) : mCurrent(node) {}
+            explicit _GLIBCXX20_CONSTEXPR const_iterator(const_pointer node) : mCurrent(node) {}
 
         public:
             _GLIBCXX20_CONSTEXPR bool operator==(const const_iterator &rhs) const {
