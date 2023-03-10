@@ -256,7 +256,10 @@ namespace JGadget {
         }
 #endif
 
-        _GLIBCXX20_CONSTEXPR ~TVector() { clear(); }
+        _GLIBCXX20_CONSTEXPR ~TVector() {
+            clear();
+            mAllocator.deallocate(mBegin, 1);
+        }
 
         _GLIBCXX20_CONSTEXPR TVector &operator=(const TVector &other) {
             clear();
