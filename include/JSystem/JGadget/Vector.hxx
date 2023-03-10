@@ -357,14 +357,14 @@ namespace JGadget {
 
 #if __cplusplus >= 201103L
         _GLIBCXX20_CONSTEXPR iterator erase(const_iterator a) {
-            return erase(*iterator(a), *iterator(a + 1));
+            return erase(&(*iterator(a)), &(*iterator(a + 1)));
         }
         _GLIBCXX20_CONSTEXPR iterator erase(const_iterator a, const_iterator b) {
-            return erase(*iterator(a), *iterator(b));
+            return erase(&(*iterator(a)), &(*iterator(b)));
         }
 #else
         iterator erase(iterator a) { return erase(&(*a), &(*(a + 1))); }
-        iterator erase(iterator a, iterator b) { return erase(&(*a, *b); }
+        iterator erase(iterator a, iterator b) { return erase(&(*a), &(*b)); }
 #endif
 
     private:
