@@ -2,6 +2,7 @@
 
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
+#include <SMS/Strategic/ObjHitCheck.hxx>
 
 class TStrategy : public JDrama::TViewObj {
 public:
@@ -16,15 +17,15 @@ public:
     u32 _10;
     u32 _14;
     u32 _18;
-    u32 _1C;
-    u32 _20;
-    u32 _24;
-    u32 _28;
-    u32 _2C;
-    u32 _30;
-    u32 _34;
-    u32 _38;
-    u32 _3C;
+    TIdxGroupObj *_1C;
+    TIdxGroupObj *_20;
+    TIdxGroupObj *_24;
+    TIdxGroupObj *mPlayerGroup;
+    TIdxGroupObj *_2C;
+    TIdxGroupObj *_30;
+    TIdxGroupObj *_34;
+    TIdxGroupObj *_38;
+    TIdxGroupObj *_3C;
     u32 _40;
     u32 _44;
     u32 _48;
