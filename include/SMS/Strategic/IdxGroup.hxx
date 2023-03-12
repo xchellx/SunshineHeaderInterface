@@ -2,14 +2,14 @@
 
 #include <JSystem/J3D/J3DAnimation.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
+#include <JSystem/JDrama/JDRViewObjPtrListT.hxx>
 #include <JSystem/JGadget/List.hxx>
 #include <SMS/Strategic/HitActor.hxx>
-#include <JSystem/JDrama/JDRViewObjPtrListT.hxx>
 
-class IdxGroup : public JDrama::TViewObjPtrListT<THitActor> {
+class IdxGroupObj : public JDrama::TViewObjPtrListT<THitActor> {
 public:
-    IdxGroup(const char *name) : TViewObjPtrListT(name){};
-    virtual ~IdxGroup();
+    IdxGroupObj(const char *name) : TViewObjPtrListT(name){};
+    virtual ~IdxGroupObj();
 
     virtual void loadSuper(JSUMemoryInputStream &stream) override;
 };
