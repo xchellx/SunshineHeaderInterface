@@ -14,9 +14,9 @@ public:
     virtual void loadAfter() override;
     virtual TNameRef *searchF(u16, const char *) override;
 
-    u32 _10;
-    u32 _14;
-    u32 _18;
+    TIdxGroupObj *mMapGroup;
+    TIdxGroupObj *mEmptyGroup;
+    TIdxGroupObj *mManagerGroup;
     TIdxGroupObj *mObjectGroup;
     TIdxGroupObj *mGraffitiGroup;
     TIdxGroupObj *mItemGroup;
