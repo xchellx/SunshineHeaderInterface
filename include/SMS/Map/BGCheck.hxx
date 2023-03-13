@@ -58,6 +58,6 @@ public:
     virtual void setPreNode(TBGCheckList *);
 
     TBGCheckList *mPreNode;  // _C
-    u16 _10;
-    u16 _12;
+    u16 mCellX;
+    u16 mCellZ;
 };
