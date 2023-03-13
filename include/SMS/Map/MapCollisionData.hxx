@@ -21,7 +21,7 @@ public:
     f32 checkRoof(f32 x, f32 y, f32 z, u8, const TBGCheckData **) const;
     size_t checkWalls(TBGWallCheckRecord *) const;
     u16 getEntryID();
-    bool getGridArea(const TBGCheckData *, int, int*, int*, int*, int*);
+    bool getGridArea(const TBGCheckData *, int type, int *xmin, int *zmin, int *xmax, int *zmax);
     void init(JSUMemoryInputStream &);
     void initMoveCollision();
     u32 intersectLine(const TVec3f &, const TVec3f &, bool, TVec3f *) const;
