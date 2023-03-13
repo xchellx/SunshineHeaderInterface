@@ -15,7 +15,7 @@ public:
 
     void addCheckDataToGrid(TBGCheckData*, int);
     TBGCheckData *allocCheckData(size_t count);
-    TBGCheckData *allocCheckList(int kind, int count);
+    TBGCheckList *allocCheckList(int kind, int count);
     // Flags are 0x1 = ignore water, 0x4 = ignore death planes
     f32 checkGround(f32 x, f32 y, f32 z, u8 ignoreFlags, const TBGCheckData **) const;
     f32 checkRoof(f32 x, f32 y, f32 z, u8, const TBGCheckData **) const;
