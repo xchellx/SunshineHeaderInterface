@@ -7,6 +7,6 @@
 #include <SMS/Map/BGCheck.hxx>
 
 void addAfterPreNode(int, int, TBGCheckList *list, TBGCheckList *addNode, int kind);
-TBGCheckData *addGroundNode(TBGCheckList *list, TBGCheckData *data);
-TBGCheckData *addRoofNode(TBGCheckList *list, TBGCheckData *data);
-TBGCheckData *addWallNode(TBGCheckList *list, TBGCheckData *data);
+TBGCheckList *addGroundNode(TBGCheckList *list, TBGCheckData *data);
+TBGCheckList *addRoofNode(TBGCheckList *list, TBGCheckData *data);
+TBGCheckList *addWallNode(TBGCheckList *list, TBGCheckData *data);
