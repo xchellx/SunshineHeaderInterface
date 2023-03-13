@@ -14,14 +14,14 @@ public:
     TMapCollisionData();
 
     void addCheckDataToGrid(TBGCheckData*, int);
-    void* allocCheckData(u32);
-    void* allocCheckList(int, int);
+    TBGCheckData *allocCheckData(size_t count);
+    TBGCheckData *allocCheckList(int kind, int count);
     // Flags are 0x1 = ignore water, 0x4 = ignore death planes
     f32 checkGround(f32 x, f32 y, f32 z, u8 ignoreFlags, const TBGCheckData **) const;
     f32 checkRoof(f32 x, f32 y, f32 z, u8, const TBGCheckData **) const;
     size_t checkWalls(TBGWallCheckRecord *) const;
     u16 getEntryID();
-    bool getGridArea(const TBGCheckData *, int type, int *xmin, int *zmin, int *xmax, int *zmax);
+    bool getGridArea(const TBGCheckData *tri, int type, int *xmin, int *zmin, int *xmax, int *zmax);
     void init(JSUMemoryInputStream &);
     void initMoveCollision();
     u32 intersectLine(const TVec3f &, const TVec3f &, bool, TVec3f *) const;
