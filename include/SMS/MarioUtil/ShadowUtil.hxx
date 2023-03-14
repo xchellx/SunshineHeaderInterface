@@ -22,8 +22,8 @@ public:
     TMBindShadowManager(char *);
     ~TMBindShadowManager() override;
 
-    void load(JSUMemoryInputStream &in);
-    void perform(u32 flags, JDrama::TGraphics *graphics);
+    void load(JSUMemoryInputStream &in) override;
+    void perform(u32 flags, JDrama::TGraphics *graphics) override;
 
     void calcVtx();
     void drawShadow(u32 flags, JDrama::TGraphics *graphics);
