@@ -60,3 +60,5 @@ public:
     f32 _6C;
     u32 _70;
 };
+
+extern TMBindShadowManager *gpBindShadowManager;
