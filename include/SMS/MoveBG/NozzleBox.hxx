@@ -20,7 +20,7 @@ public:
     TItem *mNozzleItem;  // 0x014C
     f32 mThrowLength;    // 0x0150
     f32 mThrowHeight;    // 0x0154
-    char *mBoxName;     // 0x0158
+    const char *mBoxName;     // 0x0158
     bool mIsValid;       // 0x015C
     GXColorS10 mMatColor; // 0x015E
     bool mBalloonShown;
