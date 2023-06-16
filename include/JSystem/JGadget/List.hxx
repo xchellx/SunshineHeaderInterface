@@ -385,9 +385,9 @@ namespace JGadget {
         }
 
         iterator erase(const_iterator start, const_iterator end) {
-            const_iterator iter = const_iterator(start);
-            while (iter != end) {
-                iter = const_iterator(erase(iter));
+            iterator iter = iterator(start);
+            while (iter != iterator(end)) {
+                iter = erase(iter);
             }
             return iter;
         }
