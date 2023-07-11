@@ -73,6 +73,13 @@ class TBPPolDrop;
 
 class TBossPakkun : public TSpineEnemy {
 public:
+    enum class BossPakkunState : s8 {
+        NORMAL,
+        VULNERABLE,
+        MOUTH_OPEN,
+        AIRBORNE_VULNERABLE
+    };
+
     TBossPakkun(const char *);
     virtual ~TBossPakkun();
 
@@ -96,10 +103,10 @@ public:
     TBPTornado *mTornado;        // 0x0160
     TBPHeadHit* mHeadHit;        // 0x0164
     TBPNavel* mNavel;            // 0x0168
-    s8 _02;                      // 0x016C
-    u32 _03[0xc / 4];           // 0x0170
+    BossPakkunState mState;      // 0x016C
+    u32 _03[0xc / 4];            // 0x0170
     s8 _04;                      // 0x017C
-    MActor *mActorData;     // 0x0180
+    u32 _05;                     // 0x0180
     f32 _06;                     // 0x0184
     u32 _07;                     // 0x0188
     TWaterEmitInfo *mWaterEmitInfo;// 0x018C
