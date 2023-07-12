@@ -126,7 +126,9 @@ public:
     u16 _02;                       // 0x00A4
     s16 mHorizontalAngle;          // 0x00A6
     f32 mInterpolateDistance;      // 0x00A8
-    u32 _AC[0xC0 / 4];
+    u32 _AC[0x78 / 4];
+    TVec3f mWorldTranslation;      // 0x0124
+    u32 _130[0x3C / 4];
     Mtx mProjectionMatrix;         // 0x016C
     u32 _19C[0x50 / 4];
     Mtx mTRSMatrix;                // 0x01EC
