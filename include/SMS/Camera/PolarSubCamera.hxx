@@ -126,8 +126,10 @@ public:
     u16 _02;                       // 0x00A4
     s16 mHorizontalAngle;          // 0x00A6
     f32 mInterpolateDistance;      // 0x00A8
-    u32 _AC[0x140 / 4];
-    Mtx mMatrixTRS;                // 0x01EC
+    u32 _AC[0xC0 / 4];
+    Mtx mProjectionMatrix;         // 0x016C
+    u32 _170[0x7C / 4];
+    Mtx mTRSMatrix;                // 0x01EC
     u32 _21C[0x134 / 4];
 
     static char *mCamKindNameSaveFile[73];
