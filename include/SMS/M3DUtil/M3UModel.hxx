@@ -22,7 +22,8 @@ public:
 
     void *_04;          // 0x0000
     J3DModel *mModel;   // 0x0008
-    u32 _0C[0x30 / 4];  // 0x000C
+    J3DFrameCtrl *mFrameCtrl; // 0x000C
+    u32 _10[0x2C / 4];
     u32 mLightID;       // _3C
     u8 _40;
     u32 mLightType;  // _44
