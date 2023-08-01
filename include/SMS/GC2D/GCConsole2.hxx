@@ -22,7 +22,10 @@ public:
     bool _3D;
     bool mIsTimerCard;  // 0x003E
     bool _3F;
-    u32 _40;
+    bool _40;
+    bool _41;
+    bool _42;
+    bool mIsTimerCardActive;
     bool mIsDEBSAlert;       // 0x0044
     bool mWaterCardRising;   // 0x0045
     bool mIsWaterCard;       // 0x0046
@@ -49,16 +52,31 @@ public:
     s8 mHealthCount;               // 0x01CC
     JUTRect mHealthPointRects[9];  // 0x01D0
     u32 _260[0x40 / 4];
-    J2DPicture *mWaterTopPanel;  // 0x02A0
-    u32 _09[0x14 / 4];           // 0x02A4
-    u32 mWaterCardTopHeight;     // 0x02B8
-    u32 _10[0x268 / 4];          // 0x02BC
-    TExPane *mTelopPanel;        // 0x0524
-    TExPane *mTelopWindow;       // 0x0528
-    u32 _52C[0xC / 4];
-    JUTRect mDEBSAlertPosition;  // 0x0538
+    J2DPicture *mWaterTopPanel;   // 0x02A0
+    u32 _09[0x14 / 4];            // 0x02A4
+    u32 mWaterCardTopHeight;      // 0x02B8
+    u32 _10[0x248 / 4];           // 0x02BC
+    TExPane *mRedCoinPanel;       // 0x0430
+    TExPane *_434;                // 0x0434
+    TExPane *_438;                // 0x0438
+    TExPane *_43C;                // 0x043C
+    TExPane *_440;                // 0x0440
+    TExPane *_444;                // 0x0444
+    u32 _448[0xBC / 4];           // 0x0448
+    TExPane *mTimerPanelNormal;   // 0x0504
+    TExPane *mTimerPanelRush;     // 0x0508
+    u32 _50C[0x8 / 4];            // 0x050C
+    bool mIsTimerPanelRush;       // 0x0514
+    s32 mTimerSecondsLeft;        // 0x0518
+    u32 _51C[0x8 / 4];            // 0x051C
+    TExPane *mTelopPanel;         // 0x0524
+    TExPane *mTelopWindow;        // 0x0528
+    J2DTextBox *mTelopTextFront;  // 0x052C
+    J2DTextBox *mTelopTextBack;   // 0x0530
+    u32 _534;
+    JUTRect mTelopPosition;  // 0x0538
     u32 _548[0x10 / 4];
-    size_t mDEBSAlertPixelWidth;  // 0x0558
+    size_t mTelopPixelWidth;  // 0x0558
     u32 _55C[0xC / 4];
     f32 mDEBSScrollSpeed;  // 0x0568
     f32 mDEBSPositionX;    // 0x056C
