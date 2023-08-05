@@ -4114,6 +4114,8 @@ void GXLoadLightObj(GXLightObj *lit_obj, u8 lit_id);
  */
 void GXLoadLightObjIdx(u32 litobjidx, u8 litid);
 
+void GXLoadLightObjImm(GXLightObj *lit_obj, u8 lit_id);
+
 /*!
  * \fn void GXInitLightDistAttn(GXLightObj *lit_obj,f32 ref_dist,f32
  * ref_brite,u8 dist_fn) \brief Sets coefficients for distance attenuation in a

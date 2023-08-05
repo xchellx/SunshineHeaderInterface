@@ -1103,8 +1103,8 @@ public:
     f32 mFloorBelow;                          // 0x00EC
     f32 mWaterHeight;                         // 0x00F0
     u16 _F4;
+    u16 _F6;
     u16 mLightID;
-    u16 _F8;
     u16 mAnimationID;
     u16 _FC;
     u16 _FE;
