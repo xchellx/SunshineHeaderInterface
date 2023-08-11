@@ -6,6 +6,7 @@
 #include <SMS/Player/MarioGamePad.hxx>
 
 class TSunGlass : public JDrama::TViewObj {
+public:
     TSunGlass(const char *);
     ~TSunGlass() override;
 
@@ -21,9 +22,9 @@ class TSunGlass : public JDrama::TViewObj {
     u16 mBlendFlags;    // _1A
     u8 mToAlpha;        // _1C
     u8 mFromAlpha;      // _1D
-    u8 mSelectorA;             // _1E
-    u8 mSelectorB;             // _1F
-    u16 _20;        // _20
+    u8 mSelectorA;      // _1E
+    u8 mSelectorB;      // _1F
+    u16 _20;            // _20
     u16 mLerpTimerMax;  // _22
     u16 mLerpTimer;     // _24
     bool mIsVisible;    // _26
