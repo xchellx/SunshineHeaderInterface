@@ -42,6 +42,7 @@ namespace JGadget {
             bool operator!=(const TNode_ &other) const { return mValue != other.mValue; }
         };
 
+        typedef typename _Alloc::template rebind<value_type>::other pair_allocator_t;
         typedef typename _Alloc::template rebind<TNode_>::other node_allocator_t;
         typedef typename _Alloc::template rebind<TNode_ *>::other bucket_allocator_t;
 
@@ -353,6 +354,7 @@ namespace JGadget {
         size_type size() const { return mElementCount; }
 
         void clear() _GLIBCXX_NOEXCEPT {
+            OSReport("clear\n");
             deallocate_nodes(mBuckets, mBucketCount);
             mElementCount = 0;
         }
@@ -601,7 +603,10 @@ namespace JGadget {
         }
 
         void deallocate_node(TNode_ *n) {
-            get_allocator().destroy(&n->mValue);
+            pair_allocator_t alloc(mNodeAllocator);
+            // alloc.destroy(&n->mValue);
+            alloc.destroy(&n->mValue.first);
+            alloc.destroy(&n->mValue.second);
             mNodeAllocator.deallocate(n, 1);
         }
 
