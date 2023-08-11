@@ -14,7 +14,7 @@ public:
     void loadAfter() override;
     void perform(u32, JDrama::TGraphics *) override;
 
-    void draw(const JDrama::TRect &, JUtility::TColor color) override;
+    virtual void draw(const JDrama::TRect &, JUtility::TColor color);
 
     TMarioGamePad *mGamepad;  // _10
     JUtility::TColor mColor;  // _14
@@ -27,5 +27,5 @@ public:
     u16 _20;            // _20
     u16 mLerpTimerMax;  // _22
     u16 mLerpTimer;     // _24
-    bool mIsVisible;    // _26
+    bool mIsUpdating;    // _26
 };
