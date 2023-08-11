@@ -55,7 +55,7 @@ public:
     J2DPicture *mWaterTopPanel;   // 0x02A0
     u32 _09[0x14 / 4];            // 0x02A4
     u32 mWaterCardTopHeight;      // 0x02B8
-    u32 _10[0x248 / 4];           // 0x02BC
+    u32 _10[0x170 / 4];           // 0x02BC
     TExPane *mRedCoinPanelBack;   // 0x042C
     TExPane *mRedCoinPanel;       // 0x0430
     TExPane *_434;                // 0x0434
