@@ -8,6 +8,7 @@
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 #include <JSystem/JUtility/JUTColor.hxx>
 #include <SMS/Player/Watergun.hxx>
+#include <SMS/Strategic/HitActor.hxx>
 
 class TModelWaterManager : public JDrama::TViewObj {
 public:
