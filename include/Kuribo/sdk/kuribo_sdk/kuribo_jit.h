@@ -22,11 +22,11 @@ typedef void (*kxCompiledFunction)();
 KX_API
 kxCompiledFunction kxGeckoJitCompileCodes(
     //! Where KuriboJIT will put JIT instructions to execute.
-    void* free_space_begin,
+    void *free_space_begin,
     //! The size (in bytes) of the memory region.
     u32 free_space_size,
     //! The start of your GCT. Header/footer are not needed.
-    const void* gct_begin,
+    const void *gct_begin,
     //! The size (in bytes) of your GCT.
     u32 gct_size);
 
@@ -35,9 +35,9 @@ kxCompiledFunction kxGeckoJitCompileCodes(
 //! @return Return if operation succeeded.
 //!
 inline bool kxGeckoJitRunCompiledFunction(kxCompiledFunction func) {
-  if (!func)
-    return false;
+    if (!func)
+        return false;
 
-  func();
-  return true;
+    func();
+    return true;
 }

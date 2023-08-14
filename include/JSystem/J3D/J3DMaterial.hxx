@@ -2,8 +2,8 @@
 
 #include <Dolphin/MTX.h>
 #include <Dolphin/types.h>
-#include <JSystem/J3D/J3DMaterial.hxx>
 #include <JSystem/J3D/J3DColor.hxx>
+#include <JSystem/J3D/J3DMaterial.hxx>
 #include <JSystem/J3D/J3DPacket.hxx>
 #include <JSystem/J3D/J3DShape.hxx>
 #include <JSystem/J3D/J3DTexture.hxx>

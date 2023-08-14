@@ -3,8 +3,8 @@
 #include <Dolphin/types.h>
 #include <JSystem/JDrama/JDRCamera.hxx>
 #include <JSystem/JDrama/JDRGraphics.hxx>
-#include <SMS/Camera/CameraKindParam.hxx>
 #include <SMS/Camera/CameraInbetween.hxx>
+#include <SMS/Camera/CameraKindParam.hxx>
 #include <SMS/Camera/CameraMapTool.hxx>
 #include <SMS/NPC/NpcBase.hxx>
 
@@ -127,11 +127,11 @@ public:
     s16 mHorizontalAngle;          // 0x00A6
     f32 mInterpolateDistance;      // 0x00A8
     u32 _AC[0x78 / 4];
-    TVec3f mWorldTranslation;      // 0x0124
+    TVec3f mWorldTranslation;  // 0x0124
     u32 _130[0x3C / 4];
-    Mtx mProjectionMatrix;         // 0x016C
+    Mtx mProjectionMatrix;  // 0x016C
     u32 _19C[0x50 / 4];
-    Mtx mTRSMatrix;                // 0x01EC
+    Mtx mTRSMatrix;  // 0x01EC
     u32 _21C[0x134 / 4];
 
     static char *mCamKindNameSaveFile[73];

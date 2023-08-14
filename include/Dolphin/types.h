@@ -1,6 +1,5 @@
 #pragma once
 
-
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned long u32;
@@ -43,8 +42,8 @@ typedef long ptrdiff_t;
 #ifdef __cplusplus
 #define NULL nullptr
 #else
-#define NULL ((void *)0)
-#define bool int
-#define true 1
+#define NULL  ((void *)0)
+#define bool  int
+#define true  1
 #define false 0
 #endif

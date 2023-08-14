@@ -27,5 +27,5 @@ public:
     u16 _20;            // _20
     u16 mLerpTimerMax;  // _22
     u16 mLerpTimer;     // _24
-    bool mIsUpdating;    // _26
+    bool mIsUpdating;   // _26
 };

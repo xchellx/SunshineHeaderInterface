@@ -3,10 +3,10 @@
 #include <Dolphin/OS.h>
 #include <Dolphin/types.h>
 
-#include <JSystem/bits/c++config.h>
-#include <JSystem/type_traits.hxx>
 #include <JSystem/JKernel/JKRDisposer.hxx>
 #include <JSystem/JSupport/JSUList.hxx>
+#include <JSystem/bits/c++config.h>
+#include <JSystem/type_traits.hxx>
 
 class JKRHeap : public JKRDisposer {
 public:
@@ -18,13 +18,13 @@ public:
     virtual void *alloc(size_t, int) = 0;
     virtual void free(void *)        = 0;
     virtual void freeAll();
-    virtual void freeTail()            = 0;
+    virtual void freeTail()               = 0;
     virtual size_t resize(void *, size_t) = 0;
     virtual size_t getSize(void *)        = 0;
     virtual size_t getFreeSize()          = 0;
     virtual size_t getTotalFreeSize()     = 0;
-    virtual u32 getHeapType()          = 0;
-    virtual bool check()               = 0;
+    virtual u32 getHeapType()             = 0;
+    virtual bool check()                  = 0;
     virtual u32 dump_sort();
     virtual bool dump() = 0;
     virtual u8 changeGroupID(u8);
@@ -184,7 +184,8 @@ _GLIBCXX_NODISCARD inline void *operator new(size_t blocksize, void *block) _GLI
 };  // Placement new
 _GLIBCXX_NODISCARD void *operator new[](size_t blocksize);
 _GLIBCXX_NODISCARD void *operator new[](size_t blocksize, int align) _GLIBCXX_NOEXCEPT;
-_GLIBCXX_NODISCARD void *operator new[](size_t blocksize, JKRHeap *heap, int align) _GLIBCXX_NOEXCEPT;
+_GLIBCXX_NODISCARD void *operator new[](size_t blocksize, JKRHeap *heap,
+                                        int align) _GLIBCXX_NOEXCEPT;
 _GLIBCXX_NODISCARD inline void *operator new[](size_t blocksize, void *block) _GLIBCXX_NOEXCEPT {
     return block;
 };  // Placement new

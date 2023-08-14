@@ -3,8 +3,8 @@
 #include <Dolphin/types.h>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 #include <SMS/M3DUtil/MActor.hxx>
-#include <SMS/Strategic/HitActor.hxx>
 #include <SMS/MapObj/MapObjGeneral.hxx>
+#include <SMS/Strategic/HitActor.hxx>
 
 class TMario;
 

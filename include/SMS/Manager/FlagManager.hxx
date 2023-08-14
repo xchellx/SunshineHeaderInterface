@@ -104,11 +104,11 @@ public:
     } Type5Flag;
 
     struct {
-        s32 mRedCoinCount;         // 0x00F4
-        s32 mBJRBalloonCount;      // 0x00F8
-        s32 _00;                   // 0x00FC
-        s32 mShadowMarioEvent;     // 0x0100
-        u32 _01[0x180 / 4];        // 0x0104;
+        s32 mRedCoinCount;      // 0x00F4
+        s32 mBJRBalloonCount;   // 0x00F8
+        s32 _00;                // 0x00FC
+        s32 mShadowMarioEvent;  // 0x0100
+        u32 _01[0x180 / 4];     // 0x0104;
     } Type6Flag;
 
     struct {

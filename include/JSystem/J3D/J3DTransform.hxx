@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Dolphin/types.h>
 #include <Dolphin/MTX.h>
+#include <Dolphin/types.h>
 
 struct J3DTransformInfo {
     f32 tx;

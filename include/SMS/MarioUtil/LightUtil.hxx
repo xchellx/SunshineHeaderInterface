@@ -21,11 +21,11 @@ public:
     TVec3f _14;     // _14
     int mGlobalAmbColorIndex;
     int mGlobalLightColorIndex;
-    bool mUseLocalLights; // _28
-    JUtility::TColor mAmbColorAry[2];  // _29
+    bool mUseLocalLights;                // _28
+    JUtility::TColor mAmbColorAry[2];    // _29
     JUtility::TColor mLightColorAry[4];  // _31
     bool _41;
-    TVec3f mLightPosAry[4]; // _44
+    TVec3f mLightPosAry[4];  // _44
 
     static void *mAmbAry;
     static void *mLightAry;

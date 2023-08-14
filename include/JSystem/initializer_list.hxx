@@ -49,12 +49,10 @@ namespace std {
     template <class _Tp> constexpr const _Tp *end(initializer_list<_Tp> __ils) noexcept {
         return __ils.end();
     }
-}
-
+}  // namespace std
 
 namespace JSystem {
-    template <class _E> 
-    using initializer_list = std::initializer_list<_E>;
+    template <class _E> using initializer_list = std::initializer_list<_E>;
 }
 
 #endif

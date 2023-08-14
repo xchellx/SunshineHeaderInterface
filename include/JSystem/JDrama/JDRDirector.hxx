@@ -1,8 +1,8 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <JSystem/JDrama/JDRViewObj.hxx>
 #include <JSystem/JDrama/JDRNameRef.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
 #include <JSystem/JStage/JSGSystem.hxx>
 #include <JSystem/JUtility/JUTGamePad.hxx>
 

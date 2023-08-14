@@ -21,8 +21,8 @@ typedef double f64;
 #ifdef __VERSION__
 #define __KURIBO_CC_VERSION __VERSION__
 #elif defined(__CWCC__)
-#define STRINGIZE(x) STRINGIZE_(x)
-#define STRINGIZE_(x) #x
+#define STRINGIZE(x)        STRINGIZE_(x)
+#define STRINGIZE_(x)       #x
 #define __KURIBO_CC_VERSION "CWCC " STRINGIZE(__CWCC__)
 #else
 #define __KURIBO_CC_VERSION "Unknown"

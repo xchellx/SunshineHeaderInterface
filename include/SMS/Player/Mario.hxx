@@ -5,25 +5,25 @@
 #include <JSystem/J3D/J3DDrawBuffer.hxx>
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JGeometry/JGMVec.hxx>
+#include <SMS/Map/BGCheck.hxx>
 #include <SMS/Player/MarioBlend.hxx>
 #include <SMS/Player/MarioCap.hxx>
 #include <SMS/Player/MarioDraw.hxx>
 #include <SMS/Player/MarioEffect.hxx>
 #include <SMS/Player/MarioGamePad.hxx>
 #include <SMS/Player/MarioSound.hxx>
-#include <SMS/Strategic/TakeActor.hxx>
-#include <SMS/Player/Yoshi.hxx>
-#include <SMS/Map/BGCheck.hxx>
 #include <SMS/Player/Watergun.hxx>
+#include <SMS/Player/Yoshi.hxx>
+#include <SMS/Strategic/TakeActor.hxx>
 #include <SMS/System/BaseParam.hxx>
 #include <SMS/System/Params.hxx>
 
 #define MESSAGE_MARIO_TOSS 7
 #define MESSAGE_MARIO_BURN 10
 
-#define OBJECT_ID_MARIO 0x80000001
+#define OBJECT_ID_MARIO       0x80000001
 #define OBJECT_ID_WATER_SPRAY 0x1000001
-#define OBJECT_ID_POINK 0x100000D
+#define OBJECT_ID_POINK       0x100000D
 
 class TMario : public TTakeActor, public TDrawSyncCallback {
 public:
@@ -1253,9 +1253,9 @@ public:
     J3DDrawBuffer *mDrawBufferB;  // 0x0398
     u32 _39C;
     u32 _3A0;
-    u32 _3A4;                   // unknown
-    M3UModelMario *mModelData;  // 0x03A8
-    J3DModelData *mBodyModelData;                   // unknown
+    u32 _3A4;                      // unknown
+    M3UModelMario *mModelData;     // 0x03A8
+    J3DModelData *mBodyModelData;  // unknown
     J3DModel *mHandModel2R;
     J3DModel *mHandModel2L;
     J3DModel *mHandModel3R;

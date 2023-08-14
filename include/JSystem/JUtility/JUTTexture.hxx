@@ -8,24 +8,20 @@
 
 struct ResTIMG {
     enum EFormat {
-        I4 = 0,
-        I8 = 1,
-        IA4 = 2,
-        IA8 = 3,
+        I4     = 0,
+        I8     = 1,
+        IA4    = 2,
+        IA8    = 3,
         RGB565 = 4,
         RGB5A3 = 5,
         RGBA32 = 6,
-        C4 = 8,
-        C8 = 9,
-        C14X2 = 10,
-        CMPR = 14
+        C4     = 8,
+        C8     = 9,
+        C14X2  = 10,
+        CMPR   = 14
     };
 
-    enum EWrapMode {
-        ClampToEdge,
-        Repeat,
-        MirroredRepeat
-    };
+    enum EWrapMode { ClampToEdge, Repeat, MirroredRepeat };
 
     enum EFilterMode {
         Nearest,

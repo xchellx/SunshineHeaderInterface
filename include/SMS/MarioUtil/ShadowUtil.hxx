@@ -8,7 +8,7 @@ struct TAlphaShadowQuad {};
 
 struct TCircleShadowRequest {
     TVec3f mTranslation;
-    f32 mOffsetY;  // ?
+    f32 mOffsetY;   // ?
     f32 mOffsetY2;  // ?
     f32 mRotationY;
     f32 _18;

@@ -1,6 +1,6 @@
 #include <Dolphin/types.h>
-#include <SMS/MoveBG/Item.hxx>
 #include <SMS/Manager/MapObjBaseManager.hxx>
+#include <SMS/MoveBG/Item.hxx>
 
 class TItemManager : public TMapObjBaseManager {
 public:

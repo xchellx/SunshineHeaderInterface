@@ -12,7 +12,7 @@ public:
           mIncInterpolate(1.0f) {}
 
     void startAnimation() {
-        mActive = true;
+        mActive             = true;
         mCurrentInterpolate = 0.0f;
     }
 

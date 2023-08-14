@@ -13,7 +13,7 @@ namespace JGeometry {
         TBox() = default;
         TBox(const VecT &_center, const VecT &_size) : center(_center), size(_size) {}
 
-        TBox &operator=(const TBox& other) {
+        TBox &operator=(const TBox &other) {
             center = other.center;
             size   = other.size;
         }
@@ -28,7 +28,7 @@ namespace JGeometry {
 
             if (center.y - yHalf > pos.y || center.y + yHalf < pos.y)
                 return false;
-            
+
             if (center.z - zHalf > pos.z || center.z + zHalf < pos.z)
                 return false;
 

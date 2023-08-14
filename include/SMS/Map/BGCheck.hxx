@@ -18,16 +18,16 @@ public:
     bool isWaterSurface() const;
     void setVertex(const TVec3f &a, const TVec3f &b, const TVec3f &c);
 
-    u16 mType;             // 0x0000
-    s16 mValue;            // 0x0002
-    u16 mFlags;            // 0x0004 | 0x10 = illegal
-    u8 mSoundID;           // 0x0006 | Sound ID
-    f32 mMinHeight;        // 0x0008
-    f32 mMaxHeight;        // 0x000C
-    TVec3f mVertices[3];   // 0x0010
-    TVec3f mNormal;        // 0x0034
-    f32 mProjectionFactor; // 0x0040
-    TLiveActor *mOwner;    // 0x0044
+    u16 mType;              // 0x0000
+    s16 mValue;             // 0x0002
+    u16 mFlags;             // 0x0004 | 0x10 = illegal
+    u8 mSoundID;            // 0x0006 | Sound ID
+    f32 mMinHeight;         // 0x0008
+    f32 mMaxHeight;         // 0x000C
+    TVec3f mVertices[3];    // 0x0010
+    TVec3f mNormal;         // 0x0034
+    f32 mProjectionFactor;  // 0x0040
+    TLiveActor *mOwner;     // 0x0044
 };
 
 class TBGCheckList {
@@ -41,11 +41,7 @@ public:
 
 class TBGCheckListRoot {
 public:
-    enum EPlaneType {
-        GROUND,
-        ROOF,
-        WALL
-    };
+    enum EPlaneType { GROUND, ROOF, WALL };
 
     TBGCheckListRoot();
 

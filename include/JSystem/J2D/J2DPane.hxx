@@ -75,7 +75,7 @@ public:
     void setBasePosition(J2DBasePosition basePos);
 
     u16 mTypeID;
-    u32 mTypeMagic;          // _8
+    u32 mTypeMagic;   // _8
     bool mIsVisible;  // _C
     u32 mTag;
     JUTRect mRect;          // _14

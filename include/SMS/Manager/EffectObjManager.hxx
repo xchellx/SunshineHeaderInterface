@@ -6,8 +6,8 @@
 #include <JSystem/JGadget/Allocator.hxx>
 #include <JSystem/JGadget/List.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
-#include <SMS/Strategic/HitActor.hxx>
 #include <SMS/Enemy/EffectObjBase.hxx>
+#include <SMS/Strategic/HitActor.hxx>
 #include <SMS/Strategic/ObjChara.hxx>
 
 /* Size -- 0x34 */

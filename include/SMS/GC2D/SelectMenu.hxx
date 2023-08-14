@@ -3,9 +3,9 @@
 #include <JSystem/J2D/J2DPicture.hxx>
 #include <JSystem/J2D/J2DSetScreen.hxx>
 #include <JSystem/J2D/J2DTextBox.hxx>
-#include <JSystem/JUtility/JUTTexture.hxx>
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
+#include <JSystem/JUtility/JUTTexture.hxx>
 #include <SMS/G2D/BoundPane.hxx>
 #include <SMS/G2D/ExPane.hxx>
 #include <SMS/GC2D/SelectDir.hxx>

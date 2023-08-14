@@ -614,8 +614,8 @@ namespace JGadget {
 
             if (transfer == other.mBegin) {
                 other.mBegin = transfer->mNext;
-			} else if (transfer == other.mEnd) {
-				other.mEnd = transfer->mPrev;
+            } else if (transfer == other.mEnd) {
+                other.mEnd = transfer->mPrev;
             } else {
                 TNode_ *transferPrev = transfer->mPrev;
                 TNode_ *transferNext = transfer->mNext;
@@ -678,7 +678,7 @@ namespace JGadget {
         return false;
     }
 #endif
-    using void_item = void*;
+    using void_item = void *;
     class TList_pointer_void : public TList<void_item> {};
 
     template <typename _T> class TList_pointer : public TList_pointer_void {};

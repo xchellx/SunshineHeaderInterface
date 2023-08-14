@@ -9,11 +9,11 @@
 namespace JDrama {
     class TFrmGXSet final : public TViewObj {
     public:
-        TFrmGXSet(TDisplay *display) : TViewObj("<FrmGXSet>"), mDisplay(display) {};
+        TFrmGXSet(TDisplay *display) : TViewObj("<FrmGXSet>"), mDisplay(display){};
         ~TFrmGXSet() override;
 
         void perform(u32, TGraphics *) override;
-        
+
         TDisplay *mDisplay;
     };
 }  // namespace JDrama

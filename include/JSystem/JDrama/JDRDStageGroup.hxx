@@ -9,7 +9,7 @@
 namespace JDrama {
     class TDStageGroup final : public TViewObjPtrListT<TViewObj> {
     public:
-        TDStageGroup(TDisplay *display) : TViewObjPtrListT("<TDStageGroup>"), mFrmGXSet(display) {};
+        TDStageGroup(TDisplay *display) : TViewObjPtrListT("<TDStageGroup>"), mFrmGXSet(display){};
         ~TDStageGroup() override;
 
         void perform(u32, TGraphics *) override;

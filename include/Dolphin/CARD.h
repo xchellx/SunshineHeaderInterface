@@ -10,11 +10,11 @@ extern "C" {
 #define CARD_SLOTA 0 /*!< memory card slot A */
 #define CARD_SLOTB 1 /*!< memory card slot B */
 
-#define CARD_DIRENTRY_SIZE 0x44
-#define CARD_WORKAREA      (5 * 8 * 1024) /*!< minimum size of the workarea passed to Mount[Async]() */
-#define CARD_READSIZE      512            /*!< minimum size of block to read from memory card */
-#define CARD_FILENAMELEN   32             /*!< maximum filename length */
-#define CARD_MAXFILES      128            /*!< maximum number of files on the memory card */
+#define CARD_DIRENTRY_SIZE           0x44
+#define CARD_WORKAREA                (5 * 8 * 1024) /*!< minimum size of the workarea passed to Mount[Async]() */
+#define CARD_READSIZE                512 /*!< minimum size of block to read from memory card */
+#define CARD_FILENAMELEN             32  /*!< maximum filename length */
+#define CARD_MAXFILES                128 /*!< maximum number of files on the memory card */
 #define CARD_BLOCKS_TO_BYTES(blocks) int(blocks) * 0x2000
 #define CARD_BYTES_TO_BLOCKS(blocks) int(int(blocks) / 0x2000)
 
@@ -166,7 +166,7 @@ typedef struct CARDStat {
     u16 mCompany;
     u8 mBannerFmt;
     u32 mIconAddr;
-    u16 mIconFmt;  // Masks bits for each icon
+    u16 mIconFmt;    // Masks bits for each icon
     u16 mIconSpeed;  // Masks bits for each icon
     u32 mCommentAddr;
     u32 mOffsetBanner;

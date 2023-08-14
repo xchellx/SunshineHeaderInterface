@@ -2,8 +2,8 @@
 
 #include <Dolphin/types.h>
 
-#include <SMS/Strategic/LiveActor.hxx>
 #include <SMS/Map/MapCollisionBase.hxx>
+#include <SMS/Strategic/LiveActor.hxx>
 
 class TMapCollisionStatic : public TMapCollisionBase {
 public:

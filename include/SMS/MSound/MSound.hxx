@@ -1641,11 +1641,8 @@ enum MS_SOUND_EFFECT {
     MSD_SE_SHINE_EXIST          = 0x000081C1,
 };
 
-
 class MSound : public JAIBasic {
 public:
-    
-
     MSound(JKRHeap *, JKRHeap *, u32, u8 *, u8 *, u32);
 
     bool cameraLooksAtMario();

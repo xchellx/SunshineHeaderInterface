@@ -3,8 +3,8 @@
 #include <Dolphin/types.h>
 #include <JSystem/JGeometry/JGMVec.hxx>
 
-#include <SMS/Strategic/LiveActor.hxx>
 #include <SMS/Map/MapCollisionBase.hxx>
+#include <SMS/Strategic/LiveActor.hxx>
 
 class TMapCollisionWarp : TMapCollisionBase {
 public:

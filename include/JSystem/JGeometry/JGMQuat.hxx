@@ -2,8 +2,8 @@
 
 #include <Dolphin/MTX.h>
 #include <Dolphin/math.h>
-#include <JSystem/equivtype.hxx>
 #include <JSystem/JGeometry/JGMVec.hxx>
+#include <JSystem/equivtype.hxx>
 
 namespace JGeometry {
 
@@ -12,7 +12,10 @@ namespace JGeometry {
         T s;
 
         static TQuat4 identity() {
-            return { {0, 0, 0}, 1 };
+            return {
+                {0, 0, 0},
+                1
+            };
         }
 
         static TQuat4 fromEuler(TVec3<T> angles) {

@@ -1,10 +1,10 @@
 #pragma once
 
 #include <JSystem/J3D/J3DAnimation.hxx>
-#include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JDrama/JDRActor.hxx>
-#include <JSystem/JSupport/JSUMemoryStream.hxx>
+#include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JGeometry/JGMVec.hxx>
+#include <JSystem/JSupport/JSUMemoryStream.hxx>
 
 class TSunModel : public JDrama::TActor {
 public:

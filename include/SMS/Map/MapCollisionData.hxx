@@ -4,16 +4,16 @@
 #include <JSystem/JGeometry/JGMVec.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
 
-#include <SMS/Strategic/LiveActor.hxx>
 #include <SMS/Map/BGCheck.hxx>
 #include <SMS/Map/MapCheck.hxx>
 #include <SMS/Map/MapCollisionBase.hxx>
+#include <SMS/Strategic/LiveActor.hxx>
 
 class TMapCollisionData {
 public:
     TMapCollisionData();
 
-    void addCheckDataToGrid(TBGCheckData*, int);
+    void addCheckDataToGrid(TBGCheckData *, int);
     TBGCheckData *allocCheckData(size_t count);
     TBGCheckList *allocCheckList(int kind, int count);
     // Flags are 0x1 = ignore water, 0x4 = ignore death planes
@@ -30,9 +30,9 @@ public:
     void updateCheckListNode(s32, s32, s32);
 
     static f32 checkGroundList(f32 x, f32 y, f32 z, u8 ignoreFlags, const TBGCheckList *,
-        const TBGCheckData **);
+                               const TBGCheckData **);
     static f32 checkRoofList(f32 x, f32 y, f32 z, u8 ignoreFlags, const TBGCheckList *,
-        const TBGCheckData **);
+                             const TBGCheckData **);
     static size_t checkWallList(const TBGCheckList *, TBGWallCheckRecord *);
 
     f32 mAreaSizeX;                          // 0x0000
@@ -59,4 +59,4 @@ public:
     static TBGCheckData mIllegalCheckData;
 };
 
-extern TMapCollisionData* gpMapCollisionData;
+extern TMapCollisionData *gpMapCollisionData;

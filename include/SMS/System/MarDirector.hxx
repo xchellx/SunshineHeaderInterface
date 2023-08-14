@@ -10,14 +10,14 @@
 
 #include <SMS/GC2D/Guide.hxx>
 
-#include <SMS/Player/Yoshi.hxx>
 #include <SMS/MoveBG/Coin.hxx>
 #include <SMS/MoveBG/Shine.hxx>
+#include <SMS/Player/Yoshi.hxx>
 
 #include <SMS/GC2D/GCConsole2.hxx>
-#include <SMS/NPC/NpcBase.hxx>
-#include <SMS/MoveBG/DemoCannon.hxx>
 #include <SMS/GC2D/ShineFader.hxx>
+#include <SMS/MoveBG/DemoCannon.hxx>
+#include <SMS/NPC/NpcBase.hxx>
 
 #include <SMS/GC2D/GCConsole2.hxx>
 #include <SMS/System/PerformList.hxx>
@@ -101,20 +101,20 @@ public:
     u32 _88[0x18 / 4];
     TBaseNPC *mTalkingNPC;  // 0x00A0
     u32 _A4[2];
-    u32 *mpNextState;          // 0x00AC
-    u32 _11;                   // 0x00B0
-    u8 mNextState;             // 0x00B4
-    JKRMemArchive* mCurrentStageArchive; // 0x00B8
-    u32 _12[0x18 / 4];         // 0x00BC
-    u32 *mGame6Data;           // 0x00D4
-    u32 *mAramArchive;         // 0x00D8
-    TShineFader *mShineFader;  // 0x00DC
-    u32 _13[0x44 / 4];         // 0x00E0
-    u8 mNextStateA;            // 0x0124 ?
-    u32 _14[0x12C / 4];        // 0x0128
-    TDemoCannon *mCannonObj;   // 0x0254
-    u32 _15;                   // 0x0258
-    TShine *mCollectedShine;   // 0x025C
+    u32 *mpNextState;                     // 0x00AC
+    u32 _11;                              // 0x00B0
+    u8 mNextState;                        // 0x00B4
+    JKRMemArchive *mCurrentStageArchive;  // 0x00B8
+    u32 _12[0x18 / 4];                    // 0x00BC
+    u32 *mGame6Data;                      // 0x00D4
+    u32 *mAramArchive;                    // 0x00D8
+    TShineFader *mShineFader;             // 0x00DC
+    u32 _13[0x44 / 4];                    // 0x00E0
+    u8 mNextStateA;                       // 0x0124 ?
+    u32 _14[0x12C / 4];                   // 0x0128
+    TDemoCannon *mCannonObj;              // 0x0254
+    u32 _15;                              // 0x0258
+    TShine *mCollectedShine;              // 0x025C
     u32 _260;
     u32 _264;
 };

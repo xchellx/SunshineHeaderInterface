@@ -1,7 +1,7 @@
 #pragma once
 
-#include <SMS/Player/Mario.hxx>
 #include <SMS/M3DUtil/M3UModel.hxx>
+#include <SMS/Player/Mario.hxx>
 
 class M3UModelCommonMario : public M3UModelCommon {
 public:

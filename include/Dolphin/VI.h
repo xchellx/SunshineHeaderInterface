@@ -1,8 +1,8 @@
 #ifndef VI_H
 #define VI_H
 
-#include <Dolphin/types.h>
 #include <Dolphin/OS.h>
+#include <Dolphin/types.h>
 
 /*!
  * @}

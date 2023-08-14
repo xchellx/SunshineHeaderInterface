@@ -5,9 +5,9 @@
 
 #include <JSystem/J3D/J3DModel.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
+#include <SMS/MapObj/MapObjInit.hxx>
 #include <SMS/Strategic/HitActor.hxx>
 #include <SMS/Strategic/LiveActor.hxx>
-#include <SMS/MapObj/MapObjInit.hxx>
 
 class TMapObjBase : public TLiveActor {
 public:
@@ -139,15 +139,15 @@ public:
     static void throwObjFromPointWithRot(TMapObjBase *, const TVec3f &, const TVec3f &, f32, f32);
     static bool waterHitPlane(THitActor *);
 
-    const char *mRegisterName;      // 0x00F4
-    u32 mModelLoadFlags;      // 0x00F8
-    u16 mState;               // 0x00FC
-    u16 _01;                  // 0x00FE
-    u16 mSoundIDIndex;        // 0x0100
-    s32 mStateTimer;          // 0x0104
-    u32 _03;                  // 0x0108
-    TVec3f mInitialPosition;  // 0x010C
-    TVec3f mInitialRotation;  // 0x0118
+    const char *mRegisterName;  // 0x00F4
+    u32 mModelLoadFlags;        // 0x00F8
+    u16 mState;                 // 0x00FC
+    u16 _01;                    // 0x00FE
+    u16 mSoundIDIndex;          // 0x0100
+    s32 mStateTimer;            // 0x0104
+    u32 _03;                    // 0x0108
+    TVec3f mInitialPosition;    // 0x010C
+    TVec3f mInitialRotation;    // 0x0118
     u32 _124[3];
     ObjData *mObjData;  // 0x0130
     u32 mMapObjID;      // 0x0134

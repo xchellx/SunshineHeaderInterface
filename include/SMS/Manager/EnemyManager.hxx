@@ -1,12 +1,12 @@
 #pragma once
 
 #include <JSystem/JDrama/JDRGraphics.hxx>
-#include <SMS/M3DUtil/MActor.hxx>
 #include <SMS/Enemy/SpineEnemy.hxx>
+#include <SMS/M3DUtil/MActor.hxx>
 #include <SMS/Manager/LiveManager.hxx>
 #include <SMS/Manager/ObjManager.hxx>
-#include <SMS/System/Params.hxx>
 #include <SMS/SPC/SpcBinary.hxx>
+#include <SMS/System/Params.hxx>
 
 class TLiveActor;
 

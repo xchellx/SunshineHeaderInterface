@@ -1,8 +1,8 @@
 #pragma once
 
-#include <SMS/Strategic/LiveActor.hxx>
 #include <SMS/SPC/SpcBinary.hxx>
 #include <SMS/SPC/SpcTypedInterp.hxx>
+#include <SMS/Strategic/LiveActor.hxx>
 
 template <typename T> class TSpcTypedBinary : public TSpcBinary {
 public:

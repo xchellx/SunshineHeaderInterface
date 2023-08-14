@@ -111,4 +111,4 @@ namespace JGadget {
         size_t mSize;
         TSingleLinkList mNode;
     };
-}
+}  // namespace JGadget

@@ -20,7 +20,6 @@
 #error "Unknown compiler; can't define ALIGNOF"
 #endif
 
-
 #define SMS_STRINGIZE_(x) #x
 #define SMS_STRINGIZE(x)  SMS_STRINGIZE_(x)
 
@@ -71,7 +70,7 @@
 #ifndef offsetof
 #define offsetof(t, d) ((size_t) & (((t *)0)->d))
 #endif
-//#define offsetof(t, d) __builtin_offsetof(t, d)
+// #define offsetof(t, d) __builtin_offsetof(t, d)
 #else
 #ifndef offsetof
 #define offsetof(t, d) ((size_t) & (((t *)0)->d))

@@ -2,9 +2,9 @@
 
 #include <Dolphin/types.h>
 
-#include <JSystem/JDrama/JDRFlagT.hxx>
 #include <JSystem/JDrama/JDRDisplay.hxx>
 #include <JSystem/JDrama/JDREfbCtrl.hxx>
+#include <JSystem/JDrama/JDRFlagT.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
 
 namespace JDrama {
@@ -29,4 +29,4 @@ namespace JDrama {
 
         TEfbCtrlDisp *getEfbCtrlDisp();
     };
-}
+}  // namespace JDrama

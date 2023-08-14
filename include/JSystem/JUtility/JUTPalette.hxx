@@ -3,11 +3,7 @@
 #include <Dolphin/GX.h>
 
 struct ResTLUT {
-    enum EFormat {
-        IA8 = 0,
-        RGB565 = 1,
-        RGB5A3 = 2
-    };
+    enum EFormat { IA8 = 0, RGB565 = 1, RGB5A3 = 2 };
 
     u8 mFormat;
     u8 mTransparency;

@@ -126,7 +126,9 @@ namespace JGadget {
                 return mCurrent != rhs.mCurrent;
             }
 
-            _GLIBCXX20_CONSTEXPR const_iterator operator+(int i) { return const_iterator(mCurrent + i); }
+            _GLIBCXX20_CONSTEXPR const_iterator operator+(int i) {
+                return const_iterator(mCurrent + i);
+            }
 
             _GLIBCXX20_CONSTEXPR const_iterator &operator+=(int i) {
                 mCurrent += i;
@@ -144,7 +146,9 @@ namespace JGadget {
                 return temp;
             }
 
-            _GLIBCXX20_CONSTEXPR const_iterator operator-(int i) { return const_iterator(mCurrent - i); }
+            _GLIBCXX20_CONSTEXPR const_iterator operator-(int i) {
+                return const_iterator(mCurrent - i);
+            }
 
             _GLIBCXX20_CONSTEXPR const_iterator &operator-=(int i) {
                 mCurrent -= i;

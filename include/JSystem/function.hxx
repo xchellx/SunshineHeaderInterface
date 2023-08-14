@@ -165,38 +165,32 @@ namespace JSystem {
     /// One of the @link arithmetic_functors math functors@endlink.
     template <typename _Tp> struct plus : public binary_function<_Tp, _Tp, _Tp> {
         /// Returns the sum
-        constexpr
-        _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x + __y; }
+        constexpr _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x + __y; }
     };
 
     /// One of the @link arithmetic_functors math functors@endlink.
     template <typename _Tp> struct minus : public binary_function<_Tp, _Tp, _Tp> {
-        constexpr
-        _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x - __y; }
+        constexpr _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x - __y; }
     };
 
     /// One of the @link arithmetic_functors math functors@endlink.
     template <typename _Tp> struct multiplies : public binary_function<_Tp, _Tp, _Tp> {
-        constexpr
-        _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x * __y; }
+        constexpr _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x * __y; }
     };
 
     /// One of the @link arithmetic_functors math functors@endlink.
     template <typename _Tp> struct divides : public binary_function<_Tp, _Tp, _Tp> {
-        constexpr
-        _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x / __y; }
+        constexpr _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x / __y; }
     };
 
     /// One of the @link arithmetic_functors math functors@endlink.
     template <typename _Tp> struct modulus : public binary_function<_Tp, _Tp, _Tp> {
-        constexpr
-        _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x % __y; }
+        constexpr _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x % __y; }
     };
 
     /// One of the @link arithmetic_functors math functors@endlink.
     template <typename _Tp> struct negate : public unary_function<_Tp, _Tp> {
-        constexpr
-        _Tp operator()(const _Tp &__x) const { return -__x; }
+        constexpr _Tp operator()(const _Tp &__x) const { return -__x; }
     };
 #pragma GCC diagnostic pop
 
@@ -266,8 +260,8 @@ namespace JSystem {
     /// One of the @link arithmetic_functors math functors@endlink.
     template <> struct negate<void> {
         template <typename _Tp>
-        constexpr auto operator()(_Tp &&__t) const
-            noexcept(noexcept(-forward<_Tp>(__t))) -> decltype(-forward<_Tp>(__t)) {
+        constexpr auto operator()(_Tp &&__t) const noexcept(noexcept(-forward<_Tp>(__t)))
+            -> decltype(-forward<_Tp>(__t)) {
             return -forward<_Tp>(__t);
         }
 
@@ -304,38 +298,32 @@ namespace JSystem {
 
     /// One of the @link comparison_functors comparison functors@endlink.
     template <typename _Tp> struct equal_to : public binary_function<_Tp, _Tp, bool> {
-        constexpr
-        bool operator()(const _Tp &__x, const _Tp &__y) const { return __x == __y; }
+        constexpr bool operator()(const _Tp &__x, const _Tp &__y) const { return __x == __y; }
     };
 
     /// One of the @link comparison_functors comparison functors@endlink.
     template <typename _Tp> struct not_equal_to : public binary_function<_Tp, _Tp, bool> {
-        constexpr
-        bool operator()(const _Tp &__x, const _Tp &__y) const { return __x != __y; }
+        constexpr bool operator()(const _Tp &__x, const _Tp &__y) const { return __x != __y; }
     };
 
     /// One of the @link comparison_functors comparison functors@endlink.
     template <typename _Tp> struct greater : public binary_function<_Tp, _Tp, bool> {
-        constexpr
-        bool operator()(const _Tp &__x, const _Tp &__y) const { return __x > __y; }
+        constexpr bool operator()(const _Tp &__x, const _Tp &__y) const { return __x > __y; }
     };
 
     /// One of the @link comparison_functors comparison functors@endlink.
     template <typename _Tp> struct less : public binary_function<_Tp, _Tp, bool> {
-        constexpr
-        bool operator()(const _Tp &__x, const _Tp &__y) const { return __x < __y; }
+        constexpr bool operator()(const _Tp &__x, const _Tp &__y) const { return __x < __y; }
     };
 
     /// One of the @link comparison_functors comparison functors@endlink.
     template <typename _Tp> struct greater_equal : public binary_function<_Tp, _Tp, bool> {
-        constexpr
-        bool operator()(const _Tp &__x, const _Tp &__y) const { return __x >= __y; }
+        constexpr bool operator()(const _Tp &__x, const _Tp &__y) const { return __x >= __y; }
     };
 
     /// One of the @link comparison_functors comparison functors@endlink.
     template <typename _Tp> struct less_equal : public binary_function<_Tp, _Tp, bool> {
-        constexpr
-        bool operator()(const _Tp &__x, const _Tp &__y) const { return __x <= __y; }
+        constexpr bool operator()(const _Tp &__x, const _Tp &__y) const { return __x <= __y; }
     };
 
     // Partial specialization of greater for pointers.
@@ -444,8 +432,8 @@ namespace JSystem {
 
         // False if we can call T.operator>(U)
         template <typename _Tp, typename _Up>
-        struct __not_overloaded2<
-            _Tp, _Up, __void_t<decltype(declval<_Tp>().operator>(declval<_Up>()))>>
+        struct __not_overloaded2<_Tp, _Up,
+                                 __void_t<decltype(declval<_Tp>().operator>(declval<_Up>()))>>
             : false_type {};
 
         // True if there is no overloaded operator> for these operands.
@@ -454,8 +442,8 @@ namespace JSystem {
 
         // False if we can call operator>(T,U)
         template <typename _Tp, typename _Up>
-        struct __not_overloaded<
-            _Tp, _Up, __void_t<decltype(operator>(declval<_Tp>(), declval<_Up>()))>>
+        struct __not_overloaded<_Tp, _Up,
+                                __void_t<decltype(operator>(declval<_Tp>(), declval<_Up>()))>>
             : false_type {};
 
         template <typename _Tp, typename _Up>
@@ -499,8 +487,8 @@ namespace JSystem {
 
         // False if we can call T.operator<(U)
         template <typename _Tp, typename _Up>
-        struct __not_overloaded2<
-            _Tp, _Up, __void_t<decltype(declval<_Tp>().operator<(declval<_Up>()))>>
+        struct __not_overloaded2<_Tp, _Up,
+                                 __void_t<decltype(declval<_Tp>().operator<(declval<_Up>()))>>
             : false_type {};
 
         // True if there is no overloaded operator< for these operands.
@@ -509,8 +497,8 @@ namespace JSystem {
 
         // False if we can call operator<(T,U)
         template <typename _Tp, typename _Up>
-        struct __not_overloaded<
-            _Tp, _Up, __void_t<decltype(operator<(declval<_Tp>(), declval<_Up>()))>>
+        struct __not_overloaded<_Tp, _Up,
+                                __void_t<decltype(operator<(declval<_Tp>(), declval<_Up>()))>>
             : false_type {};
 
         template <typename _Tp, typename _Up>
@@ -554,8 +542,8 @@ namespace JSystem {
 
         // False if we can call T.operator>=(U)
         template <typename _Tp, typename _Up>
-        struct __not_overloaded2<
-            _Tp, _Up, __void_t<decltype(declval<_Tp>().operator>=(declval<_Up>()))>>
+        struct __not_overloaded2<_Tp, _Up,
+                                 __void_t<decltype(declval<_Tp>().operator>=(declval<_Up>()))>>
             : false_type {};
 
         // True if there is no overloaded operator>= for these operands.
@@ -564,8 +552,8 @@ namespace JSystem {
 
         // False if we can call operator>=(T,U)
         template <typename _Tp, typename _Up>
-        struct __not_overloaded<
-            _Tp, _Up, __void_t<decltype(operator>=(declval<_Tp>(), declval<_Up>()))>>
+        struct __not_overloaded<_Tp, _Up,
+                                __void_t<decltype(operator>=(declval<_Tp>(), declval<_Up>()))>>
             : false_type {};
 
         template <typename _Tp, typename _Up>
@@ -609,8 +597,8 @@ namespace JSystem {
 
         // False if we can call T.operator<=(U)
         template <typename _Tp, typename _Up>
-        struct __not_overloaded2<
-            _Tp, _Up, __void_t<decltype(declval<_Tp>().operator<=(declval<_Up>()))>>
+        struct __not_overloaded2<_Tp, _Up,
+                                 __void_t<decltype(declval<_Tp>().operator<=(declval<_Up>()))>>
             : false_type {};
 
         // True if there is no overloaded operator<= for these operands.
@@ -619,8 +607,8 @@ namespace JSystem {
 
         // False if we can call operator<=(T,U)
         template <typename _Tp, typename _Up>
-        struct __not_overloaded<
-            _Tp, _Up, __void_t<decltype(operator<=(declval<_Tp>(), declval<_Up>()))>>
+        struct __not_overloaded<_Tp, _Up,
+                                __void_t<decltype(operator<=(declval<_Tp>(), declval<_Up>()))>>
             : false_type {};
 
         template <typename _Tp, typename _Up>
@@ -653,20 +641,17 @@ namespace JSystem {
 
     /// One of the @link logical_functors Boolean operations functors@endlink.
     template <typename _Tp> struct logical_and : public binary_function<_Tp, _Tp, bool> {
-        constexpr
-        bool operator()(const _Tp &__x, const _Tp &__y) const { return __x && __y; }
+        constexpr bool operator()(const _Tp &__x, const _Tp &__y) const { return __x && __y; }
     };
 
     /// One of the @link logical_functors Boolean operations functors@endlink.
     template <typename _Tp> struct logical_or : public binary_function<_Tp, _Tp, bool> {
-        constexpr
-        bool operator()(const _Tp &__x, const _Tp &__y) const { return __x || __y; }
+        constexpr bool operator()(const _Tp &__x, const _Tp &__y) const { return __x || __y; }
     };
 
     /// One of the @link logical_functors Boolean operations functors@endlink.
     template <typename _Tp> struct logical_not : public unary_function<_Tp, bool> {
-        constexpr
-        bool operator()(const _Tp &__x) const { return !__x; }
+        constexpr bool operator()(const _Tp &__x) const { return !__x; }
     };
 #pragma GCC diagnostic pop
 
@@ -698,8 +683,8 @@ namespace JSystem {
     /// One of the @link logical_functors Boolean operations functors@endlink.
     template <> struct logical_not<void> {
         template <typename _Tp>
-        constexpr auto operator()(_Tp &&__t) const
-            noexcept(noexcept(!forward<_Tp>(__t))) -> decltype(!forward<_Tp>(__t)) {
+        constexpr auto operator()(_Tp &&__t) const noexcept(noexcept(!forward<_Tp>(__t)))
+            -> decltype(!forward<_Tp>(__t)) {
             return !forward<_Tp>(__t);
         }
 
@@ -724,23 +709,19 @@ namespace JSystem {
     // _GLIBCXX_RESOLVE_LIB_DEFECTS
     // DR 660. Missing Bitwise Operations.
     template <typename _Tp> struct bit_and : public binary_function<_Tp, _Tp, _Tp> {
-        constexpr
-        _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x & __y; }
+        constexpr _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x & __y; }
     };
 
     template <typename _Tp> struct bit_or : public binary_function<_Tp, _Tp, _Tp> {
-        constexpr
-        _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x | __y; }
+        constexpr _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x | __y; }
     };
 
     template <typename _Tp> struct bit_xor : public binary_function<_Tp, _Tp, _Tp> {
-        constexpr
-        _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x ^ __y; }
+        constexpr _Tp operator()(const _Tp &__x, const _Tp &__y) const { return __x ^ __y; }
     };
 
     template <typename _Tp> struct bit_not : public unary_function<_Tp, _Tp> {
-        constexpr
-        _Tp operator()(const _Tp &__x) const { return ~__x; }
+        constexpr _Tp operator()(const _Tp &__x) const { return ~__x; }
     };
 #pragma GCC diagnostic pop
 
@@ -780,8 +761,8 @@ namespace JSystem {
 
     template <> struct bit_not<void> {
         template <typename _Tp>
-        constexpr auto operator()(_Tp &&__t) const
-            noexcept(noexcept(~forward<_Tp>(__t))) -> decltype(~forward<_Tp>(__t)) {
+        constexpr auto operator()(_Tp &&__t) const noexcept(noexcept(~forward<_Tp>(__t)))
+            -> decltype(~forward<_Tp>(__t)) {
             return ~forward<_Tp>(__t);
         }
 
@@ -826,17 +807,14 @@ namespace JSystem {
      */
     /// One of the @link negators negation functors@endlink.
     template <typename _Predicate>
-    class unary_negate
-        : public unary_function<typename _Predicate::argument_type, bool> {
+    class unary_negate : public unary_function<typename _Predicate::argument_type, bool> {
     protected:
         _Predicate _M_pred;
 
     public:
-        constexpr
-        explicit unary_negate(const _Predicate &__x) : _M_pred(__x) {}
+        constexpr explicit unary_negate(const _Predicate &__x) : _M_pred(__x) {}
 
-        constexpr
-        bool operator()(const typename _Predicate::argument_type &__x) const {
+        constexpr bool operator()(const typename _Predicate::argument_type &__x) const {
             return !_M_pred(__x);
         }
     };
@@ -849,19 +827,16 @@ namespace JSystem {
 
     /// One of the @link negators negation functors@endlink.
     template <typename _Predicate>
-    class binary_negate
-        : public binary_function<typename _Predicate::first_argument_type,
-                                 typename _Predicate::second_argument_type, bool> {
+    class binary_negate : public binary_function<typename _Predicate::first_argument_type,
+                                                 typename _Predicate::second_argument_type, bool> {
     protected:
         _Predicate _M_pred;
 
     public:
-        constexpr
-        explicit binary_negate(const _Predicate &__x) : _M_pred(__x) {}
+        constexpr explicit binary_negate(const _Predicate &__x) : _M_pred(__x) {}
 
-        constexpr
-        bool operator()(const typename _Predicate::first_argument_type &__x,
-                        const typename _Predicate::second_argument_type &__y) const {
+        constexpr bool operator()(const typename _Predicate::first_argument_type &__x,
+                                  const typename _Predicate::second_argument_type &__y) const {
             return !_M_pred(__x, __y);
         }
     };
@@ -913,7 +888,7 @@ namespace JSystem {
 
     /// One of the @link pointer_adaptors adaptors for function pointers@endlink.
     template <typename _Arg, typename _Result>
-    inline pointer_to_unary_function<_Arg, _Result> ptr_fun(_Result(*__x)(_Arg)) {
+    inline pointer_to_unary_function<_Arg, _Result> ptr_fun(_Result (*__x)(_Arg)) {
         return pointer_to_unary_function<_Arg, _Result>(__x);
     }
 
@@ -933,7 +908,7 @@ namespace JSystem {
 
     /// One of the @link pointer_adaptors adaptors for function pointers@endlink.
     template <typename _Arg1, typename _Arg2, typename _Result>
-    inline pointer_to_binary_function<_Arg1, _Arg2, _Result> ptr_fun(_Result(*__x)(_Arg1, _Arg2)) {
+    inline pointer_to_binary_function<_Arg1, _Arg2, _Result> ptr_fun(_Result (*__x)(_Arg1, _Arg2)) {
         return pointer_to_binary_function<_Arg1, _Arg2, _Result>(__x);
     }
     /** @}  */
@@ -1087,43 +1062,42 @@ namespace JSystem {
 
     // Mem_fun adaptor helper functions.  There are only two:
     // mem_fun and mem_fun_ref.
-    template <typename _Ret, typename _Tp>
-    inline mem_fun_t<_Ret, _Tp> mem_fun(_Ret(_Tp::*__f)()) {
+    template <typename _Ret, typename _Tp> inline mem_fun_t<_Ret, _Tp> mem_fun(_Ret (_Tp::*__f)()) {
         return mem_fun_t<_Ret, _Tp>(__f);
     }
 
     template <typename _Ret, typename _Tp>
-    inline const_mem_fun_t<_Ret, _Tp> mem_fun(_Ret(_Tp::*__f)() const) {
+    inline const_mem_fun_t<_Ret, _Tp> mem_fun(_Ret (_Tp::*__f)() const) {
         return const_mem_fun_t<_Ret, _Tp>(__f);
     }
 
     template <typename _Ret, typename _Tp>
-    inline mem_fun_ref_t<_Ret, _Tp> mem_fun_ref(_Ret(_Tp::*__f)()) {
+    inline mem_fun_ref_t<_Ret, _Tp> mem_fun_ref(_Ret (_Tp::*__f)()) {
         return mem_fun_ref_t<_Ret, _Tp>(__f);
     }
 
     template <typename _Ret, typename _Tp>
-    inline const_mem_fun_ref_t<_Ret, _Tp> mem_fun_ref(_Ret(_Tp::*__f)() const) {
+    inline const_mem_fun_ref_t<_Ret, _Tp> mem_fun_ref(_Ret (_Tp::*__f)() const) {
         return const_mem_fun_ref_t<_Ret, _Tp>(__f);
     }
 
     template <typename _Ret, typename _Tp, typename _Arg>
-    inline mem_fun1_t<_Ret, _Tp, _Arg> mem_fun(_Ret(_Tp::*__f)(_Arg)) {
+    inline mem_fun1_t<_Ret, _Tp, _Arg> mem_fun(_Ret (_Tp::*__f)(_Arg)) {
         return mem_fun1_t<_Ret, _Tp, _Arg>(__f);
     }
 
     template <typename _Ret, typename _Tp, typename _Arg>
-    inline const_mem_fun1_t<_Ret, _Tp, _Arg> mem_fun(_Ret(_Tp::*__f)(_Arg) const) {
+    inline const_mem_fun1_t<_Ret, _Tp, _Arg> mem_fun(_Ret (_Tp::*__f)(_Arg) const) {
         return const_mem_fun1_t<_Ret, _Tp, _Arg>(__f);
     }
 
     template <typename _Ret, typename _Tp, typename _Arg>
-    inline mem_fun1_ref_t<_Ret, _Tp, _Arg> mem_fun_ref(_Ret(_Tp::*__f)(_Arg)) {
+    inline mem_fun1_ref_t<_Ret, _Tp, _Arg> mem_fun_ref(_Ret (_Tp::*__f)(_Arg)) {
         return mem_fun1_ref_t<_Ret, _Tp, _Arg>(__f);
     }
 
     template <typename _Ret, typename _Tp, typename _Arg>
-    inline const_mem_fun1_ref_t<_Ret, _Tp, _Arg> mem_fun_ref(_Ret(_Tp::*__f)(_Arg) const) {
+    inline const_mem_fun1_ref_t<_Ret, _Tp, _Arg> mem_fun_ref(_Ret (_Tp::*__f)(_Arg) const) {
         return const_mem_fun1_ref_t<_Ret, _Tp, _Arg>(__f);
     }
 #pragma GCC diagnostic pop
@@ -1143,4 +1117,4 @@ namespace JSystem {
     using __has_is_transparent_t = typename __has_is_transparent<_Func, _SfinaeType>::type;
 #endif
 
-}
+}  // namespace JSystem

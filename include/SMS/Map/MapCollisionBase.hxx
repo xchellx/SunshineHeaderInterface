@@ -3,14 +3,10 @@
 #include <Dolphin/types.h>
 #include <JSystem/JGeometry/JGMVec.hxx>
 
-#include <SMS/Strategic/LiveActor.hxx>
 #include <SMS/Map/BGCheck.hxx>
+#include <SMS/Strategic/LiveActor.hxx>
 
-enum CollisionType {
-    COLLISION_STATIC,
-    COLLISION_MOVE,
-    COLLISION_WARP
-};
+enum CollisionType { COLLISION_STATIC, COLLISION_MOVE, COLLISION_WARP };
 
 class TMapCollisionBase {
 public:

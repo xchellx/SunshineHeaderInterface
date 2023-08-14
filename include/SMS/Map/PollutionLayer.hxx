@@ -1,8 +1,8 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <SMS/Map/PollutionPos.hxx>
 #include <SMS/Map/JointModel.hxx>
+#include <SMS/Map/PollutionPos.hxx>
 
 enum PollutionType {
     POLLUTION_SINK,

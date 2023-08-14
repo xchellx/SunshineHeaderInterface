@@ -1,16 +1,16 @@
 #pragma once
 
-#include <Dolphin/types.h>
 #include <Dolphin/MTX.h>
+#include <Dolphin/types.h>
 
 #include <JSystem/JUtility/JUTColor.hxx>
 #include <JSystem/JUtility/JUTTexture.hxx>
 
 extern "C" {
-	void ReInitializeGX();
+void ReInitializeGX();
 
-	extern JUtility::TColor ColorWhite;
-	extern JUtility::TColor ColorBlack;
+extern JUtility::TColor ColorWhite;
+extern JUtility::TColor ColorBlack;
 }
 
 void ReInitGeometry();

@@ -6,11 +6,11 @@
 #include <JSystem/JGadget/Vector.hxx>
 #include <JSystem/JUtility/JUTConsole.hxx>
 
+#include <SMS/GC2D/SMSFader.hxx>
 #include <SMS/Player/Mario.hxx>
 #include <SMS/System/GameSequence.hxx>
 #include <SMS/System/MarDirector.hxx>
 #include <SMS/System/MarNameRefGen.hxx>
-#include <SMS/GC2D/SMSFader.hxx>
 
 class TApplication {
 public:
@@ -55,7 +55,7 @@ public:
     TSMSFader *mFader;                                                      // 0x0034
     u8 mCurrentSaveBlock;
     u32 _3C;
-    JKRHeap *mCurrentHeap;                                                  // 0x0040
+    JKRHeap *mCurrentHeap;  // 0x0040
     u16 _44;
 };
 

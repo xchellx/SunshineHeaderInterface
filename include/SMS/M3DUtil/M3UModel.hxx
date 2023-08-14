@@ -20,11 +20,11 @@ public:
     void updateInMotion();
     void updateInTexPatternAnm();
 
-    void *_04;          // 0x0000
-    J3DModel *mModel;   // 0x0008
-    J3DFrameCtrl *mFrameCtrl; // 0x000C
+    void *_04;                 // 0x0000
+    J3DModel *mModel;          // 0x0008
+    J3DFrameCtrl *mFrameCtrl;  // 0x000C
     u32 _10[0x2C / 4];
-    u32 mLightID;       // _3C
+    u32 mLightID;  // _3C
     u8 _40;
     u32 mLightType;  // _44
 };

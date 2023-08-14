@@ -1,10 +1,10 @@
 #pragma once
 
-#include <Dolphin/types.h>
 #include <Dolphin/GX.h>
+#include <Dolphin/types.h>
 
-#include <JSystem/JDrama/JDRViewObj.hxx>
 #include <JSystem/JDrama/JDRRect.hxx>
+#include <JSystem/JDrama/JDRViewObj.hxx>
 
 namespace JDrama {
     class TEfbCtrl : public TViewObj {
@@ -41,4 +41,4 @@ namespace JDrama {
 
         void perform(u32, JDrama::TGraphics *) override;
     };
-}
+}  // namespace JDrama

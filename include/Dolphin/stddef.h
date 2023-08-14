@@ -19,8 +19,8 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
 /*
  * ISO C Standard:  7.17  Common definitions  <type_traits.h>
  */
-#if (!defined(_type_traits_H) && !defined(_type_traits_H_) && !defined(_ANSI_type_traits_H) &&                    \
-     !defined(__type_traits_H__)) ||                                                                    \
+#if (!defined(_type_traits_H) && !defined(_type_traits_H_) && !defined(_ANSI_type_traits_H) &&     \
+     !defined(__type_traits_H__)) ||                                                               \
     defined(__need_wchar_t) || defined(__need_size_t) || defined(__need_ptrdiff_t) ||              \
     defined(__need_NULL) || defined(__need_wint_t)
 
@@ -443,11 +443,11 @@ typedef __typeof__(nullptr) nullptr_t;
 #endif /* C23.  */
 
 #if defined __STDC_VERSION__ && __STDC_VERSION__ > 201710L
-#define unreachable()             (__builtin_unreachable())
+#define unreachable()                  (__builtin_unreachable())
 #define __STDC_VERSION_type_traits_H__ 202311L
 #endif
 
 #endif /* _type_traits_H was defined this time */
 
-#endif /* !_type_traits_H && !_type_traits_H_ && !_ANSI_type_traits_H && !__type_traits_H__                            \
+#endif /* !_type_traits_H && !_type_traits_H_ && !_ANSI_type_traits_H && !__type_traits_H__        \
       || __need_XXX was not defined before */

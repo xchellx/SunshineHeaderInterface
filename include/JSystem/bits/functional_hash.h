@@ -30,8 +30,8 @@
 #ifndef _FUNCTIONAL_HASH_H
 #define _FUNCTIONAL_HASH_H 1
 
-#include <JSystem/bits/hash_bytes.h>
 #include <JSystem/bits/c++config.h>
+#include <JSystem/bits/hash_bytes.h>
 #include <JSystem/type_traits.hxx>
 
 namespace JSystem {
@@ -241,6 +241,6 @@ namespace JSystem {
     template <> struct __is_fast_hash<hash<long double>> : public JSystem::false_type {};
 
     _GLIBCXX_END_NAMESPACE_VERSION
-}  // namespace )
+}  // namespace JSystem
 
 #endif  // _FUNCTIONAL_HASH_H

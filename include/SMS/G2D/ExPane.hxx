@@ -2,8 +2,8 @@
 
 #include <Dolphin/types.h>
 #include <JSystem/J2D/J2DPane.hxx>
-#include <JSystem/JUtility/JUTRect.hxx>
 #include <JSystem/JUtility/JUTPoint.hxx>
+#include <JSystem/JUtility/JUTRect.hxx>
 #include <SMS/GC2D/Coord2D.hxx>
 
 class TExPane {

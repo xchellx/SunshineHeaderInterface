@@ -4,10 +4,10 @@
 
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JGeometry/JGMVec.hxx>
-#include <SMS/Strategic/HitActor.hxx>
-#include <SMS/Strategic/TakeActor.hxx>
 #include <SMS/Map/MapCheck.hxx>
 #include <SMS/MapObj/MapObjBase.hxx>
+#include <SMS/Strategic/HitActor.hxx>
+#include <SMS/Strategic/TakeActor.hxx>
 
 class TMapObjGeneral : public TMapObjBase {
 public:

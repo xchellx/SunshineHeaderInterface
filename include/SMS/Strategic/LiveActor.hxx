@@ -5,16 +5,16 @@
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JGeometry/JGMVec.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
+#include <SMS/Enemy/SpineBase.hxx>
+#include <SMS/M3DUtil/LodAnm.hxx>
 #include <SMS/M3DUtil/MActor.hxx>
 #include <SMS/M3DUtil/MActorKeeper.hxx>
-#include <SMS/MarioUtil/RidingInfo.hxx>
-#include <SMS/Enemy/SpineBase.hxx>
-#include <SMS/Strategic/TakeActor.hxx>
-#include <SMS/Map/BGCheck.hxx>
-#include <SMS/M3DUtil/LodAnm.hxx>
+#include <SMS/MSound/MAnmSound.hxx>
 #include <SMS/Manager/LiveManager.hxx>
 #include <SMS/Manager/MapCollisionManager.hxx>
-#include <SMS/MSound/MAnmSound.hxx>
+#include <SMS/Map/BGCheck.hxx>
+#include <SMS/MarioUtil/RidingInfo.hxx>
+#include <SMS/Strategic/TakeActor.hxx>
 
 class TLiveActor : public TTakeActor {
 

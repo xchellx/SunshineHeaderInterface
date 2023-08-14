@@ -17,7 +17,9 @@ namespace JGadget {
         typedef const _T &const_reference;
         typedef size_t size_type;
         typedef ptrdiff_t difference_type;
-        template <class U> struct rebind { typedef TAllocator<U> other; };
+        template <class U> struct rebind {
+            typedef TAllocator<U> other;
+        };
 
         _GLIBCXX20_CONSTEXPR TAllocator() _GLIBCXX_USE_NOEXCEPT                        = default;
         _GLIBCXX20_CONSTEXPR TAllocator(const TAllocator &other) _GLIBCXX_USE_NOEXCEPT = default;

@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Dolphin/types.h>
 #include <Dolphin/GX.h>
-#include <SMS/MoveBG/Item.hxx>
+#include <Dolphin/types.h>
 #include <SMS/MapObj/MapObjGeneral.hxx>
+#include <SMS/MoveBG/Item.hxx>
 
 class TNozzleBox : public TMapObjGeneral {
 public:
@@ -16,12 +16,12 @@ public:
 
     void makeModelValid();
 
-    u32 mNozzleType;  // 0x0148
-    TItem *mNozzleItem;  // 0x014C
-    f32 mThrowLength;    // 0x0150
-    f32 mThrowHeight;    // 0x0154
-    const char *mBoxName;     // 0x0158
-    bool mIsValid;       // 0x015C
-    GXColorS10 mMatColor; // 0x015E
+    u32 mNozzleType;       // 0x0148
+    TItem *mNozzleItem;    // 0x014C
+    f32 mThrowLength;      // 0x0150
+    f32 mThrowHeight;      // 0x0154
+    const char *mBoxName;  // 0x0158
+    bool mIsValid;         // 0x015C
+    GXColorS10 mMatColor;  // 0x015E
     bool mBalloonShown;
 };
