@@ -4,7 +4,8 @@
 #include <JSystem/JGeometry/JGMVec.hxx>
 
 #include <SMS/Map/BGCheck.hxx>
-#include <SMS/Strategic/LiveActor.hxx>
+
+class TLiveActor;
 
 enum CollisionType { COLLISION_STATIC, COLLISION_MOVE, COLLISION_WARP };
 

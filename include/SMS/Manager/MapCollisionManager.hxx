@@ -1,3 +1,5 @@
+#pragma once
+
 #include <Dolphin/types.h>
 #include <SMS/Map/MapCollisionBase.hxx>
 

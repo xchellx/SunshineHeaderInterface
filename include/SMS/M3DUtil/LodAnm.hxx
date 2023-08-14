@@ -1,7 +1,8 @@
 #pragma once
 
 #include <Dolphin/types.h>
-#include <SMS/Strategic/LiveActor.hxx>
+
+class TLiveActor;
 
 class TLodAnmIndex {};
 
