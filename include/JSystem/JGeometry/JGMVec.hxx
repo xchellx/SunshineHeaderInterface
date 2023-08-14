@@ -133,10 +133,18 @@ namespace JGeometry {
             return *this;
         }
 
-        TVec3 operator+(const TVec3 &other) const { return {x + other.x, y + other.y, z + other.z}; }
-        TVec3 operator-(const TVec3 &other) const { return {x - other.x, y - other.y, z - other.z}; }
-        TVec3 operator*(const TVec3 &other) const { return {x * other.x, y * other.y, z * other.z}; }
-        TVec3 operator/(const TVec3 &other) const { return {x / other.x, y / other.y, z / other.z}; }
+        TVec3 operator+(const TVec3 &other) const {
+            return {x + other.x, y + other.y, z + other.z};
+        }
+        TVec3 operator-(const TVec3 &other) const {
+            return {x - other.x, y - other.y, z - other.z};
+        }
+        TVec3 operator*(const TVec3 &other) const {
+            return {x * other.x, y * other.y, z * other.z};
+        }
+        TVec3 operator/(const TVec3 &other) const {
+            return {x / other.x, y / other.y, z / other.z};
+        }
 
         void set(const TVec3 &other) {
             x = other.x;
