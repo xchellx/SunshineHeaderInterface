@@ -4,7 +4,14 @@
 #include <JSystem/JDrama/JDRDirector.hxx>
 #include <JSystem/JDrama/JDRDisplay.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
+#include <JSystem/JDrama/JDRScreen.hxx>
+#include <JSystem/JKernel/JKRMemArchive.hxx>
+#include <JSystem/JParticle/JPAResourceManager.hxx>
 #include <SMS/Player/Mario.hxx>
+#include <SMS/Player/MarioGamePad.hxx>
+#include <SMS/GC2D/SelectMenu.hxx>
+#include <SMS/GC2D/SelectGrad.hxx>
+#include <SMS/Manager/SelectShineManager.hxx>
 
 class TSelectDir : public JDrama::TDirector {
 public:
@@ -15,21 +22,21 @@ public:
 
     void changeOrder();
     void rsetup();
-    s32 setup(JDrama::TDisplay *, TMarioGamePad *, u8 areaID);
+    s32 setup(JDrama::TDisplay *display, TMarioGamePad *controller, u8 areaID);
     void setupThreadFunc(void *);
 
-    u32 _18;
-    u32 _1C;
-    u32 _20;
-    u32 _24;
-    u32 _28;
-    u32 _2C;
-    u32 _30;
-    u32 _34;
-    u8 _38;
+    TMarioGamePad *mController;
+    JDrama::TDisplay *mDisplay;
+    TSelectMenu *mMenu;
+    TSelectGrad *mGradient;
+    TSelectShineManager *mManager;
+    JKRMemArchive *mArchive;
+    void *mEmitterManager1;  // JPAEmitterManager *
+    void *mEmitterManager2;  // JPAEmitterManager *
+    bool mIsInitialized;
     u32 _3C;
-    u8 _40;
-    u32 _44;
-    u32 _48;
-    u8 _4C;
+    u8 mAreaID;
+    JDrama::TScreen *mScreen1;
+    JDrama::TScreen *mScreen2;
+    bool mIsResetting;
 };
