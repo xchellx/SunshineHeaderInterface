@@ -31,24 +31,23 @@ public:
     J2DPane *mPaneDynName;           // 0x0030
     TBoundPane *mBoundPaneDynName1;  // 0x0034
     TBoundPane *mBoundPaneDynName2;  // 0x0038
-
+    u32 _3C;
     TExPane *mS_0;             // 0x0040
     J2DTextBox *mSttxTextBox;  // 0x0044
     J2DPicture *mPicture0;     // 0x0048
     J2DPicture *mPicture1;     // 0x004C
-
+    u32 _50[0x18 / 4];
     TExPane *m0_0;             // 0x0068
     J2DTextBox *m0ttxTextBox;  // 0x006C
-
+    u32 _70[0x10 / 4];
     JUTTexture *mShineCountNumberTex[8];  // 0x0080
     J2DPane *mI_0;                        // 0x00A0
     J2DPane *mSc_0;                       // 0x00A4
-
     JUTTexture *mCoinCountNumberTex[10];  // 0x00A8
-
+    u32 _D0[0x34 / 4];
     J2DPane *mA_l;  // 0x0104
     J2DPane *mA_r;  // 0x0108
-
+    u32 _10C;
     int mPosX1_0;                   // 0x0110
     int mPosX2_0;                   // 0x0114
     int mPosX1_1;                   // 0x0118
@@ -59,11 +58,13 @@ public:
     int mPosX2_3;                   // 0x012C
     TSelectShineManager *mManager;  // 0x0130
     TSelectDir *mDir;               // 0x0134
-
+    u16 _138;
     u8 mAreaID;     // 0x013A
     s8 mEpisodeID;  // 0x013B
-    s8 mNextIndex;      // ? | 0x013C
-
+    s8 mNextIndex;  // ? | 0x013C
+    u32 _140;
+    u32 _144;
+    u32 _148;
     f32 mAnmDeltaTime;      // 0x014C
     u8 mSelectionState[8];  // 0x0150
 };
