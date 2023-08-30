@@ -41,9 +41,11 @@ public:
 
     u16 _0C;
     TEProgress mProgress;
-    u32 mState;         // 0x0014
-    u32 _18[0x98 / 4];  // 0x0018
-    u8 mSelected;       // 0x00B0
+    u32 mState;                       // 0x0014
+    u32 _18[0x28 / 4];                // 0x0018
+    TCardBookmarkInfo mBookmarkInfo;  // 0x0040
+    u32 _A4[0xC / 4];                 // 0x00A4
+    u8 mSelected;                     // 0x00B0
     u8 _B1[0xF];
     s32 mFramesOpen;     // 0x00C0
     u32 _C4[0x60 / 4];   // 0x00C4

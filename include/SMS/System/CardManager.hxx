@@ -7,11 +7,23 @@
 
 class TCardBookmarkInfo {
 public:
-    struct {
-        u32 _00[0x1C / 4];  // 0x0000
+    struct TBlockData {
+        enum EBlockState {
+            READY,
+            CORRUPT,
+        };
+
+        EBlockState mState;
+        u32 _04;           // Always 4?
+        OSTime mLastSave;  // 0x0008
+        u32 _10;
+        u32 _14;
+        size_t mSaveCount;  // 0x0018
         u16 mShineCount;    // 0x001C
         u16 _01;            // 0x001E
-    } FileData[3];
+    };
+
+    TBlockData mFileData[3];
 };
 
 class TCardManager {
@@ -34,8 +46,10 @@ public:
     class TCriteria {
     public:
         enum TEBlockStat {
-            SETTING = 1,
-            COPYING = 3,
+            SAVING,
+            ERASING,
+            INVALID,
+            VALID,
         };
 
         TCriteria();
@@ -43,8 +57,14 @@ public:
         void set(TEBlockStat, size_t, const void *);
 
         TEBlockStat mBlockStat;
-        u32 _04;  //?
-        u8 mBuffer[32];
+        size_t mSectorSaveCount;  // 0x0004
+        u32 _08;                  // Always 4?
+        OSTime mLastSave;         // 0x000C
+        u32 _14;                  //?
+        u32 _18;                  //?
+        size_t mBlockSaveCount;   // 0x001C
+        u16 mShineCount;          // 0x0020
+        u32 _24;                  //?
     };
 
     TCardManager(void *, void *, s32, s32, void *, size_t);
@@ -94,7 +114,7 @@ public:
     OSCond mCond;
     TCardBookmarkInfo *mBookMarks;  // 0x046C
     u32 _470;
-    Blocks mSaveBlock;              // 0x0474
+    Blocks mSaveBlock;  // 0x0474
 };
 
 void cardmain(void *);
