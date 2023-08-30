@@ -93,6 +93,7 @@ public:
     OSMutex mMutex;
     OSCond mCond;
     TCardBookmarkInfo *mBookMarks;  // 0x046C
+    u32 _470;
     Blocks mSaveBlock;              // 0x0474
 };
 
