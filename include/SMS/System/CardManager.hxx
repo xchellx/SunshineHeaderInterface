@@ -4,6 +4,7 @@
 #include <Dolphin/OS.h>
 #include <Dolphin/types.h>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
+#include <SMS/macros.h>
 
 class TCardBookmarkInfo {
 public:
@@ -43,7 +44,7 @@ public:
 
     enum Blocks { BLOCK_A, BLOCK_B, BLOCK_C };
 
-    class TCriteria {
+    SMS_PACKED_CLASS(TCriteria) {
     public:
         enum TEBlockStat {
             SAVING,
@@ -64,6 +65,7 @@ public:
         u32 _18;                  //?
         size_t mBlockSaveCount;   // 0x001C
         u16 mShineCount;          // 0x0020
+        u16 __padding;            // 0x0022
         u32 _24;                  //?
     };
 
