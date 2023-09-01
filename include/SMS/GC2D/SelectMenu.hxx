@@ -36,7 +36,9 @@ public:
     J2DTextBox *mSttxTextBox;  // 0x0044
     J2DPicture *mPicture0;     // 0x0048
     J2DPicture *mPicture1;     // 0x004C
-    u32 _50[0x18 / 4];
+    u32 _50;
+    bool _54;
+    JUTRect _58;
     TExPane *m0_0;             // 0x0068
     J2DTextBox *m0ttxTextBox;  // 0x006C
     u32 _70[0x10 / 4];
@@ -44,27 +46,33 @@ public:
     J2DPane *mI_0;                        // 0x00A0
     J2DPane *mSc_0;                       // 0x00A4
     JUTTexture *mCoinCountNumberTex[10];  // 0x00A8
-    u32 _D0[0x34 / 4];
+    JUTTexture *mScMark1;
+    JUTTexture *mScMark0;
+    u32 _D8[0x2C / 4];
     J2DPane *mA_l;  // 0x0104
     J2DPane *mA_r;  // 0x0108
-    u32 _10C;
-    int mPosX1_0;                   // 0x0110
-    int mPosX2_0;                   // 0x0114
-    int mPosX1_1;                   // 0x0118
-    int mPosX2_1;                   // 0x011C
-    int mPosX1_2;                   // 0x0120
-    int mPosX2_2;                   // 0x0124
-    int mPosX1_3;                   // 0x0128
-    int mPosX2_3;                   // 0x012C
+    bool _10C;
+    u8 _10D;
+    JUTRect mLeftArrowPos;          // 0x0110
+    JUTRect mRightArrowPos;         // 0x0120
     TSelectShineManager *mManager;  // 0x0130
     TSelectDir *mDir;               // 0x0134
-    u16 _138;
-    u8 mAreaID;     // 0x013A
-    s8 mEpisodeID;  // 0x013B
-    s8 mNextIndex;  // ? | 0x013C
-    u32 _140;
-    u32 _144;
-    u32 _148;
-    f32 mAnmDeltaTime;      // 0x014C
-    u8 mSelectionState[8];  // 0x0150
+    u8 _138;
+    u8 mCloseTime;
+    u8 mAreaID;                         // 0x013A
+    s8 mEpisodeID;                      // 0x013B
+    s8 mEpisodeCount;                   // 0x013C
+    JUtility::TColor mSelectedColor;    // 0x0140
+    JUtility::TColor mUnselectedColor;  // 0x0144
+    u8 mSelectedFlickerTime;            // 0x0148
+    u8 mUnselectedAlphaMix;             // 0x0149
+    f32 mAnmDeltaTime;                  // 0x014C
+    u8 mSelectionState[8];              // 0x0150
+    void *mStageBMGData;                // 0x0158
+    void *mScenarioBMGData;             // 0x015C
+    JUtility::TColor _160;              // 0x0160
+    JUtility::TColor _164;              // 0x0164
+    s16 _168;
+    s16 _16A;
+    s16 mCloseDuration;
 };
