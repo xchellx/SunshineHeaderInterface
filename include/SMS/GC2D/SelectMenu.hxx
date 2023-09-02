@@ -62,6 +62,7 @@ public:
     u8 mAreaID;                         // 0x013A
     s8 mEpisodeID;                      // 0x013B
     s8 mEpisodeCount;                   // 0x013C
+    u16 _13E;
     JUtility::TColor mSelectedColor;    // 0x0140
     JUtility::TColor mUnselectedColor;  // 0x0144
     u8 mSelectedFlickerTime;            // 0x0148
