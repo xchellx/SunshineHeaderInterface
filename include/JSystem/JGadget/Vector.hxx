@@ -189,9 +189,7 @@ namespace JGadget {
             insert(end(), count, value);
         }
 #else
-        explicit TVector(size_type count, const value_type &value = value_type(),
-                         const allocator_type &allocator = allocator_type())
-            : TVector(allocator) {
+        explicit TVector(size_type count, const value_type &value) : TVector(allocator_type()) {
             insert(end(), count, value);
         }
 #endif
