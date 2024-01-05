@@ -477,7 +477,7 @@ namespace JGadget {
             }
         }
 #else
-        void resize(size_type s, value_type value = value_type()) {
+        void resize(size_type s, value_type value) {
             const size_type currentSize = size();
             if (s == currentSize)
                 return;
