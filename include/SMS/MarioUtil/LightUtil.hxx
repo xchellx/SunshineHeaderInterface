@@ -1,3 +1,5 @@
+#pragma once
+
 #include <JDrama/JDRViewObj.hxx>
 #include <JGeometry/JGMVec.hxx>
 #include <JUtility/JUTColor.hxx>

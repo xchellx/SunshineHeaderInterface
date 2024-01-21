@@ -19,3 +19,5 @@ f32 MsSin(f32);
 f32 MsVECMag2(Vec *);
 f32 MsVECNormalize(Vec *src, Vec *out);
 template <typename T> T MsWrap(T value, T min, T max);
+
+void SMSCalcJumpVelocityXZ(const TVec3f &to, const TVec3f &from, f32 z, f32 y, TVec3f *out);
