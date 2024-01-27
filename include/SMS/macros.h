@@ -49,19 +49,19 @@
 #define SMS_REGISTER register
 #define SMS_ASM_FUNC asm
 #define SMS_ASM_BLOCK
-#define SMS_PACKED_CLASS(name)      class __attribute__((packed)) name
+#define SMS_PACKED_CLASS(name)  class __attribute__((packed)) name
 #define SMS_PACKED_STRUCT(name) struct __attribute__((packed)) name
 #else
 #define SMS_REGISTER
 #ifdef _MSC_VER
-#define SMS_ASM_FUNC                 __declspec(naked)
-#define SMS_ASM_BLOCK                __asm volatile
-#define SMS_PACKED_CLASS(name)      __pragma(pack(push, 1)) class name __pragma(pack(pop))
+#define SMS_ASM_FUNC            __declspec(naked)
+#define SMS_ASM_BLOCK           __asm volatile
+#define SMS_PACKED_CLASS(name)  __pragma(pack(push, 1)) class name __pragma(pack(pop))
 #define SMS_PACKED_STRUCT(name) __pragma(pack(push, 1)) struct name __pragma(pack(pop))
 #else
-#define SMS_ASM_FUNC                 __attribute__((naked))
-#define SMS_ASM_BLOCK                asm volatile
-#define SMS_PACKED_CLASS(name)      class __attribute__((packed)) name
+#define SMS_ASM_FUNC            __attribute__((naked))
+#define SMS_ASM_BLOCK           asm volatile
+#define SMS_PACKED_CLASS(name)  class __attribute__((packed)) name
 #define SMS_PACKED_STRUCT(name) struct __attribute__((packed)) name
 #endif
 #endif

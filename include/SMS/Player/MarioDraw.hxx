@@ -10,18 +10,17 @@ public:
 };
 
 struct TMarioAnimeData {
-    enum FLUDD { FLUDD_ENABLED = 68, FLUDD_DISABLED = 200 };
-    enum HAND { HAND_A, HAND_B, HAND_C };
+    enum EHand { HAND_A, HAND_B, HAND_C };
+    enum EBodyFlags { JIGGLE_PHYS = (1 << 1), FLUDD_GRIP = (1 << 2) };
 
     bool isPumpOK() const;
 
     u16 mAnimID;
-    u16 mFluddEnabled;  // Note: ENUM? 68 = enabled, 200 = disabled
+    u16 mAnimFluddID;   // Note: Goes unused except for sentinel case which disables fludd.
     u8 mAnmTexPattern;  // Note: 23 is the max value allowed
-    u8 mMarioHand;      // Note: 1, 2, and 3 seem to be valid values, this determines
-                        // the hand model used(?)
-    u8 mBodyFlags;      // Note: If bit 30 is set (0x2), enables jiggle physics
-    u8 unk_2;           // Note: Value seems to be set but is never used?
+    u8 mMarioHand;
+    u8 mBodyFlags;
+    u8 unk_0;  // Note: Value seems to be set but is never used?
 };
 
 extern TMarioAnimeData gMarioAnimeData[336];
