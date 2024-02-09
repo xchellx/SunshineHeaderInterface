@@ -33,8 +33,8 @@ public:
     void manageObj(THitActor *obj);
 
     size_t mMaxObjs;  // _10
-    u32 _14;          // I think this is obj number
-    u32 *_18;
+    size_t mObjCount; // _14
+    JDrama::TViewObj *mObjAry;
     TObjChara *mObjChara;
     u32 _20;
     u32 _24;
