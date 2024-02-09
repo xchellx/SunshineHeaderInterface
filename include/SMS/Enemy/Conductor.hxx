@@ -4,7 +4,9 @@
 #include <JSystem/JDrama/JDRGraphics.hxx>
 #include <JSystem/JDrama/JDRNameRef.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
+#include <JSystem/JGadget/List.hxx>
 #include <JSystem/JGeometry/JGMVec.hxx>
+#include <SMS/Graph/GraphGroup.hxx>
 #include <SMS/Graph/GraphWeb.hxx>
 #include <SMS/Manager/LiveManager.hxx>
 #include <SMS/Strategic/LiveActor.hxx>
@@ -60,14 +62,14 @@ public:
     void registerOtherObj(JDrama::TViewObj *);
     void registerSDLModelData(void * /*SDLModelData*/);
 
-    TConductorPacket _10;
-    TConductorPacket _20;
-    TConductorPacket _30;
-    TConductorPacket _40;
-    TConductorPacket _50;
-    TConductorPacket _60;
-    TConductorPacket _70;
-    u32 _80;
+    JGadget::TList<TLiveActor *> _10;
+    JGadget::TList<TLiveActor *> _20;
+    JGadget::TList<TLiveActor *> _30;
+    JGadget::TList<TLiveActor *> _40;
+    JGadget::TList<TLiveActor *> _50;
+    JGadget::TList<TLiveActor *> _60;
+    JGadget::TList<TLiveActor *> _70;
+    TGraphGroup *mGraphGroup;
     TConductorParams mParams;
     u32 _F0;
     void *mNpcParams;  // TNpcParams *
