@@ -62,6 +62,7 @@ public:
     void registerOtherObj(JDrama::TViewObj *);
     void registerSDLModelData(void * /*SDLModelData*/);
 
+    u32 _0C;
     JGadget::TList<TLiveActor *> _10;
     JGadget::TList<TLiveActor *> _20;
     JGadget::TList<TLiveActor *> _30;
