@@ -357,9 +357,9 @@ namespace JGadget {
 
         iterator begin() _GLIBCXX_NOEXCEPT { return iterator(mBegin); }
         const_iterator begin() const _GLIBCXX_NOEXCEPT { return const_iterator(mBegin); }
-        iterator end() _GLIBCXX_NOEXCEPT { return iterator(reinterpret_cast<TNode_ *>(&mBegin)); }
+        iterator end() _GLIBCXX_NOEXCEPT { return iterator(reinterpret_cast<TNode_ *>(&mEnd)); }
         const_iterator end() const _GLIBCXX_NOEXCEPT {
-            return const_iterator(reinterpret_cast<const TNode_ *>(&mBegin));
+            return const_iterator(reinterpret_cast<const TNode_ *>(&mEnd));
         }
 
 #if __cplusplus >= 201103L
