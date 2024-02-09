@@ -34,7 +34,7 @@ public:
 
     size_t mMaxObjs;  // _10
     size_t mObjCount; // _14
-    JDrama::TViewObj *mObjAry;
+    JDrama::TViewObj **mObjAry;
     TObjChara *mObjChara;
     u32 _20;
     u32 _24;
