@@ -50,8 +50,8 @@ enum MSStageInfo {
     BGM_MONTE_LAST      = 0x8001002C,
     BGM_SHINE_APPEAR    = 0x8001002D,
     BGM_KUPPA           = 0x8001002E,
-    BGM_MONTEMAN_RACE   = 0x8001002F,
-    BGM_SPACEWORLD      = 0x80011030,
+    BGM_MONTEMAN_RA     = 0x8001002F,
+    BGM_SPACEWORLD      = 0x80011030
 };
 
 class MSBgm {
