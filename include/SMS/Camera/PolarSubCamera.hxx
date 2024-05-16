@@ -132,7 +132,12 @@ public:
     Mtx mProjectionMatrix;  // 0x016C
     u32 _19C[0x50 / 4];
     Mtx mTRSMatrix;  // 0x01EC
-    u32 _21C[0x134 / 4];
+    u32 _21C[0x38 / 4];
+    u16 _254;
+    u16 mAnglePitch;  // 0x0256   matan(sqrtf((cam.x - mar.x) * (cam.x - mar.x) + (cam.z - mar.z) *
+                      //                (cam.z - mar.z)), cam.y - mar.y);
+    u16 mAngleYaw;    // 0x0258   matan(cam.z - mar.z, cam.x - mar.x);
+    u32 _25C[0xF4 / 4];
 
     static char *mCamKindNameSaveFile[73];
 };
