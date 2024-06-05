@@ -64,3 +64,5 @@ public:
     u16 _98;
     u16 _9A;
 };
+
+extern TMapObjWave *gpMapObjWave;
