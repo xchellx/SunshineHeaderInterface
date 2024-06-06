@@ -2,6 +2,7 @@
 #include <Dolphin/types.h>
 
 #include <JSystem/JDrama/JDRGraphics.hxx>
+#include <SMS/System/MarNameRefGen.hxx>
 #include <JSystem/JDrama/JDRViewObj.hxx>
 #include <JSystem/JGadget/Vector.hxx>
 #include <JSystem/JSupport/JSUMemoryStream.hxx>
@@ -20,9 +21,15 @@ public:
     s32 getInCubeNo(const Vec &pos) const;
     bool isInCube(const Vec &pos, s32) const;
 
+    template <typename CubeT>
+    inline TNameRefPtrAryT<CubeT> *getCubeInfo() {
+        return static_cast<TNameRefPtrAryT<CubeT> *>(mCubeInfo);
+    }
+
+    u16 _0E;
     u8 mCubeMax;
-    JGadget::TVector_pointer_void *mCubes;
-    const char *_18;
+    void *mCubeInfo;
+    const char *mCubeKey;
 };
 
 extern TCubeManagerBase *gpCubeMirror;
