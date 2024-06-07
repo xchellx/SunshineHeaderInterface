@@ -10,4 +10,10 @@ public:
 
     void calcPosAndAt(TVec3f *, TVec3f *) const;
     void load(JSUMemoryInputStream &);
+
+    TVec3f mTranslation;
+    TVec3f mRotation;
+    u32 mType;
+    u32 _28;
+    u32 _2C;
 };
