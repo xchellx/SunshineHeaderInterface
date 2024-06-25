@@ -41,7 +41,7 @@ public:
     virtual void kill();
     virtual f32 getGravityY() const;
     virtual bool hasMapCollision() const;
-    virtual void getFocalPoint() const;
+    virtual TVec3f getFocalPoint() const;
     virtual void updateAnmSound();
     virtual const char **getBasNameTable() const;
 
