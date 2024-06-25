@@ -11,7 +11,7 @@ public:
     void load(JSUMemoryInputStream &in) override;
     void loadAfter() override;
     void perform(u32 flags, JDrama::TGraphics *graphics) override;
-    bool receiveMessage(TActor *sender, u32 message) override;
+    bool receiveMessage(THitActor *sender, u32 message) override;
     void init(TLiveManager *) override;
     void calcRootMatrix() override;
     void bind() override;
