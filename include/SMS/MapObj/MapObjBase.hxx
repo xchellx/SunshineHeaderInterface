@@ -115,8 +115,8 @@ public:
     static f32 getJointTransZ(J3DJoint *);
     static s32 getWaterID(THitActor *);
     static void *getWaterPlane(THitActor *);
-    static void *getWaterPos(THitActor *);
-    static void *getWaterSpeed(THitActor *);
+    static TVec3f *getWaterPos(THitActor *);
+    static TVec3f *getWaterSpeed(THitActor *);
     static void initPacketColor(J3DModel *, GXTevRegID, const GXColorS10 *);
     static bool isCoin(THitActor *);
     static bool isDemo();
