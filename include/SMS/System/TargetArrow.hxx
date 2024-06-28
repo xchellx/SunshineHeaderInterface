@@ -20,3 +20,5 @@ public:
     MActor *mActor;
     bool mIsVisible;
 };
+
+extern TTargetArrow *gpTargetArrow;
