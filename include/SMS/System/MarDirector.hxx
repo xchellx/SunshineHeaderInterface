@@ -46,7 +46,7 @@ public:
 
     void moveStage();
     void updateGameMode();
-    void nextStateInitialize(s8);
+    void nextStateInitialize(u8);
     void setMario();
     void currentStateFinalize(u8);
     s32 changeState();
