@@ -27,7 +27,10 @@ public:
         if (mStackIndex > 0) {
             return mStackItems[--mStackIndex];
         }
+        return nullptr;
     }
+
+    void clear() { mStackIndex = 0; }
 
     size_t capacity() const { return mStackCapacity; };
     s32 depth() const { return mStackIndex; }
