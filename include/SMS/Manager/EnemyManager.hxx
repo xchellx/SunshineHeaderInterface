@@ -44,7 +44,7 @@ public:
     void setSharedFlags();
     void updateAnmSoundShared();
 
-    TSpineEnemyParams *mEnemyParams;  // 0
+    TSpineEnemyParams *mEnemyParams;  // _38: 0
     f32 _3C;                          // 1.0f
     u32 _40;                          // 0
     u32 _44;                          // 0

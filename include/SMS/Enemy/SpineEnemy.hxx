@@ -37,6 +37,7 @@ public:
     virtual bool receiveMessage(THitActor *, u32) override;
     virtual void init(TLiveManager *) override;
     virtual void calcRootMatrix() override;
+
     virtual void reset();
     virtual void resetToPosition(const TVec3f &);
     virtual void resetSRTV(const TVec3f &, const TVec3f &, const TVec3f &, const TVec3f &);
@@ -65,18 +66,18 @@ public:
     void zigzagToCurPathNode(f32, f32, f32, f32);
 
     THitActor* mTarget;
-    f32 _F8;
-    f32 _FC;
-    f32 _100;
-    u32 _104;
-    f32 _108;
-    f32 _10C;
-    f32 _110;
+    f32 _F8;   // start of node path x?
+    f32 _FC;   // start of node path y?
+    f32 _100;  // start of node path z?
+    u32 _104;  // Target node flag?
+    f32 _108;  // Target node x?
+    f32 _10C;  // Target node y?
+    f32 _110;  // Target node z?
     u32 _114;
     u32 _118;
     u32 *_11C;  // array
     u32 _120;
-    TGraphTracer *mGraphTracer;
+    TGraphTracer *mGraphTracer; // _124
     u16 _128;
     u16 _12A;  // padding?
     f32 _12C;
