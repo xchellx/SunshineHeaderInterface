@@ -12,7 +12,7 @@ public:
     TGraphWeb *getGraph() const;
     void moveTo(int);
     void setTo(int);
-    void traceSpline(f32);
+    bool traceSpline(f32);
 
     TGraphWeb *mGraph;  // 0x0000
     s32 mCurrentNode;   // 0x0004
