@@ -770,7 +770,7 @@ public:
     virtual u32 moveRequest(const TVec3f &destPosition) override;
     virtual void initValues();
     virtual void checkReturn();
-    virtual void checkController();
+    virtual void checkController(JDrama::TGraphics *);
     virtual void playerControl(JDrama::TGraphics *);
     virtual void initModel();
     virtual void drawSpecial(JDrama::TGraphics *);
@@ -839,7 +839,7 @@ public:
     bool checkStickRotate(int *out);
     bool checkSwimJump();
     void checkThrowObject();
-    void checkWallPlane(const Vec &pos, f32 width, f32 height);
+    void checkWallPlane(Vec *pos, f32 width, f32 height);
     void checkWet();
     bool considerJumpRotate();
     bool considerRotateJumpStart();
