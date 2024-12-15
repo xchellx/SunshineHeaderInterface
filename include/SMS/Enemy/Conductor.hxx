@@ -50,9 +50,9 @@ public:
     void initGraphGroup();
     bool isBossDefeated();
     void killEnemiesWithin(const TVec3f &pos, f32 radius);
-    void makeEnemyAppear(const TVec3f &pos, const char *name, int, int);
+    void *makeEnemyAppear(const TVec3f &pos, const char *name, int, int);
     void makeGraphGroup(void *);
-    void makeOneEnemyAppear(const TVec3f &pos, const char *name, int);
+    void *makeOneEnemyAppear(const TVec3f &pos, const char *name, int);
     void registerAloneActor(TLiveActor *actor);
     void registerAreaCylinderManager(void * /*TAreaCylinderManager*/);
     void registerEnemyInfoTable(void * /*TStageEnemyInfoTable*/);

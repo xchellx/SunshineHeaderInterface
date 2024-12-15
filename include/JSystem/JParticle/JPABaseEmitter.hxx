@@ -28,7 +28,10 @@ public:
     void setGlobalRTMatrix(Mtx);
     void setGlobalSRTMatrix(Mtx);
 
-    u32 _00[0x144 / 4];
+    u32 _0C[0xE8 / 4];
+    JSUPtrList mParticleList;  // _F4
+    JSUPtrList mChildParticleList;  // _100
+    u32 _10C[0x50 / 4];
     TVec3f mSize1;
     u32 _160;
     TVec3f mSize2;
