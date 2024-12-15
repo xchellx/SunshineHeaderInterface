@@ -1688,7 +1688,7 @@ public:
     bool setRegisterTrackCallback();
     void startBeeSe(Vec *, u32);
     void startForceJumpSound(Vec *, u32, f32, u32);
-    void startMarioVoice(u32, s16, u8);
+    u32 startMarioVoice(u32, s16, u8);
     void startSoundActorSpecial(u32, const Vec *, f32, f32, u32, JAISound **, u32, u8);
     void startSoundSet(u32, const Vec *, u32, f32, u32, u32, u8);
     void startSoundGrp(u32, const Vec *, u32, f32, u32, u32, u8);

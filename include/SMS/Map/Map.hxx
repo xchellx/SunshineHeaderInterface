@@ -48,7 +48,7 @@ public:
     bool isInArea(f32 x, f32 z) const;
     bool isTouchedOneWall(f32, f32, f32, f32) const;
     bool isTouchedOneWallAndMoveXZ(f32 *, f32, f32 *, f32) const;
-    bool isTouchedWallsAndMoveXZ(f32 *, f32, f32 *, f32) const;
+    bool isTouchedWallsAndMoveXZ(TBGWallCheckRecord *record) const;
     void update();
 
     TMapCollisionData *mCollisionData;  // 0x0010
