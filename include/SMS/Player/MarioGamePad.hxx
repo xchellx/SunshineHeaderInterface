@@ -53,7 +53,7 @@ public:
     u16 _E0;
 
     struct {
-        u16 _00         : 8;
+        u8 _00          : 5;
         bool mDisable   : 1;
         bool _01        : 1;
         bool _02        : 1;
