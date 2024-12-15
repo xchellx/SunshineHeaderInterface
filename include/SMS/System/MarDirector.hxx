@@ -50,7 +50,7 @@ public:
     void setMario();
     void currentStateFinalize(u8);
     s32 changeState();
-    void fireStreamingMovie(s8);
+    void fireStreamingMovie(u8);
     void fireEndDemoCamera();
     void fireStartDemoCamera(const char *, const TVec3f *, s32, f32, bool, s32 (*)(u32, u32), u32,
                              JDrama::TActor *, JDrama::TFlagT<u16>);
@@ -72,8 +72,8 @@ public:
     s32 setup(JDrama::TDisplay *, TMarioGamePad **, u8 areaID, u8 episodeID);
 
     TMarioGamePad **mGamePads;
-    TPerformList *mPerformListGX;          // 0x001c
-    TPerformList *mPerformListSilhouette;  // 0x0020
+    TPerformList *mPerformListGX;
+    TPerformList *mPerformListSilhouette;
     TPerformList *mPerformListGXPost;      // 0x0024
     TPerformList *mPerformListMovement;    // 0x0028
     TPerformList *mPerformListCalcAnim;    // 0x002C
